@@ -1,12 +1,11 @@
 
-from PySide6.QtUiTools import loadUiType
 from PySide6 import QtCore as sQtCore
 from PySide6.QtWidgets import QMainWindow as sQMainWindow
 from PySide6.QtWidgets import QApplication as sQApplication
 import sqlite3
 import sys,os,platform,time,subprocess,threading
 from database import DataBase
-from copy_ping import ShareCopyWorker
+# from copy_ping import ShareCopyWorker
 from persiantools.jdatetime import JalaliDateTime
 import jdatetime
 from Calendar import  JalaliCalendarDialog
@@ -18,7 +17,7 @@ from PySide6.QtWidgets import QGraphicsBlurEffect
 from UIFiles.main_UI import Ui_main
 from uiUtils.GUIComponents import single_timer_runner
 
-from transformModule import transformModule
+from Tranform.transformModule import transformModule
 
 
 

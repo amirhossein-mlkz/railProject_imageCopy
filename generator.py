@@ -5,7 +5,7 @@ from persiantools.jdatetime import JalaliDateTime
 encode_param = [int(cv2.IMWRITE_JPEG_LUMA_QUALITY), 80]
 
 
-MODE = 2
+MODE = 1
 main_path = f'test_data{MODE}'
 
 

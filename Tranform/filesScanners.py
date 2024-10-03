@@ -1,65 +1,32 @@
 import os
 import threading
+import time
 
 from persiantools.jdatetime import JalaliDateTime, timedelta
 from PySide6.QtCore import Signal, QObject
 
-from tranformMadule.transformUtils import transormUtils
-from tranformMadule.dirStuct import STRUCT_PARTS
+from Tranform.transformUtils import transormUtils
+from Tranform.sharingConstans import DIRECTORY_TREE, STRUCT_PARTS
 
-
-# class filesFinderWorker(QObject):
-#     finish_singal = Signal(dict)
-#     log_signal = Signal(str)
-
-#     def __init__(self,
-#                  main_path:str, 
-#                  struct:list[str],
-#                  trains:list[str] = None, 
-#                  date_ranges:tuple[JalaliDateTime] = None,
-#                  gap_step_sec=600) -> None:
-#         super().__init__()    
-#         self.trains = trains
-#         self.date_ranges = date_ranges
-#         self.temp_date_ranges = date_ranges[0], date_ranges[1]
-#         self.main_path = main_path
-#         self.struct = struct
-
-#     def __init_flags(self,):
-#         self.is_train_checked = False
-#         self.is_year_checked = False
-#         self.is_month_checked = False
-#         self.is_day_checked = False
-#         self.is_hour_checked = False
-#         self.is_minute_checked = False
-
-#     def searcher(self, path, pos_index, date=None):
-#         #pos_index show we are in which level of directory
-#         if pos_index >= len(self.struct):
-#             return
-
-#         step_name = self.struct[pos_index]
-
-#         if step_name == 'train':
-
-
-
-
-
-class filesFilterWorker(QObject):
-    finish_singal = Signal(list, list)
+class filesFinderWorker(QObject):
+    #this class returns list of files that pass filters
+    finish_signal = Signal(list, list, dict)
     log_signal = Signal(str)
     def __init__(self, 
                  main_path:str, 
                  struct:list[str],
                  trains:list[str] = None, 
-                 date_ranges:tuple[JalaliDateTime] = None,) -> None:
+                 date_ranges:tuple[JalaliDateTime] = None,
+                 return_avaiability=True) -> None:
         super().__init__()    
         self.trains = trains
         self.date_ranges = date_ranges
-        self.temp_date_ranges = date_ranges[0], date_ranges[1]
+        self.temp_date_ranges = None
+        if date_ranges is not None:
+            self.temp_date_ranges = date_ranges[0], date_ranges[1]
         self.main_path = main_path
         self.struct = struct
+        self.return_avaiability = return_avaiability
 
         #choose filter trains by folder name or by directory name
         # self.check_train_by_filename = True
@@ -74,16 +41,19 @@ class filesFilterWorker(QObject):
         self.is_day_checked = False
         self.is_hour_checked = False
         self.is_minute_checked = False
+        
   
 
     def run(self, ):
         self.__init_flags()
         self.res_paths = []
         self.res_sizes = []
-        self.avalability = {}
+        self.avaiabilities:dict[str, dict[str, list]] = {}
         self.total_size = 0
+        t = time.time()
         self.searcher(self.main_path, pos_index=0)
-        self.finish_singal.emit( self.res_paths, self.res_sizes)
+        print(time.time() - t)
+        self.finish_signal.emit( self.res_paths, self.res_sizes, self.avaiabilities)
 
     def __sort_number_folder(self, names:list[str]):
         def key_func(x:str):
@@ -116,7 +86,7 @@ class filesFilterWorker(QObject):
                 if not os.path.isfile(sub_path):
                     continue
             #-----------------------------------
-            flag, date = self.check_filters(sub, step_name, date)
+            flag, date = self.check_filters(path, sub, step_name, date)
             if flag:
                 if pos_index == (len(self.struct) -1):
                     size = os.path.getsize(sub_path)
@@ -131,7 +101,7 @@ class filesFilterWorker(QObject):
             
     
 
-    def check_filters(self, sub:str, step_name:str, date:JalaliDateTime):
+    def check_filters(self, dir:str, sub:str, step_name:str, date:JalaliDateTime):
         if step_name == STRUCT_PARTS.TRAIN:
             self.is_train_checked = True
             if self.trains is None:
@@ -254,12 +224,31 @@ class filesFilterWorker(QObject):
             else:
                 return False, date
         #------------------------------check FILE-------------------------
-        
+         
         elif step_name == STRUCT_PARTS.FILE:
+            date, train_id, camera = transormUtils.extract_file_name_info(sub)
+            # t = time.time()
+
+            if self.return_avaiability:
+                if train_id not in self.avaiabilities:
+                    self.avaiabilities[train_id] = {}
+            
+                if camera not in self.avaiabilities[train_id]:
+                    self.avaiabilities[train_id][camera] = []
+            
+                start_date = date
+                # duration = 600
+                # duration = transormUtils.get_video_duration(os.path.join(dir, sub))
+                # if duration is not None:
+                    # end_date = start_date + timedelta(seconds=duration)
+                self.avaiabilities[train_id][camera].append(start_date)
+            # t = time.time() - t
+            # print(t)
+            
+
             if self.date_ranges is None and self.trains is None:
                 return True, date
             
-            date, train_id, camera = transormUtils.extract_file_name_info(sub)
             
             if self.trains is not None:
                 if not self.is_train_checked:
