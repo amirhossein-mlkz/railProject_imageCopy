@@ -4,6 +4,7 @@ import shutil
 
 from persiantools.jdatetime import JalaliDateTime, timedelta
 from PySide6.QtCore import Signal, QObject
+from Tranform.sharingConstans import StatusCodes
 
 
 
@@ -11,7 +12,7 @@ class CopyWorker(QObject):
     progress_signal = Signal(int, int)
     speed_singnal = Signal(int)
     log_signal = Signal(str)
-    finish_signal = Signal()
+    finish_signal = Signal(int)
     error_signal = Signal(str)
 
     def __init__(self, src_path, dst_path, files_paths:list[str], sizes:list[int], move = False):
@@ -26,10 +27,13 @@ class CopyWorker(QObject):
 
     def run(self):
         total = sum(self.sizes)
-        total_removed = 0
+        total = int(total/(1024**2))
+        total_copied = 0
         self.speeds = []
 
         self.log_signal.emit('Start Copy')
+        self.progress_signal.emit(0, total)
+
         time.sleep(0.5)
 
         for i in range(len(self.files_paths)):
@@ -55,19 +59,23 @@ class CopyWorker(QObject):
                 self.calc_speed(self.sizes[i], t)
             
             except Exception as e:
+                #if src path not exist means 
+                if not os.path.exists(self.src_path):
+                    self.finish_signal.emit(StatusCodes.copyStatusCodes.DISCONNECT)
+                    return
                 print(e)
                 self.log_signal.emit(f'Failed Copy {fname}: {e}')
                 
 
             
             
-            total_removed += self.sizes[i]
-            self.progress_signal.emit(total_removed, total)
+            total_copied += self.sizes[i]
+            self.progress_signal.emit(int(total_copied/(1024**2)), total)
         
         else:
             self.log_signal.emit(f'Finish Success')
         
-        self.finish_signal.emit()
+        self.finish_signal.emit(StatusCodes.copyStatusCodes.SUCCESS)
 
 
     def calc_speed(self, size, t, avg=5):

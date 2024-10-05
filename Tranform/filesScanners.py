@@ -6,11 +6,13 @@ from persiantools.jdatetime import JalaliDateTime, timedelta
 from PySide6.QtCore import Signal, QObject
 
 from Tranform.transformUtils import transormUtils
-from Tranform.sharingConstans import DIRECTORY_TREE, STRUCT_PARTS
+from Tranform.sharingConstans import DIRECTORY_TREE, STRUCT_PARTS, StatusCodes
+
 
 class filesFinderWorker(QObject):
     #this class returns list of files that pass filters
-    finish_signal = Signal(list, list, dict)
+
+    finish_signal = Signal(int, list, list, dict)#status_code, paths, sizes, availability
     log_signal = Signal(str)
     def __init__(self, 
                  main_path:str, 
@@ -45,6 +47,13 @@ class filesFinderWorker(QObject):
   
 
     def run(self, ):
+        if not os.path.exists(self.main_path):
+            # self.log_signal.emit('Directory not Exist')
+            self.finish_signal.emit(StatusCodes.findFilesStatusCodes.DIR_NOT_EXISTS, 
+                                    [], 
+                                    [], 
+                                    {})
+            return
         self.__init_flags()
         self.res_paths = []
         self.res_sizes = []
@@ -53,7 +62,10 @@ class filesFinderWorker(QObject):
         t = time.time()
         self.searcher(self.main_path, pos_index=0)
         print(time.time() - t)
-        self.finish_signal.emit( self.res_paths, self.res_sizes, self.avaiabilities)
+        self.finish_signal.emit(StatusCodes.findFilesStatusCodes.SUCCESS,
+                                self.res_paths, 
+                                self.res_sizes, 
+                                self.avaiabilities)
 
     def __sort_number_folder(self, names:list[str]):
         def key_func(x:str):

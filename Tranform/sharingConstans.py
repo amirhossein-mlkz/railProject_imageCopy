@@ -17,3 +17,18 @@ DIRECTORY_TREE = [STRUCT_PARTS.TRAIN,
                   STRUCT_PARTS.MINUTE,
                   STRUCT_PARTS.FILE
                 ]
+
+
+
+class StatusCodes:
+    class findFilesStatusCodes:
+        DIR_NOT_EXISTS = 0
+        SUCCESS = 1
+
+    class copyStatusCodes:
+        DISCONNECT = 0
+        SUCCESS=1
+
+    class pingAndConnectionStatusCodes:
+        NOT_CONNECT = 0
+        SUCCESS = 1

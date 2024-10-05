@@ -1,7 +1,10 @@
 import sys
+import hashlib
+
 from PySide6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout
 from PySide6.QtCore import Qt
-from PySide6 import QtCore as sQtCore
+from PySide6.QtCore import QTimer
+
 
 
 
@@ -15,15 +18,18 @@ class LoginPage(QWidget):
 
         # Remove window close button and add rounded corners
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.Window)
-        # self.setAttribute(Qt.WA_TranslucentBackground)
         self.pos_ = self.pos()
         self._old_pos = None
+
         # Create widgets
         self.password_label = QLabel('Password:', self)
         self.password_input = QLineEdit(self)
         self.password_input.setEchoMode(QLineEdit.Password)  # Hide password input
 
-        self.open_button = QPushButton('Login', self)
+        self.error_label = QLabel('', self)  # Label for displaying error messages
+        self.error_label.setStyleSheet("color: red;")  # Set the error message color to red
+
+        self.login_button = QPushButton('Login', self)
         self.close_button = QPushButton('Close', self)
 
         # Set up layouts
@@ -34,10 +40,11 @@ class LoginPage(QWidget):
         password_layout.addWidget(self.password_input)
 
         button_layout = QHBoxLayout()
-        button_layout.addWidget(self.open_button)
+        button_layout.addWidget(self.login_button)
         button_layout.addWidget(self.close_button)
 
         main_layout.addLayout(password_layout)
+        main_layout.addWidget(self.error_label)  # Add error label to the layout
         main_layout.addLayout(button_layout)
 
         self.setLayout(main_layout)
@@ -77,14 +84,22 @@ class LoginPage(QWidget):
         """)
 
         # Connect buttons
-        self.open_button.clicked.connect(self.open_button_clicked)
-        self.close_button.clicked.connect(self.close_button_clicked)
 
         self.setWindowTitle('Login Page')
         self.setGeometry(300, 150, 300, 150)
-        self.show()
+
+    def show(self,):
+        self.write_error('')
+        self.password_input.setText('')
+        super().show()
         self.centerOnParent()
 
+    
+    def write_error(self, txt:str, t=2000):
+        self.error_label.setText(txt)
+        if txt:
+            timer = QTimer()
+            timer.singleShot(t, lambda: self.write_error(''))
         
     def centerOnParent(self):
         if self.parent():
@@ -94,35 +109,20 @@ class LoginPage(QWidget):
             self_geometry.moveCenter(center_point)
             self.move(self_geometry.topLeft())
 
+    def login_button_connector(self, func):
+        self.login_button.clicked.connect(func)
 
-    # def mousePressEvent(self, event):
-    #     if event.button() == sQtCore.Qt.LeftButton and not self.isMaximized():
-
-    #         self._old_pos = event.globalPosition().toPoint()
-
-    # def mouseReleaseEvent(self, event):
-    #     if event.button() == sQtCore.Qt.LeftButton:
-    #         self._old_pos = None
-
-    # def mouseMoveEvent(self, event):
-    #     if not self._old_pos:
-    #         return
-    #     delta = sQtCore.QPoint(event.globalPosition().toPoint() - self._old_pos)
-    #     self.move(self.x() + delta.x(), self.y() + delta.y())
-    #     self._old_pos = event.globalPosition().toPoint()
-
-
-
-
-    def open_button_clicked(self):
-        # Implement the open button functionality here
-        self.password = self.password_input.text()
-        print("Open button clicked")
-
-    def close_button_clicked(self):
-        # Implement the close button functionality here
-        print("Close button clicked")
-        self.close()
+    def close_button_connector(self, func):
+        self.close_button.clicked.connect( func )
+        
+    
+    def get_hash_pass(self, ):
+        password = self.password_input.text()
+        if password == '':
+            return password
+        
+        password_hash = hashlib.sha256(password.encode()).hexdigest()
+        return password_hash
 
 
 

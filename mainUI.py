@@ -18,7 +18,7 @@ from UIFiles.main_UI import Ui_main
 from uiUtils.GUIComponents import single_timer_runner
 
 from Tranform.transformModule import transformModule
-
+from Tranform.sharingConstans import StatusCodes
 
 
 
@@ -33,6 +33,10 @@ class mainUI(sQMainWindow):
 
         self.ui = Ui_main()
         self.ui.setupUi(self)
+
+        self.login_ui = LoginPage(self)
+        self.login_ui.login_button_connector(self.check_password)
+        self.login_ui.close_button_connector(self.close_login)
 
         # window setup
         flags = sQtCore.Qt.WindowFlags(
@@ -53,7 +57,7 @@ class mainUI(sQMainWindow):
             'ip': self.ui.ip_address_msg,
             'username': self.ui.username_msg,
             'password': self.ui.password_msg,
-            'copy': self.ui.get_data_msg,
+            'copy': self.ui.copy_log_lbl,
         }
         
 
@@ -107,32 +111,31 @@ class mainUI(sQMainWindow):
         self.ui.timeline_copy_btn.clicked.connect(self.time_line_copy)
 
     def show_login(self):
-        if not  self.preview_login:
-            self.applyBlurEffect()
-            self.login_ui = LoginPage(self)
-            self.login_ui.show()
-            self.preview_login = True
-            self.login_ui.open_button.clicked.connect(self.check_password)
-            self.login_ui.close_button.clicked.connect(self.close_login)
+        GUIBackend.set_disable_enable(self.ui.timeline_copy_btn, False)
+        self.applyBlurEffect()
+        self.login_ui.show()
 
     def close_login(self):
-            self.preview_login = False
+        GUIBackend.set_disable_enable(self.ui.timeline_copy_btn, True)
+        self.login_ui.close()
 
     def check_password(self):
 
-        password = self.login_ui.password
-        self.preview_login = False
-        if password != '':
-            res = self.db.fetch_table_as_dict(table_name='password')
-            if len(res)==1:
-                res = res[0]
-                if str(password) == str(res['password']):
-                    self.login_ui.close()
-                    self.update_log('Login Succussfully')
-                    self.show_timeline(mode=True)
+        password = self.login_ui.get_hash_pass()
+        if password == '':
+            self.login_ui.write_error('Please Enter Password')
+            return
+        
 
-                else:
-                    self.show_error('Password is Wrong')
+        
+        passwords_db = self.db.fetch_table_as_dict(table_name='password')
+        for pass_db in passwords_db:    
+            if str(password) == str(pass_db['password']):
+                self.login_ui.close()
+                self.show_timeline(mode=True)
+
+            else:
+                self.login_ui.write_error("Password is Incorrect")
 
     def time_line_copy(self):
         self.show_timeline(mode=False)
@@ -275,16 +278,7 @@ class mainUI(sQMainWindow):
         self.show_timeline(mode=False) 
         self.start_copy()
 
-    def check_connection_event(self, res:bool):
-        if not res:
-            self.show_message('copy', 'Connection Faild. check ip and cables connections')
-            GUIBackend.set_disable_enable(self.ui.copy_button, True)
-            return
-        
-        self.show_message('copy', 'Connection Success')
-
-
-        GUIBackend.set_disable_enable(self.ui.copy_button, True)
+    
 
 
 
@@ -296,59 +290,83 @@ class mainUI(sQMainWindow):
         src_path = self.src_path
         dst_path = self.dst_path
 
-        self.trasformer = transformModule(ip)
+        self.trasformer = transformModule(ip, src_path, dst_path, username, password)
         self.show_message('copy', 'Check Connection...')
         GUIBackend.set_disable_enable(self.ui.copy_button, False)
-        self.trasformer.check_connection(self.check_connection_event)
+        self.trasformer.check_connection(self.step1_check_connection_event)
+
+
+    def step1_check_connection_event(self, status_code):
+        if status_code == StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT:
+            self.show_message('copy', 'Connection Faild. check ip and cables connections')
+            GUIBackend.set_disable_enable(self.ui.copy_button, True)
+            return
         
-        return
+        elif status_code == StatusCodes.pingAndConnectionStatusCodes.SUCCESS:
+            self.show_message('copy', 'Searching Files...')
+            self.trasformer.find_files( trains= None,
+                                        dates_tange=None,
+                                        finish_event_func=self.step2_files_list_ready_event,
+                                        log_event_func=self.step1_log_event)
 
-        # if ip and username and password and src_path and dst_path:
-        if self.ping_host(ip):
-            conn_details = {
-                'ip': ip,
-                'username': username,
-                'password': password,
-                'share': src_path,
+    def step1_log_event(self, log:str):
+        txt = f'Searching Files: {log}'
+        self.show_message('copy', txt)
 
-            }
-            self.worker = ShareCopyWorker(src_path, dst_path, conn_details,image_condition=image_condition)
-            self.worker.progress.connect(self.update_progress)
-            self.worker.log.connect(self.update_log)
-            self.worker.completed.connect(self.copy_completed)
-            self.worker.error.connect(self.show_error)
-            self.worker.start()
-            # self.worker.run()
-        else:
-            self.show_error("Ping failed. Check the IP address and try again.")
-        # else:
-        #     self.log_label.setText("Please fill all fields.")
-
- 
+    def step2_files_list_ready_event(self, 
+                                     status_code, 
+                                     paths:list[str], 
+                                     sizes:list[int], 
+                                     avaiabilities:dict[str,dict[str, list]]):
+        
+        if status_code == StatusCodes.findFilesStatusCodes.DIR_NOT_EXISTS:
+            self.show_message('copy', "Path dosen't exists")
+            GUIBackend.set_disable_enable(self.ui.copy_button, True)
+            return
+        
 
 
-    def update_progress(self, value):
+        if len(paths) == 0:
+            GUIBackend.set_disable_enable(self.ui.copy_button, True)
+            self.show_message('copy', 'No Files Found to Copy')
+            return
 
-        self.ui.progress_bar.setValue(value)
+        self.ui.progress_bar.setMinimum(0)
+        self.ui.progress_bar.setMaximum(100)
+        self.ui.progress_bar.setValue(0)
+        self.trasformer.start_copy(paths, 
+                                   sizes, 
+                                   finish_func=self.step3_copy_finish_event,
+                                   speed_func=self.step2_update_speed,
+                                   progress_func=self.step2_update_progress,
+                                   msg_callback=self.step2_log )
 
-    def update_log(self, message):
-        self.ui.log_label.setText(message)
-        QTimer.singleShot(3000, lambda: self.show_error(''))
+    def step2_update_progress(self, completed:int, total:int):
+        percent = int(completed/total * 100)
+        self.ui.progress_bar.setValue(percent)
+        #Convert to MB
+        self.ui.completed_copy_lbl.setText(str(completed))
+        self.ui.total_copy_lbl.setText(str(total))
 
-    def copy_completed(self):
-        self.ui.progress_bar.setValue(100)
-        self.ui.log_label.setText("Copy Completed!")
-        # threading.Timer(3,self.update_log,args=('',)).start()
-        # threading.Timer(3,self.update_progress,args=(0,)).start()
+    def step2_update_speed(self, speed):
+        speed = speed / (1024)**2
+        speed = round(speed,1)
+        txt = f'Speed: {speed} MB'
+        self.ui.copy_speed_lbl.setText(txt)
+
+    def step2_log(self, txt):
+        self.show_message('copy', txt)
 
 
-    def show_error(self, error):
-        if error !='':
-            self.ui.log_label.setText(f"Error: {error}")
-        else:
-            self.ui.log_label.setText('')
-
-        QTimer.singleShot(3000, lambda: self.show_error(''))
+    def step3_copy_finish_event(self, status_code):
+        if status_code == StatusCodes.copyStatusCodes.DISCONNECT:
+            GUIBackend.set_disable_enable(self.ui.copy_button, True)
+            self.show_message('copy', "Dissconnected!")
+            return
+        # a = transormUtils.dateTimeRanges( avaiabilities['11BG21']['right'], 600 )
+        GUIBackend.set_disable_enable(self.ui.copy_button, True)
+        self.show_message('copy', "Finish Success")
+        
 
 
 

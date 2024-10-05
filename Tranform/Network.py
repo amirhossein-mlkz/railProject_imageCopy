@@ -4,11 +4,11 @@ import os
 
 from PySide6.QtCore import Signal, QObject
 
-
+from Tranform.sharingConstans import StatusCodes
 
 
 class pingWorker(QObject):
-    result_signal = Signal(bool)
+    result_signal = Signal(int)
 
     def __init__(self, ip) -> None:
         super().__init__()
@@ -16,7 +16,12 @@ class pingWorker(QObject):
     
     def run(self,):
         res = self.__get_ping(self.ip)
-        self.result_signal.emit(res)
+        if not res:
+            self.result_signal.emit(StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT)
+            return
+        else:
+
+            self.result_signal.emit(StatusCodes.pingAndConnectionStatusCodes.SUCCESS)
 
     def __get_ping(self, ip):
         if platform.system().lower() == "windows":

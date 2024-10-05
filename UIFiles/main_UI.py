@@ -25,7 +25,7 @@ class Ui_main(object):
     def setupUi(self, main):
         if not main.objectName():
             main.setObjectName(u"main")
-        main.resize(512, 579)
+        main.resize(717, 618)
         self.globalStyleSheet = QWidget(main)
         self.globalStyleSheet.setObjectName(u"globalStyleSheet")
         self.globalStyleSheet.setStyleSheet(u"/**************************Global Font***************************/\n"
@@ -1040,30 +1040,76 @@ class Ui_main(object):
 
         self.verticalLayout_2.addWidget(self.frame_date)
 
-        self.get_data_msg = QLabel(self.copy)
-        self.get_data_msg.setObjectName(u"get_data_msg")
-        sizePolicy.setHeightForWidth(self.get_data_msg.sizePolicy().hasHeightForWidth())
-        self.get_data_msg.setSizePolicy(sizePolicy)
-        self.get_data_msg.setMaximumSize(QSize(16777215, 40))
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_2.addWidget(self.get_data_msg)
+        self.verticalLayout_2.addItem(self.verticalSpacer_3)
 
-        self.log_label = QLabel(self.copy)
-        self.log_label.setObjectName(u"log_label")
+        self.copy_log_lbl = QLabel(self.copy)
+        self.copy_log_lbl.setObjectName(u"copy_log_lbl")
+        sizePolicy.setHeightForWidth(self.copy_log_lbl.sizePolicy().hasHeightForWidth())
+        self.copy_log_lbl.setSizePolicy(sizePolicy)
+        self.copy_log_lbl.setMaximumSize(QSize(16777215, 40))
 
-        self.verticalLayout_2.addWidget(self.log_label)
+        self.verticalLayout_2.addWidget(self.copy_log_lbl)
 
         self.frame_5 = QFrame(self.copy)
         self.frame_5.setObjectName(u"frame_5")
         self.frame_5.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_5.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_6 = QHBoxLayout(self.frame_5)
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.verticalLayout_18 = QVBoxLayout(self.frame_5)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.completed_copy_lbl = QLabel(self.frame_5)
+        self.completed_copy_lbl.setObjectName(u"completed_copy_lbl")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.completed_copy_lbl.sizePolicy().hasHeightForWidth())
+        self.completed_copy_lbl.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_5.addWidget(self.completed_copy_lbl)
+
+        self.label_9 = QLabel(self.frame_5)
+        self.label_9.setObjectName(u"label_9")
+        sizePolicy4.setHeightForWidth(self.label_9.sizePolicy().hasHeightForWidth())
+        self.label_9.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_5.addWidget(self.label_9)
+
+        self.total_copy_lbl = QLabel(self.frame_5)
+        self.total_copy_lbl.setObjectName(u"total_copy_lbl")
+        sizePolicy4.setHeightForWidth(self.total_copy_lbl.sizePolicy().hasHeightForWidth())
+        self.total_copy_lbl.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_5.addWidget(self.total_copy_lbl)
+
+        self.total_copy_lbl_2 = QLabel(self.frame_5)
+        self.total_copy_lbl_2.setObjectName(u"total_copy_lbl_2")
+        sizePolicy4.setHeightForWidth(self.total_copy_lbl_2.sizePolicy().hasHeightForWidth())
+        self.total_copy_lbl_2.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_5.addWidget(self.total_copy_lbl_2)
+
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_5.addItem(self.horizontalSpacer_6)
+
+        self.copy_speed_lbl = QLabel(self.frame_5)
+        self.copy_speed_lbl.setObjectName(u"copy_speed_lbl")
+        sizePolicy4.setHeightForWidth(self.copy_speed_lbl.sizePolicy().hasHeightForWidth())
+        self.copy_speed_lbl.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_5.addWidget(self.copy_speed_lbl)
+
+
+        self.verticalLayout_18.addLayout(self.horizontalLayout_5)
+
         self.progress_bar = QProgressBar(self.frame_5)
         self.progress_bar.setObjectName(u"progress_bar")
         self.progress_bar.setValue(0)
 
-        self.horizontalLayout_6.addWidget(self.progress_bar)
+        self.verticalLayout_18.addWidget(self.progress_bar)
 
 
         self.verticalLayout_2.addWidget(self.frame_5)
@@ -1674,9 +1720,13 @@ class Ui_main(object):
         self.end_calendar_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
         self.timeline_copy_btn.setText(QCoreApplication.translate("main", u"Start Copy", None))
         self.timeline_copy_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
-        self.get_data_msg.setText(QCoreApplication.translate("main", u"message", None))
-        self.get_data_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
-        self.log_label.setText("")
+        self.copy_log_lbl.setText(QCoreApplication.translate("main", u"message", None))
+        self.copy_log_lbl.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
+        self.completed_copy_lbl.setText(QCoreApplication.translate("main", u"-", None))
+        self.label_9.setText(QCoreApplication.translate("main", u"/", None))
+        self.total_copy_lbl.setText(QCoreApplication.translate("main", u"-", None))
+        self.total_copy_lbl_2.setText(QCoreApplication.translate("main", u"MB", None))
+        self.copy_speed_lbl.setText(QCoreApplication.translate("main", u"Speed", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("main", u"Right Camera", None))
         self.label_12.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_13.setText(QCoreApplication.translate("main", u"Username :", None))
