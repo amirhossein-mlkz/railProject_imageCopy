@@ -15,17 +15,20 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGroupBox,
-    QHBoxLayout, QLabel, QLineEdit, QMainWindow,
-    QProgressBar, QPushButton, QSizePolicy, QSpacerItem,
-    QStackedWidget, QStatusBar, QTabWidget, QTimeEdit,
-    QToolButton, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
+    QGroupBox, QHBoxLayout, QLabel, QLineEdit,
+    QMainWindow, QProgressBar, QPushButton, QSizePolicy,
+    QSpacerItem, QStackedWidget, QStatusBar, QTabWidget,
+    QVBoxLayout, QWidget)
+
+from uiUtils.GUIComponents import timeSpinBox
+import assets_rc
 
 class Ui_main(object):
     def setupUi(self, main):
         if not main.objectName():
             main.setObjectName(u"main")
-        main.resize(717, 618)
+        main.resize(714, 655)
         self.globalStyleSheet = QWidget(main)
         self.globalStyleSheet.setObjectName(u"globalStyleSheet")
         self.globalStyleSheet.setStyleSheet(u"/**************************Global Font***************************/\n"
@@ -210,6 +213,12 @@ class Ui_main(object):
 "	border-bottom: 2px solid #7892DF;\n"
 "}\n"
 "\n"
+"QLineEdit:disabled \n"
+"{\n"
+"	color: rgb(120,120,120);\n"
+"}\n"
+"\n"
+"\n"
 "/*****************QSpinBox, QDoubleSpinBox*******************/\n"
 "\n"
 "QSpinBox, QDoubleSpinBox\n"
@@ -224,11 +233,11 @@ class Ui_main(object):
 "}\n"
 "\n"
 "QSpinBox:disabled ,\n"
-"QDoubleSpinBox:disabled\n"
+""
+                        "QDoubleSpinBox:disabled\n"
 "{\n"
 "	border-bottom: 2px solid #F0F0F2;\n"
-"	co"
-                        "lor: rgb(120, 120, 120);\n"
+"	color: rgb(120, 120, 120);\n"
 "}\n"
 "\n"
 "QSpinBox::up-arrow, \n"
@@ -271,13 +280,13 @@ class Ui_main(object):
 "    min-height: 29px;\n"
 "    subcontrol-origin: margin;\n"
 "    subcontrol-position: right;\n"
-"    top: 0px;\n"
+"    top: 0"
+                        "px;\n"
 "    right: 0px;\n"
 "}\n"
 "\n"
 "QSpinBox::down-button,\n"
-"QDoubleSpi"
-                        "nBox::down-button\n"
+"QDoubleSpinBox::down-button\n"
 "{\n"
 "    min-width:30px;\n"
 "    min-height: 29px;\n"
@@ -321,12 +330,12 @@ class Ui_main(object):
 "\n"
 "QDateEdit:disabled\n"
 "{\n"
-"	border: 2px solid #F0F0F2;\n"
+"	border: 2p"
+                        "x solid #F0F0F2;\n"
 "	color: rgb(120, 120, 120);\n"
 "}\n"
 "\n"
-"QDateEdit::u"
-                        "p-button,\n"
+"QDateEdit::up-button,\n"
 "QDateEdit::down-button\n"
 "{\n"
 "	width: 0px;\n"
@@ -374,12 +383,12 @@ class Ui_main(object):
 "    border-bottom: 2px solid #7892DF; \n"
 "}\n"
 "\n"
-"/**************************QTableWidget***************************/\n"
+"/**************************"
+                        "QTableWidget***************************/\n"
 "\n"
 "QTableWidget \n"
 "{\n"
-"  "
-                        "  background-color: #F7F8FA;\n"
+"    background-color: #F7F8FA;\n"
 "	gridline-color: #D7D7D9;\n"
 "	color: rgb(20, 20, 20);\n"
 "	border: 2px solid #F7F8FA;\n"
@@ -426,11 +435,11 @@ class Ui_main(object):
 "}\n"
 "\n"
 "\n"
-"/**************************QTextEdit***************************/\n"
+"/********"
+                        "******************QTextEdit***************************/\n"
 "\n"
 "QTextEdit \n"
-""
-                        "{\n"
+"{\n"
 "    background-color: #E0E4EC;\n"
 "    border-radius: 5px;\n"
 "    color: rgb(20, 20, 20);\n"
@@ -607,6 +616,27 @@ class Ui_main(object):
 "QPushButton[styleClass=\"fillBtn\"]:disabled {\n"
 "   background-color: #c0c0c0;\n"
 "	border:none;\n"
+"}\n"
+"\n"
+"\n"
+"QPushButton[styleSheet=\"calendar\"]{\n"
+"background:transparent;\n"
+"icon:url(:/asstets/icons/calendar.png);\n"
+"border:none;\n"
+"icon-size:25px;\n"
+"width:25px;\n"
+"height:25px"
+                        ";\n"
+"}\n"
+"\n"
+"QPushButton[styleSheet=\"calendar\"]:hover{\n"
+"icon:url(:/asstets/icons/calendar-hover.png);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton[styleSheet=\"calendar\"]:disabled{\n"
+"icon:url(:/asstets/icons/calendar-disable.png);\n"
+"\n"
 "}\n"
 "\n"
 "\n"
@@ -928,6 +958,7 @@ class Ui_main(object):
         self.timeline_btn = QPushButton(self.frame_6)
         self.timeline_btn.setObjectName(u"timeline_btn")
         self.timeline_btn.setEnabled(True)
+        self.timeline_btn.setMinimumSize(QSize(0, 0))
         self.timeline_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.timeline_btn.setStyleSheet(u"")
 
@@ -936,111 +967,209 @@ class Ui_main(object):
 
         self.verticalLayout_2.addWidget(self.frame_6)
 
-        self.frame_date = QFrame(self.copy)
-        self.frame_date.setObjectName(u"frame_date")
-        self.frame_date.setMaximumSize(QSize(16777215, 115))
-        self.frame_date.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_date.setFrameShadow(QFrame.Shadow.Raised)
-        self.frame_dateasd = QVBoxLayout(self.frame_date)
-        self.frame_dateasd.setObjectName(u"frame_dateasd")
-        self.frame_dateasd.setContentsMargins(0, 0, 0, 0)
-        self.frame_8 = QFrame(self.frame_date)
-        self.frame_8.setObjectName(u"frame_8")
-        self.frame_8.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_8.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_8 = QHBoxLayout(self.frame_8)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(9, 0, 9, 0)
+        self.timeline_groupbox = QGroupBox(self.copy)
+        self.timeline_groupbox.setObjectName(u"timeline_groupbox")
+        self.timeline_groupbox.setMinimumSize(QSize(0, 160))
+        self.timeline_groupbox.setCheckable(True)
+        self.verticalLayout_19 = QVBoxLayout(self.timeline_groupbox)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.frame_7 = QFrame(self.timeline_groupbox)
+        self.frame_7.setObjectName(u"frame_7")
+        self.frame_7.setMinimumSize(QSize(0, 120))
+        self.frame_7.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_7.setFrameShadow(QFrame.Shadow.Raised)
+        self.verticalLayout_20 = QVBoxLayout(self.frame_7)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.frame_date_2 = QFrame(self.frame_7)
+        self.frame_date_2.setObjectName(u"frame_date_2")
+        self.frame_date_2.setMaximumSize(QSize(16777215, 16777215))
+        self.frame_date_2.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_date_2.setFrameShadow(QFrame.Shadow.Raised)
+        self.gridLayout = QGridLayout(self.frame_date_2)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setContentsMargins(9, 9, 9, 9)
+        self.label_31 = QLabel(self.frame_date_2)
+        self.label_31.setObjectName(u"label_31")
+        self.label_31.setEnabled(True)
+        self.label_31.setStyleSheet(u"QLabel{\n"
+"	font-weight:bold;\n"
+"	font-size:20px;\n"
+"	color:rgb(0, 123, 255);\n"
+"}\n"
+"\n"
+"QLabel:disabled{\n"
+"	font-weight:bold;\n"
+"	font-size:20px;\n"
+"	color:rgb(177, 177, 177);\n"
+"}")
+
+        self.gridLayout.addWidget(self.label_31, 1, 8, 1, 1)
+
         self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_8.addItem(self.horizontalSpacer_4)
+        self.gridLayout.addItem(self.horizontalSpacer_4, 0, 1, 1, 1)
 
-        self.label_6 = QLabel(self.frame_8)
-        self.label_6.setObjectName(u"label_6")
-
-        self.horizontalLayout_8.addWidget(self.label_6)
-
-        self.timeEdit_start = QTimeEdit(self.frame_8)
-        self.timeEdit_start.setObjectName(u"timeEdit_start")
-        self.timeEdit_start.setMinimumSize(QSize(127, 0))
-        self.timeEdit_start.setLocale(QLocale(QLocale.Persian, QLocale.Iran))
-
-        self.horizontalLayout_8.addWidget(self.timeEdit_start)
-
-        self.start_date = QLineEdit(self.frame_8)
-        self.start_date.setObjectName(u"start_date")
-        self.start_date.setReadOnly(True)
-
-        self.horizontalLayout_8.addWidget(self.start_date)
-
-        self.start_calendar_btn = QToolButton(self.frame_8)
-        self.start_calendar_btn.setObjectName(u"start_calendar_btn")
-        self.start_calendar_btn.setStyleSheet(u"")
-
-        self.horizontalLayout_8.addWidget(self.start_calendar_btn)
-
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_8.addItem(self.horizontalSpacer_2)
-
-
-        self.frame_dateasd.addWidget(self.frame_8)
-
-        self.frame_9 = QFrame(self.frame_date)
-        self.frame_9.setObjectName(u"frame_9")
-        self.frame_9.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_9.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_9 = QHBoxLayout(self.frame_9)
-        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.horizontalLayout_9.setContentsMargins(-1, 0, -1, 0)
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_9.addItem(self.horizontalSpacer_5)
-
-        self.label_7 = QLabel(self.frame_9)
+        self.label_7 = QLabel(self.frame_date_2)
         self.label_7.setObjectName(u"label_7")
 
-        self.horizontalLayout_9.addWidget(self.label_7)
+        self.gridLayout.addWidget(self.label_7, 1, 2, 1, 1)
 
-        self.timeEdit_end = QTimeEdit(self.frame_9)
-        self.timeEdit_end.setObjectName(u"timeEdit_end")
-        self.timeEdit_end.setMinimumSize(QSize(127, 0))
-        self.timeEdit_end.setLocale(QLocale(QLocale.Persian, QLocale.Iran))
+        self.label_32 = QLabel(self.frame_date_2)
+        self.label_32.setObjectName(u"label_32")
 
-        self.horizontalLayout_9.addWidget(self.timeEdit_end)
+        self.gridLayout.addWidget(self.label_32, 0, 6, 1, 1)
 
-        self.end_date = QLineEdit(self.frame_9)
+        self.label_34 = QLabel(self.frame_date_2)
+        self.label_34.setObjectName(u"label_34")
+
+        self.gridLayout.addWidget(self.label_34, 1, 6, 1, 1)
+
+        self.label_6 = QLabel(self.frame_date_2)
+        self.label_6.setObjectName(u"label_6")
+
+        self.gridLayout.addWidget(self.label_6, 0, 2, 1, 1)
+
+        self.horizontalSpacer_7 = QSpacerItem(38, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer_7, 0, 5, 1, 1)
+
+        self.start_time_hour = timeSpinBox(self.frame_date_2)
+        self.start_time_hour.setObjectName(u"start_time_hour")
+        self.start_time_hour.setMaximum(23)
+
+        self.gridLayout.addWidget(self.start_time_hour, 0, 7, 1, 1)
+
+        self.end_calendar_btn = QPushButton(self.frame_date_2)
+        self.end_calendar_btn.setObjectName(u"end_calendar_btn")
+        self.end_calendar_btn.setMinimumSize(QSize(0, 0))
+        self.end_calendar_btn.setStyleSheet(u"calendar")
+
+        self.gridLayout.addWidget(self.end_calendar_btn, 1, 4, 1, 1)
+
+        self.end_date = QLineEdit(self.frame_date_2)
         self.end_date.setObjectName(u"end_date")
+        self.end_date.setMinimumSize(QSize(102, 27))
+        self.end_date.setMaximumSize(QSize(120, 16777215))
         self.end_date.setReadOnly(True)
 
-        self.horizontalLayout_9.addWidget(self.end_date)
+        self.gridLayout.addWidget(self.end_date, 1, 3, 1, 1)
 
-        self.end_calendar_btn = QToolButton(self.frame_9)
-        self.end_calendar_btn.setObjectName(u"end_calendar_btn")
-        self.end_calendar_btn.setStyleSheet(u"")
+        self.label_30 = QLabel(self.frame_date_2)
+        self.label_30.setObjectName(u"label_30")
+        self.label_30.setMinimumSize(QSize(40, 0))
+        self.label_30.setStyleSheet(u"QLabel{\n"
+"	font-size:16px;\n"
+"	color:rgb(0, 123, 255);\n"
+"}\n"
+"\n"
+"QLabel:disabled{\n"
+"	font-weight:bold;\n"
+"	font-size:20px;\n"
+"	color:rgb(177, 177, 177);\n"
+"}")
 
-        self.horizontalLayout_9.addWidget(self.end_calendar_btn)
+        self.gridLayout.addWidget(self.label_30, 1, 0, 1, 1)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.label_10 = QLabel(self.frame_date_2)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setMinimumSize(QSize(40, 0))
+        self.label_10.setStyleSheet(u"QLabel{\n"
+"	font-size:16px;\n"
+"	color:rgb(0, 123, 255);\n"
+"}\n"
+"\n"
+"QLabel:disabled{\n"
+"	font-weight:bold;\n"
+"	font-size:20px;\n"
+"	color:rgb(177, 177, 177);\n"
+"}")
 
-        self.horizontalLayout_9.addItem(self.horizontalSpacer_3)
+        self.gridLayout.addWidget(self.label_10, 0, 0, 1, 1)
+
+        self.start_date = QLineEdit(self.frame_date_2)
+        self.start_date.setObjectName(u"start_date")
+        self.start_date.setMinimumSize(QSize(102, 27))
+        self.start_date.setMaximumSize(QSize(120, 16777215))
+        self.start_date.setReadOnly(True)
+
+        self.gridLayout.addWidget(self.start_date, 0, 3, 1, 1)
+
+        self.horizontalSpacer_8 = QSpacerItem(38, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer_8, 1, 5, 1, 1)
+
+        self.start_calendar_btn = QPushButton(self.frame_date_2)
+        self.start_calendar_btn.setObjectName(u"start_calendar_btn")
+        self.start_calendar_btn.setEnabled(True)
+        sizePolicy1.setHeightForWidth(self.start_calendar_btn.sizePolicy().hasHeightForWidth())
+        self.start_calendar_btn.setSizePolicy(sizePolicy1)
+        self.start_calendar_btn.setMinimumSize(QSize(25, 25))
+        self.start_calendar_btn.setMaximumSize(QSize(16777210, 16777215))
+        self.start_calendar_btn.setStyleSheet(u"calendar")
+
+        self.gridLayout.addWidget(self.start_calendar_btn, 0, 4, 1, 1)
+
+        self.label_8 = QLabel(self.frame_date_2)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setEnabled(True)
+        self.label_8.setStyleSheet(u"QLabel{\n"
+"	font-weight:bold;\n"
+"	font-size:20px;\n"
+"	color:rgb(0, 123, 255);\n"
+"}\n"
+"\n"
+"QLabel:disabled{\n"
+"	font-weight:bold;\n"
+"	font-size:20px;\n"
+"	color:rgb(177, 177, 177);\n"
+"}")
+
+        self.gridLayout.addWidget(self.label_8, 0, 8, 1, 1)
+
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer_5, 1, 1, 1, 1)
+
+        self.end_time_hour = timeSpinBox(self.frame_date_2)
+        self.end_time_hour.setObjectName(u"end_time_hour")
+        self.end_time_hour.setMaximum(23)
+
+        self.gridLayout.addWidget(self.end_time_hour, 1, 7, 1, 1)
+
+        self.start_time_minute = timeSpinBox(self.frame_date_2)
+        self.start_time_minute.setObjectName(u"start_time_minute")
+        self.start_time_minute.setMaximum(59)
+
+        self.gridLayout.addWidget(self.start_time_minute, 0, 9, 1, 1)
+
+        self.end_time_minute = timeSpinBox(self.frame_date_2)
+        self.end_time_minute.setObjectName(u"end_time_minute")
+        self.end_time_minute.setMaximum(59)
+
+        self.gridLayout.addWidget(self.end_time_minute, 1, 9, 1, 1)
 
 
-        self.frame_dateasd.addWidget(self.frame_9)
+        self.verticalLayout_20.addWidget(self.frame_date_2)
 
-        self.timeline_copy_btn = QPushButton(self.frame_date)
-        self.timeline_copy_btn.setObjectName(u"timeline_copy_btn")
-        self.timeline_copy_btn.setMinimumSize(QSize(185, 35))
-        self.timeline_copy_btn.setMaximumSize(QSize(183, 16777215))
-        self.timeline_copy_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.timeline_copy_btn.setStyleSheet(u"")
+        self.time_line_msg = QLabel(self.frame_7)
+        self.time_line_msg.setObjectName(u"time_line_msg")
+        font1 = QFont()
+        font1.setFamilies([u"Roboto"])
+        font1.setPointSize(12)
+        font1.setBold(False)
+        font1.setItalic(False)
+        self.time_line_msg.setFont(font1)
+        self.time_line_msg.setStyleSheet(u"color:rgb(230, 62, 5);")
 
-        self.frame_dateasd.addWidget(self.timeline_copy_btn, 0, Qt.AlignmentFlag.AlignHCenter)
+        self.verticalLayout_20.addWidget(self.time_line_msg)
 
 
-        self.verticalLayout_2.addWidget(self.frame_date)
+        self.verticalLayout_19.addWidget(self.frame_7)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_2.addWidget(self.timeline_groupbox)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 60, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_2.addItem(self.verticalSpacer_3)
 
@@ -1712,14 +1841,20 @@ class Ui_main(object):
         self.copy_button.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
         self.timeline_btn.setText(QCoreApplication.translate("main", u"Timeline Copy", None))
         self.timeline_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
-        self.label_6.setText(QCoreApplication.translate("main", u"Start time :", None))
-        self.start_calendar_btn.setText(QCoreApplication.translate("main", u"...", None))
-        self.start_calendar_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
-        self.label_7.setText(QCoreApplication.translate("main", u"End time   :", None))
-        self.end_calendar_btn.setText(QCoreApplication.translate("main", u"...", None))
-        self.end_calendar_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
-        self.timeline_copy_btn.setText(QCoreApplication.translate("main", u"Start Copy", None))
-        self.timeline_copy_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
+        self.timeline_groupbox.setTitle(QCoreApplication.translate("main", u"Time Line Filter", None))
+        self.label_31.setText(QCoreApplication.translate("main", u":", None))
+        self.label_7.setText(QCoreApplication.translate("main", u"date", None))
+        self.label_32.setText(QCoreApplication.translate("main", u"Time", None))
+        self.label_34.setText(QCoreApplication.translate("main", u"Time", None))
+        self.label_6.setText(QCoreApplication.translate("main", u"date", None))
+        self.end_calendar_btn.setText("")
+        self.end_calendar_btn.setProperty("styleClass", "")
+        self.label_30.setText(QCoreApplication.translate("main", u"To", None))
+        self.label_10.setText(QCoreApplication.translate("main", u"From", None))
+        self.start_calendar_btn.setText("")
+        self.start_calendar_btn.setProperty("styleClass", "")
+        self.label_8.setText(QCoreApplication.translate("main", u":", None))
+        self.time_line_msg.setText(QCoreApplication.translate("main", u"TextLabel", None))
         self.copy_log_lbl.setText(QCoreApplication.translate("main", u"message", None))
         self.copy_log_lbl.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.completed_copy_lbl.setText(QCoreApplication.translate("main", u"-", None))

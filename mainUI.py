@@ -13,6 +13,8 @@ from guiBackend import GUIBackend
 from PySide6.QtCore import QTimer
 from login import LoginPage
 from PySide6.QtWidgets import QGraphicsBlurEffect
+from PySide6.QtWidgets import QAbstractSpinBox
+
 
 from UIFiles.main_UI import Ui_main
 from uiUtils.GUIComponents import single_timer_runner
@@ -31,6 +33,7 @@ class mainUI(sQMainWindow):
         super().__init__()
 
 
+
         self.ui = Ui_main()
         self.ui.setupUi(self)
 
@@ -45,7 +48,7 @@ class mainUI(sQMainWindow):
         self.pos_ = self.pos()
         self.setWindowFlags(flags)
         self._old_pos = None
-        self.show_timeline(mode=False) 
+        self.show_timeline(mode=True) 
         self.ui.stackedWidget.setCurrentWidget(self.ui.copy)
         self.db = DataBase('data.db')
         self.button_connector()
@@ -58,6 +61,7 @@ class mainUI(sQMainWindow):
             'username': self.ui.username_msg,
             'password': self.ui.password_msg,
             'copy': self.ui.copy_log_lbl,
+            'timeline':self.ui.time_line_msg
         }
         
 
@@ -67,6 +71,7 @@ class mainUI(sQMainWindow):
             'start':JalaliCalendarDialog( self.ui.start_date),
             'end'  :JalaliCalendarDialog(self.ui.end_date)
         }
+
         self.calenders_btn = {
             'start': self.ui.start_calendar_btn,
             'end': self.ui.end_calendar_btn
@@ -75,7 +80,13 @@ class mainUI(sQMainWindow):
         for name , btn in self.calenders_btn.items():
             GUIBackend.button_connector_argument_pass(btn, self.open_calender, args=(name,))
 
+      
+
+
+        
+
         self.preview_login = False
+        self.init_clock_spinbox()
         self.all_style_repoblish()
         self.startup()
 
@@ -83,6 +94,13 @@ class mainUI(sQMainWindow):
         for name in self.fields_msg.keys():
             self.show_message(name, None)
 
+    def init_clock_spinbox(self,):
+        self.ui.start_time_hour.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.ui.start_time_minute.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.ui.end_time_hour.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.ui.end_time_minute.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.ui.end_time_hour.setValue(23)
+        self.ui.end_time_minute.setValue(59)
 
     def all_style_repoblish(self,):        
         for atr_name in dir(self.ui):
@@ -108,15 +126,14 @@ class mainUI(sQMainWindow):
         self.ui.side_copy_btn.clicked.connect(self.set_stack_widget)
         self.ui.side_profile_btn.clicked.connect(self.set_stack_widget)
         self.ui.timeline_btn.clicked.connect(self.show_login)
-        self.ui.timeline_copy_btn.clicked.connect(self.time_line_copy)
 
     def show_login(self):
-        GUIBackend.set_disable_enable(self.ui.timeline_copy_btn, False)
+        GUIBackend.set_disable_enable(self.ui.timeline_btn, False)
         self.applyBlurEffect()
         self.login_ui.show()
 
     def close_login(self):
-        GUIBackend.set_disable_enable(self.ui.timeline_copy_btn, True)
+        GUIBackend.set_disable_enable(self.ui.timeline_btn, True)
         self.login_ui.close()
 
     def check_password(self):
@@ -136,53 +153,6 @@ class mainUI(sQMainWindow):
 
             else:
                 self.login_ui.write_error("Password is Incorrect")
-
-    def time_line_copy(self):
-        self.show_timeline(mode=False)
-
-        if  self.ui.start_date.text() !='' and  self.ui.end_date.text() !='':
-
-            start_time={}
-            get_date = self.calenders['start'].date
-            # get_date = get_date.jdate()
-            get_time = self.ui.timeEdit_end.time()
-            h = get_time.hour()
-            m = get_time.minute()
-
-            start_time = get_date.replace(hour=h,minute=m)
-
-
-            print(start_time)
-
-
-            get_time = self.ui.timeEdit_end.time()
-            h = get_time.hour()
-            m = get_time.minute()
-            get_date = self.ui.end_date.text().split('/')
-            end_time = JalaliDateTime.now()
-            end_time = end_time.replace(year=int(get_date[0]),month=int(get_date[1]),day = int(get_date[2]), hour=h,minute=m)
-
-            print(end_time)
-
-            if end_time<start_time:
-                print('End time should be bigger than start time')
-                self.show_error('End time should be bigger than start time')
-
-            else:
-
-                print('Start Doing Copy')
-
-                self.image_condition = {'start':start_time,'end':end_time}
-                self.start_copy(image_condition=self.image_condition)
-
-
-
-
-
-
-
-
-
 
 
     def covert_date(self,jdatetime):
@@ -274,8 +244,6 @@ class mainUI(sQMainWindow):
 
 
     def ui_copy(self):
-
-        self.show_timeline(mode=False) 
         self.start_copy()
 
     
@@ -289,6 +257,29 @@ class mainUI(sQMainWindow):
         password = self.ui.password_input.text()
         src_path = self.src_path
         dst_path = self.dst_path
+        self.date_time_ranges = None
+
+        if self.ui.timeline_groupbox.isChecked():
+            start_date_time = self.calenders['start'].date
+            end_date_time = self.calenders['end'].date
+
+            start_h = self.ui.start_time_hour.value()
+            start_min = self.ui.start_time_minute.value()
+
+            end_h = self.ui.end_time_hour.value()
+            end_min = self.ui.end_time_minute.value()
+
+            start_date_time = start_date_time.replace(hour=start_h, minute=start_min, second=0, microsecond=0)
+            end_date_time = end_date_time.replace(hour=end_h, minute=end_min, second=0, microsecond=0)
+
+            if start_date_time > end_date_time:
+                self.show_message('timeline', "start date time can't be bigger than end", 4000)
+                return
+
+            self.date_time_ranges = (start_date_time, end_date_time)
+
+
+            
 
         self.trasformer = transformModule(ip, src_path, dst_path, username, password)
         self.show_message('copy', 'Check Connection...')
@@ -305,7 +296,7 @@ class mainUI(sQMainWindow):
         elif status_code == StatusCodes.pingAndConnectionStatusCodes.SUCCESS:
             self.show_message('copy', 'Searching Files...')
             self.trasformer.find_files( trains= None,
-                                        dates_tange=None,
+                                        dates_tange=self.date_time_ranges,
                                         finish_event_func=self.step2_files_list_ready_event,
                                         log_event_func=self.step1_log_event)
 
@@ -320,7 +311,7 @@ class mainUI(sQMainWindow):
                                      avaiabilities:dict[str,dict[str, list]]):
         
         if status_code == StatusCodes.findFilesStatusCodes.DIR_NOT_EXISTS:
-            self.show_message('copy', "Path dosen't exists")
+            self.show_message('copy', f"Path dosen't exists: {self.trasformer.src_path} ", )
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
             return
         
@@ -371,7 +362,7 @@ class mainUI(sQMainWindow):
 
 
     def show_timeline(self,mode):
-        self.ui.frame_date.setVisible(mode) 
+        self.ui.timeline_groupbox.setVisible(mode) 
 
         
 

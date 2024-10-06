@@ -1,14 +1,11 @@
 import sys
 sys.path.append('C:\\Users\\amirh\Desktop\\railProject_SoftwareCopy')
 
-import subprocess
 import time
-import os
 import threading
-import shutil
 
-from persiantools.jdatetime import JalaliDateTime, timedelta
-from PySide6.QtCore import Signal, QObject
+# from persiantools.jdatetime import JalaliDateTime, timedelta
+# from PySide6.QtCore import Signal, QObject
 
 from Tranform.Network import pingWorker, shareMapping
 from Tranform.transformUtils import transormUtils

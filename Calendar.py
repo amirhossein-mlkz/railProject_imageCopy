@@ -1,217 +1,125 @@
-import time
-import datetime
-
-import re
-import cv2
-#from persiantools.jdatetime import JalaliDateTime, JalaliDate
-from datetime import datetime, date
-
-from PySide6.QtWidgets import QApplication, QToolButton
-from PySide6 import QtWidgets, QtCore, QtGui
-from PySide6.QtWidgets import QApplication, QVBoxLayout, QWidget, QComboBox, QGridLayout, QLabel, QDialog,QDialogButtonBox,QPushButton
-
-from guiBackend import GUIBackend
-from PySide6.QtCore import QDate
-from PySide6 import QtCore as sQtCore
+from PySide6.QtWidgets import QPushButton, QLabel, QComboBox, QGridLayout, QDialogButtonBox, QVBoxLayout,QHBoxLayout, QWidget, QDialog
+from PySide6 import QtCore
+from PySide6.QtGui import QColor
 
 from persiantools.jdatetime import JalaliDateTime
-import jdatetime
 
-# class Calendar(QtWidgets.QDialog):
-#     def __init__(self, input_field:QtWidgets.QLineEdit, date:datetime = None) -> None:
-#         super(Calendar, self).__init__()
+TODAY_BUTTON_STYLE="""
+    QPushButton {
+        background-color: transparent;
+        border:none;
+        color:rgba(0, 122, 255, 255);
+        font-weight:bold;
+        padding:10px;
+    }
+    QPushButton:hover {
+        color:rgba(0, 40, 255, 255)
+    }
+"""
 
-#         self.ui = Ui_CalendarDialog()
-#         self.ui.setupUi(self)
-
-#         flags = sQtCore.Qt.WindowFlags(
-#             sQtCore.Qt.FramelessWindowHint
-#         )  # remove the windows frame of ui
-#         self.pos_ = self.pos()
-#         self.setWindowFlags(flags)
-#         self._old_pos = None
-
-
-#         self.input_field = input_field
-#         if date is None:
-#             date = datetime.now()
-
-#         self.date:datetime = date
-        
-#         self.__set_date_into_field()
-#         GUIBackend.set_win_frameless(self)
-#         GUIBackend.set_win_attribute(self, QtCore.Qt.WA_TranslucentBackground)
-
-#         GUIBackend.button_connector(self.ui.cancel_btn, self.close_win)
-#         GUIBackend.button_connector(self.ui.ok_btn, self.__update__date_field)
-
-#         self.move_refresh_time = 0
-#         self.offset = None
-
-#         self.selected_date = None
-
-#         self._center()
-#         self._styler()
-
-#         self.__set_date_into_field()
-
-
-#     def _center(self):
-#         primary_screen = QApplication.primaryScreen()
-
-#         if primary_screen:
-#             screen_geometry = primary_screen.geometry()
-
-#             center_point = screen_geometry.center()
-
-#             self.move(center_point.x() - self.frameGeometry().width() // 2,
-#                       center_point.y() - self.frameGeometry().height() // 2)
-            
-#     def _styler(self):
-#         self._style_next_prev()
-#         self._style_today()
-            
-#     def _style_next_prev(self):
-#         prev_month_button = self.ui.calendar.findChild(QToolButton, 'qt_calendar_prevmonth')
-#         next_month_button = self.ui.calendar.findChild(QToolButton, 'qt_calendar_nextmonth')
-
-#         prev_month_button.setIcon(QtGui.QIcon(':/icons/icons/prev_gray.png'))
-#         next_month_button.setIcon(QtGui.QIcon(':/icons/icons/next_gray.png'))
-
-#         prev_month_button.setCursor(QtGui.QCursor(QtGui.Qt.PointingHandCursor))
-#         next_month_button.setCursor(QtGui.QCursor(QtGui.Qt.PointingHandCursor))
-
-#     def _style_today(self):
-#         today_format = QtGui.QTextCharFormat()
-#         today_format.setForeground(QtGui.QColor('#4C7EFF'))
-
-#         self.ui.calendar.setDateTextFormat(QtCore.QDate.currentDate(), today_format)
-
-#     def mousePressEvent(self, event):
-#         if event.button() == QtCore.Qt.LeftButton:
-#             self.offset = QtCore.QPoint(event.position().x(),event.position().y())
-#         else:
-#             super().mousePressEvent(event)
-
-#     def mouseMoveEvent(self, event):
-#         if self.offset is not None and event.buttons() == QtCore.Qt.LeftButton:
-#             if time.time() - self.move_refresh_time > 10:
-#                 self.move_refresh_time = time.time()
-#                 self.move(self.pos() + QtCore.QPoint(event.scenePosition().x(),event.scenePosition().y()) - self.offset)
-
-#         else:
-#             super().mouseMoveEvent(event)
-
-#     def mouseReleaseEvent(self, event):
-#         self.offset = None
-#         super().mouseReleaseEvent(event)
-
-#     def show_win(self):
-#         #date = GUIBackend.get_date_input(self.input_field)
-#         self.__set_date(self.date)
-    
-#         GUIBackend.show_window(self, always_on_top=True)
-
-#     def close_win(self):
-#         GUIBackend.close_window(self)
-
-#     def __set_date_into_field(self,):
-#         str_date = self.date.strftime("%Y/%m/%d")
-#         GUIBackend.set_input(self.input_field, str_date)
-
-#     def __update__date_field(self):
-#         self.date = self.ui.calendar.selectedDate().toPython()
-#         self.__set_date_into_field()
-#         self.close_win()
-    
-#     def __set_date(self, date:datetime):
-#         date = QtCore.QDate(date.year, date.month, date.day)
-#         self.ui.calendar.setSelectedDate(date)
-
-DAY_BUTTON_STYLE = """QPushButton {
-
-    background-color:transparent;
-}
-
-QPushButton:hover {
-    background-color:rgba(0,0,255,50);
-}
+# Button styles
+DAY_BUTTON_STYLE = """
+    QPushButton {
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 20px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+    QPushButton:hover {
+        background-color: rgba(0, 122, 255, 30);
+    }
 """
 
 DAY_BUTTON_SELECTED_STYLE = """
-
-QPushButton {
-    border:2px solid red;
-    color: rgb(0,64,64);
-    border-radius:3px;
-    background-color:transparent;
-}
+    QPushButton {
+        background-color: rgba(0, 122, 255, 255);
+        color: white;
+        border-radius: 20px;
+        border: none;
+        min-width: 40px;
+        min-height: 40px;
+    }
 """
-
 
 MAIN_STYLE = """
-QComboBox
-{
-	border:2px solid #e0e0e0;
-    border-radius: 17px;
-    padding: 1px 8px 1px 8px;
-	min-height: 20px;
-	font-size: 14px;
-}
+    QComboBox {
+        border: 2px solid #e0e0e0;
+        border-radius: 17px;
+        padding: 8px;
+        font-size: 14px;
+    }
 
-QComboBox::drop-down
-{
+    QComboBox::drop-down {
+    border: none;
     background-color: transparent;
-	border-top-right-radius: 8px;
-	border-bottom-right-radius: 8px;
 }
 
-QDialogButtonBox{
-color:red;
-}
+    QPushButton#okButton {
+        background-color: #007AFF;
+        color: white;
+        border-radius: 18px;
+        border: 2px solid #007AFF;
+        font-size: 14px;
+        min-height:36px;
+        max-height:36px;
+        min-width:85px;
+
+    }
+
+    QPushButton#okButton:hover {
+        background-color: #0051a8;
+
+    }
+
+    QPushButton#cancelButton {
+        color: #007AFF;
+        background-color: transparent;
+        border: 2px solid #007AFF;
+        border-radius: 18px;
+        font-size: 14px;
+        min-height:36px;
+        max-height:36px;
+        min-width:85px;
+
+    }
+
+    QPushButton#cancelButton:hover {
+        color: #0051a8;
+        border: 2px solid #0051a8;
+        
+    }
 """
 
-        
-
-
-
 class JalaliCalendarDialog(QDialog):
-    def __init__(self, input_field: QtWidgets.QLineEdit, date=None):
+    def __init__(self, input_field=None, date=None):
         super().__init__()
 
         self.setWindowTitle("Jalali Calendar Dialog")
+        self.setStyleSheet(MAIN_STYLE)
 
-
-        flags = sQtCore.Qt.WindowFlags(
-            sQtCore.Qt.FramelessWindowHint
-        )  # remove the windows frame of ui
-        self.pos_ = self.pos()
-        self.setWindowFlags(flags)
-        self._old_pos = None
-
+        self.selected_button = None
         self.selected_day = None
         self.input_field = input_field
+        self.days_buttons:dict[str,QPushButton] = {}
+
+        self.today_date = JalaliDateTime.now()
 
         if date is None:
             date = JalaliDateTime.now()
-        
 
-
-        self.date:datetime = date
+        self.date = date
 
         # Set up the layout
         layout = QVBoxLayout()
 
-
         self.yearCombo = QComboBox()
         self.monthCombo = QComboBox()
 
-        # Add years to the year combo box
-        current_jalali_year = JalaliDateTime.now().year
+        current_jalali_year = self.today_date.year
         for year in range(current_jalali_year - 50, current_jalali_year + 50):
             self.yearCombo.addItem(str(year))
 
-        # Add months to the month combo box
         jalali_months = [
             "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
             "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
@@ -220,13 +128,12 @@ class JalaliCalendarDialog(QDialog):
             self.monthCombo.addItem(month)
 
         self.yearCombo.setCurrentText(str(current_jalali_year))
-        self.monthCombo.setCurrentIndex(JalaliDateTime.now().month - 1)
+        self.monthCombo.setCurrentIndex(self.today_date.month - 1)
 
         self.yearCombo.currentTextChanged.connect(self.updateCalendar)
         self.monthCombo.currentIndexChanged.connect(self.updateCalendar)
 
         self.calendarGrid = QGridLayout()
-        self.selected_button = None
         self.updateCalendar()
 
         layout.addWidget(self.yearCombo)
@@ -236,19 +143,37 @@ class JalaliCalendarDialog(QDialog):
         calendar_widget.setLayout(self.calendarGrid)
         layout.addWidget(calendar_widget)
 
-        # Add buttons
-        buttonBox = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        buttonBox.accepted.connect(self.selected_date)
-        buttonBox.rejected.connect(self.reject)
+        # Add Today button
+        todayButton = QPushButton("امروز")
+        todayButton.setStyleSheet(TODAY_BUTTON_STYLE)
+        todayButton.clicked.connect(self.select_today)
+        layout.addWidget(todayButton)
+
+        # Add OK and Cancel buttons
+        buttonBox = QDialogButtonBox()
+        ok_button = QPushButton("تایید")
+        ok_button.setObjectName("okButton")
+        ok_button.clicked.connect(self.accept_date)
+        cancel_button = QPushButton("لغو")
+        cancel_button.setObjectName("cancelButton")
+        cancel_button.clicked.connect(self.reject)
+
+        buttonBox.addButton(ok_button, QDialogButtonBox.AcceptRole)
+        buttonBox.addButton(cancel_button, QDialogButtonBox.RejectRole)
+        
+
+        button_layout = QHBoxLayout()
+        button_layout.addWidget(buttonBox)
+        button_layout.setAlignment(QtCore.Qt.AlignHCenter)
+
         layout.addWidget(buttonBox)
+        layout.setAlignment(QtCore.Qt.AlignHCenter)
 
         self.setLayout(layout)
-        self.setStyleSheet(MAIN_STYLE)
 
-        self.__set_date_into_field()
+        self.set_date(self.date, accept=True)
 
     def updateCalendar(self):
-        # Clear previous widgets in the calendar grid
         while self.calendarGrid.count():
             item = self.calendarGrid.takeAt(0)
             widget = item.widget()
@@ -263,6 +188,8 @@ class JalaliCalendarDialog(QDialog):
 
         days_in_month = self.days_in_jalali_month(year, month)
 
+        self.days_buttons = {}
+
         day = 1
         for week in range(6):
             for weekday in range(7):
@@ -274,56 +201,52 @@ class JalaliCalendarDialog(QDialog):
                     self.calendarGrid.addWidget(label, week, weekday)
                 else:
                     button = QPushButton(str(day))
-                    GUIBackend.set_style(button, DAY_BUTTON_STYLE)
-                    # button.setStyleSheet(DAY_BUTTON_STYLE)
-
-                    self.calendarGrid.addWidget(button, week, weekday)
+                    button.setStyleSheet(DAY_BUTTON_STYLE)
                     button.clicked.connect(self.select_day)
-
+                    self.calendarGrid.addWidget(button, week, weekday)
+                    self.days_buttons[day] = button
                     day += 1
 
-                    
+    def select_day(self):
+        for btn in self.days_buttons.values():
+            btn.setStyleSheet(DAY_BUTTON_STYLE)
+        
+        self.selected_button = self.sender()
+        self.selected_button.setStyleSheet(DAY_BUTTON_SELECTED_STYLE)
+        self.selected_day = int(self.selected_button.text())
 
-        # self.calendarGrid.setLayout(layout)
+    def set_date(self, date:JalaliDateTime, accept=False):
+        self.yearCombo.setCurrentText(str(date.year))
+        self.monthCombo.setCurrentIndex(date.month - 1)
+        self.selected_day = date.day
+        self.updateCalendar()
+        # Simulate day selection for today's date
+        self.days_buttons[self.selected_day].click()
+        if accept:
+            self.accept_date()
 
-        # self.calendarGrid.setLayout(layout)
+    def select_today(self):
+        self.set_date(JalaliDateTime.now())
 
-    @staticmethod
-    def days_in_jalali_month(year, month):
+
+    def days_in_jalali_month(self, year, month):
         if month <= 6:
             return 31
         elif month <= 11:
             return 30
         else:
-            # Check for leap year
             return 30 if JalaliDateTime.is_leap(year) else 29
 
-
-    def select_day(self):
-        try:
-            if self.selected_button:
-                GUIBackend.set_style(self.selected_button, DAY_BUTTON_STYLE)
-        except RuntimeError as e:
-            print("Button has been deleted.")
-        self.selected_button = self.sender()
-        self.selected_day = int(self.selected_button.text())
-        GUIBackend.set_style(self.selected_button, DAY_BUTTON_SELECTED_STYLE)
-
-    def selected_date(self):
+    def accept_date(self):
         year = int(self.yearCombo.currentText())
         month = self.monthCombo.currentIndex() + 1
         day = self.selected_day
-        
-
         if day:
             self.date = JalaliDateTime(year, month, day)
             self.__set_date_into_field()
-
         self.accept()
 
-
-        # return JalaliDateTime(year, month, day) if day else None
-    
-    def __set_date_into_field(self,):
+    def __set_date_into_field(self):
         str_date = self.date.strftime("%Y/%m/%d")
-        GUIBackend.set_input(self.input_field, str_date)
+        if self.input_field:
+            self.input_field.setText(str_date)

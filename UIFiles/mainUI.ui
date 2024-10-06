@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>717</width>
-    <height>618</height>
+    <width>714</width>
+    <height>655</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -193,6 +193,12 @@ QLineEdit:focus
 {
 	border-bottom: 2px solid #7892DF;
 }
+
+QLineEdit:disabled 
+{
+	color: rgb(120,120,120);
+}
+
 
 /*****************QSpinBox, QDoubleSpinBox*******************/
 
@@ -598,6 +604,26 @@ QPushButton[styleClass=&quot;fillBtn&quot;]:pressed {
 QPushButton[styleClass=&quot;fillBtn&quot;]:disabled {
    background-color: #c0c0c0;
 	border:none;
+}
+
+
+QPushButton[styleSheet=&quot;calendar&quot;]{
+background:transparent;
+icon:url(:/asstets/icons/calendar.png);
+border:none;
+icon-size:25px;
+width:25px;
+height:25px;
+}
+
+QPushButton[styleSheet=&quot;calendar&quot;]:hover{
+icon:url(:/asstets/icons/calendar-hover.png);
+
+}
+
+QPushButton[styleSheet=&quot;calendar&quot;]:disabled{
+icon:url(:/asstets/icons/calendar-disable.png);
+
 }
 
 
@@ -1263,6 +1289,12 @@ QPushButton[styleClass=&quot;fillBtn&quot;]:disabled {
                    <property name="enabled">
                     <bool>true</bool>
                    </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
                    <property name="cursor">
                     <cursorShape>PointingHandCursor</cursorShape>
                    </property>
@@ -1281,232 +1313,385 @@ QPushButton[styleClass=&quot;fillBtn&quot;]:disabled {
                </widget>
               </item>
               <item>
-               <widget class="QFrame" name="frame_date">
-                <property name="maximumSize">
+               <widget class="QGroupBox" name="timeline_groupbox">
+                <property name="minimumSize">
                  <size>
-                  <width>16777215</width>
-                  <height>115</height>
+                  <width>0</width>
+                  <height>160</height>
                  </size>
                 </property>
-                <property name="frameShape">
-                 <enum>QFrame::Shape::StyledPanel</enum>
+                <property name="title">
+                 <string>Time Line Filter</string>
                 </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Shadow::Raised</enum>
+                <property name="checkable">
+                 <bool>true</bool>
                 </property>
-                <layout class="QVBoxLayout" name="frame_dateasd">
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
+                <layout class="QVBoxLayout" name="verticalLayout_19">
                  <item>
-                  <widget class="QFrame" name="frame_8">
-                   <property name="frameShape">
-                    <enum>QFrame::Shape::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Shadow::Raised</enum>
-                   </property>
-                   <layout class="QHBoxLayout" name="horizontalLayout_8">
-                    <property name="leftMargin">
-                     <number>9</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>9</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <spacer name="horizontalSpacer_4">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_6">
-                      <property name="text">
-                       <string>Start time :</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QTimeEdit" name="timeEdit_start">
-                      <property name="minimumSize">
-                       <size>
-                        <width>127</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="locale">
-                       <locale language="Persian" country="Iran"/>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="start_date">
-                      <property name="readOnly">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QToolButton" name="start_calendar_btn">
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string>...</string>
-                      </property>
-                      <property name="styleClass" stdset="0">
-                       <string>fillBtn</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <spacer name="horizontalSpacer_2">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QFrame" name="frame_9">
-                   <property name="frameShape">
-                    <enum>QFrame::Shape::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Shadow::Raised</enum>
-                   </property>
-                   <layout class="QHBoxLayout" name="horizontalLayout_9">
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <spacer name="horizontalSpacer_5">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="label_7">
-                      <property name="text">
-                       <string>End time   :</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QTimeEdit" name="timeEdit_end">
-                      <property name="minimumSize">
-                       <size>
-                        <width>127</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="locale">
-                       <locale language="Persian" country="Iran"/>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="end_date">
-                      <property name="readOnly">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QToolButton" name="end_calendar_btn">
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string>...</string>
-                      </property>
-                      <property name="styleClass" stdset="0">
-                       <string>fillBtn</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <spacer name="horizontalSpacer_3">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item alignment="Qt::AlignmentFlag::AlignHCenter">
-                  <widget class="QPushButton" name="timeline_copy_btn">
+                  <widget class="QFrame" name="frame_7">
                    <property name="minimumSize">
                     <size>
-                     <width>185</width>
-                     <height>35</height>
+                     <width>0</width>
+                     <height>120</height>
                     </size>
                    </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>183</width>
-                     <height>16777215</height>
-                    </size>
+                   <property name="frameShape">
+                    <enum>QFrame::Shape::StyledPanel</enum>
                    </property>
-                   <property name="cursor">
-                    <cursorShape>PointingHandCursor</cursorShape>
+                   <property name="frameShadow">
+                    <enum>QFrame::Shadow::Raised</enum>
                    </property>
-                   <property name="styleSheet">
-                    <string notr="true"/>
-                   </property>
-                   <property name="text">
-                    <string>Start Copy</string>
-                   </property>
-                   <property name="styleClass" stdset="0">
-                    <string>fillBtn</string>
-                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_20">
+                    <item>
+                     <widget class="QFrame" name="frame_date_2">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="frameShape">
+                       <enum>QFrame::Shape::NoFrame</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Shadow::Raised</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout">
+                       <property name="leftMargin">
+                        <number>9</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>9</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>9</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>9</number>
+                       </property>
+                       <item row="1" column="8">
+                        <widget class="QLabel" name="label_31">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLabel{
+	font-weight:bold;
+	font-size:20px;
+	color:rgb(0, 123, 255);
+}
+
+QLabel:disabled{
+	font-weight:bold;
+	font-size:20px;
+	color:rgb(177, 177, 177);
+}</string>
+                         </property>
+                         <property name="text">
+                          <string>:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <spacer name="horizontalSpacer_4">
+                         <property name="orientation">
+                          <enum>Qt::Orientation::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_7">
+                         <property name="text">
+                          <string>date</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="6">
+                        <widget class="QLabel" name="label_32">
+                         <property name="text">
+                          <string>Time</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="6">
+                        <widget class="QLabel" name="label_34">
+                         <property name="text">
+                          <string>Time</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="2">
+                        <widget class="QLabel" name="label_6">
+                         <property name="text">
+                          <string>date</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="5">
+                        <spacer name="horizontalSpacer_7">
+                         <property name="orientation">
+                          <enum>Qt::Orientation::Horizontal</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Policy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>38</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item row="0" column="7">
+                        <widget class="timeSpinBox" name="start_time_hour">
+                         <property name="maximum">
+                          <number>23</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="4">
+                        <widget class="QPushButton" name="end_calendar_btn">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">calendar</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="styleClass" stdset="0">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="3">
+                        <widget class="QLineEdit" name="end_date">
+                         <property name="minimumSize">
+                          <size>
+                           <width>102</width>
+                           <height>27</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>120</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="0">
+                        <widget class="QLabel" name="label_30">
+                         <property name="minimumSize">
+                          <size>
+                           <width>40</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLabel{
+	font-size:16px;
+	color:rgb(0, 123, 255);
+}
+
+QLabel:disabled{
+	font-weight:bold;
+	font-size:20px;
+	color:rgb(177, 177, 177);
+}</string>
+                         </property>
+                         <property name="text">
+                          <string>To</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="0">
+                        <widget class="QLabel" name="label_10">
+                         <property name="minimumSize">
+                          <size>
+                           <width>40</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLabel{
+	font-size:16px;
+	color:rgb(0, 123, 255);
+}
+
+QLabel:disabled{
+	font-weight:bold;
+	font-size:20px;
+	color:rgb(177, 177, 177);
+}</string>
+                         </property>
+                         <property name="text">
+                          <string>From</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="3">
+                        <widget class="QLineEdit" name="start_date">
+                         <property name="minimumSize">
+                          <size>
+                           <width>102</width>
+                           <height>27</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>120</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="5">
+                        <spacer name="horizontalSpacer_8">
+                         <property name="orientation">
+                          <enum>Qt::Orientation::Horizontal</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Policy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>38</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item row="0" column="4">
+                        <widget class="QPushButton" name="start_calendar_btn">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777210</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">calendar</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="styleClass" stdset="0">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="8">
+                        <widget class="QLabel" name="label_8">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLabel{
+	font-weight:bold;
+	font-size:20px;
+	color:rgb(0, 123, 255);
+}
+
+QLabel:disabled{
+	font-weight:bold;
+	font-size:20px;
+	color:rgb(177, 177, 177);
+}</string>
+                         </property>
+                         <property name="text">
+                          <string>:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="1">
+                        <spacer name="horizontalSpacer_5">
+                         <property name="orientation">
+                          <enum>Qt::Orientation::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item row="1" column="7">
+                        <widget class="timeSpinBox" name="end_time_hour">
+                         <property name="maximum">
+                          <number>23</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="9">
+                        <widget class="timeSpinBox" name="start_time_minute">
+                         <property name="maximum">
+                          <number>59</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="9">
+                        <widget class="timeSpinBox" name="end_time_minute">
+                         <property name="maximum">
+                          <number>59</number>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="time_line_msg">
+                      <property name="font">
+                       <font>
+                        <family>Roboto</family>
+                        <pointsize>12</pointsize>
+                        <italic>false</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color:rgb(230, 62, 5);</string>
+                      </property>
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                 </layout>
@@ -1518,12 +1703,12 @@ QPushButton[styleClass=&quot;fillBtn&quot;]:disabled {
                  <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeType">
-                 <enum>QSizePolicy::Policy::Expanding</enum>
+                 <enum>QSizePolicy::Policy::Fixed</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>40</height>
+                  <height>60</height>
                  </size>
                 </property>
                </spacer>
@@ -2664,6 +2849,15 @@ QPushButton[styleClass=&quot;fillBtn&quot;]:disabled {
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
- <resources/>
+ <customwidgets>
+  <customwidget>
+   <class>timeSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>uiUtils.GUIComponents.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="Assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

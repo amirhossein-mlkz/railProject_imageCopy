@@ -393,6 +393,11 @@ QSpinBox:focus, QDoubleSpinBox:focus{
 
 """
 
+class timeSpinBox(QtWidgets.QSpinBox):
+    def textFromValue(self, value):
+        # این تابع اعداد را همیشه با دو رقم نمایش می‌دهد
+        return f"{value:02d}"  # دو رقم با پر کردن صفر
+
 
 def take_closest(num, collection):
     return min(collection, key=lambda x: abs(x - num))

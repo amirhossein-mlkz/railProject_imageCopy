@@ -1,15 +1,14 @@
 from PySide6 import QtWidgets, QtCore, QtGui 
 import sys
 import os
-from mainUI import mainUI
-
-
 BUILD_UI = True
-
 if BUILD_UI:
-    # os.system('CMD /C pyside6-rcc uiFiles/Assets/Assets.qrc -o uiFiles/Assets/Assets_rc.py')#PySide
+    sys.path.append('UIFiles\\Assets')
+    os.system('CMD /C pyside6-rcc uiFiles/Assets/assets.qrc -o uiFiles/Assets/assets_rc.py')#PySide
     os.system('CMD /C pyside6-uic UIFiles/mainUI.ui -o UIFiles/main_UI.py')
     #dialogs
+
+from mainUI import mainUI
 
 
 if __name__ == '__main__':
