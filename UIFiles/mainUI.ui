@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>714</width>
-    <height>655</height>
+    <height>688</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -941,6 +941,31 @@ icon:url(:/asstets/icons/calendar-disable.png);
               <number>6</number>
              </property>
              <item>
+              <widget class="QPushButton" name="login_btn">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="text">
+                <string>Login</string>
+               </property>
+               <property name="styleClass" stdset="0">
+                <string>fillBtn</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer">
                <property name="orientation">
                 <enum>Qt::Orientation::Horizontal</enum>
@@ -1278,31 +1303,6 @@ icon:url(:/asstets/icons/calendar-disable.png);
                    </property>
                    <property name="text">
                     <string>Start Copy</string>
-                   </property>
-                   <property name="styleClass" stdset="0">
-                    <string>fillBtn</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="timeline_btn">
-                   <property name="enabled">
-                    <bool>true</bool>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="cursor">
-                    <cursorShape>PointingHandCursor</cursorShape>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true"/>
-                   </property>
-                   <property name="text">
-                    <string>Timeline Copy</string>
                    </property>
                    <property name="styleClass" stdset="0">
                     <string>fillBtn</string>

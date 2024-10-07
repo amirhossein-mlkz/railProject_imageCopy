@@ -41,6 +41,8 @@ class mainUI(sQMainWindow):
         self.login_ui.login_button_connector(self.check_password)
         self.login_ui.close_button_connector(self.close_login)
 
+        self.is_login = False
+
         # window setup
         flags = sQtCore.Qt.WindowFlags(
             sQtCore.Qt.FramelessWindowHint
@@ -48,7 +50,7 @@ class mainUI(sQMainWindow):
         self.pos_ = self.pos()
         self.setWindowFlags(flags)
         self._old_pos = None
-        self.show_timeline(mode=True) 
+        self.set_login_status(False) 
         self.ui.stackedWidget.setCurrentWidget(self.ui.copy)
         self.db = DataBase('data.db')
         self.button_connector()
@@ -81,11 +83,6 @@ class mainUI(sQMainWindow):
             GUIBackend.button_connector_argument_pass(btn, self.open_calender, args=(name,))
 
       
-
-
-        
-
-        self.preview_login = False
         self.init_clock_spinbox()
         self.all_style_repoblish()
         self.startup()
@@ -125,15 +122,16 @@ class mainUI(sQMainWindow):
         self.ui.copy_button.clicked.connect(self.ui_copy)
         self.ui.side_copy_btn.clicked.connect(self.set_stack_widget)
         self.ui.side_profile_btn.clicked.connect(self.set_stack_widget)
-        self.ui.timeline_btn.clicked.connect(self.show_login)
+        self.ui.login_btn.clicked.connect(self.show_login)
 
     def show_login(self):
-        GUIBackend.set_disable_enable(self.ui.timeline_btn, False)
-        self.applyBlurEffect()
-        self.login_ui.show()
+        if self.is_login:
+            self.set_login_status(False)
+        else:
+            self.applyBlurEffect()
+            self.login_ui.show()
 
     def close_login(self):
-        GUIBackend.set_disable_enable(self.ui.timeline_btn, True)
         self.login_ui.close()
 
     def check_password(self):
@@ -148,11 +146,23 @@ class mainUI(sQMainWindow):
         passwords_db = self.db.fetch_table_as_dict(table_name='password')
         for pass_db in passwords_db:    
             if str(password) == str(pass_db['password']):
+                self.set_login_status(True)
                 self.login_ui.close()
-                self.show_timeline(mode=True)
+                
+                
+                
 
             else:
                 self.login_ui.write_error("Password is Incorrect")
+
+    def set_login_status(self, status):
+        self.is_login = status
+        self.ui.timeline_groupbox.setVisible(status) 
+        if status == True:
+            self.ui.login_btn.setText('Logout')
+        else:
+            self.ui.login_btn.setText('Login')
+        
 
 
     def covert_date(self,jdatetime):
@@ -358,11 +368,6 @@ class mainUI(sQMainWindow):
         GUIBackend.set_disable_enable(self.ui.copy_button, True)
         self.show_message('copy', "Finish Success")
         
-
-
-
-    def show_timeline(self,mode):
-        self.ui.timeline_groupbox.setVisible(mode) 
 
         
 

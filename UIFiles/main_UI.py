@@ -28,7 +28,7 @@ class Ui_main(object):
     def setupUi(self, main):
         if not main.objectName():
             main.setObjectName(u"main")
-        main.resize(714, 655)
+        main.resize(714, 688)
         self.globalStyleSheet = QWidget(main)
         self.globalStyleSheet.setObjectName(u"globalStyleSheet")
         self.globalStyleSheet.setStyleSheet(u"/**************************Global Font***************************/\n"
@@ -764,6 +764,15 @@ class Ui_main(object):
         self.horizontalLayout_14 = QHBoxLayout(self.topFrame)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
         self.horizontalLayout_14.setContentsMargins(-1, 6, -1, 6)
+        self.login_btn = QPushButton(self.topFrame)
+        self.login_btn.setObjectName(u"login_btn")
+        self.login_btn.setEnabled(True)
+        self.login_btn.setMinimumSize(QSize(0, 0))
+        self.login_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.login_btn.setStyleSheet(u"")
+
+        self.horizontalLayout_14.addWidget(self.login_btn)
+
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_14.addItem(self.horizontalSpacer)
@@ -954,15 +963,6 @@ class Ui_main(object):
         self.copy_button.setStyleSheet(u"")
 
         self.horizontalLayout_7.addWidget(self.copy_button)
-
-        self.timeline_btn = QPushButton(self.frame_6)
-        self.timeline_btn.setObjectName(u"timeline_btn")
-        self.timeline_btn.setEnabled(True)
-        self.timeline_btn.setMinimumSize(QSize(0, 0))
-        self.timeline_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.timeline_btn.setStyleSheet(u"")
-
-        self.horizontalLayout_7.addWidget(self.timeline_btn)
 
 
         self.verticalLayout_2.addWidget(self.frame_6)
@@ -1821,6 +1821,8 @@ class Ui_main(object):
         self.side_copy_btn.setText(QCoreApplication.translate("main", u"Copy", None))
         self.side_profile_btn.setText(QCoreApplication.translate("main", u"Profile", None))
         self.side_about_btn.setText(QCoreApplication.translate("main", u" About Us ", None))
+        self.login_btn.setText(QCoreApplication.translate("main", u"Login", None))
+        self.login_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
         self.logined_username_lbl.setText("")
         self.help_btn.setText("")
         self.minimize_btn.setText("")
@@ -1839,8 +1841,6 @@ class Ui_main(object):
         self.password_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.copy_button.setText(QCoreApplication.translate("main", u"Start Copy", None))
         self.copy_button.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
-        self.timeline_btn.setText(QCoreApplication.translate("main", u"Timeline Copy", None))
-        self.timeline_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
         self.timeline_groupbox.setTitle(QCoreApplication.translate("main", u"Time Line Filter", None))
         self.label_31.setText(QCoreApplication.translate("main", u":", None))
         self.label_7.setText(QCoreApplication.translate("main", u"date", None))
