@@ -269,7 +269,7 @@ class mainUI(sQMainWindow):
         dst_path = self.dst_path
         self.date_time_ranges = None
 
-        if self.ui.timeline_groupbox.isChecked():
+        if self.ui.timeline_groupbox.isChecked() and self.is_login:
             start_date_time = self.calenders['start'].date
             end_date_time = self.calenders['end'].date
 
