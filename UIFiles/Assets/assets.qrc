@@ -1,5 +1,14 @@
 <RCC>
   <qresource prefix="asstets">
+    <file>icons/success_icon.png</file>
+    <file>icons/left_double_arrow - Copy.png</file>
+    <file>icons/left_double_arrow.png</file>
+    <file>icons/help_icon.png</file>
+    <file>icons/login_icon.png</file>
+    <file>icons/logout_icon.png</file>
+    <file>icons/close_icon.png</file>
+    <file>icons/minus_icon.png</file>
+    <file>icons/2.png</file>
     <file>icons/calendar.png</file>
     <file>icons/calendar-disable.png</file>
     <file>icons/calendar-hover.png</file>

@@ -125,9 +125,11 @@ class LoginPage(QWidget):
         return password_hash
 
 
+    def convert_pass2hash(self,password):
 
 
-
+        password_hash = hashlib.sha256(password.encode()).hexdigest()
+        return password_hash
 
 
 if __name__ == '__main__':
