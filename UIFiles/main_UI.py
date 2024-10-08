@@ -2123,6 +2123,71 @@ class Ui_main(object):
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
+        self.verticalLayout_7 = QVBoxLayout(self.tab_3)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.frame_62 = QFrame(self.tab_3)
+        self.frame_62.setObjectName(u"frame_62")
+        self.frame_62.setMaximumSize(QSize(16777215, 50))
+        self.frame_62.setFrameShape(QFrame.StyledPanel)
+        self.frame_62.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_16 = QHBoxLayout(self.frame_62)
+        self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
+        self.label_12 = QLabel(self.frame_62)
+        self.label_12.setObjectName(u"label_12")
+        self.label_12.setMaximumSize(QSize(100, 16777215))
+
+        self.horizontalLayout_16.addWidget(self.label_12)
+
+        self.combo_send_profile_name = QComboBox(self.frame_62)
+        self.combo_send_profile_name.setObjectName(u"combo_send_profile_name")
+        self.combo_send_profile_name.setMinimumSize(QSize(0, 30))
+
+        self.horizontalLayout_16.addWidget(self.combo_send_profile_name)
+
+
+        self.verticalLayout_7.addWidget(self.frame_62)
+
+        self.frame_63 = QFrame(self.tab_3)
+        self.frame_63.setObjectName(u"frame_63")
+        self.frame_63.setMaximumSize(QSize(16777215, 50))
+        self.frame_63.setFrameShape(QFrame.StyledPanel)
+        self.frame_63.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_21 = QHBoxLayout(self.frame_63)
+        self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
+        self.label_13 = QLabel(self.frame_63)
+        self.label_13.setObjectName(u"label_13")
+        self.label_13.setMaximumSize(QSize(100, 16777215))
+
+        self.horizontalLayout_21.addWidget(self.label_13)
+
+        self.combo_send_train_name = QComboBox(self.frame_63)
+        self.combo_send_train_name.setObjectName(u"combo_send_train_name")
+        self.combo_send_train_name.setMinimumSize(QSize(0, 30))
+
+        self.horizontalLayout_21.addWidget(self.combo_send_train_name)
+
+
+        self.verticalLayout_7.addWidget(self.frame_63)
+
+        self.frame_14 = QFrame(self.tab_3)
+        self.frame_14.setObjectName(u"frame_14")
+        self.frame_14.setMaximumSize(QSize(16777215, 50))
+        self.frame_14.setFrameShape(QFrame.StyledPanel)
+        self.frame_14.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_17 = QHBoxLayout(self.frame_14)
+        self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.btn_send_profile = QPushButton(self.frame_14)
+        self.btn_send_profile.setObjectName(u"btn_send_profile")
+
+        self.horizontalLayout_17.addWidget(self.btn_send_profile)
+
+
+        self.verticalLayout_7.addWidget(self.frame_14)
+
+        self.verticalSpacer_10 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_7.addItem(self.verticalSpacer_10)
+
         self.tabWidget.addTab(self.tab_3, "")
 
         self.verticalLayout_4.addWidget(self.tabWidget)
@@ -2559,7 +2624,7 @@ class Ui_main(object):
         self.retranslateUi(main)
 
         self.stackedWidget.setCurrentIndex(1)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -2654,6 +2719,9 @@ class Ui_main(object):
         self.label_50.setText(QCoreApplication.translate("main", u"Password :", None))
         self.btn_save_edit_profile.setText(QCoreApplication.translate("main", u"Save", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("main", u"Edit / Delete", None))
+        self.label_12.setText(QCoreApplication.translate("main", u"Profile Name :", None))
+        self.label_13.setText(QCoreApplication.translate("main", u"Train Name :", None))
+        self.btn_send_profile.setText(QCoreApplication.translate("main", u"Send", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("main", u"Load / Send", None))
         self.label_56.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.label_53.setText(QCoreApplication.translate("main", u"Ip Adrress :", None))

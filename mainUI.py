@@ -171,6 +171,7 @@ class mainUI(sQMainWindow):
         
         self.ui.btn_edit_profile.clicked.connect(self.edit_profile)
         self.ui.btn_delete_profile.clicked.connect(self.delete_profile)
+        self.ui.btn_send_profile.clicked.connect(self.send_profile)
         
 
 
@@ -533,6 +534,9 @@ class mainUI(sQMainWindow):
 
         GUIBackend.set_combobox_items(self.ui.combo_train_name_config,self.names)
         GUIBackend.set_combobox_items(self.ui.combo_copy_train_name,self.names)
+        GUIBackend.set_combobox_items(self.ui.combo_send_train_name,self.names)
+
+        
 
 
     def load_train_profiles(self):
@@ -548,7 +552,10 @@ class mainUI(sQMainWindow):
             # new_configs.append(config.split('.')[1])
             config = config.replace(".json", "")
             new_configs.append(config)
+
         GUIBackend.set_combobox_items(self.ui.combo_train_name_profile,new_configs)
+        GUIBackend.set_combobox_items(self.ui.combo_send_profile_name,new_configs)
+
 
 
 
@@ -910,6 +917,27 @@ class mainUI(sQMainWindow):
             os.remove(path)
             self.load_train_profiles()
 
+
+    def send_profile(self):
+
+        profile_name = self.ui.combo_send_profile_name.currentText()
+
+        if profile_name =='':
+            print('no profile Exist')
+            return
+
+        train_name = self.ui.combo_send_train_name.currentText()
+        if train_name =='':
+            print('No train Exist')
+            return
+
+
+        train_parms = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=train_name)
+
+
+        profile_name = profile_name+'.json'
+        file_path = os.path.join(BASE_CONFIG,profile_name)
+        print(file_path,'   ',train_parms)
 
 
 
