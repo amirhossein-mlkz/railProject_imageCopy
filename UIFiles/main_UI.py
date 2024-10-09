@@ -502,7 +502,7 @@ class Ui_main(object):
 "\n"
 "*[styleSheet=\"LsideFrameStyle\"]\n"
 "{\n"
-"	background-color: #17203A;\n"
+"	background-color:#FF6500;\n"
 "}\n"
 "\n"
 "*[styleSheet=\"LsideFrameStyle\"]  .QPushButton{\n"
@@ -515,7 +515,7 @@ class Ui_main(object):
 "\n"
 "*[styleSheet=\"LtopFrameStyle\"]\n"
 "{\n"
-"	background-color:#17203A;\n"
+"	background-color:#FF6500;\n"
 "	border:1px solid #D7D7D9;\n"
 "}\n"
 "\n"
@@ -528,6 +528,8 @@ class Ui_main(object):
 "*[styleSheet=\"LpagesFrameStyle\"] .QFrame\n"
 "{\n"
 "	background-color: #F7F8FA;\n"
+"\n"
+"\n"
 "	border:1px solid #D7D7D9;\n"
 "}\n"
 "\n"
@@ -543,8 +545,8 @@ class Ui_main(object):
 "	border: None;\n"
 "}\n"
 "\n"
-"/******"
-                        "*******************LpagesBoldLabelStyle**************************/\n"
+""
+                        "/*************************LpagesBoldLabelStyle**************************/\n"
 "\n"
 "*[styleSheet=\"LpagesBoldLabelStyle\"] .QLabel\n"
 "{\n"
@@ -587,8 +589,8 @@ class Ui_main(object):
 "\n"
 "/*************************LfilterByFrameStyle**************************/\n"
 "\n"
-"*[styleShee"
-                        "t=\"LfilterByFrameStyle\"] .QFrame\n"
+"*[st"
+                        "yleSheet=\"LfilterByFrameStyle\"] .QFrame\n"
 "{\n"
 "	border: None;\n"
 "}\n"
@@ -633,8 +635,8 @@ class Ui_main(object):
 "border:none;\n"
 "icon-size:25px;\n"
 "width:25px;\n"
-"height:25px;"
-                        "\n"
+"heigh"
+                        "t:25px;\n"
 "}\n"
 "\n"
 "QPushButton[styleSheet=\"calendar\"]:hover{\n"
@@ -646,6 +648,71 @@ class Ui_main(object):
 "icon:url(:/asstets/icons/calendar-disable.png);\n"
 "\n"
 "}\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"QComboBox {\n"
+"    background-color: #FFFFFF;\n"
+"    border: 1px solid #D7D7D9;\n"
+"    padding: 5px;\n"
+"    border-radius: 4px;\n"
+"    color: #17203A;\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px;\n"
+"    border-left: 1px solid #D7D7D9;\n"
+"    background-color: #F7F8FA;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow {\n"
+"    image: url(:/asstets/icons/down_icon_black.png); /* Adjust the path to your arrow icon */\n"
+"    width:15px; /* Set the arrow width */\n"
+"    height: 15px; /* Set the arrow height */\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow:hover {\n"
+"    image: url(:/asstets/icons/down_icon_b"
+                        "lack.png);\n"
+"    width: 12px; /* Set the arrow width */\n"
+"    height: 12px; /* Set the arrow height */\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow:disabled {\n"
+"    image: url(:/asstets/icons/down_icon_black.png);\n"
+"    width: 12px; /* Set the arrow width */\n"
+"    height: 12px; /* Set the arrow height */\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    background-color: #FFFFFF;\n"
+"    border: 1px solid #D7D7D9;\n"
+"    selection-background-color: #007BFF;\n"
+"    selection-color: white;\n"
+"}\n"
+"\n"
+"/* ComboBox for Disabled State */\n"
+"QComboBox:disabled {\n"
+"    background-color: #E0E0E0;\n"
+"    color: #A0A0A0;\n"
+"    border: 1px solid #D7D7D9;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"\n"
 "\n"
 "\n"
 "")
@@ -684,8 +751,8 @@ class Ui_main(object):
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.dorsa_lbl.sizePolicy().hasHeightForWidth())
         self.dorsa_lbl.setSizePolicy(sizePolicy2)
-        self.dorsa_lbl.setMinimumSize(QSize(96, 45))
-        self.dorsa_lbl.setMaximumSize(QSize(50, 65))
+        self.dorsa_lbl.setMinimumSize(QSize(90, 45))
+        self.dorsa_lbl.setMaximumSize(QSize(75, 65))
         self.dorsa_lbl.setPixmap(QPixmap(u":/asstets/icons/2.png"))
         self.dorsa_lbl.setScaledContents(True)
 
@@ -918,7 +985,8 @@ class Ui_main(object):
 "	padding: 2px 2px;\n"
 "    border: 1px solid #007BFF;\n"
 "    border-radius: 5px;\n"
-"    background-color: #007BFF;\n"
+"    background-color: 007BFF;\n"
+"	background-color: rgb(33, 33, 33);\n"
 "    color: white;\n"
 "}\n"
 "QPushButton:hover {\n"
@@ -928,8 +996,10 @@ class Ui_main(object):
 "   background-color: #003d80;\n"
 "}\n"
 "\n"
-"QPushButto\u062f:disabled {\n"
-"   background-color: #c0c0c0;\n"
+"QPushButton:disabled {\n"
+"\n"
+"\n"
+"	background-color: rgb(112, 112, 112);\n"
 "	border:none;\n"
 "}")
         self.copy = QWidget()
@@ -1797,13 +1867,26 @@ class Ui_main(object):
 
         self.btn_edit_profile = QPushButton(self.frame_12)
         self.btn_edit_profile.setObjectName(u"btn_edit_profile")
-        self.btn_edit_profile.setMaximumSize(QSize(50, 16777215))
+        self.btn_edit_profile.setMinimumSize(QSize(30, 0))
+        self.btn_edit_profile.setMaximumSize(QSize(30, 16777215))
+        self.btn_edit_profile.setStyleSheet(u"background-color: None;\n"
+"border:none;")
+        icon7 = QIcon()
+        icon7.addFile(u":/asstets/icons/pencil_5171801.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_edit_profile.setIcon(icon7)
+        self.btn_edit_profile.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_13.addWidget(self.btn_edit_profile)
 
         self.btn_delete_profile = QPushButton(self.frame_12)
         self.btn_delete_profile.setObjectName(u"btn_delete_profile")
-        self.btn_delete_profile.setMaximumSize(QSize(50, 16777215))
+        self.btn_delete_profile.setMaximumSize(QSize(30, 16777215))
+        self.btn_delete_profile.setStyleSheet(u"background-color: None;\n"
+"border:none;")
+        icon8 = QIcon()
+        icon8.addFile(u":/asstets/icons/trash_9915690.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_delete_profile.setIcon(icon8)
+        self.btn_delete_profile.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_13.addWidget(self.btn_delete_profile)
 
@@ -2125,7 +2208,11 @@ class Ui_main(object):
         self.tab_3.setObjectName(u"tab_3")
         self.verticalLayout_7 = QVBoxLayout(self.tab_3)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
-        self.frame_62 = QFrame(self.tab_3)
+        self.groupBox = QGroupBox(self.tab_3)
+        self.groupBox.setObjectName(u"groupBox")
+        self.verticalLayout_8 = QVBoxLayout(self.groupBox)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.frame_62 = QFrame(self.groupBox)
         self.frame_62.setObjectName(u"frame_62")
         self.frame_62.setMaximumSize(QSize(16777215, 50))
         self.frame_62.setFrameShape(QFrame.StyledPanel)
@@ -2134,6 +2221,7 @@ class Ui_main(object):
         self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
         self.label_12 = QLabel(self.frame_62)
         self.label_12.setObjectName(u"label_12")
+        self.label_12.setMinimumSize(QSize(100, 0))
         self.label_12.setMaximumSize(QSize(100, 16777215))
 
         self.horizontalLayout_16.addWidget(self.label_12)
@@ -2145,9 +2233,9 @@ class Ui_main(object):
         self.horizontalLayout_16.addWidget(self.combo_send_profile_name)
 
 
-        self.verticalLayout_7.addWidget(self.frame_62)
+        self.verticalLayout_8.addWidget(self.frame_62)
 
-        self.frame_63 = QFrame(self.tab_3)
+        self.frame_63 = QFrame(self.groupBox)
         self.frame_63.setObjectName(u"frame_63")
         self.frame_63.setMaximumSize(QSize(16777215, 50))
         self.frame_63.setFrameShape(QFrame.StyledPanel)
@@ -2156,6 +2244,7 @@ class Ui_main(object):
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
         self.label_13 = QLabel(self.frame_63)
         self.label_13.setObjectName(u"label_13")
+        self.label_13.setMinimumSize(QSize(100, 0))
         self.label_13.setMaximumSize(QSize(100, 16777215))
 
         self.horizontalLayout_21.addWidget(self.label_13)
@@ -2167,9 +2256,9 @@ class Ui_main(object):
         self.horizontalLayout_21.addWidget(self.combo_send_train_name)
 
 
-        self.verticalLayout_7.addWidget(self.frame_63)
+        self.verticalLayout_8.addWidget(self.frame_63)
 
-        self.frame_14 = QFrame(self.tab_3)
+        self.frame_14 = QFrame(self.groupBox)
         self.frame_14.setObjectName(u"frame_14")
         self.frame_14.setMaximumSize(QSize(16777215, 50))
         self.frame_14.setFrameShape(QFrame.StyledPanel)
@@ -2178,11 +2267,90 @@ class Ui_main(object):
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
         self.btn_send_profile = QPushButton(self.frame_14)
         self.btn_send_profile.setObjectName(u"btn_send_profile")
+        self.btn_send_profile.setMaximumSize(QSize(95, 16777215))
 
         self.horizontalLayout_17.addWidget(self.btn_send_profile)
 
 
-        self.verticalLayout_7.addWidget(self.frame_14)
+        self.verticalLayout_8.addWidget(self.frame_14)
+
+
+        self.verticalLayout_7.addWidget(self.groupBox)
+
+        self.line_3 = QFrame(self.tab_3)
+        self.line_3.setObjectName(u"line_3")
+        self.line_3.setFrameShape(QFrame.Shape.HLine)
+        self.line_3.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_7.addWidget(self.line_3)
+
+        self.groupBox_2 = QGroupBox(self.tab_3)
+        self.groupBox_2.setObjectName(u"groupBox_2")
+        self.verticalLayout_23 = QVBoxLayout(self.groupBox_2)
+        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
+        self.frame_65 = QFrame(self.groupBox_2)
+        self.frame_65.setObjectName(u"frame_65")
+        self.frame_65.setMaximumSize(QSize(16777215, 50))
+        self.frame_65.setFrameShape(QFrame.StyledPanel)
+        self.frame_65.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_35 = QHBoxLayout(self.frame_65)
+        self.horizontalLayout_35.setObjectName(u"horizontalLayout_35")
+        self.label_29 = QLabel(self.frame_65)
+        self.label_29.setObjectName(u"label_29")
+        self.label_29.setMinimumSize(QSize(100, 0))
+        self.label_29.setMaximumSize(QSize(100, 16777215))
+
+        self.horizontalLayout_35.addWidget(self.label_29)
+
+        self.combo_load_train_name = QComboBox(self.frame_65)
+        self.combo_load_train_name.setObjectName(u"combo_load_train_name")
+        self.combo_load_train_name.setMinimumSize(QSize(0, 30))
+
+        self.horizontalLayout_35.addWidget(self.combo_load_train_name)
+
+
+        self.verticalLayout_23.addWidget(self.frame_65)
+
+        self.frame_16 = QFrame(self.groupBox_2)
+        self.frame_16.setObjectName(u"frame_16")
+        self.frame_16.setMinimumSize(QSize(0, 40))
+        self.frame_16.setFrameShape(QFrame.StyledPanel)
+        self.frame_16.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_12 = QHBoxLayout(self.frame_16)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.label_5 = QLabel(self.frame_16)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setMinimumSize(QSize(100, 0))
+        self.label_5.setMaximumSize(QSize(100, 16777215))
+
+        self.horizontalLayout_12.addWidget(self.label_5)
+
+        self.line_ip_load = QLineEdit(self.frame_16)
+        self.line_ip_load.setObjectName(u"line_ip_load")
+
+        self.horizontalLayout_12.addWidget(self.line_ip_load)
+
+
+        self.verticalLayout_23.addWidget(self.frame_16)
+
+        self.frame_15 = QFrame(self.groupBox_2)
+        self.frame_15.setObjectName(u"frame_15")
+        self.frame_15.setMaximumSize(QSize(16777215, 50))
+        self.frame_15.setFrameShape(QFrame.StyledPanel)
+        self.frame_15.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_36 = QHBoxLayout(self.frame_15)
+        self.horizontalLayout_36.setObjectName(u"horizontalLayout_36")
+        self.btn_load_profile = QPushButton(self.frame_15)
+        self.btn_load_profile.setObjectName(u"btn_load_profile")
+        self.btn_load_profile.setMaximumSize(QSize(95, 16777215))
+
+        self.horizontalLayout_36.addWidget(self.btn_load_profile)
+
+
+        self.verticalLayout_23.addWidget(self.frame_15)
+
+
+        self.verticalLayout_7.addWidget(self.groupBox_2)
 
         self.verticalSpacer_10 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -2225,6 +2393,13 @@ class Ui_main(object):
 
         self.verticalLayout_31.addWidget(self.frame_55)
 
+        self.line_17 = QFrame(self.tab_5)
+        self.line_17.setObjectName(u"line_17")
+        self.line_17.setFrameShape(QFrame.Shape.HLine)
+        self.line_17.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_31.addWidget(self.line_17)
+
         self.frame_6 = QFrame(self.tab_5)
         self.frame_6.setObjectName(u"frame_6")
         self.frame_6.setFrameShape(QFrame.StyledPanel)
@@ -2245,6 +2420,13 @@ class Ui_main(object):
 
 
         self.verticalLayout_31.addWidget(self.frame_6)
+
+        self.line_18 = QFrame(self.tab_5)
+        self.line_18.setObjectName(u"line_18")
+        self.line_18.setFrameShape(QFrame.Shape.HLine)
+        self.line_18.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_31.addWidget(self.line_18)
 
         self.frame_8 = QFrame(self.tab_5)
         self.frame_8.setObjectName(u"frame_8")
@@ -2268,6 +2450,13 @@ class Ui_main(object):
 
         self.verticalLayout_31.addWidget(self.frame_8)
 
+        self.line_19 = QFrame(self.tab_5)
+        self.line_19.setObjectName(u"line_19")
+        self.line_19.setFrameShape(QFrame.Shape.HLine)
+        self.line_19.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_31.addWidget(self.line_19)
+
         self.frame_9 = QFrame(self.tab_5)
         self.frame_9.setObjectName(u"frame_9")
         self.frame_9.setFrameShape(QFrame.StyledPanel)
@@ -2289,6 +2478,13 @@ class Ui_main(object):
 
 
         self.verticalLayout_31.addWidget(self.frame_9)
+
+        self.line_20 = QFrame(self.tab_5)
+        self.line_20.setObjectName(u"line_20")
+        self.line_20.setFrameShape(QFrame.Shape.HLine)
+        self.line_20.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_31.addWidget(self.line_20)
 
         self.frame_54 = QFrame(self.tab_5)
         self.frame_54.setObjectName(u"frame_54")
@@ -2341,7 +2537,13 @@ class Ui_main(object):
 
         self.btn_refresh_name_config_edit = QPushButton(self.frame_57)
         self.btn_refresh_name_config_edit.setObjectName(u"btn_refresh_name_config_edit")
-        self.btn_refresh_name_config_edit.setMaximumSize(QSize(50, 16777215))
+        self.btn_refresh_name_config_edit.setMaximumSize(QSize(20, 16777215))
+        self.btn_refresh_name_config_edit.setStyleSheet(u"background-color: None;\n"
+"border:none;")
+        icon9 = QIcon()
+        icon9.addFile(u":/asstets/icons/refresh_5730689.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_refresh_name_config_edit.setIcon(icon9)
+        self.btn_refresh_name_config_edit.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_53.addWidget(self.btn_refresh_name_config_edit)
 
@@ -2353,13 +2555,21 @@ class Ui_main(object):
         self.btn_edit_config = QPushButton(self.frame_57)
         self.btn_edit_config.setObjectName(u"btn_edit_config")
         self.btn_edit_config.setEnabled(True)
-        self.btn_edit_config.setMaximumSize(QSize(50, 16777215))
+        self.btn_edit_config.setMaximumSize(QSize(30, 16777215))
+        self.btn_edit_config.setStyleSheet(u"background-color: None;\n"
+"border:none;")
+        self.btn_edit_config.setIcon(icon7)
+        self.btn_edit_config.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_53.addWidget(self.btn_edit_config)
 
         self.btn_delete_config = QPushButton(self.frame_57)
         self.btn_delete_config.setObjectName(u"btn_delete_config")
-        self.btn_delete_config.setMaximumSize(QSize(50, 16777215))
+        self.btn_delete_config.setMaximumSize(QSize(30, 16777215))
+        self.btn_delete_config.setStyleSheet(u"background-color: None;\n"
+"border:none;")
+        self.btn_delete_config.setIcon(icon8)
+        self.btn_delete_config.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_53.addWidget(self.btn_delete_config)
 
@@ -2438,9 +2648,10 @@ class Ui_main(object):
 
         self.btn_save_config_edit = QPushButton(self.frame_train_edit)
         self.btn_save_config_edit.setObjectName(u"btn_save_config_edit")
-        self.btn_save_config_edit.setMaximumSize(QSize(200, 16777215))
+        self.btn_save_config_edit.setEnabled(False)
+        self.btn_save_config_edit.setMaximumSize(QSize(16777215, 16777215))
 
-        self.verticalLayout_11.addWidget(self.btn_save_config_edit, 0, Qt.AlignHCenter)
+        self.verticalLayout_11.addWidget(self.btn_save_config_edit)
 
 
         self.verticalLayout_16.addWidget(self.frame_train_edit)
@@ -2580,10 +2791,7 @@ class Ui_main(object):
         self.btn_save_password.setObjectName(u"btn_save_password")
         self.btn_save_password.setMinimumSize(QSize(100, 0))
         self.btn_save_password.setMaximumSize(QSize(100, 16777215))
-        self.btn_save_password.setStyleSheet(u"\n"
-"background-color: rgb(49, 179, 39);\n"
-"border :  rgb(10, 255, 30);\n"
-"")
+        self.btn_save_password.setStyleSheet(u"")
 
         self.verticalLayout_21.addWidget(self.btn_save_password, 0, Qt.AlignHCenter)
 
@@ -2625,7 +2833,7 @@ class Ui_main(object):
 
         self.stackedWidget.setCurrentIndex(1)
         self.tabWidget.setCurrentIndex(2)
-        self.tabWidget_2.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(main)
@@ -2634,7 +2842,7 @@ class Ui_main(object):
     def retranslateUi(self, main):
         main.setWindowTitle(QCoreApplication.translate("main", u"MainWindow", None))
         self.dorsa_lbl.setText("")
-        self.side_copy_btn.setText(QCoreApplication.translate("main", u"Train Copy", None))
+        self.side_copy_btn.setText(QCoreApplication.translate("main", u"Copy", None))
         self.side_profile_btn.setText(QCoreApplication.translate("main", u"Profile Config", None))
         self.side_train_config_btn.setText(QCoreApplication.translate("main", u"Train Config", None))
         self.side_setting_btn.setText(QCoreApplication.translate("main", u"Settings", None))
@@ -2699,8 +2907,8 @@ class Ui_main(object):
         self.btn_save_profile.setText(QCoreApplication.translate("main", u"Save", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("main", u"Create New Profile", None))
         self.label_11.setText(QCoreApplication.translate("main", u"Train Name :", None))
-        self.btn_edit_profile.setText(QCoreApplication.translate("main", u"Edit", None))
-        self.btn_delete_profile.setText(QCoreApplication.translate("main", u"Delete", None))
+        self.btn_edit_profile.setText("")
+        self.btn_delete_profile.setText("")
         self.group_camera_5.setTitle(QCoreApplication.translate("main", u"Camera 1 - Right", None))
         self.label_39.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_40.setText(QCoreApplication.translate("main", u"Username :", None))
@@ -2719,9 +2927,14 @@ class Ui_main(object):
         self.label_50.setText(QCoreApplication.translate("main", u"Password :", None))
         self.btn_save_edit_profile.setText(QCoreApplication.translate("main", u"Save", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("main", u"Edit / Delete", None))
+        self.groupBox.setTitle(QCoreApplication.translate("main", u"Send", None))
         self.label_12.setText(QCoreApplication.translate("main", u"Profile Name :", None))
         self.label_13.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.btn_send_profile.setText(QCoreApplication.translate("main", u"Send", None))
+        self.groupBox_2.setTitle(QCoreApplication.translate("main", u"Load", None))
+        self.label_29.setText(QCoreApplication.translate("main", u"Train Name :", None))
+        self.label_5.setText(QCoreApplication.translate("main", u"Ip : ", None))
+        self.btn_load_profile.setText(QCoreApplication.translate("main", u"Load", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("main", u"Load / Send", None))
         self.label_56.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.label_53.setText(QCoreApplication.translate("main", u"Ip Adrress :", None))
@@ -2729,11 +2942,12 @@ class Ui_main(object):
         self.label_55.setText(QCoreApplication.translate("main", u"Password :", None))
         self.btn_check_connection.setText(QCoreApplication.translate("main", u"Check Connection", None))
         self.btn_save_train.setText(QCoreApplication.translate("main", u"Save", None))
+        self.plainTextEdit_check_connection.setPlainText(QCoreApplication.translate("main", u"Check Ping ....", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_5), QCoreApplication.translate("main", u"Create New Train Config", None))
         self.label_57.setText(QCoreApplication.translate("main", u"Train Name :", None))
-        self.btn_refresh_name_config_edit.setText(QCoreApplication.translate("main", u"Refresh", None))
-        self.btn_edit_config.setText(QCoreApplication.translate("main", u"Edit", None))
-        self.btn_delete_config.setText(QCoreApplication.translate("main", u"Delete", None))
+        self.btn_refresh_name_config_edit.setText("")
+        self.btn_edit_config.setText("")
+        self.btn_delete_config.setText("")
         self.label_60.setText(QCoreApplication.translate("main", u"Ip Adrress :", None))
         self.label_58.setText(QCoreApplication.translate("main", u"UserName :", None))
         self.label_59.setText(QCoreApplication.translate("main", u"Password :", None))

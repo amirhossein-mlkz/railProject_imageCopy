@@ -172,7 +172,8 @@ class mainUI(sQMainWindow):
         self.ui.btn_edit_profile.clicked.connect(self.edit_profile)
         self.ui.btn_delete_profile.clicked.connect(self.delete_profile)
         self.ui.btn_send_profile.clicked.connect(self.send_profile)
-        
+        self.ui.btn_load_profile.clicked.connect(self.load_profile)
+        self.ui.combo_load_train_name.currentIndexChanged.connect(self.set_load_ip)
 
 
 
@@ -461,19 +462,41 @@ class mainUI(sQMainWindow):
 
     def save_train_config(self):
 
+
         name = self.ui.line_train_profile_name.text()
 
         ip = self.ui.line_train_profile_ip.text()
         username = self.ui.line_train_profile_username.text()
         password = self.ui.line_train_profile_password.text()
-       
+    
         if name =='' or ip=='' or username=='' or password=='':
             print('name error')
             return
+        
 
-        ret = self.db.add_value('TrainConfig',name=name,ip=ip,username=username,password=password)
+        if not self.is_valid_ip(ip):
+            print('IP Error')
+            return
+        
+        ret = self.show_question(texts.MESSAGES['message'][self.language],texts.MESSAGES['CheckSave'][self.language])
 
-        print(ret)
+        if ret:
+
+
+
+            ret = self.db.add_value('TrainConfig',name=name,ip=ip,username=username,password=password)
+
+            if ret:
+                print('Add Complete')
+
+                ip = self.ui.line_train_profile_ip.setText('')
+                username = self.ui.line_train_profile_username.setText('')
+                password = self.ui.line_train_profile_password.setText('')
+
+
+
+
+
 
     def check_connection_train_cofig(self):
         print('check_connection_train_cofig')
@@ -535,6 +558,7 @@ class mainUI(sQMainWindow):
         GUIBackend.set_combobox_items(self.ui.combo_train_name_config,self.names)
         GUIBackend.set_combobox_items(self.ui.combo_copy_train_name,self.names)
         GUIBackend.set_combobox_items(self.ui.combo_send_train_name,self.names)
+        GUIBackend.set_combobox_items(self.ui.combo_load_train_name,self.names)
 
         
 
@@ -936,8 +960,43 @@ class mainUI(sQMainWindow):
 
 
         profile_name = profile_name+'.json'
-        file_path = os.path.join(BASE_CONFIG,profile_name)
+        file_path = os.path.join(CONFIG_PATH,profile_name)
         print(file_path,'   ',train_parms)
+
+
+
+
+    def load_profile(self):
+
+
+
+
+        train_name = self.ui.combo_load_train_name.currentText()
+        if train_name =='':
+            print('No train Exist')
+            return
+
+
+        train_parms = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=train_name)
+
+        if train_parms:
+
+            print(train_parms)
+
+
+
+    def show_load_parms(self):
+
+        return
+    
+    def set_load_ip(self):
+
+        train_name = self.ui.combo_load_train_name.currentText()
+        train_parms = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=train_name)
+
+        if len(train_parms)==1: 
+            train_parms = train_parms[0]
+            self.ui.line_ip_load.setText(train_parms['ip'])
 
 
 

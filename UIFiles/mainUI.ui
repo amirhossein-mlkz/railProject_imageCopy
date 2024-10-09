@@ -505,7 +505,7 @@ QSplitter::handle
 
 *[styleSheet=&quot;LsideFrameStyle&quot;]
 {
-	background-color: #17203A;
+	background-color:#FF6500;
 }
 
 *[styleSheet=&quot;LsideFrameStyle&quot;]  .QPushButton{
@@ -518,7 +518,7 @@ QSplitter::handle
 
 *[styleSheet=&quot;LtopFrameStyle&quot;]
 {
-	background-color:#17203A;
+	background-color:#FF6500;
 	border:1px solid #D7D7D9;
 }
 
@@ -531,6 +531,8 @@ QSplitter::handle
 *[styleSheet=&quot;LpagesFrameStyle&quot;] .QFrame
 {
 	background-color: #F7F8FA;
+
+
 	border:1px solid #D7D7D9;
 }
 
@@ -648,6 +650,70 @@ icon:url(:/asstets/icons/calendar-disable.png);
 }
 
 
+
+
+
+
+
+
+
+
+
+
+QComboBox {
+    background-color: #FFFFFF;
+    border: 1px solid #D7D7D9;
+    padding: 5px;
+    border-radius: 4px;
+    color: #17203A;
+    font-size: 14px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #D7D7D9;
+    background-color: #F7F8FA;
+}
+
+QComboBox::down-arrow {
+    image: url(:/asstets/icons/down_icon_black.png); /* Adjust the path to your arrow icon */
+    width:15px; /* Set the arrow width */
+    height: 15px; /* Set the arrow height */
+}
+
+QComboBox::down-arrow:hover {
+    image: url(:/asstets/icons/down_icon_black.png);
+    width: 12px; /* Set the arrow width */
+    height: 12px; /* Set the arrow height */
+}
+
+QComboBox::down-arrow:disabled {
+    image: url(:/asstets/icons/down_icon_black.png);
+    width: 12px; /* Set the arrow width */
+    height: 12px; /* Set the arrow height */
+}
+
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #D7D7D9;
+    selection-background-color: #007BFF;
+    selection-color: white;
+}
+
+/* ComboBox for Disabled State */
+QComboBox:disabled {
+    background-color: #E0E0E0;
+    color: #A0A0A0;
+    border: 1px solid #D7D7D9;
+}
+
+
+
+
+
+
 </string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -739,13 +805,13 @@ icon:url(:/asstets/icons/calendar-disable.png);
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>96</width>
+                 <width>90</width>
                  <height>45</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>50</width>
+                 <width>75</width>
                  <height>65</height>
                 </size>
                </property>
@@ -821,7 +887,7 @@ icon:url(:/asstets/icons/calendar-disable.png);
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>Train Copy</string>
+             <string>Copy</string>
             </property>
             <property name="icon">
              <iconset>
@@ -1270,7 +1336,8 @@ icon:url(:/asstets/icons/calendar-disable.png);
 	padding: 2px 2px;
     border: 1px solid #007BFF;
     border-radius: 5px;
-    background-color: #007BFF;
+    background-color: 007BFF;
+	background-color: rgb(33, 33, 33);
     color: white;
 }
 QPushButton:hover {
@@ -1280,8 +1347,10 @@ QPushButton:pressed {
    background-color: #003d80;
 }
 
-QPushButtoد:disabled {
-   background-color: #c0c0c0;
+QPushButton:disabled {
+
+
+	background-color: rgb(112, 112, 112);
 	border:none;
 }</string>
             </property>
@@ -2882,14 +2951,34 @@ QLabel:disabled{
                      </item>
                      <item>
                       <widget class="QPushButton" name="btn_edit_profile">
+                       <property name="minimumSize">
+                        <size>
+                         <width>30</width>
+                         <height>0</height>
+                        </size>
+                       </property>
                        <property name="maximumSize">
                         <size>
-                         <width>50</width>
+                         <width>30</width>
                          <height>16777215</height>
                         </size>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: None;
+border:none;</string>
+                       </property>
                        <property name="text">
-                        <string>Edit</string>
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="Assets/assets.qrc">
+                         <normaloff>:/asstets/icons/pencil_5171801.png</normaloff>:/asstets/icons/pencil_5171801.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>30</width>
+                         <height>30</height>
+                        </size>
                        </property>
                       </widget>
                      </item>
@@ -2897,12 +2986,26 @@ QLabel:disabled{
                       <widget class="QPushButton" name="btn_delete_profile">
                        <property name="maximumSize">
                         <size>
-                         <width>50</width>
+                         <width>30</width>
                          <height>16777215</height>
                         </size>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: None;
+border:none;</string>
+                       </property>
                        <property name="text">
-                        <string>Delete</string>
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="Assets/assets.qrc">
+                         <normaloff>:/asstets/icons/trash_9915690.png</normaloff>:/asstets/icons/trash_9915690.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>30</width>
+                         <height>30</height>
+                        </size>
                        </property>
                       </widget>
                      </item>
@@ -3506,107 +3609,268 @@ QLabel:disabled{
                  </attribute>
                  <layout class="QVBoxLayout" name="verticalLayout_7">
                   <item>
-                   <widget class="QFrame" name="frame_62">
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>50</height>
-                     </size>
+                   <widget class="QGroupBox" name="groupBox">
+                    <property name="title">
+                     <string>Send</string>
                     </property>
-                    <property name="frameShape">
-                     <enum>QFrame::StyledPanel</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Raised</enum>
-                    </property>
-                    <layout class="QHBoxLayout" name="horizontalLayout_16">
+                    <layout class="QVBoxLayout" name="verticalLayout_8">
                      <item>
-                      <widget class="QLabel" name="label_12">
+                      <widget class="QFrame" name="frame_62">
                        <property name="maximumSize">
                         <size>
-                         <width>100</width>
-                         <height>16777215</height>
+                         <width>16777215</width>
+                         <height>50</height>
                         </size>
                        </property>
-                       <property name="text">
-                        <string>Profile Name :</string>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
                        </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_16">
+                        <item>
+                         <widget class="QLabel" name="label_12">
+                          <property name="minimumSize">
+                           <size>
+                            <width>100</width>
+                            <height>0</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>100</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Profile Name :</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="combo_send_profile_name">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>30</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="combo_send_profile_name">
-                       <property name="minimumSize">
+                      <widget class="QFrame" name="frame_63">
+                       <property name="maximumSize">
                         <size>
-                         <width>0</width>
-                         <height>30</height>
+                         <width>16777215</width>
+                         <height>50</height>
                         </size>
                        </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_21">
+                        <item>
+                         <widget class="QLabel" name="label_13">
+                          <property name="minimumSize">
+                           <size>
+                            <width>100</width>
+                            <height>0</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>100</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Train Name :</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="combo_send_train_name">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>30</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_14">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_17">
+                        <item>
+                         <widget class="QPushButton" name="btn_send_profile">
+                          <property name="maximumSize">
+                           <size>
+                            <width>95</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Send</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </widget>
                      </item>
                     </layout>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="frame_63">
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>50</height>
-                     </size>
+                   <widget class="Line" name="line_3">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
                     </property>
-                    <property name="frameShape">
-                     <enum>QFrame::StyledPanel</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Raised</enum>
-                    </property>
-                    <layout class="QHBoxLayout" name="horizontalLayout_21">
-                     <item>
-                      <widget class="QLabel" name="label_13">
-                       <property name="maximumSize">
-                        <size>
-                         <width>100</width>
-                         <height>16777215</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>Train Name :</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QComboBox" name="combo_send_train_name">
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="frame_14">
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>50</height>
-                     </size>
+                   <widget class="QGroupBox" name="groupBox_2">
+                    <property name="title">
+                     <string>Load</string>
                     </property>
-                    <property name="frameShape">
-                     <enum>QFrame::StyledPanel</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Raised</enum>
-                    </property>
-                    <layout class="QHBoxLayout" name="horizontalLayout_17">
+                    <layout class="QVBoxLayout" name="verticalLayout_23">
                      <item>
-                      <widget class="QPushButton" name="btn_send_profile">
-                       <property name="text">
-                        <string>Send</string>
+                      <widget class="QFrame" name="frame_65">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
                        </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_35">
+                        <item>
+                         <widget class="QLabel" name="label_29">
+                          <property name="minimumSize">
+                           <size>
+                            <width>100</width>
+                            <height>0</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>100</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Train Name :</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="combo_load_train_name">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>30</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_16">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_12">
+                        <item>
+                         <widget class="QLabel" name="label_5">
+                          <property name="minimumSize">
+                           <size>
+                            <width>100</width>
+                            <height>0</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>100</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Ip : </string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="line_ip_load"/>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_15">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_36">
+                        <item>
+                         <widget class="QPushButton" name="btn_load_profile">
+                          <property name="maximumSize">
+                           <size>
+                            <width>95</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Load</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </widget>
                      </item>
                     </layout>
@@ -3639,7 +3903,7 @@ QLabel:disabled{
                  <bool>true</bool>
                 </property>
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="tab_5">
                  <attribute name="title">
@@ -3681,6 +3945,13 @@ QLabel:disabled{
                    </widget>
                   </item>
                   <item>
+                   <widget class="Line" name="line_17">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
                    <widget class="QFrame" name="frame_6">
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
@@ -3712,6 +3983,13 @@ QLabel:disabled{
                       <widget class="QLineEdit" name="line_train_profile_ip"/>
                      </item>
                     </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_18">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -3749,6 +4027,13 @@ QLabel:disabled{
                       <widget class="QLineEdit" name="line_train_profile_username"/>
                      </item>
                     </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_19">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -3790,6 +4075,13 @@ QLabel:disabled{
                    </widget>
                   </item>
                   <item>
+                   <widget class="Line" name="line_20">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
                    <widget class="QFrame" name="frame_54">
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
@@ -3825,6 +4117,9 @@ QLabel:disabled{
                       <width>16777215</width>
                       <height>100</height>
                      </size>
+                    </property>
+                    <property name="plainText">
+                     <string>Check Ping ....</string>
                     </property>
                    </widget>
                   </item>
@@ -3886,12 +4181,26 @@ QLabel:disabled{
                       <widget class="QPushButton" name="btn_refresh_name_config_edit">
                        <property name="maximumSize">
                         <size>
-                         <width>50</width>
+                         <width>20</width>
                          <height>16777215</height>
                         </size>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: None;
+border:none;</string>
+                       </property>
                        <property name="text">
-                        <string>Refresh</string>
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="Assets/assets.qrc">
+                         <normaloff>:/asstets/icons/refresh_5730689.png</normaloff>:/asstets/icons/refresh_5730689.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>20</width>
+                         <height>20</height>
+                        </size>
                        </property>
                       </widget>
                      </item>
@@ -3905,12 +4214,26 @@ QLabel:disabled{
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>50</width>
+                         <width>30</width>
                          <height>16777215</height>
                         </size>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: None;
+border:none;</string>
+                       </property>
                        <property name="text">
-                        <string>Edit</string>
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="Assets/assets.qrc">
+                         <normaloff>:/asstets/icons/pencil_5171801.png</normaloff>:/asstets/icons/pencil_5171801.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>30</width>
+                         <height>30</height>
+                        </size>
                        </property>
                       </widget>
                      </item>
@@ -3918,12 +4241,26 @@ QLabel:disabled{
                       <widget class="QPushButton" name="btn_delete_config">
                        <property name="maximumSize">
                         <size>
-                         <width>50</width>
+                         <width>30</width>
                          <height>16777215</height>
                         </size>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: None;
+border:none;</string>
+                       </property>
                        <property name="text">
-                        <string>Delete</string>
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="Assets/assets.qrc">
+                         <normaloff>:/asstets/icons/trash_9915690.png</normaloff>:/asstets/icons/trash_9915690.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>30</width>
+                         <height>30</height>
+                        </size>
                        </property>
                       </widget>
                      </item>
@@ -4044,11 +4381,14 @@ QLabel:disabled{
                        </layout>
                       </widget>
                      </item>
-                     <item alignment="Qt::AlignHCenter">
+                     <item>
                       <widget class="QPushButton" name="btn_save_config_edit">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
                        <property name="maximumSize">
                         <size>
-                         <width>200</width>
+                         <width>16777215</width>
                          <height>16777215</height>
                         </size>
                        </property>
@@ -4345,10 +4685,7 @@ QLabel:disabled{
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">
-background-color: rgb(49, 179, 39);
-border :  rgb(10, 255, 30);
-</string>
+                    <string notr="true"/>
                    </property>
                    <property name="text">
                     <string>Save</string>
