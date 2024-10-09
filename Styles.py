@@ -29,3 +29,16 @@ none_style = """"
 
 
 """
+
+
+
+click_side_btns ="""
+                background-color: rgb(241, 229, 139);
+                color:black;
+            """
+
+
+
+normal_side_btns ="""
+
+            """

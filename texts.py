@@ -8,6 +8,9 @@ MESSAGES = {
     'Close' :{'Persian(فارسی)': '  آیا برای خروج مطمئن هستید؟',
                 'English': 'Are you sure want to Close ?'}, 
 
+    'Save' :{'Persian(فارسی)': '  آیا برای ذخیره سازی مطمئن هستید؟',
+                'English': 'Are you sure want to Save ?'}, 
+
 
 
 

@@ -26,7 +26,7 @@ from PySide6.QtGui import QFont,QIcon
 from PySide6.QtWidgets import QMessageBox
 import texts
 
-from Styles import error_style,success_style,none_style
+from Styles import error_style,success_style,none_style,click_side_btns,normal_side_btns
 import re,json
 
 
@@ -75,8 +75,11 @@ class mainUI(sQMainWindow):
             'timeline':self.ui.time_line_msg,
             'change_password' : self.ui.label_message_change_password,
             'profile' :  self.ui.label_profile_message,
+            'profile_edit' :  self.ui.label_profile_edit_message,
         }
         
+        self.side_btns = [ self.ui.side_setting_btn , self.ui.side_train_config_btn,self.ui.side_profile_btn,self.ui.side_copy_btn]
+
 
      
 
@@ -104,6 +107,9 @@ class mainUI(sQMainWindow):
         self.create_init_folders()
 
         self.load_train_profiles()
+
+
+        self.clear_ui_profile()
 
     def create_init_folders(self):
         if not os.path.exists(CONFIG_PATH):
@@ -171,6 +177,7 @@ class mainUI(sQMainWindow):
         
         self.ui.btn_edit_profile.clicked.connect(self.edit_profile)
         self.ui.btn_delete_profile.clicked.connect(self.delete_profile)
+        self.ui.btn_save_edit_profile.clicked.connect(self.save_edit_profile)
         self.ui.btn_send_profile.clicked.connect(self.send_profile)
         self.ui.btn_load_profile.clicked.connect(self.load_profile)
         self.ui.combo_load_train_name.currentIndexChanged.connect(self.set_load_ip)
@@ -235,6 +242,20 @@ class mainUI(sQMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.train_config)
         if btnName == "side_setting_btn":
             self.ui.stackedWidget.setCurrentWidget(self.ui.settings)
+        
+
+        self.clear_side_btns(click_btn=btn)
+
+
+
+
+    def clear_side_btns(self,click_btn=None):
+
+
+        for btn in self.side_btns:            
+            btn.setStyleSheet(normal_side_btns)
+
+        click_btn.setStyleSheet(click_side_btns)
 
 
 
@@ -250,6 +271,8 @@ class mainUI(sQMainWindow):
         if event.button() == sQtCore.Qt.LeftButton:
             self._old_pos = None
 
+
+
     def mouseMoveEvent(self, event):
         if not self._old_pos:
             return
@@ -257,20 +280,18 @@ class mainUI(sQMainWindow):
         self.move(self.x() + delta.x(), self.y() + delta.y())
         self._old_pos = event.globalPosition().toPoint()
 
+
+
     def close_win(self):
 
-
         ret = self.show_question(texts.MESSAGES['message'][self.language],texts.MESSAGES['Close'][self.language])
-
         if ret:
 
             self.close()
-
             sys.exit()
 
     def minimize_win(self):
         self.showMinimized()
-
 
 
     
@@ -744,33 +765,75 @@ class mainUI(sQMainWindow):
                 self.show_message('profile',txt=msg,style=error_style,disapear=2000)
 
 
-    def check_camera_config(self,index):
+    def clear_ui_profile(self, edit=False):
+
+
+        for iter in range(len(PARMS)+1):
+
+            for parm in PARMS:
+                if edit:
+                    input = eval('self.ui.line_{}_camera_{}_edit'.format(parm,iter+1))
+                else:
+                    input = eval('self.ui.line_{}_camera_{}'.format(parm,iter+1))
+
+                input.setText('')
+            
+            self.ui.group_camera_1.setChecked(False)
+            if edit :
+                group = eval('self.ui.group_camera_{}_edit'.format(iter+1))
+            
+            else:
+                group = eval('self.ui.group_camera_{}'.format(iter+1))
+            group.setChecked(False)
+
+
+    def check_camera_config(self,index,edit= False):
         
         message = True
         flag = True
+        one_item = False
         for iter in range(1,index):
+            if edit:
+                goup_box = eval('self.ui.group_camera_{}_edit'.format(iter))
+            else:
+                goup_box = eval('self.ui.group_camera_{}'.format(iter))
+            if goup_box.isChecked():
+                one_item = True
+                for parm in PARMS:
 
-            for parm in PARMS:
-            
-                input = eval('self.ui.line_{}_camera_{}.text()'.format(parm,iter))
+                    if edit:
+                        input = eval('self.ui.line_{}_camera_{}_edit.text()'.format(parm,iter))
 
-                if parm == 'ip':
+                    else:
+                        input = eval('self.ui.line_{}_camera_{}.text()'.format(parm,iter))
 
-                    ret = self.is_valid_ip(input)
+                    if parm == 'ip':
 
-                    if not ret:
-                        message = 'IP Camera {} is not correct'.format(iter)
+                        ret = self.is_valid_ip(input)
+
+                        if not ret:
+                            message = 'IP Camera {} is not correct'.format(iter)
+                            flag = False
+                            break
+
+                    if input =='':
                         flag = False
+                        message = 'Field {} Camera {} is Empty'.format(parm,iter)
+
                         break
 
-                if input =='':
-                    flag = False
-                    message = 'Field {} Camera {} is Empty'.format(parm,iter)
 
-                    break
+
+
                 
             if not flag :
                 break
+
+        if not one_item:
+            message = 'At Least Select One Item'
+            flag = False
+            return flag,message
+
 
         return flag,message
 
@@ -788,6 +851,8 @@ class mainUI(sQMainWindow):
 
 
 
+
+
         train_name = self.get_train_name_config()
 
         ret,msg = self.check_train_name(train_name=train_name)
@@ -796,7 +861,7 @@ class mainUI(sQMainWindow):
             return False
 
         ret , msg = self.check_camera_config(index=5)
-        ret = True ############# temp
+        # ret = True ############# temp
         if not ret:
             print(msg)
             self.show_message('profile',txt=msg,style=error_style,disapear=2000)
@@ -811,19 +876,31 @@ class mainUI(sQMainWindow):
             else:
                 return
             
+
+            ret = self.show_question(texts.MESSAGES['message'][self.language],texts.MESSAGES['Save'][self.language])
+
+            if not ret:
+                return
+
+
             camera_configs = self.create_camera_configs()
 
             json_data = self.update_base_json(json_data,camera_configs,train_name)
 
             self.save_json(save_name=train_name,json_data=json_data)
+
+            self.clear_ui_profile()
+
             print(json_data)
 
 
 
-    def update_base_json(self,json_data,camera_configs,train_name):
+    def update_base_json(self,json_data,camera_configs=None,train_name=None):
 
-        json_data['cameras'] = camera_configs
-        json_data ['name'] = train_name
+        if camera_configs:
+            json_data['cameras'] = camera_configs
+        if train_name:
+            json_data ['name'] = train_name
         return json_data
     
 
@@ -831,14 +908,15 @@ class mainUI(sQMainWindow):
 
         exist_json = os.listdir(CONFIG_PATH)
         train_name = train_name+'.json'
-        if train_name in exist_json:
-            return False,'Duplicate Name , Change Train Name'
-        elif train_name =='':
+        if train_name =='.json':
             return False,'Train Name Is Empty'
+        elif train_name in exist_json:
+            return False,'Duplicate Name , Change Train Name'
+
 
         return True,''
 
-    def create_camera_configs(self):
+    def create_camera_configs(self,edit_mode = False):
 
         configs = []
 
@@ -846,9 +924,15 @@ class mainUI(sQMainWindow):
 
             config = {}
             
-            ip = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[0],iter+1))
-            username = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[1],iter+1))
-            password = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[2],iter+1))
+            if edit_mode:
+
+                ip = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[0],iter+1))
+                username = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[1],iter+1))
+                password = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[2],iter+1))
+            else:
+                ip = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[0],iter+1))
+                username = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[1],iter+1))
+                password = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[2],iter+1))
 
             config = {
                 'name' : CAMERA_NAMES[iter],
@@ -909,11 +993,14 @@ class mainUI(sQMainWindow):
 
     def edit_profile(self):
 
+
+
         profile = self.ui.combo_train_name_profile.currentText()
 
         json_data = self.load_json(json_name=profile)
 
         camera_configs = json_data['cameras']
+
 
         for iter,config in enumerate(camera_configs):
             if config['name'] == 'right':
@@ -922,16 +1009,35 @@ class mainUI(sQMainWindow):
                 id = 2
             else:
                 id = config['name']
+
+            one_item = False
             
             for parm in PARMS:
 
-
+                if config[parm] !='':
+                    one_item=True
                 input = eval('self.ui.line_{}_camera_{}_edit'.format(parm,id))
                 input.setText(config[parm])
-   
+
+            if one_item:
+                group = eval('self.ui.group_camera_{}_edit'.format(id))
+                group.setChecked(True)
+
+        self.profile_edit_mode(mode=True)
 
 
+    def profile_edit_mode(self,mode=True):
+        # return
+        height = 0 
+        if mode:
+            height = 490
 
+        self.ui.frame_profile_edit.setMaximumHeight(height)
+        self.ui.btn_edit_profile.setDisabled(mode)
+        self.ui.btn_delete_profile.setDisabled(mode)
+        self.ui.combo_train_name_profile.setDisabled(mode)
+
+        self.ui.btn_save_edit_profile.setDisabled(not(mode))
 
     
     def delete_profile(self):
@@ -946,6 +1052,48 @@ class mainUI(sQMainWindow):
             path = os.path.join(CONFIG_PATH,profile)
             os.remove(path)
             self.load_train_profiles()
+
+
+
+
+    def save_edit_profile(self):
+
+        profile = self.ui.combo_train_name_profile.currentText()
+
+        if profile == '':
+            print('Profile cant be empty')
+            return
+        profile+='.json'
+        if not os.path.exists(os.path.join(CONFIG_PATH,profile)):
+            print('Profile Config Not Exist')
+            return
+
+        json_data = self.load_json(json_name=profile)
+
+
+
+        
+
+        camera_configs = self.create_camera_configs(edit_mode=True)
+
+        ret , msg = self.check_camera_config(index=5,edit=True)
+
+        if ret:
+
+            json_data = self.update_base_json(json_data,camera_configs)
+
+            # self.save_json(save_name=train_name,json_data=json_data)
+            print(json_data)
+
+            self.profile_edit_mode(mode=False)
+
+        else:
+            self.show_message('profile_edit',txt=msg,style=error_style,disapear=2000)
+
+
+
+
+
 
 
     def send_profile(self):

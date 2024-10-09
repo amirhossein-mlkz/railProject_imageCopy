@@ -511,6 +511,15 @@ class Ui_main(object):
 "	font-weight: bold;\n"
 "}\n"
 "\n"
+"*[styleSheet=\"LsideFrameStyle\"]  .QPushButton:disabled{\n"
+"	border: 0px;\n"
+"\n"
+"	color: rgb(212, 212, 212);\n"
+"	font-weight: bold;\n"
+"	background-color: rgb(144, 144, 144);\n"
+"}\n"
+"\n"
+"\n"
 "/**************************LtopFrameStyle***************************/\n"
 "\n"
 "*[styleSheet=\"LtopFrameStyle\"]\n"
@@ -533,7 +542,8 @@ class Ui_main(object):
 "	border:1px solid #D7D7D9;\n"
 "}\n"
 "\n"
-"*[styleSheet=\"LpagesFrameStyle\"] .QWidget\n"
+"*[styleSheet=\"LpagesFrameStyle\"] .QWidg"
+                        "et\n"
 "{\n"
 "	background-color: transparent;\n"
 "	border:None;\n"
@@ -545,8 +555,7 @@ class Ui_main(object):
 "	border: None;\n"
 "}\n"
 "\n"
-""
-                        "/*************************LpagesBoldLabelStyle**************************/\n"
+"/*************************LpagesBoldLabelStyle**************************/\n"
 "\n"
 "*[styleSheet=\"LpagesBoldLabelStyle\"] .QLabel\n"
 "{\n"
@@ -581,7 +590,8 @@ class Ui_main(object):
 "	color: rgb(20, 20, 20);\n"
 "	font-weight: bold;\n"
 "}\n"
-"\n"
+""
+                        "\n"
 "*[styleSheet=\"LshowStepsFrameStyle\"]  .QPushButton:hover\n"
 "{\n"
 "	border:5px solid #BDBDBF;\n"
@@ -589,8 +599,7 @@ class Ui_main(object):
 "\n"
 "/*************************LfilterByFrameStyle**************************/\n"
 "\n"
-"*[st"
-                        "yleSheet=\"LfilterByFrameStyle\"] .QFrame\n"
+"*[styleSheet=\"LfilterByFrameStyle\"] .QFrame\n"
 "{\n"
 "	border: None;\n"
 "}\n"
@@ -625,7 +634,8 @@ class Ui_main(object):
 "\n"
 "QPushButton[styleClass=\"fillBtn\"]:disabled {\n"
 "   background-color: #c0c0c0;\n"
-"	border:none;\n"
+"	bor"
+                        "der:none;\n"
 "}\n"
 "\n"
 "\n"
@@ -635,8 +645,7 @@ class Ui_main(object):
 "border:none;\n"
 "icon-size:25px;\n"
 "width:25px;\n"
-"heigh"
-                        "t:25px;\n"
+"height:25px;\n"
 "}\n"
 "\n"
 "QPushButton[styleSheet=\"calendar\"]:hover{\n"
@@ -678,14 +687,14 @@ class Ui_main(object):
 "}\n"
 "\n"
 "QComboBox::down-arrow {\n"
-"    image: url(:/asstets/icons/down_icon_black.png); /* Adjust the path to your arrow icon */\n"
+"    image: url(:/asstets/icons/down_icon_black.png); /* Adjust the path to you"
+                        "r arrow icon */\n"
 "    width:15px; /* Set the arrow width */\n"
 "    height: 15px; /* Set the arrow height */\n"
 "}\n"
 "\n"
 "QComboBox::down-arrow:hover {\n"
-"    image: url(:/asstets/icons/down_icon_b"
-                        "lack.png);\n"
+"    image: url(:/asstets/icons/down_icon_black.png);\n"
 "    width: 12px; /* Set the arrow width */\n"
 "    height: 12px; /* Set the arrow height */\n"
 "}\n"
@@ -722,11 +731,11 @@ class Ui_main(object):
 "\n"
 "/**************************LGroupBoxStyle***************************/\n"
 "\n"
-"QGroupBox {\n"
+"QGroupBox {"
+                        "\n"
 "    background-color: #F7F8FA;  /* Background color inside the group box */\n"
 "    border: 1px solid #D7D7D9;  /* Border around the group box */\n"
-"    border-radius: 5px;         /* Slight round"
-                        "ed corners */\n"
+"    border-radius: 5px;         /* Slight rounded corners */\n"
 "    margin-top: 20px;           /* Space between title and top edge */\n"
 "    padding: 10px;              /* Padding inside the group box */\n"
 "}\n"
@@ -745,7 +754,8 @@ class Ui_main(object):
 "QGroupBox:disabled {\n"
 "    background-color: #E0E0E0;  /* Background when disabled */\n"
 "    color: #A0A0A0;             /* Text color when disabled */\n"
-"    border: 1px solid #D7D7D9;  /* Same border when disabled */\n"
+"    border: 1px soli"
+                        "d #D7D7D9;  /* Same border when disabled */\n"
 "}\n"
 "\n"
 "\n"
@@ -823,7 +833,9 @@ class Ui_main(object):
         font.setItalic(False)
         self.side_copy_btn.setFont(font)
         self.side_copy_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.side_copy_btn.setStyleSheet(u"")
+        self.side_copy_btn.setStyleSheet(u"\n"
+"background-color: rgb(241, 229, 139);\n"
+"color:black;")
         icon = QIcon()
         icon.addFile(u":/icons/icons/live_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.side_copy_btn.setIcon(icon)
@@ -899,6 +911,7 @@ class Ui_main(object):
 
         self.side_about_btn = QPushButton(self.leftSideFrame)
         self.side_about_btn.setObjectName(u"side_about_btn")
+        self.side_about_btn.setEnabled(False)
         sizePolicy3.setHeightForWidth(self.side_about_btn.sizePolicy().hasHeightForWidth())
         self.side_about_btn.setSizePolicy(sizePolicy3)
         self.side_about_btn.setMinimumSize(QSize(0, 50))
@@ -1904,6 +1917,7 @@ class Ui_main(object):
 
         self.btn_edit_profile = QPushButton(self.frame_12)
         self.btn_edit_profile.setObjectName(u"btn_edit_profile")
+        self.btn_edit_profile.setEnabled(True)
         self.btn_edit_profile.setMinimumSize(QSize(30, 0))
         self.btn_edit_profile.setMaximumSize(QSize(30, 16777215))
         self.btn_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -1932,22 +1946,24 @@ class Ui_main(object):
 
         self.verticalLayout_5.addWidget(self.frame_12)
 
-        self.frame_11 = QFrame(self.tab_2)
-        self.frame_11.setObjectName(u"frame_11")
-        self.frame_11.setFrameShape(QFrame.StyledPanel)
-        self.frame_11.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_6 = QVBoxLayout(self.frame_11)
+        self.frame_profile_edit = QFrame(self.tab_2)
+        self.frame_profile_edit.setObjectName(u"frame_profile_edit")
+        self.frame_profile_edit.setMaximumSize(QSize(16777215, 490))
+        self.frame_profile_edit.setFrameShape(QFrame.StyledPanel)
+        self.frame_profile_edit.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_6 = QVBoxLayout(self.frame_profile_edit)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.group_camera_5 = QGroupBox(self.frame_11)
-        self.group_camera_5.setObjectName(u"group_camera_5")
-        self.group_camera_5.setMaximumSize(QSize(16777215, 145))
-        self.group_camera_5.setCheckable(True)
-        self.group_camera_5.setChecked(False)
-        self.verticalLayout_25 = QVBoxLayout(self.group_camera_5)
+        self.group_camera_1_edit = QGroupBox(self.frame_profile_edit)
+        self.group_camera_1_edit.setObjectName(u"group_camera_1_edit")
+        self.group_camera_1_edit.setEnabled(True)
+        self.group_camera_1_edit.setMaximumSize(QSize(16777215, 145))
+        self.group_camera_1_edit.setCheckable(True)
+        self.group_camera_1_edit.setChecked(False)
+        self.verticalLayout_25 = QVBoxLayout(self.group_camera_1_edit)
         self.verticalLayout_25.setObjectName(u"verticalLayout_25")
         self.verticalLayout_25.setContentsMargins(0, 0, 0, 0)
-        self.frame_41 = QFrame(self.group_camera_5)
+        self.frame_41 = QFrame(self.group_camera_1_edit)
         self.frame_41.setObjectName(u"frame_41")
         self.frame_41.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_40 = QHBoxLayout(self.frame_41)
@@ -1966,7 +1982,7 @@ class Ui_main(object):
 
         self.verticalLayout_25.addWidget(self.frame_41)
 
-        self.frame_42 = QFrame(self.group_camera_5)
+        self.frame_42 = QFrame(self.group_camera_1_edit)
         self.frame_42.setObjectName(u"frame_42")
         self.frame_42.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_41 = QHBoxLayout(self.frame_42)
@@ -2005,17 +2021,17 @@ class Ui_main(object):
         self.verticalLayout_25.addWidget(self.frame_42)
 
 
-        self.verticalLayout_6.addWidget(self.group_camera_5)
+        self.verticalLayout_6.addWidget(self.group_camera_1_edit)
 
-        self.group_camera_6 = QGroupBox(self.frame_11)
-        self.group_camera_6.setObjectName(u"group_camera_6")
-        self.group_camera_6.setEnabled(True)
-        self.group_camera_6.setCheckable(True)
-        self.group_camera_6.setChecked(False)
-        self.verticalLayout_26 = QVBoxLayout(self.group_camera_6)
+        self.group_camera_2_edit = QGroupBox(self.frame_profile_edit)
+        self.group_camera_2_edit.setObjectName(u"group_camera_2_edit")
+        self.group_camera_2_edit.setEnabled(True)
+        self.group_camera_2_edit.setCheckable(True)
+        self.group_camera_2_edit.setChecked(False)
+        self.verticalLayout_26 = QVBoxLayout(self.group_camera_2_edit)
         self.verticalLayout_26.setObjectName(u"verticalLayout_26")
         self.verticalLayout_26.setContentsMargins(0, 0, 0, 0)
-        self.frame_44 = QFrame(self.group_camera_6)
+        self.frame_44 = QFrame(self.group_camera_2_edit)
         self.frame_44.setObjectName(u"frame_44")
         self.frame_44.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_43 = QHBoxLayout(self.frame_44)
@@ -2034,7 +2050,7 @@ class Ui_main(object):
 
         self.verticalLayout_26.addWidget(self.frame_44)
 
-        self.frame_45 = QFrame(self.group_camera_6)
+        self.frame_45 = QFrame(self.group_camera_2_edit)
         self.frame_45.setObjectName(u"frame_45")
         self.frame_45.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_44 = QHBoxLayout(self.frame_45)
@@ -2073,17 +2089,17 @@ class Ui_main(object):
         self.verticalLayout_26.addWidget(self.frame_45)
 
 
-        self.verticalLayout_6.addWidget(self.group_camera_6)
+        self.verticalLayout_6.addWidget(self.group_camera_2_edit)
 
-        self.group_camera_7 = QGroupBox(self.frame_11)
-        self.group_camera_7.setObjectName(u"group_camera_7")
-        self.group_camera_7.setEnabled(True)
-        self.group_camera_7.setCheckable(True)
-        self.group_camera_7.setChecked(False)
-        self.verticalLayout_27 = QVBoxLayout(self.group_camera_7)
+        self.group_camera_3_edit = QGroupBox(self.frame_profile_edit)
+        self.group_camera_3_edit.setObjectName(u"group_camera_3_edit")
+        self.group_camera_3_edit.setEnabled(True)
+        self.group_camera_3_edit.setCheckable(True)
+        self.group_camera_3_edit.setChecked(False)
+        self.verticalLayout_27 = QVBoxLayout(self.group_camera_3_edit)
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
         self.verticalLayout_27.setContentsMargins(0, 0, 0, 0)
-        self.frame_47 = QFrame(self.group_camera_7)
+        self.frame_47 = QFrame(self.group_camera_3_edit)
         self.frame_47.setObjectName(u"frame_47")
         self.frame_47.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_46 = QHBoxLayout(self.frame_47)
@@ -2102,7 +2118,7 @@ class Ui_main(object):
 
         self.verticalLayout_27.addWidget(self.frame_47)
 
-        self.frame_48 = QFrame(self.group_camera_7)
+        self.frame_48 = QFrame(self.group_camera_3_edit)
         self.frame_48.setObjectName(u"frame_48")
         self.frame_48.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_47 = QHBoxLayout(self.frame_48)
@@ -2141,17 +2157,17 @@ class Ui_main(object):
         self.verticalLayout_27.addWidget(self.frame_48)
 
 
-        self.verticalLayout_6.addWidget(self.group_camera_7)
+        self.verticalLayout_6.addWidget(self.group_camera_3_edit)
 
-        self.group_camera_8 = QGroupBox(self.frame_11)
-        self.group_camera_8.setObjectName(u"group_camera_8")
-        self.group_camera_8.setEnabled(True)
-        self.group_camera_8.setCheckable(True)
-        self.group_camera_8.setChecked(False)
-        self.verticalLayout_28 = QVBoxLayout(self.group_camera_8)
+        self.group_camera_4_edit = QGroupBox(self.frame_profile_edit)
+        self.group_camera_4_edit.setObjectName(u"group_camera_4_edit")
+        self.group_camera_4_edit.setEnabled(True)
+        self.group_camera_4_edit.setCheckable(True)
+        self.group_camera_4_edit.setChecked(False)
+        self.verticalLayout_28 = QVBoxLayout(self.group_camera_4_edit)
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
         self.verticalLayout_28.setContentsMargins(0, 0, 0, 0)
-        self.frame_50 = QFrame(self.group_camera_8)
+        self.frame_50 = QFrame(self.group_camera_4_edit)
         self.frame_50.setObjectName(u"frame_50")
         self.frame_50.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_49 = QHBoxLayout(self.frame_50)
@@ -2170,7 +2186,7 @@ class Ui_main(object):
 
         self.verticalLayout_28.addWidget(self.frame_50)
 
-        self.frame_51 = QFrame(self.group_camera_8)
+        self.frame_51 = QFrame(self.group_camera_4_edit)
         self.frame_51.setObjectName(u"frame_51")
         self.frame_51.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_50 = QHBoxLayout(self.frame_51)
@@ -2209,14 +2225,22 @@ class Ui_main(object):
         self.verticalLayout_28.addWidget(self.frame_51)
 
 
-        self.verticalLayout_6.addWidget(self.group_camera_8)
-
-
-        self.verticalLayout_5.addWidget(self.frame_11)
+        self.verticalLayout_6.addWidget(self.group_camera_4_edit)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_5.addItem(self.verticalSpacer)
+        self.verticalLayout_6.addItem(self.verticalSpacer)
+
+        self.btn_save_edit_profile = QPushButton(self.frame_profile_edit)
+        self.btn_save_edit_profile.setObjectName(u"btn_save_edit_profile")
+        self.btn_save_edit_profile.setMinimumSize(QSize(95, 0))
+        self.btn_save_edit_profile.setMaximumSize(QSize(95, 16777215))
+        self.btn_save_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.verticalLayout_6.addWidget(self.btn_save_edit_profile, 0, Qt.AlignHCenter)
+
+
+        self.verticalLayout_5.addWidget(self.frame_profile_edit)
 
         self.frame_13 = QFrame(self.tab_2)
         self.frame_13.setObjectName(u"frame_13")
@@ -2224,21 +2248,11 @@ class Ui_main(object):
         self.frame_13.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_15 = QHBoxLayout(self.frame_13)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
-        self.horizontalSpacer_12 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.label_profile_edit_message = QLabel(self.frame_13)
+        self.label_profile_edit_message.setObjectName(u"label_profile_edit_message")
+        self.label_profile_edit_message.setMaximumSize(QSize(16777215, 23))
 
-        self.horizontalLayout_15.addItem(self.horizontalSpacer_12)
-
-        self.btn_save_edit_profile = QPushButton(self.frame_13)
-        self.btn_save_edit_profile.setObjectName(u"btn_save_edit_profile")
-        self.btn_save_edit_profile.setMinimumSize(QSize(95, 0))
-        self.btn_save_edit_profile.setMaximumSize(QSize(95, 16777215))
-        self.btn_save_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_15.addWidget(self.btn_save_edit_profile)
-
-        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_15.addItem(self.horizontalSpacer_13)
+        self.horizontalLayout_15.addWidget(self.label_profile_edit_message)
 
 
         self.verticalLayout_5.addWidget(self.frame_13)
@@ -2885,8 +2899,8 @@ class Ui_main(object):
 
         self.retranslateUi(main)
 
-        self.stackedWidget.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(1)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -2956,30 +2970,31 @@ class Ui_main(object):
         self.label_36.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_37.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_38.setText(QCoreApplication.translate("main", u"Password :", None))
-        self.label_4.setText(QCoreApplication.translate("main", u"Train Name :", None))
+        self.label_4.setText(QCoreApplication.translate("main", u"Profile Name :", None))
         self.label_profile_message.setText("")
         self.btn_save_profile.setText(QCoreApplication.translate("main", u"Save", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("main", u"Create New Profile", None))
-        self.label_11.setText(QCoreApplication.translate("main", u"Train Name :", None))
+        self.label_11.setText(QCoreApplication.translate("main", u"Profile Name :", None))
         self.btn_edit_profile.setText("")
         self.btn_delete_profile.setText("")
-        self.group_camera_5.setTitle(QCoreApplication.translate("main", u"Camera 1 - Right", None))
+        self.group_camera_1_edit.setTitle(QCoreApplication.translate("main", u"Camera 1 - Right", None))
         self.label_39.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_40.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_41.setText(QCoreApplication.translate("main", u"Password :", None))
-        self.group_camera_6.setTitle(QCoreApplication.translate("main", u"Camera 2 - Left", None))
+        self.group_camera_2_edit.setTitle(QCoreApplication.translate("main", u"Camera 2 - Left", None))
         self.label_42.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_43.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_44.setText(QCoreApplication.translate("main", u"Password :", None))
-        self.group_camera_7.setTitle(QCoreApplication.translate("main", u"Camera 3", None))
+        self.group_camera_3_edit.setTitle(QCoreApplication.translate("main", u"Camera 3", None))
         self.label_45.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_46.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_47.setText(QCoreApplication.translate("main", u"Password :", None))
-        self.group_camera_8.setTitle(QCoreApplication.translate("main", u"Camera 4", None))
+        self.group_camera_4_edit.setTitle(QCoreApplication.translate("main", u"Camera 4", None))
         self.label_48.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_49.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_50.setText(QCoreApplication.translate("main", u"Password :", None))
         self.btn_save_edit_profile.setText(QCoreApplication.translate("main", u"Save", None))
+        self.label_profile_edit_message.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("main", u"Edit / Delete", None))
         self.groupBox.setTitle(QCoreApplication.translate("main", u"Send", None))
         self.label_12.setText(QCoreApplication.translate("main", u"Profile Name :", None))
