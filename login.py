@@ -52,9 +52,9 @@ class LoginPage(QWidget):
         # Set styles
         self.setStyleSheet("""
             QWidget#LoginPage {
-                background-color: #f0f0f0;
-                border-radius: 15px;
-                border: 2px solid #ccc;
+                background-color: rgba(255, 255, 255, 200);
+                border: 2px solid #007BFF;  /* Blue border */
+                border-radius: 15px;        /* Rounded corners */
             }
             QLabel {
                 font-size: 14px;

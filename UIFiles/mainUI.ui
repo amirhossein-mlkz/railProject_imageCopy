@@ -2999,6 +2999,45 @@ QLabel:disabled{
                       </widget>
                      </item>
                      <item>
+                      <widget class="QPushButton" name="btn_refresh_profile_name">
+                       <property name="enabled">
+                        <bool>true</bool>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>20</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>20</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color: None;
+border:none;</string>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="Assets/assets.qrc">
+                         <normaloff>:/asstets/icons/refresh_5730689.png</normaloff>:/asstets/icons/refresh_5730689.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>20</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
                       <widget class="QComboBox" name="combo_train_name_profile"/>
                      </item>
                      <item>
@@ -3975,7 +4014,7 @@ border:none;</string>
                          <widget class="QPushButton" name="btn_load_profile">
                           <property name="maximumSize">
                            <size>
-                            <width>95</width>
+                            <width>120</width>
                             <height>16777215</height>
                            </size>
                           </property>
@@ -3983,7 +4022,7 @@ border:none;</string>
                            <cursorShape>PointingHandCursor</cursorShape>
                           </property>
                           <property name="text">
-                           <string>Load</string>
+                           <string>Connect &amp; Load</string>
                           </property>
                          </widget>
                         </item>
@@ -4523,6 +4562,9 @@ border:none;</string>
                          <width>16777215</width>
                          <height>16777215</height>
                         </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
                        </property>
                        <property name="text">
                         <string>Save</string>

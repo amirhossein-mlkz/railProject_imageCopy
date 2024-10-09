@@ -28,7 +28,7 @@ import texts
 
 from Styles import error_style,success_style,none_style,click_side_btns,normal_side_btns
 import re,json
-
+from ShowConfig import ShowConfig
 
 CONFIG_PATH = 'Configs'
 
@@ -182,6 +182,8 @@ class mainUI(sQMainWindow):
         self.ui.btn_load_profile.clicked.connect(self.load_profile)
         self.ui.combo_load_train_name.currentIndexChanged.connect(self.set_load_ip)
 
+        self.ui.btn_refresh_profile_name.clicked.connect(self.refresh_edit_profile)
+
 
 
     def show_login(self):
@@ -221,8 +223,13 @@ class mainUI(sQMainWindow):
         self.ui.timeline_groupbox.setVisible(status) 
         if status == True:
             self.ui.login_btn.setText('Logout')
+            self.ui.login_btn.setIcon(QIcon(":/asstets/icons/logout_icon.png"))
+
         else:
             self.ui.login_btn.setText('Login')
+            self.ui.login_btn.setIcon(QIcon(":/asstets/icons/login_icon.png"))
+
+
         
 
 
@@ -625,7 +632,6 @@ class mainUI(sQMainWindow):
 
     def edit_config_train(self):
 
-        self.edit_mode(mode=True)
 
         name = self.ui.combo_train_name_config.currentText()
 
@@ -636,6 +642,9 @@ class mainUI(sQMainWindow):
             return
         
         ret = ret[0]
+
+        self.edit_mode(mode=True)
+
 
         self.ui.line_train_profile_ip_edit.setText(ret['ip'])
         self.ui.line_train_profile_username_edit.setText(ret['username'])
@@ -654,6 +663,8 @@ class mainUI(sQMainWindow):
         self.ui.combo_train_name_config.setDisabled(mode)
         self.ui.btn_refresh_name_config_edit.setDisabled(mode)
         self.ui.frame_train_edit.setDisabled(not(mode))
+        self.ui.btn_save_config_edit.setDisabled(not(mode))
+
 
         
 
@@ -1056,6 +1067,12 @@ class mainUI(sQMainWindow):
 
 
 
+    def refresh_edit_profile(self):
+
+        self.load_train_profiles()
+
+
+
     def save_edit_profile(self):
 
         profile = self.ui.combo_train_name_profile.currentText()
@@ -1133,9 +1150,20 @@ class mainUI(sQMainWindow):
 
         train_parms = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=train_name)
 
-        if train_parms:
 
-            print(train_parms)
+
+        if train_parms:
+            ##################### connect to triain and get data
+            
+            #################### ////////////////////////////////
+            train_name +='.json'
+
+            ret = self.load_json(BASE_CONFIG)  ######### TEMP
+            if ret:
+                print(train_parms)
+
+                self.ui_config = ShowConfig(data=ret)
+                self.ui_config.show()
 
 
 

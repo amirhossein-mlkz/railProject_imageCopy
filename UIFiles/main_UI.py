@@ -1910,6 +1910,21 @@ class Ui_main(object):
 
         self.horizontalLayout_13.addWidget(self.label_11)
 
+        self.btn_refresh_profile_name = QPushButton(self.frame_12)
+        self.btn_refresh_profile_name.setObjectName(u"btn_refresh_profile_name")
+        self.btn_refresh_profile_name.setEnabled(True)
+        self.btn_refresh_profile_name.setMinimumSize(QSize(20, 0))
+        self.btn_refresh_profile_name.setMaximumSize(QSize(20, 16777215))
+        self.btn_refresh_profile_name.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btn_refresh_profile_name.setStyleSheet(u"background-color: None;\n"
+"border:none;")
+        icon7 = QIcon()
+        icon7.addFile(u":/asstets/icons/refresh_5730689.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_refresh_profile_name.setIcon(icon7)
+        self.btn_refresh_profile_name.setIconSize(QSize(20, 20))
+
+        self.horizontalLayout_13.addWidget(self.btn_refresh_profile_name)
+
         self.combo_train_name_profile = QComboBox(self.frame_12)
         self.combo_train_name_profile.setObjectName(u"combo_train_name_profile")
 
@@ -1923,9 +1938,9 @@ class Ui_main(object):
         self.btn_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_edit_profile.setStyleSheet(u"background-color: None;\n"
 "border:none;")
-        icon7 = QIcon()
-        icon7.addFile(u":/asstets/icons/pencil_5171801.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btn_edit_profile.setIcon(icon7)
+        icon8 = QIcon()
+        icon8.addFile(u":/asstets/icons/pencil_5171801.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_edit_profile.setIcon(icon8)
         self.btn_edit_profile.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_13.addWidget(self.btn_edit_profile)
@@ -1936,9 +1951,9 @@ class Ui_main(object):
         self.btn_delete_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_delete_profile.setStyleSheet(u"background-color: None;\n"
 "border:none;")
-        icon8 = QIcon()
-        icon8.addFile(u":/asstets/icons/trash_9915690.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btn_delete_profile.setIcon(icon8)
+        icon9 = QIcon()
+        icon9.addFile(u":/asstets/icons/trash_9915690.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_delete_profile.setIcon(icon9)
         self.btn_delete_profile.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_13.addWidget(self.btn_delete_profile)
@@ -2402,7 +2417,7 @@ class Ui_main(object):
         self.horizontalLayout_36.setContentsMargins(0, 0, 0, 0)
         self.btn_load_profile = QPushButton(self.frame_15)
         self.btn_load_profile.setObjectName(u"btn_load_profile")
-        self.btn_load_profile.setMaximumSize(QSize(95, 16777215))
+        self.btn_load_profile.setMaximumSize(QSize(120, 16777215))
         self.btn_load_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_36.addWidget(self.btn_load_profile)
@@ -2604,9 +2619,7 @@ class Ui_main(object):
         self.btn_refresh_name_config_edit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_refresh_name_config_edit.setStyleSheet(u"background-color: None;\n"
 "border:none;")
-        icon9 = QIcon()
-        icon9.addFile(u":/asstets/icons/refresh_5730689.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btn_refresh_name_config_edit.setIcon(icon9)
+        self.btn_refresh_name_config_edit.setIcon(icon7)
         self.btn_refresh_name_config_edit.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_53.addWidget(self.btn_refresh_name_config_edit)
@@ -2623,7 +2636,7 @@ class Ui_main(object):
         self.btn_edit_config.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_edit_config.setStyleSheet(u"background-color: None;\n"
 "border:none;")
-        self.btn_edit_config.setIcon(icon7)
+        self.btn_edit_config.setIcon(icon8)
         self.btn_edit_config.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_53.addWidget(self.btn_edit_config)
@@ -2634,7 +2647,7 @@ class Ui_main(object):
         self.btn_delete_config.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_delete_config.setStyleSheet(u"background-color: None;\n"
 "border:none;")
-        self.btn_delete_config.setIcon(icon8)
+        self.btn_delete_config.setIcon(icon9)
         self.btn_delete_config.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_53.addWidget(self.btn_delete_config)
@@ -2716,6 +2729,7 @@ class Ui_main(object):
         self.btn_save_config_edit.setObjectName(u"btn_save_config_edit")
         self.btn_save_config_edit.setEnabled(False)
         self.btn_save_config_edit.setMaximumSize(QSize(16777215, 16777215))
+        self.btn_save_config_edit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.verticalLayout_11.addWidget(self.btn_save_config_edit)
 
@@ -2975,6 +2989,7 @@ class Ui_main(object):
         self.btn_save_profile.setText(QCoreApplication.translate("main", u"Save", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("main", u"Create New Profile", None))
         self.label_11.setText(QCoreApplication.translate("main", u"Profile Name :", None))
+        self.btn_refresh_profile_name.setText("")
         self.btn_edit_profile.setText("")
         self.btn_delete_profile.setText("")
         self.group_camera_1_edit.setTitle(QCoreApplication.translate("main", u"Camera 1 - Right", None))
@@ -3003,7 +3018,7 @@ class Ui_main(object):
         self.groupBox_2.setTitle(QCoreApplication.translate("main", u"Load", None))
         self.label_29.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.label_5.setText(QCoreApplication.translate("main", u"Ip : ", None))
-        self.btn_load_profile.setText(QCoreApplication.translate("main", u"Load", None))
+        self.btn_load_profile.setText(QCoreApplication.translate("main", u"Connect & Load", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("main", u"Load / Send", None))
         self.label_56.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.label_53.setText(QCoreApplication.translate("main", u"Ip Adrress :", None))
