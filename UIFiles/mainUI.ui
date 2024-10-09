@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>617</width>
-    <height>664</height>
+    <height>710</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -714,6 +714,41 @@ QComboBox:disabled {
 
 
 
+
+
+
+
+
+/**************************LGroupBoxStyle***************************/
+
+QGroupBox {
+    background-color: #F7F8FA;  /* Background color inside the group box */
+    border: 1px solid #D7D7D9;  /* Border around the group box */
+    border-radius: 5px;         /* Slight rounded corners */
+    margin-top: 20px;           /* Space between title and top edge */
+    padding: 10px;              /* Padding inside the group box */
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;  /* Position title over the border */
+    subcontrol-position: top left; /* Title alignment */
+
+	background-color: rgb(89, 89, 89);
+    padding: 5px 10px;          /* Padding around the title */
+    color: white;               /* Title text color */
+    border-radius: 3px;         /* Rounded corners for the title */
+    font-weight: bold;          /* Bold title text */
+}
+
+QGroupBox:disabled {
+    background-color: #E0E0E0;  /* Background when disabled */
+    color: #A0A0A0;             /* Text color when disabled */
+    border: 1px solid #D7D7D9;  /* Same border when disabled */
+}
+
+
+
+
 </string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -1355,7 +1390,7 @@ QPushButton:disabled {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="copy">
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -2193,7 +2228,7 @@ QLabel:disabled{
                     <property name="maximumSize">
                      <size>
                       <width>16777215</width>
-                      <height>450</height>
+                      <height>509</height>
                      </size>
                     </property>
                     <property name="frameShape">
@@ -2217,7 +2252,7 @@ QLabel:disabled{
                        <property name="maximumSize">
                         <size>
                          <width>16777215</width>
-                         <height>145</height>
+                         <height>156</height>
                         </size>
                        </property>
                        <property name="title">
@@ -2866,6 +2901,9 @@ QLabel:disabled{
                          <height>16777215</height>
                         </size>
                        </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Save</string>
                        </property>
@@ -2963,6 +3001,9 @@ QLabel:disabled{
                          <height>16777215</height>
                         </size>
                        </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="styleSheet">
                         <string notr="true">background-color: None;
 border:none;</string>
@@ -2989,6 +3030,9 @@ border:none;</string>
                          <width>30</width>
                          <height>16777215</height>
                         </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
                        </property>
                        <property name="styleSheet">
                         <string notr="true">background-color: None;
@@ -3580,6 +3624,9 @@ border:none;</string>
                          <height>16777215</height>
                         </size>
                        </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Save</string>
                        </property>
@@ -3614,6 +3661,18 @@ border:none;</string>
                      <string>Send</string>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_8">
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
                      <item>
                       <widget class="QFrame" name="frame_62">
                        <property name="maximumSize">
@@ -3723,6 +3782,18 @@ border:none;</string>
                         <enum>QFrame::Raised</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_17">
+                        <property name="leftMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>0</number>
+                        </property>
                         <item>
                          <widget class="QPushButton" name="btn_send_profile">
                           <property name="maximumSize">
@@ -3730,6 +3801,9 @@ border:none;</string>
                             <width>95</width>
                             <height>16777215</height>
                            </size>
+                          </property>
+                          <property name="cursor">
+                           <cursorShape>PointingHandCursor</cursorShape>
                           </property>
                           <property name="text">
                            <string>Send</string>
@@ -3755,6 +3829,18 @@ border:none;</string>
                      <string>Load</string>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_23">
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
                      <item>
                       <widget class="QFrame" name="frame_65">
                        <property name="maximumSize">
@@ -3857,6 +3943,21 @@ border:none;</string>
                         <enum>QFrame::Raised</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_36">
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
+                        <property name="leftMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>0</number>
+                        </property>
                         <item>
                          <widget class="QPushButton" name="btn_load_profile">
                           <property name="maximumSize">
@@ -3864,6 +3965,9 @@ border:none;</string>
                             <width>95</width>
                             <height>16777215</height>
                            </size>
+                          </property>
+                          <property name="cursor">
+                           <cursorShape>PointingHandCursor</cursorShape>
                           </property>
                           <property name="text">
                            <string>Load</string>
@@ -3903,7 +4007,7 @@ border:none;</string>
                  <bool>true</bool>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="tab_5">
                  <attribute name="title">
@@ -4092,6 +4196,9 @@ border:none;</string>
                     <layout class="QHBoxLayout" name="horizontalLayout_9">
                      <item>
                       <widget class="QPushButton" name="btn_check_connection">
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Check Connection</string>
                        </property>
@@ -4101,6 +4208,9 @@ border:none;</string>
                       <widget class="QPushButton" name="btn_save_train">
                        <property name="enabled">
                         <bool>true</bool>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
                        </property>
                        <property name="text">
                         <string>Save</string>
@@ -4185,6 +4295,9 @@ border:none;</string>
                          <height>16777215</height>
                         </size>
                        </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="styleSheet">
                         <string notr="true">background-color: None;
 border:none;</string>
@@ -4218,6 +4331,9 @@ border:none;</string>
                          <height>16777215</height>
                         </size>
                        </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="styleSheet">
                         <string notr="true">background-color: None;
 border:none;</string>
@@ -4244,6 +4360,9 @@ border:none;</string>
                          <width>30</width>
                          <height>16777215</height>
                         </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
                        </property>
                        <property name="styleSheet">
                         <string notr="true">background-color: None;
@@ -4445,6 +4564,9 @@ border:none;</string>
                  </item>
                  <item>
                   <widget class="QPushButton" name="btn_change_password">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
                    <property name="text">
                     <string>Click Here</string>
                    </property>
@@ -4683,6 +4805,9 @@ border:none;</string>
                      <width>100</width>
                      <height>16777215</height>
                     </size>
+                   </property>
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
                    </property>
                    <property name="styleSheet">
                     <string notr="true"/>

@@ -185,6 +185,7 @@ class mainUI(sQMainWindow):
             self.login_ui.show()
 
     def close_login(self):
+        
         self.login_ui.close()
 
     def check_password(self):
@@ -257,10 +258,15 @@ class mainUI(sQMainWindow):
         self._old_pos = event.globalPosition().toPoint()
 
     def close_win(self):
-        self.close()
-        # pid = os.getpid()
-        # os.kill(pid, SIGKILL)
-        sys.exit()
+
+
+        ret = self.show_question(texts.MESSAGES['message'][self.language],texts.MESSAGES['Close'][self.language])
+
+        if ret:
+
+            self.close()
+
+            sys.exit()
 
     def minimize_win(self):
         self.showMinimized()
@@ -1014,10 +1020,10 @@ class mainUI(sQMainWindow):
 
         if question:
             # Add custom buttons for "بلی" and "خیر"
-            yes_button = msg_box.addButton("بلی", QMessageBox.YesRole)
+            yes_button = msg_box.addButton("Yes", QMessageBox.YesRole)
             yes_button.setFont(font)
 
-            no_button = msg_box.addButton("خیر", QMessageBox.NoRole)
+            no_button = msg_box.addButton("No", QMessageBox.NoRole)
             no_button.setFont(font)
 
 
@@ -1033,7 +1039,7 @@ class mainUI(sQMainWindow):
                 return False
         else:
             # Add the "تایید" button for simple confirmations
-            ok_button = msg_box.addButton("تایید", QMessageBox.AcceptRole)
+            ok_button = msg_box.addButton("Confirm", QMessageBox.AcceptRole)
 
             # Execute and check if Ok (or تایید) was clicked
             msg_box.exec_()

@@ -29,7 +29,7 @@ class Ui_main(object):
         if not main.objectName():
             main.setObjectName(u"main")
         main.setEnabled(True)
-        main.resize(617, 664)
+        main.resize(617, 710)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -711,6 +711,42 @@ class Ui_main(object):
 "}\n"
 "\n"
 "\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"/**************************LGroupBoxStyle***************************/\n"
+"\n"
+"QGroupBox {\n"
+"    background-color: #F7F8FA;  /* Background color inside the group box */\n"
+"    border: 1px solid #D7D7D9;  /* Border around the group box */\n"
+"    border-radius: 5px;         /* Slight round"
+                        "ed corners */\n"
+"    margin-top: 20px;           /* Space between title and top edge */\n"
+"    padding: 10px;              /* Padding inside the group box */\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;  /* Position title over the border */\n"
+"    subcontrol-position: top left; /* Title alignment */\n"
+"\n"
+"	background-color: rgb(89, 89, 89);\n"
+"    padding: 5px 10px;          /* Padding around the title */\n"
+"    color: white;               /* Title text color */\n"
+"    border-radius: 3px;         /* Rounded corners for the title */\n"
+"    font-weight: bold;          /* Bold title text */\n"
+"}\n"
+"\n"
+"QGroupBox:disabled {\n"
+"    background-color: #E0E0E0;  /* Background when disabled */\n"
+"    color: #A0A0A0;             /* Text color when disabled */\n"
+"    border: 1px solid #D7D7D9;  /* Same border when disabled */\n"
+"}\n"
 "\n"
 "\n"
 "\n"
@@ -1458,14 +1494,14 @@ class Ui_main(object):
         self.verticalLayout_14.setContentsMargins(-1, -1, -1, 9)
         self.frame_21 = QFrame(self.tab)
         self.frame_21.setObjectName(u"frame_21")
-        self.frame_21.setMaximumSize(QSize(16777215, 450))
+        self.frame_21.setMaximumSize(QSize(16777215, 509))
         self.frame_21.setFrameShape(QFrame.NoFrame)
         self.verticalLayout_13 = QVBoxLayout(self.frame_21)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
         self.group_camera_1 = QGroupBox(self.frame_21)
         self.group_camera_1.setObjectName(u"group_camera_1")
-        self.group_camera_1.setMaximumSize(QSize(16777215, 145))
+        self.group_camera_1.setMaximumSize(QSize(16777215, 156))
         self.group_camera_1.setCheckable(True)
         self.group_camera_1.setChecked(False)
         self.verticalLayout_10 = QVBoxLayout(self.group_camera_1)
@@ -1828,6 +1864,7 @@ class Ui_main(object):
         self.btn_save_profile.setObjectName(u"btn_save_profile")
         self.btn_save_profile.setMinimumSize(QSize(95, 0))
         self.btn_save_profile.setMaximumSize(QSize(95, 16777215))
+        self.btn_save_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_save_profile.setIconSize(QSize(29, 23))
 
         self.horizontalLayout_33.addWidget(self.btn_save_profile)
@@ -1869,6 +1906,7 @@ class Ui_main(object):
         self.btn_edit_profile.setObjectName(u"btn_edit_profile")
         self.btn_edit_profile.setMinimumSize(QSize(30, 0))
         self.btn_edit_profile.setMaximumSize(QSize(30, 16777215))
+        self.btn_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_edit_profile.setStyleSheet(u"background-color: None;\n"
 "border:none;")
         icon7 = QIcon()
@@ -1881,6 +1919,7 @@ class Ui_main(object):
         self.btn_delete_profile = QPushButton(self.frame_12)
         self.btn_delete_profile.setObjectName(u"btn_delete_profile")
         self.btn_delete_profile.setMaximumSize(QSize(30, 16777215))
+        self.btn_delete_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_delete_profile.setStyleSheet(u"background-color: None;\n"
 "border:none;")
         icon8 = QIcon()
@@ -2193,6 +2232,7 @@ class Ui_main(object):
         self.btn_save_edit_profile.setObjectName(u"btn_save_edit_profile")
         self.btn_save_edit_profile.setMinimumSize(QSize(95, 0))
         self.btn_save_edit_profile.setMaximumSize(QSize(95, 16777215))
+        self.btn_save_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_15.addWidget(self.btn_save_edit_profile)
 
@@ -2212,6 +2252,7 @@ class Ui_main(object):
         self.groupBox.setObjectName(u"groupBox")
         self.verticalLayout_8 = QVBoxLayout(self.groupBox)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.frame_62 = QFrame(self.groupBox)
         self.frame_62.setObjectName(u"frame_62")
         self.frame_62.setMaximumSize(QSize(16777215, 50))
@@ -2265,9 +2306,11 @@ class Ui_main(object):
         self.frame_14.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_17 = QHBoxLayout(self.frame_14)
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.horizontalLayout_17.setContentsMargins(0, 0, 0, 0)
         self.btn_send_profile = QPushButton(self.frame_14)
         self.btn_send_profile.setObjectName(u"btn_send_profile")
         self.btn_send_profile.setMaximumSize(QSize(95, 16777215))
+        self.btn_send_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_17.addWidget(self.btn_send_profile)
 
@@ -2288,6 +2331,7 @@ class Ui_main(object):
         self.groupBox_2.setObjectName(u"groupBox_2")
         self.verticalLayout_23 = QVBoxLayout(self.groupBox_2)
         self.verticalLayout_23.setObjectName(u"verticalLayout_23")
+        self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
         self.frame_65 = QFrame(self.groupBox_2)
         self.frame_65.setObjectName(u"frame_65")
         self.frame_65.setMaximumSize(QSize(16777215, 50))
@@ -2339,10 +2383,13 @@ class Ui_main(object):
         self.frame_15.setFrameShape(QFrame.StyledPanel)
         self.frame_15.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_36 = QHBoxLayout(self.frame_15)
+        self.horizontalLayout_36.setSpacing(0)
         self.horizontalLayout_36.setObjectName(u"horizontalLayout_36")
+        self.horizontalLayout_36.setContentsMargins(0, 0, 0, 0)
         self.btn_load_profile = QPushButton(self.frame_15)
         self.btn_load_profile.setObjectName(u"btn_load_profile")
         self.btn_load_profile.setMaximumSize(QSize(95, 16777215))
+        self.btn_load_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_36.addWidget(self.btn_load_profile)
 
@@ -2494,12 +2541,14 @@ class Ui_main(object):
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.btn_check_connection = QPushButton(self.frame_54)
         self.btn_check_connection.setObjectName(u"btn_check_connection")
+        self.btn_check_connection.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_9.addWidget(self.btn_check_connection)
 
         self.btn_save_train = QPushButton(self.frame_54)
         self.btn_save_train.setObjectName(u"btn_save_train")
         self.btn_save_train.setEnabled(True)
+        self.btn_save_train.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_9.addWidget(self.btn_save_train)
 
@@ -2538,6 +2587,7 @@ class Ui_main(object):
         self.btn_refresh_name_config_edit = QPushButton(self.frame_57)
         self.btn_refresh_name_config_edit.setObjectName(u"btn_refresh_name_config_edit")
         self.btn_refresh_name_config_edit.setMaximumSize(QSize(20, 16777215))
+        self.btn_refresh_name_config_edit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_refresh_name_config_edit.setStyleSheet(u"background-color: None;\n"
 "border:none;")
         icon9 = QIcon()
@@ -2556,6 +2606,7 @@ class Ui_main(object):
         self.btn_edit_config.setObjectName(u"btn_edit_config")
         self.btn_edit_config.setEnabled(True)
         self.btn_edit_config.setMaximumSize(QSize(30, 16777215))
+        self.btn_edit_config.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_edit_config.setStyleSheet(u"background-color: None;\n"
 "border:none;")
         self.btn_edit_config.setIcon(icon7)
@@ -2566,6 +2617,7 @@ class Ui_main(object):
         self.btn_delete_config = QPushButton(self.frame_57)
         self.btn_delete_config.setObjectName(u"btn_delete_config")
         self.btn_delete_config.setMaximumSize(QSize(30, 16777215))
+        self.btn_delete_config.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_delete_config.setStyleSheet(u"background-color: None;\n"
 "border:none;")
         self.btn_delete_config.setIcon(icon8)
@@ -2683,6 +2735,7 @@ class Ui_main(object):
 
         self.btn_change_password = QPushButton(self.frame_2)
         self.btn_change_password.setObjectName(u"btn_change_password")
+        self.btn_change_password.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_3.addWidget(self.btn_change_password)
 
@@ -2791,6 +2844,7 @@ class Ui_main(object):
         self.btn_save_password.setObjectName(u"btn_save_password")
         self.btn_save_password.setMinimumSize(QSize(100, 0))
         self.btn_save_password.setMaximumSize(QSize(100, 16777215))
+        self.btn_save_password.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_save_password.setStyleSheet(u"")
 
         self.verticalLayout_21.addWidget(self.btn_save_password, 0, Qt.AlignHCenter)
@@ -2831,9 +2885,9 @@ class Ui_main(object):
 
         self.retranslateUi(main)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(2)
-        self.tabWidget_2.setCurrentIndex(0)
+        self.tabWidget_2.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(main)

@@ -5,6 +5,8 @@ MESSAGES = {
     'saved' :{'Persian(فارسی)': '  با موفقیت ذخیره گردید',
                 'English': 'Saved Successfully'}, 
 
+    'Close' :{'Persian(فارسی)': '  آیا برای خروج مطمئن هستید؟',
+                'English': 'Are you sure want to Close ?'}, 
 
 
 
