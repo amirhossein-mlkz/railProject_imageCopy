@@ -19,7 +19,8 @@ class filesFinderWorker(QObject):
                  struct:list[str],
                  trains:list[str] = None, 
                  date_ranges:tuple[JalaliDateTime] = None,
-                 return_avaiability=True) -> None:
+                 return_avaiability=True,
+                 log_search = False) -> None:
         super().__init__()    
         self.trains = trains
         self.date_ranges = date_ranges
@@ -29,7 +30,7 @@ class filesFinderWorker(QObject):
         self.main_path = main_path
         self.struct = struct
         self.return_avaiability = return_avaiability
-
+        self.log_search = log_search
         #choose filter trains by folder name or by directory name
         # self.check_train_by_filename = True
         # if STRUCT_PARTS.TRAIN in self.struct:
@@ -88,29 +89,41 @@ class filesFinderWorker(QObject):
         if step_name in [STRUCT_PARTS.YEAR,STRUCT_PARTS.MONTH,STRUCT_PARTS.DAY,STRUCT_PARTS.HOUR,STRUCT_PARTS.MINUTE]:
             subs = self.__sort_number_folder(subs)
 
-        for sub in subs:
-            sub_path = os.path.join(path, sub)
-            #check if we arent in last level of tree
-            if pos_index != (len(self.struct) -1):
-                if not os.path.isdir(sub_path):
-                    continue
-            else:
-                if not os.path.isfile(sub_path):
-                    continue
-            #-----------------------------------
-            flag, date = self.check_filters(path, sub, step_name, date)
-            if flag:
-                if pos_index == (len(self.struct) -1):
-                    size = os.path.getsize(sub_path)
-                    self.res_paths.append(sub_path)
+        if not self.log_search:
+            for sub in subs:
+                sub_path = os.path.join(path, sub)
+                #check if we arent in last level of tree
+                if pos_index != (len(self.struct) -1):
+                    if not os.path.isdir(sub_path):
+                        continue
+                else:
+                    if not os.path.isfile(sub_path):
+                        continue
+                #-----------------------------------
+                flag, date = self.check_filters(path, sub, step_name, date)
+
+                if flag:
+                    if pos_index == (len(self.struct) -1):
+                        size = os.path.getsize(sub_path)
+                        self.res_paths.append(sub_path)
+                        self.res_sizes.append(size)
+                        self.total_size += size
+                        self.log_signal.emit(f'Size f{int(self.total_size)}')
+                    else:
+                        self.searcher(sub_path, pos_index+1, date)
+                        
+        else:
+            for sub in subs:
+                sub_path = os.path.join(path, sub)
+                for path in os.listdir(sub_path):
+                    new_path = os.path.join(sub_path,path)
+                    self.res_paths.append(new_path)
+                    size = os.path.getsize(new_path)
                     self.res_sizes.append(size)
                     self.total_size += size
                     self.log_signal.emit(f'Size f{int(self.total_size)}')
-                else:
-                    self.searcher(sub_path, pos_index+1, date)
-                    
-                
-            
+
+
     
 
     def check_filters(self, dir:str, sub:str, step_name:str, date:JalaliDateTime):

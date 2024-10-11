@@ -29,12 +29,9 @@ import texts
 from Styles import error_style,success_style,none_style,click_side_btns,normal_side_btns
 import re,json
 from ShowConfig import ShowConfig
+from Constants import BASE_CONFIG,CAMERA_NAMES,CONFIG_PATH,PARMS
 
-CONFIG_PATH = 'Configs'
 
-CAMERA_NAMES = ['right','left','3','4','5']
-PARMS = ['ip','username','password']
-BASE_CONFIG = 'base_config.json'
 # ui class
 class mainUI(sQMainWindow):
 
@@ -111,6 +108,12 @@ class mainUI(sQMainWindow):
 
         self.clear_ui_profile()
 
+        self.log_search = False
+
+        self.flag_copy_log = True  ############ Temp
+
+
+
     def create_init_folders(self):
         if not os.path.exists(CONFIG_PATH):
             os.mkdir(CONFIG_PATH)
@@ -145,7 +148,9 @@ class mainUI(sQMainWindow):
         self.ui.close_btn.clicked.connect(self.close_win)
         self.ui.minimize_btn.clicked.connect(self.minimize_win)
 
-        self.ui.copy_button.clicked.connect(self.ui_copy)
+        # self.ui.copy_button.clicked.connect(self.ui_copy)
+        self.ui.copy_button.clicked.connect(self.copy_logs)
+
         self.ui.side_copy_btn.clicked.connect(self.set_stack_widget)
         self.ui.side_profile_btn.clicked.connect(self.set_stack_widget)
         self.ui.side_train_config_btn.clicked.connect(self.set_stack_widget)
@@ -184,7 +189,7 @@ class mainUI(sQMainWindow):
 
         self.ui.btn_refresh_profile_name.clicked.connect(self.refresh_edit_profile)
 
-
+        
 
     def show_login(self):
         if self.is_login:
@@ -329,10 +334,20 @@ class mainUI(sQMainWindow):
 
     def load_pathes(self):
         res = self.db.fetch_table_as_dict(table_name='pathes')
-        if len(res)==1:
-            res = res[0]
-            self.src_path = res['folder_to_copy']
-            self.dst_path = res['destination_folder']
+
+        data = self.load_json(json_name=BASE_CONFIG)
+
+        if data:
+            self.main_path = data['main_path']
+            self.image_path = os.path.join(self.main_path,data['image_path'])
+            self.log_path = os.path.join(self.main_path,data['log_path'])
+            self.image_path = os.path.join(self.main_path,data['image_path'])
+            # self.dst_path = self.image_path
+
+            self.dst_main_path  = os.path.join('C:\\',self.main_path)
+            self.dst_image_path = os.path.join(self.dst_main_path,data['image_path']) 
+            self.dst_log_path = os.path.join(self.dst_main_path,data['log_path']) 
+
 
 
     def ui_copy(self):
@@ -371,11 +386,11 @@ class mainUI(sQMainWindow):
         ret = ret[0]
 
 
-        ip = ret['ip']
-        username = ret['username']
-        password = ret['password']
-        src_path = self.src_path
-        dst_path = self.dst_path
+        self.copy_ip = ret['ip']
+        self.copy_username = ret['username']
+        self.copy_password = ret['password']
+        src_path = self.image_path
+        dst_path = self.dst_image_path
         self.date_time_ranges = None
 
         if self.ui.timeline_groupbox.isChecked() and self.is_login:
@@ -400,9 +415,13 @@ class mainUI(sQMainWindow):
 
             
 
-        self.trasformer = transformModule(ip, src_path, dst_path, username, password)
+        self.trasformer = transformModule(self.copy_ip, src_path, dst_path, self.copy_username, self.copy_password)
         self.show_message('copy', 'Check Connection...')
         GUIBackend.set_disable_enable(self.ui.copy_button, False)
+
+        self.log_search = False
+        self.start_copy_logs = False
+
         self.trasformer.check_connection(self.step1_check_connection_event)
 
 
@@ -417,7 +436,8 @@ class mainUI(sQMainWindow):
             self.trasformer.find_files( trains= None,
                                         dates_tange=self.date_time_ranges,
                                         finish_event_func=self.step2_files_list_ready_event,
-                                        log_event_func=self.step1_log_event)
+                                        log_event_func=self.step1_log_event,
+                                        log_search=self.log_search)
 
     def step1_log_event(self, log:str):
         txt = f'Searching Files: {log}'
@@ -452,6 +472,8 @@ class mainUI(sQMainWindow):
                                    msg_callback=self.step2_log )
 
     def step2_update_progress(self, completed:int, total:int):
+        if total<1:
+            total = 1 
         percent = int(completed/total * 100)
         self.ui.progress_bar.setValue(percent)
         #Convert to MB
@@ -476,7 +498,58 @@ class mainUI(sQMainWindow):
         # a = transormUtils.dateTimeRanges( avaiabilities['11BG21']['right'], 600 )
         GUIBackend.set_disable_enable(self.ui.copy_button, True)
         self.show_message('copy', "Finish Success")
+
+
+        if self.log_search and self.start_copy_logs:
+            new_logs = self.trasformer.searcher_worker.res_paths
+            self.show_logs(new_logs)
+
+        if self.flag_copy_log and not self.start_copy_logs:
+            self.copy_logs()
+
+    def show_logs(self,new_logs):
+        print('milad'*80)
+
+        for log in new_logs:
+            split = log.split('\\')
+            file = split[-1]
+            folder = split[-2]
+
+            log_path = os.path.join(self.log_path,folder,file)
+            print(log_path)
+
+
+
+    def copy_logs(self):
+
+
+        self.start_copy_logs = True
+
+
+        name = self.ui.combo_copy_train_name.currentText()
+
+        ret = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=name)
+
+        if len(ret)!=1:
+            print('Error in get data')
+            return
         
+        ret = ret[0]
+
+
+        self.copy_ip = ret['ip']
+        self.copy_username = ret['username']
+        self.copy_password = ret['password']
+        src_path = self.log_path
+        dst_path = self.dst_log_path
+        self.date_time_ranges = None
+
+
+        self.trasformer = transformModule(self.copy_ip, src_path, dst_path, self.copy_username, self.copy_password)
+
+        self.log_search=True
+        self.trasformer.check_connection(self.step1_check_connection_event)
+
 
         
 
@@ -779,7 +852,7 @@ class mainUI(sQMainWindow):
     def clear_ui_profile(self, edit=False):
 
 
-        for iter in range(len(PARMS)+1):
+        for iter in range(len(CAMERA_NAMES)):
 
             for parm in PARMS:
                 if edit:
@@ -931,22 +1004,24 @@ class mainUI(sQMainWindow):
 
         configs = []
 
-        for iter in range(len(PARMS)+1):
+        for iter in range(len(CAMERA_NAMES)):
 
             config = {}
             
             if edit_mode:
 
-                ip = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[0],iter+1))
-                username = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[1],iter+1))
-                password = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[2],iter+1))
+                name = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[0],iter+1))
+                ip = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[1],iter+1))
+                username = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[2],iter+1))
+                password = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[3],iter+1))
             else:
-                ip = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[0],iter+1))
-                username = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[1],iter+1))
-                password = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[2],iter+1))
+                name = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[0],iter+1))
+                ip = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[1],iter+1))
+                username = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[2],iter+1))
+                password = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[3],iter+1))
 
             config = {
-                'name' : CAMERA_NAMES[iter],
+                'name' : name,
                 'ip' : ip,
                 'username' :username,
                 'password' :password
@@ -1014,12 +1089,7 @@ class mainUI(sQMainWindow):
 
 
         for iter,config in enumerate(camera_configs):
-            if config['name'] == 'right':
-                id = 1
-            elif config['name'] == 'left':
-                id = 2
-            else:
-                id = config['name']
+
 
             one_item = False
             
@@ -1027,11 +1097,11 @@ class mainUI(sQMainWindow):
 
                 if config[parm] !='':
                     one_item=True
-                input = eval('self.ui.line_{}_camera_{}_edit'.format(parm,id))
+                input = eval('self.ui.line_{}_camera_{}_edit'.format(parm,iter+1))
                 input.setText(config[parm])
 
             if one_item:
-                group = eval('self.ui.group_camera_{}_edit'.format(id))
+                group = eval('self.ui.group_camera_{}_edit'.format(iter+1))
                 group.setChecked(True)
 
         self.profile_edit_mode(mode=True)
@@ -1099,7 +1169,8 @@ class mainUI(sQMainWindow):
 
             json_data = self.update_base_json(json_data,camera_configs)
 
-            # self.save_json(save_name=train_name,json_data=json_data)
+            self.save_json(save_name=profile,json_data=json_data)
+            
             print(json_data)
 
             self.profile_edit_mode(mode=False)
@@ -1182,7 +1253,6 @@ class mainUI(sQMainWindow):
 
 
 
-
     def show_question(self, title, message, question=True):
         # Create the custom QMessageBox
         msg_box = QMessageBox(self)
@@ -1191,7 +1261,7 @@ class mainUI(sQMainWindow):
 
         # Set the font size to 20 for the message box
         font = QFont()
-        font.setPointSize(12)
+        font.setPointSize(10)
         msg_box.setFont(font)
 
         if question:

@@ -1,12 +1,9 @@
-import sys
-import hashlib
-
 from PySide6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout
 from PySide6.QtCore import Qt
 from PySide6.QtCore import QTimer
 
 
-
+import hashlib,sys
 
 
 class LoginPage(QWidget):
@@ -52,9 +49,9 @@ class LoginPage(QWidget):
         # Set styles
         self.setStyleSheet("""
             QWidget#LoginPage {
-                background-color: rgba(255, 255, 255, 200);
-                border: 2px solid #007BFF;  /* Blue border */
-                border-radius: 15px;        /* Rounded corners */
+                background-color: #f0f0f0;
+                border-radius: 15px;
+                border: 2px solid #ccc;
             }
             QLabel {
                 font-size: 14px;

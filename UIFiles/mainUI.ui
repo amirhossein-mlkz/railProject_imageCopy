@@ -1404,7 +1404,7 @@ QPushButton:disabled {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="copy">
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -2086,6 +2086,13 @@ QLabel:disabled{
                </widget>
               </item>
               <item>
+               <widget class="Line" name="line_21">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLabel" name="copy_log_lbl">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -2224,7 +2231,7 @@ QLabel:disabled{
               <item>
                <widget class="QTabWidget" name="tabWidget">
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="tab">
                  <attribute name="title">
@@ -2309,6 +2316,26 @@ QLabel:disabled{
                            <property name="bottomMargin">
                             <number>0</number>
                            </property>
+                           <item>
+                            <widget class="QLabel" name="label_33">
+                             <property name="text">
+                              <string>Name :</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="line_name_camera_1">
+                             <property name="maximumSize">
+                              <size>
+                               <width>174</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Right</string>
+                             </property>
+                            </widget>
+                           </item>
                            <item>
                             <widget class="QLabel" name="label_18">
                              <property name="text">
@@ -2440,6 +2467,26 @@ QLabel:disabled{
                             <number>0</number>
                            </property>
                            <item>
+                            <widget class="QLabel" name="label_35">
+                             <property name="text">
+                              <string>Username :</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="line_name_camera_2">
+                             <property name="maximumSize">
+                              <size>
+                               <width>174</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Left</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
                             <widget class="QLabel" name="label_23">
                              <property name="text">
                               <string>Ip :</string>
@@ -2570,6 +2617,26 @@ QLabel:disabled{
                             <number>0</number>
                            </property>
                            <item>
+                            <widget class="QLabel" name="label_63">
+                             <property name="text">
+                              <string>Name :</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="line_name_camera_3">
+                             <property name="maximumSize">
+                              <size>
+                               <width>174</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Spare 3</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
                             <widget class="QLabel" name="label_26">
                              <property name="text">
                               <string>Ip :</string>
@@ -2699,6 +2766,26 @@ QLabel:disabled{
                            <property name="bottomMargin">
                             <number>0</number>
                            </property>
+                           <item>
+                            <widget class="QLabel" name="label_64">
+                             <property name="text">
+                              <string>Name :</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="line_name_camera_4">
+                             <property name="maximumSize">
+                              <size>
+                               <width>174</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string>Spare 4</string>
+                             </property>
+                            </widget>
+                           </item>
                            <item>
                             <widget class="QLabel" name="label_36">
                              <property name="text">
@@ -3191,6 +3278,32 @@ border:none;</string>
                             <number>0</number>
                            </property>
                            <item>
+                            <widget class="QLabel" name="label_51">
+                             <property name="text">
+                              <string>Name :</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="line_name_camera_1_edit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>102</width>
+                               <height>27</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>177</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
                             <widget class="QLabel" name="label_39">
                              <property name="text">
                               <string>Ip :</string>
@@ -3313,6 +3426,26 @@ border:none;</string>
                            <property name="bottomMargin">
                             <number>0</number>
                            </property>
+                           <item>
+                            <widget class="QLabel" name="label_52">
+                             <property name="text">
+                              <string>Name :</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="line_name_camera_2_edit">
+                             <property name="maximumSize">
+                              <size>
+                               <width>177</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                            </widget>
+                           </item>
                            <item>
                             <widget class="QLabel" name="label_42">
                              <property name="text">
@@ -3437,6 +3570,26 @@ border:none;</string>
                             <number>0</number>
                            </property>
                            <item>
+                            <widget class="QLabel" name="label_61">
+                             <property name="text">
+                              <string>Name :</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="line_name_camera_3_edit">
+                             <property name="maximumSize">
+                              <size>
+                               <width>177</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
                             <widget class="QLabel" name="label_45">
                              <property name="text">
                               <string>Ip :</string>
@@ -3559,6 +3712,26 @@ border:none;</string>
                            <property name="bottomMargin">
                             <number>0</number>
                            </property>
+                           <item>
+                            <widget class="QLabel" name="label_62">
+                             <property name="text">
+                              <string>Name :</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="line_name_camera_4_edit">
+                             <property name="maximumSize">
+                              <size>
+                               <width>177</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                            </widget>
+                           </item>
                            <item>
                             <widget class="QLabel" name="label_48">
                              <property name="text">

@@ -1,0 +1,38 @@
+{
+    "cameras": [
+        {
+            "name": "1",
+            "ip": "192.168.1.1",
+            "username": "user",
+            "password": "pass"
+        },
+        {
+            "name": "2",
+            "ip": "192.168.1.2",
+            "username": "user",
+            "password": "pass"
+        },
+        {
+            "name": "13123",
+            "ip": "192.168.1.3",
+            "username": "user",
+            "password": "pass"
+        },
+        {
+            "name": "4",
+            "ip": "192.168.1.6",
+            "username": "user",
+            "password": "pass"
+        }
+    ],
+    "path": "c:/rail_share",
+    "temp_folder": "temp_videos",
+    "max_allowed_storage": 0.7,
+    "train_id": "11BG21",
+    "motion": "false",
+    "motion_sens": 3000,
+    "output": "video",
+    "video_fps": 25,
+    "video_duration": 600,
+    "name": "testf"
+}

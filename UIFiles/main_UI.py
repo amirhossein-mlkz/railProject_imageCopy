@@ -1421,6 +1421,13 @@ class Ui_main(object):
 
         self.verticalLayout_2.addWidget(self.copy_button, 0, Qt.AlignHCenter)
 
+        self.line_21 = QFrame(self.copy)
+        self.line_21.setObjectName(u"line_21")
+        self.line_21.setFrameShape(QFrame.Shape.HLine)
+        self.line_21.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_2.addWidget(self.line_21)
+
         self.copy_log_lbl = QLabel(self.copy)
         self.copy_log_lbl.setObjectName(u"copy_log_lbl")
         sizePolicy1.setHeightForWidth(self.copy_log_lbl.sizePolicy().hasHeightForWidth())
@@ -1526,6 +1533,17 @@ class Ui_main(object):
         self.horizontalLayout_22 = QHBoxLayout(self.frame_22)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
         self.horizontalLayout_22.setContentsMargins(0, 0, 0, 0)
+        self.label_33 = QLabel(self.frame_22)
+        self.label_33.setObjectName(u"label_33")
+
+        self.horizontalLayout_22.addWidget(self.label_33)
+
+        self.line_name_camera_1 = QLineEdit(self.frame_22)
+        self.line_name_camera_1.setObjectName(u"line_name_camera_1")
+        self.line_name_camera_1.setMaximumSize(QSize(174, 16777215))
+
+        self.horizontalLayout_22.addWidget(self.line_name_camera_1)
+
         self.label_18 = QLabel(self.frame_22)
         self.label_18.setObjectName(u"label_18")
 
@@ -1601,6 +1619,17 @@ class Ui_main(object):
         self.horizontalLayout_27 = QHBoxLayout(self.frame_27)
         self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
         self.horizontalLayout_27.setContentsMargins(0, 0, 0, 0)
+        self.label_35 = QLabel(self.frame_27)
+        self.label_35.setObjectName(u"label_35")
+
+        self.horizontalLayout_27.addWidget(self.label_35)
+
+        self.line_name_camera_2 = QLineEdit(self.frame_27)
+        self.line_name_camera_2.setObjectName(u"line_name_camera_2")
+        self.line_name_camera_2.setMaximumSize(QSize(174, 16777215))
+
+        self.horizontalLayout_27.addWidget(self.line_name_camera_2)
+
         self.label_23 = QLabel(self.frame_27)
         self.label_23.setObjectName(u"label_23")
 
@@ -1676,6 +1705,17 @@ class Ui_main(object):
         self.horizontalLayout_30 = QHBoxLayout(self.frame_30)
         self.horizontalLayout_30.setObjectName(u"horizontalLayout_30")
         self.horizontalLayout_30.setContentsMargins(0, 0, 0, 0)
+        self.label_63 = QLabel(self.frame_30)
+        self.label_63.setObjectName(u"label_63")
+
+        self.horizontalLayout_30.addWidget(self.label_63)
+
+        self.line_name_camera_3 = QLineEdit(self.frame_30)
+        self.line_name_camera_3.setObjectName(u"line_name_camera_3")
+        self.line_name_camera_3.setMaximumSize(QSize(174, 16777215))
+
+        self.horizontalLayout_30.addWidget(self.line_name_camera_3)
+
         self.label_26 = QLabel(self.frame_30)
         self.label_26.setObjectName(u"label_26")
 
@@ -1751,6 +1791,17 @@ class Ui_main(object):
         self.horizontalLayout_37 = QHBoxLayout(self.frame_38)
         self.horizontalLayout_37.setObjectName(u"horizontalLayout_37")
         self.horizontalLayout_37.setContentsMargins(0, 0, 0, 0)
+        self.label_64 = QLabel(self.frame_38)
+        self.label_64.setObjectName(u"label_64")
+
+        self.horizontalLayout_37.addWidget(self.label_64)
+
+        self.line_name_camera_4 = QLineEdit(self.frame_38)
+        self.line_name_camera_4.setObjectName(u"line_name_camera_4")
+        self.line_name_camera_4.setMaximumSize(QSize(174, 16777215))
+
+        self.horizontalLayout_37.addWidget(self.line_name_camera_4)
+
         self.label_36 = QLabel(self.frame_38)
         self.label_36.setObjectName(u"label_36")
 
@@ -1984,6 +2035,18 @@ class Ui_main(object):
         self.horizontalLayout_40 = QHBoxLayout(self.frame_41)
         self.horizontalLayout_40.setObjectName(u"horizontalLayout_40")
         self.horizontalLayout_40.setContentsMargins(0, 0, 0, 0)
+        self.label_51 = QLabel(self.frame_41)
+        self.label_51.setObjectName(u"label_51")
+
+        self.horizontalLayout_40.addWidget(self.label_51)
+
+        self.line_name_camera_1_edit = QLineEdit(self.frame_41)
+        self.line_name_camera_1_edit.setObjectName(u"line_name_camera_1_edit")
+        self.line_name_camera_1_edit.setMinimumSize(QSize(102, 27))
+        self.line_name_camera_1_edit.setMaximumSize(QSize(177, 16777215))
+
+        self.horizontalLayout_40.addWidget(self.line_name_camera_1_edit)
+
         self.label_39 = QLabel(self.frame_41)
         self.label_39.setObjectName(u"label_39")
 
@@ -2052,6 +2115,17 @@ class Ui_main(object):
         self.horizontalLayout_43 = QHBoxLayout(self.frame_44)
         self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
         self.horizontalLayout_43.setContentsMargins(0, 0, 0, 0)
+        self.label_52 = QLabel(self.frame_44)
+        self.label_52.setObjectName(u"label_52")
+
+        self.horizontalLayout_43.addWidget(self.label_52)
+
+        self.line_name_camera_2_edit = QLineEdit(self.frame_44)
+        self.line_name_camera_2_edit.setObjectName(u"line_name_camera_2_edit")
+        self.line_name_camera_2_edit.setMaximumSize(QSize(177, 16777215))
+
+        self.horizontalLayout_43.addWidget(self.line_name_camera_2_edit)
+
         self.label_42 = QLabel(self.frame_44)
         self.label_42.setObjectName(u"label_42")
 
@@ -2120,6 +2194,17 @@ class Ui_main(object):
         self.horizontalLayout_46 = QHBoxLayout(self.frame_47)
         self.horizontalLayout_46.setObjectName(u"horizontalLayout_46")
         self.horizontalLayout_46.setContentsMargins(0, 0, 0, 0)
+        self.label_61 = QLabel(self.frame_47)
+        self.label_61.setObjectName(u"label_61")
+
+        self.horizontalLayout_46.addWidget(self.label_61)
+
+        self.line_name_camera_3_edit = QLineEdit(self.frame_47)
+        self.line_name_camera_3_edit.setObjectName(u"line_name_camera_3_edit")
+        self.line_name_camera_3_edit.setMaximumSize(QSize(177, 16777215))
+
+        self.horizontalLayout_46.addWidget(self.line_name_camera_3_edit)
+
         self.label_45 = QLabel(self.frame_47)
         self.label_45.setObjectName(u"label_45")
 
@@ -2188,6 +2273,17 @@ class Ui_main(object):
         self.horizontalLayout_49 = QHBoxLayout(self.frame_50)
         self.horizontalLayout_49.setObjectName(u"horizontalLayout_49")
         self.horizontalLayout_49.setContentsMargins(0, 0, 0, 0)
+        self.label_62 = QLabel(self.frame_50)
+        self.label_62.setObjectName(u"label_62")
+
+        self.horizontalLayout_49.addWidget(self.label_62)
+
+        self.line_name_camera_4_edit = QLineEdit(self.frame_50)
+        self.line_name_camera_4_edit.setObjectName(u"line_name_camera_4_edit")
+        self.line_name_camera_4_edit.setMaximumSize(QSize(177, 16777215))
+
+        self.horizontalLayout_49.addWidget(self.line_name_camera_4_edit)
+
         self.label_48 = QLabel(self.frame_50)
         self.label_48.setObjectName(u"label_48")
 
@@ -2913,8 +3009,8 @@ class Ui_main(object):
 
         self.retranslateUi(main)
 
-        self.stackedWidget.setCurrentIndex(1)
-        self.tabWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -2969,18 +3065,26 @@ class Ui_main(object):
         self.total_copy_lbl_2.setText(QCoreApplication.translate("main", u"MB", None))
         self.copy_speed_lbl.setText(QCoreApplication.translate("main", u"Speed", None))
         self.group_camera_1.setTitle(QCoreApplication.translate("main", u"Camera 1 - Right", None))
+        self.label_33.setText(QCoreApplication.translate("main", u"Name :", None))
+        self.line_name_camera_1.setText(QCoreApplication.translate("main", u"Right", None))
         self.label_18.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_19.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_20.setText(QCoreApplication.translate("main", u"Password :", None))
         self.group_camera_2.setTitle(QCoreApplication.translate("main", u"Camera 2 - Left", None))
+        self.label_35.setText(QCoreApplication.translate("main", u"Username :", None))
+        self.line_name_camera_2.setText(QCoreApplication.translate("main", u"Left", None))
         self.label_23.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_24.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_25.setText(QCoreApplication.translate("main", u"Password :", None))
         self.group_camera_3.setTitle(QCoreApplication.translate("main", u"Camera 3", None))
+        self.label_63.setText(QCoreApplication.translate("main", u"Name :", None))
+        self.line_name_camera_3.setText(QCoreApplication.translate("main", u"Spare 3", None))
         self.label_26.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_27.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_28.setText(QCoreApplication.translate("main", u"Password :", None))
         self.group_camera_4.setTitle(QCoreApplication.translate("main", u"Camera 4", None))
+        self.label_64.setText(QCoreApplication.translate("main", u"Name :", None))
+        self.line_name_camera_4.setText(QCoreApplication.translate("main", u"Spare 4", None))
         self.label_36.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_37.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_38.setText(QCoreApplication.translate("main", u"Password :", None))
@@ -2993,18 +3097,26 @@ class Ui_main(object):
         self.btn_edit_profile.setText("")
         self.btn_delete_profile.setText("")
         self.group_camera_1_edit.setTitle(QCoreApplication.translate("main", u"Camera 1 - Right", None))
+        self.label_51.setText(QCoreApplication.translate("main", u"Name :", None))
+        self.line_name_camera_1_edit.setText("")
         self.label_39.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_40.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_41.setText(QCoreApplication.translate("main", u"Password :", None))
         self.group_camera_2_edit.setTitle(QCoreApplication.translate("main", u"Camera 2 - Left", None))
+        self.label_52.setText(QCoreApplication.translate("main", u"Name :", None))
+        self.line_name_camera_2_edit.setText("")
         self.label_42.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_43.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_44.setText(QCoreApplication.translate("main", u"Password :", None))
         self.group_camera_3_edit.setTitle(QCoreApplication.translate("main", u"Camera 3", None))
+        self.label_61.setText(QCoreApplication.translate("main", u"Name :", None))
+        self.line_name_camera_3_edit.setText("")
         self.label_45.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_46.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_47.setText(QCoreApplication.translate("main", u"Password :", None))
         self.group_camera_4_edit.setTitle(QCoreApplication.translate("main", u"Camera 4", None))
+        self.label_62.setText(QCoreApplication.translate("main", u"Name :", None))
+        self.line_name_camera_4_edit.setText("")
         self.label_48.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_49.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_50.setText(QCoreApplication.translate("main", u"Password :", None))

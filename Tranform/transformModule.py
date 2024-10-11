@@ -66,13 +66,14 @@ class transformModule:
 
     
 
-    def find_files(self, trains, dates_tange, finish_event_func, log_event_func=None):
+    def find_files(self, trains, dates_tange, finish_event_func, log_event_func=None,log_search=False):
         
         
         self.searcher_worker = filesFinderWorker(self.src_path,
                                                  trains=trains,
                                                  date_ranges=dates_tange,
-                                                 struct=DIRECTORY_TREE)
+                                                 struct=DIRECTORY_TREE,
+                                                 log_search=log_search)
         if log_event_func is not None:
             self.searcher_worker.log_signal.connect(log_event_func)
 
