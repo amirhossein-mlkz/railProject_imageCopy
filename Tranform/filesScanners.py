@@ -63,6 +63,7 @@ class filesFinderWorker(QObject):
         t = time.time()
         self.searcher(self.main_path, pos_index=0)
         print(time.time() - t)
+        print('signal emmit ,',self.res_paths)
         self.finish_signal.emit(StatusCodes.findFilesStatusCodes.SUCCESS,
                                 self.res_paths, 
                                 self.res_sizes, 
@@ -86,8 +87,9 @@ class filesFinderWorker(QObject):
 
         step_name = self.struct[pos_index]
         subs = os.listdir(path)
-        if step_name in [STRUCT_PARTS.YEAR,STRUCT_PARTS.MONTH,STRUCT_PARTS.DAY,STRUCT_PARTS.HOUR,STRUCT_PARTS.MINUTE]:
-            subs = self.__sort_number_folder(subs)
+        if not self.log_search:
+            if step_name in [STRUCT_PARTS.YEAR,STRUCT_PARTS.MONTH,STRUCT_PARTS.DAY,STRUCT_PARTS.HOUR,STRUCT_PARTS.MINUTE]:
+                subs = self.__sort_number_folder(subs)
 
         if not self.log_search:
             for sub in subs:
@@ -113,15 +115,17 @@ class filesFinderWorker(QObject):
                         self.searcher(sub_path, pos_index+1, date)
                         
         else:
-            for sub in subs:
-                sub_path = os.path.join(path, sub)
-                for path in os.listdir(sub_path):
-                    new_path = os.path.join(sub_path,path)
-                    self.res_paths.append(new_path)
-                    size = os.path.getsize(new_path)
-                    self.res_sizes.append(size)
-                    self.total_size += size
-                    self.log_signal.emit(f'Size f{int(self.total_size)}')
+            if os.path.exists(path):
+                for sub in subs:
+                    sub_path = os.path.join(path, sub)
+                    if os.path.exists(sub_path):
+                        for log_name in os.listdir(sub_path):
+                            new_path = os.path.join(sub_path,log_name)
+                            self.res_paths.append(new_path)
+                            size = os.path.getsize(new_path)
+                            self.res_sizes.append(size)
+                            self.total_size += size
+                            self.log_signal.emit(f'Size f{int(self.total_size)}')
 
 
     
@@ -293,3 +297,14 @@ class filesFinderWorker(QObject):
         
         else:
             return True, date
+        
+
+
+
+
+
+
+
+
+
+        # transormUtils.dateTimeRanges()

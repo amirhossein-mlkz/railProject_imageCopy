@@ -26,12 +26,19 @@ class transformModule:
         self.ip = ip
         if self.ip is not None:
             self.src_path = transormUtils.build_share_path(ip, src_path)
+
+            self.dst_path = dst_path
+            self.username = username
+            self.password = password
+
+
         else:
             self.src_path = src_path
 
-        self.dst_path = dst_path
-        self.username = username
-        self.password = password
+            self.dst_path = None
+            self.username = None
+            self.password = None
+
 
 
         self.msg_callback = None

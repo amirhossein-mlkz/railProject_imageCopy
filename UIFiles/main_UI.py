@@ -29,7 +29,7 @@ class Ui_main(object):
         if not main.objectName():
             main.setObjectName(u"main")
         main.setEnabled(True)
-        main.resize(617, 710)
+        main.resize(617, 765)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1428,13 +1428,83 @@ class Ui_main(object):
 
         self.verticalLayout_2.addWidget(self.line_21)
 
-        self.copy_log_lbl = QLabel(self.copy)
+        self.frame_11 = QFrame(self.copy)
+        self.frame_11.setObjectName(u"frame_11")
+        self.frame_11.setFrameShape(QFrame.StyledPanel)
+        self.frame_11.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_29 = QVBoxLayout(self.frame_11)
+        self.verticalLayout_29.setObjectName(u"verticalLayout_29")
+        self.frame_20 = QFrame(self.frame_11)
+        self.frame_20.setObjectName(u"frame_20")
+        self.frame_20.setFrameShape(QFrame.StyledPanel)
+        self.frame_20.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_34 = QHBoxLayout(self.frame_20)
+        self.horizontalLayout_34.setObjectName(u"horizontalLayout_34")
+        self.copy_log_lbl = QLabel(self.frame_20)
         self.copy_log_lbl.setObjectName(u"copy_log_lbl")
         sizePolicy1.setHeightForWidth(self.copy_log_lbl.sizePolicy().hasHeightForWidth())
         self.copy_log_lbl.setSizePolicy(sizePolicy1)
         self.copy_log_lbl.setMaximumSize(QSize(16777215, 40))
+        self.copy_log_lbl.setStyleSheet(u"color: rgb(0, 0, 0);")
 
-        self.verticalLayout_2.addWidget(self.copy_log_lbl)
+        self.horizontalLayout_34.addWidget(self.copy_log_lbl)
+
+        self.progressBar = QProgressBar(self.frame_20)
+        self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setMaximumSize(QSize(100, 16777215))
+        self.progressBar.setStyleSheet(u"QProgressBar {\n"
+"    border: 2px solid #FFA726;\n"
+"    border-radius: 10px;\n"
+"    background-color: #FFF3E0;\n"
+"    text-align: center;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background: QLinearGradient(\n"
+"        x1: 0, y1: 0, x2: 1, y2: 1,\n"
+"        stop: 0 #FFB74D,\n"
+"        stop: 1 #FB8C00\n"
+"    );\n"
+"    border-radius: 8px;\n"
+"    width: 20px;\n"
+"    margin: 2px;\n"
+"    animation: moveSlow 6s infinite; /* Slower animation */\n"
+"}\n"
+"\n"
+"@keyframes moveSlow {\n"
+"    0% { margin-left: 0px; }\n"
+"    50% { margin-left: 80px; }\n"
+"    100% { margin-left: 0px; }\n"
+"}")
+        self.progressBar.setMinimum(0)
+        self.progressBar.setMaximum(0)
+        self.progressBar.setValue(-1)
+        self.progressBar.setTextVisible(False)
+        self.progressBar.setOrientation(Qt.Horizontal)
+        self.progressBar.setInvertedAppearance(False)
+
+        self.horizontalLayout_34.addWidget(self.progressBar)
+
+
+        self.verticalLayout_29.addWidget(self.frame_20)
+
+        self.btn_found_errors = QPushButton(self.frame_11)
+        self.btn_found_errors.setObjectName(u"btn_found_errors")
+        self.btn_found_errors.setMaximumSize(QSize(16777215, 16777215))
+        font2 = QFont()
+        font2.setFamilies([u"Roboto"])
+        font2.setBold(False)
+        font2.setItalic(False)
+        self.btn_found_errors.setFont(font2)
+        self.btn_found_errors.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btn_found_errors.setStyleSheet(u"background-color: none;\n"
+"color:red;\n"
+"border:none;")
+
+        self.verticalLayout_29.addWidget(self.btn_found_errors, 0, Qt.AlignLeft)
+
+
+        self.verticalLayout_2.addWidget(self.frame_11)
 
         self.frame_5 = QFrame(self.copy)
         self.frame_5.setObjectName(u"frame_5")
@@ -1492,6 +1562,25 @@ class Ui_main(object):
 
         self.progress_bar = QProgressBar(self.frame_5)
         self.progress_bar.setObjectName(u"progress_bar")
+        self.progress_bar.setStyleSheet(u"    QProgressBar {\n"
+"        border: 2px solid #555;          /* Border color */\n"
+"        border-radius: 10px;             /* Rounded corners */\n"
+"        text-align: center;              /* Hide text */\n"
+"        background-color: #f3f3f3;       /* Background color */\n"
+"    }\n"
+"\n"
+"    QProgressBar::chunk {\n"
+"        background-color: #4caf50;       /* Color of the moving chunk */\n"
+"        width: 25px;                     /* Width of the moving element */\n"
+"        margin: 0px;                     /* No gap between chunks */\n"
+"        animation: move 2s infinite;     /* Continuous left-right animation */\n"
+"    }\n"
+"\n"
+"    @keyframes move {\n"
+"        0% { margin-left: 0%; }\n"
+"        50% { margin-left: 80%; }\n"
+"        100% { margin-left: 0%; }\n"
+"    }")
         self.progress_bar.setValue(0)
 
         self.verticalLayout_18.addWidget(self.progress_bar)
@@ -3059,6 +3148,7 @@ class Ui_main(object):
         self.copy_button.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
         self.copy_log_lbl.setText(QCoreApplication.translate("main", u"message", None))
         self.copy_log_lbl.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
+        self.btn_found_errors.setText("")
         self.completed_copy_lbl.setText(QCoreApplication.translate("main", u"-", None))
         self.label_9.setText(QCoreApplication.translate("main", u"/", None))
         self.total_copy_lbl.setText(QCoreApplication.translate("main", u"-", None))

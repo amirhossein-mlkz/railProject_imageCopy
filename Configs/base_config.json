@@ -13,10 +13,7 @@
     ],
 
 
-    "main_path" : "rail_share",
-    "image_path" : "images",
-    "config_path":"utils/config.json",
-    "log_path":"utils/logs",
+
 
 
     "temp_folder": "temp_videos",

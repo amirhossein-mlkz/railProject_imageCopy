@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QMainWindow as sQMainWindow
 from PySide6.QtWidgets import QApplication as sQApplication
 import sqlite3
 import sys,os,platform,time,subprocess,threading
+from Tranform.transformUtils import transormUtils
 from database import DataBase
 # from copy_ping import ShareCopyWorker
 from persiantools.jdatetime import JalaliDateTime
@@ -29,9 +30,11 @@ import texts
 from Styles import error_style,success_style,none_style,click_side_btns,normal_side_btns
 import re,json
 from ShowConfig import ShowConfig
-from Constants import BASE_CONFIG,CAMERA_NAMES,CONFIG_PATH,PARMS
+from Constants import BASE_CONFIG,CAMERA_NAMES,CONFIG_PATH, EXISTVIDEOS_PATH, IMAGE_GRABBER_CONFIG_PATH,PARMS,EXISTVIDEOS_PATH,MAIN_PATH,IMAGE_PATH,LOG_PATH,DST_PATH, UTILS_PATH
 
+from UpdateExistVideos import WidgetUpdateExistVideos
 
+DEBUG = True
 # ui class
 class mainUI(sQMainWindow):
 
@@ -112,6 +115,10 @@ class mainUI(sQMainWindow):
 
         self.flag_copy_log = True  ############ Temp
 
+        self.ui.progressBar.setMaximum(100)  # Indefinite progress
+        self.ui.progressBar.setMinimum(0)
+        self.ui.progressBar.setValue(0)
+
 
 
     def create_init_folders(self):
@@ -148,8 +155,8 @@ class mainUI(sQMainWindow):
         self.ui.close_btn.clicked.connect(self.close_win)
         self.ui.minimize_btn.clicked.connect(self.minimize_win)
 
-        # self.ui.copy_button.clicked.connect(self.ui_copy)
-        self.ui.copy_button.clicked.connect(self.copy_logs)
+        self.ui.copy_button.clicked.connect(self.ui_copy)
+        # self.ui.copy_button.clicked.connect(self.copy_logs)
 
         self.ui.side_copy_btn.clicked.connect(self.set_stack_widget)
         self.ui.side_profile_btn.clicked.connect(self.set_stack_widget)
@@ -338,15 +345,28 @@ class mainUI(sQMainWindow):
         data = self.load_json(json_name=BASE_CONFIG)
 
         if data:
-            self.main_path = data['main_path']
-            self.image_path = os.path.join(self.main_path,data['image_path'])
-            self.log_path = os.path.join(self.main_path,data['log_path'])
-            self.image_path = os.path.join(self.main_path,data['image_path'])
-            # self.dst_path = self.image_path
+            self.main_path = MAIN_PATH
+            self.image_path = os.path.join(self.main_path,IMAGE_PATH)
+            self.log_path = os.path.join(self.main_path,UTILS_PATH,LOG_PATH)
+            self.image_grabber_log_path = os.path.join(self.main_path,UTILS_PATH,IMAGE_GRABBER_CONFIG_PATH)
 
-            self.dst_main_path  = os.path.join('C:\\',self.main_path)
-            self.dst_image_path = os.path.join(self.dst_main_path,data['image_path']) 
-            self.dst_log_path = os.path.join(self.dst_main_path,data['log_path']) 
+
+            self.dst_main_path  = os.path.join(DST_PATH,MAIN_PATH)
+            if DEBUG:
+                self.dst_main_path  = os.path.join('C:\\test_share',MAIN_PATH)      ############# TEMP
+            self.dst_image_path = os.path.join(self.dst_main_path,IMAGE_PATH) 
+            self.dst_utils_path = os.path.join(self.dst_main_path,UTILS_PATH)
+            self.dst_exist_videos_path = os.path.join(self.dst_utils_path,EXISTVIDEOS_PATH)
+            self.dst_log_path = os.path.join(self.dst_utils_path,LOG_PATH)
+
+
+            pathes = [self.dst_main_path,self.dst_image_path,self.dst_utils_path]
+
+            for path in pathes:
+                if not os.path.exists(path):
+                    print(path)
+                    os.mkdir(path)
+
 
 
 
@@ -374,7 +394,8 @@ class mainUI(sQMainWindow):
 
     def start_copy(self,image_condition=None):
 
-
+        self.set_error_btn(error_count = 0)
+        
         name = self.ui.combo_copy_train_name.currentText()
 
         ret = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=name)
@@ -417,6 +438,8 @@ class mainUI(sQMainWindow):
 
         self.trasformer = transformModule(self.copy_ip, src_path, dst_path, self.copy_username, self.copy_password)
         self.show_message('copy', 'Check Connection...')
+        self.set_loading_progress_bar(loading=True)
+        
         GUIBackend.set_disable_enable(self.ui.copy_button, False)
 
         self.log_search = False
@@ -459,6 +482,7 @@ class mainUI(sQMainWindow):
         if len(paths) == 0:
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
             self.show_message('copy', 'No Files Found to Copy')
+            
             return
 
         self.ui.progress_bar.setMinimum(0)
@@ -497,34 +521,153 @@ class mainUI(sQMainWindow):
             return
         # a = transormUtils.dateTimeRanges( avaiabilities['11BG21']['right'], 600 )
         GUIBackend.set_disable_enable(self.ui.copy_button, True)
-        self.show_message('copy', "Finish Success")
+        self.show_message('copy', "Copy Videos Finish Success")
+
+        self.set_loading_progress_bar(loading=False)
+
 
 
         if self.log_search and self.start_copy_logs:
             new_logs = self.trasformer.searcher_worker.res_paths
             self.show_logs(new_logs)
+            self.update_exist_videos()
 
         if self.flag_copy_log and not self.start_copy_logs:
             self.copy_logs()
 
     def show_logs(self,new_logs):
-        print('milad'*80)
-
+        
+        self.errors = 0
         for log in new_logs:
             split = log.split('\\')
             file = split[-1]
             folder = split[-2]
 
-            log_path = os.path.join(self.log_path,folder,file)
+            log_path = os.path.join(self.dst_log_path,folder,file)
+
+            errors = self.read_log(log_path=log_path)
+            self.errors+=errors
+
             print(log_path)
 
+        print(self.errors)
 
+
+        self.set_error_btn(error_count = self.errors)
+
+
+
+    def set_error_btn(self,error_count):
+        if error_count>0:
+            self.ui.btn_found_errors.setText('{} Error Found , Click To Send When Connect Internet !'.format(error_count))
+        else:
+            self.ui.btn_found_errors.setText('')
+
+
+    def read_log(self,log_path):
+        print(log_path)
+        # Open and read the log file
+        with open(log_path, 'r', encoding='utf-8') as file:
+            log_content = file.readlines()
+
+        # Initialize the error count
+        error_count = 0
+
+        # Loop through and process each line
+        for line in log_content:
+            if "ERROR" in line:
+                error_count += 1
+                # print(line.strip())  # Print each error line
+
+        return error_count
+
+
+
+
+
+
+
+
+    def update_exist_videos(self):
+
+        self.show_message('copy', "Local Updateing You Can Remove Trian Connection")
+        self.set_loading_progress_bar(loading=True)
+
+
+
+
+
+        self.check_availables = transformModule(None, self.dst_image_path, None,None, None)
+
+        self.check_availables.find_files(trains=None , dates_tange=None , finish_event_func=self.save_exist_videos)
+
+
+
+    def save_exist_videos(self,status_code,res_paths,res_sizes,avaiabilities):
+
+
+        print('asd')
+        avaiabilities
+
+        if avaiabilities != {}:
+
+
+            for train_name in avaiabilities.keys():
+
+                train = avaiabilities[train_name]
+
+                for camera in train.keys():
+                    
+                    try:
+                        date_times = train[camera]
+                        times = transormUtils.dateTimeRanges(date_times=date_times,step_lenght_sec=600,max_gap_sec=10)
+                        train[camera] = times
+                    except:
+                        print('Error in Convert timtimes to ranges')
+
+
+        json_exist_videos = self.dst_exist_videos_path
+
+
+        if os.path.exists(json_exist_videos):
+            os.remove(json_exist_videos)
+
+        # # Your code to write the JSON
+        with open(json_exist_videos, 'w', encoding='utf-8') as f:
+            json.dump(avaiabilities, f, ensure_ascii=False, indent=4, default=self.custom_json_handler)
+
+
+        self.show_message('copy', "Finish Local Updateing")
+        self.set_loading_progress_bar(loading=False)
+
+
+
+
+    # Custom JSON encoder function
+    def custom_json_handler(self,obj):
+        if isinstance(obj, JalaliDateTime):
+            return obj.strftime('%Y-%m-%d %H:%M')  # Convert to string format
+        raise TypeError(f"Type {type(obj)} is not serializable")
+
+
+
+    def set_loading_progress_bar(self,loading=True):
+
+        if loading:
+
+            self.ui.progressBar.setMaximum(0)
+            self.ui.progressBar.setValue(0)
+
+        else:
+            self.ui.progressBar.setMaximum(100)
+            self.ui.progressBar.setValue(100)
 
     def copy_logs(self):
 
 
         self.start_copy_logs = True
 
+        self.show_message('copy', "Start Copy Logs ...")
 
         name = self.ui.combo_copy_train_name.currentText()
 
