@@ -21,7 +21,7 @@ success_style = """
 """
 
 
-none_style = """"
+none_style = """
 
     background-color:none;
     border:none;

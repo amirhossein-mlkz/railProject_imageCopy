@@ -1,25 +1,32 @@
+import json
+import os
 
+# Specify the network path to the JSON file
+json_path = r'\\192.168.43.99\rail_share\utils\config.json'
 
+def read_json_from_network(path):
+    try:
+        # Check if the file exists
+        if os.path.exists(path):
+            with open(path, 'r', encoding='utf-8') as f:
+                # Load JSON data
+                data = json.load(f)
+                return data
+        else:
+            print(f"File not found: {path}")
+            return None
+    except FileNotFoundError:
+        print(f"File not found: {path}")
+    except PermissionError:
+        print(f"Permission denied: {path}")
+    except json.JSONDecodeError:
+        print(f"Error decoding JSON from file: {path}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    
+    return None
 
-
-
-
-log_path = r'C:\rail_share\utils\logs\2024-10-11\2024-10-11-10-10-20.log'
-
-
-
-# Open and read the log file
-with open(log_path, 'r', encoding='utf-8') as file:
-    log_content = file.readlines()
-
-# Initialize the error count
-error_count = 0
-
-# Loop through and process each line
-for line in log_content:
-    if "ERROR" in line:
-        error_count += 1
-        print(line.strip())  # Print each error line
-
-# Print the total count of errors
-print(f"\nTotal number of 'ERROR' entries: {error_count}")
+# Call the function and print the result
+data = read_json_from_network(json_path)
+if data is not None:
+    print(data)

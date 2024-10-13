@@ -505,7 +505,7 @@ QSplitter::handle
 
 *[styleSheet=&quot;LsideFrameStyle&quot;]
 {
-	background-color:#FF6500;
+	background-color:#F3C623;
 }
 
 *[styleSheet=&quot;LsideFrameStyle&quot;]  .QPushButton{
@@ -527,7 +527,7 @@ QSplitter::handle
 
 *[styleSheet=&quot;LtopFrameStyle&quot;]
 {
-	background-color:#FF6500;
+	background-color:#F3C623;
 	border:1px solid #D7D7D9;
 }
 
@@ -1404,7 +1404,7 @@ QPushButton:disabled {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="copy">
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -2363,7 +2363,7 @@ border:none;</string>
               <item>
                <widget class="QTabWidget" name="tabWidget">
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>2</number>
                 </property>
                 <widget class="QWidget" name="tab">
                  <attribute name="title">
@@ -4283,6 +4283,31 @@ border:none;</string>
                          <widget class="QLineEdit" name="line_ip_load"/>
                         </item>
                        </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="load_config_msg">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(0, 0, 0);</string>
+                       </property>
+                       <property name="text">
+                        <string>message</string>
+                       </property>
+                       <property name="styleClass" stdset="0">
+                        <string>msgStyle</string>
+                       </property>
                       </widget>
                      </item>
                      <item>

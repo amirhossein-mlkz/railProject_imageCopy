@@ -18,6 +18,9 @@ class transormUtils:
     @staticmethod
     def build_share_path( ip:str, share_name:str, path:str=''):
         res = f"\\\\{ip}\\{share_name}"
+
+        
+
         if path:
             res = res + f"\\{path}"
         return res

@@ -76,6 +76,7 @@ class mainUI(sQMainWindow):
             'change_password' : self.ui.label_message_change_password,
             'profile' :  self.ui.label_profile_message,
             'profile_edit' :  self.ui.label_profile_edit_message,
+            'load_config': self.ui.load_config_msg
         }
         
         self.side_btns = [ self.ui.side_setting_btn , self.ui.side_train_config_btn,self.ui.side_profile_btn,self.ui.side_copy_btn]
@@ -445,12 +446,16 @@ class mainUI(sQMainWindow):
         self.log_search = False
         self.start_copy_logs = False
 
-        self.trasformer.check_connection(self.step1_check_connection_event)
+        # self.trasformer.check_connection(self.step1_check_connection_event)
+        self.trasformer.check_connection_and_create_connection(self.step1_check_connection_event)
 
 
-    def step1_check_connection_event(self, status_code):
+    def step1_check_connection_event(self, status_code,msg=''):
         if status_code == StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT:
-            self.show_message('copy', 'Connection Faild. check ip and cables connections')
+            if msg !='':
+                self.show_message('copy', msg)
+            else:
+                self.show_message('copy', 'Connection Faild. check ip and cables connections')
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
             return
         
@@ -691,10 +696,11 @@ class mainUI(sQMainWindow):
         self.trasformer = transformModule(self.copy_ip, src_path, dst_path, self.copy_username, self.copy_password)
 
         self.log_search=True
-        self.trasformer.check_connection(self.step1_check_connection_event)
+        # self.trasformer.check_connection(self.step1_check_connection_event)
+        self.trasformer.check_connection_and_create_connection(self.step1_check_connection_event)
 
 
-        
+        # check_connection_and_create_connection
 
 
 
@@ -1341,12 +1347,11 @@ class mainUI(sQMainWindow):
             return
 
 
-        train_parms = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=train_name)
 
 
-        profile_name = profile_name+'.json'
-        file_path = os.path.join(CONFIG_PATH,profile_name)
-        print(file_path,'   ',train_parms)
+        # profile_name = profile_name+'.json'
+        # file_path = os.path.join(CONFIG_PATH,profile_name)
+        # print(file_path,'   ',train_parms)
 
 
 
@@ -1366,18 +1371,62 @@ class mainUI(sQMainWindow):
 
 
 
-        if train_parms:
-            ##################### connect to triain and get data
+        if len(train_parms)>0:
+
+            parms = train_parms[0]
+            self.remote_ip = parms['ip']
+            username = parms['username']
+            password = parms['password']
+
+
+
+            # self.config_path = self.image_grabber_log_path
+            self.read_config_path = self.log_path
+
+            self.trasformer = transformModule(ip=self.remote_ip,src_path=self.read_config_path,username=username,password=password,dst_path=None)
+
+            self.trasformer.check_connection_and_create_connection(self.step1_load_profile)
+
+            self.show_message('load_config', 'Connecting ...')
+
+
+            self.ui.btn_load_profile.setDisabled(True)
+            self.ui.combo_load_train_name.setDisabled(True)
+
+    def step1_load_profile(self, status_code,msg=''):
+
+        self.ui.btn_load_profile.setDisabled(False)
+        self.ui.combo_load_train_name.setDisabled(False)
+
+        if status_code == StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT:
+            if msg !='':
+                self.show_message('load_config', msg)
+            else:
+                self.show_message('load_config', 'Connection Faild. check ip and cables connections')
+            # GUIBackend.set_disable_enable(self.ui.copy_button, True)
+            return
+        
+        elif status_code == StatusCodes.pingAndConnectionStatusCodes.SUCCESS:
+
+            self.show_message('load_config', msg)
             
-            #################### ////////////////////////////////
-            train_name +='.json'
 
-            ret = self.load_json(BASE_CONFIG)  ######### TEMP
-            if ret:
-                print(train_parms)
+            json_path =os.path.join('\\\\',self.remote_ip, self.image_grabber_log_path)
 
-                self.ui_config = ShowConfig(data=ret)
-                self.ui_config.show()
+            if os.path.exists(json_path):
+                
+
+                with open(json_path, 'r', encoding='utf-8') as f:
+                    self.json_data = json.load(f)
+
+                print(self.json_data)
+                self.ui_show_config = ShowConfig(self.json_data)
+                self.ui_show_config.show()
+                # self.trasformer.read_log()
+                self.show_message('load_config', 'Window Show')
+            else:
+                self.show_message('load_config', 'Config Not Exist')
+
 
 
 
@@ -1386,6 +1435,9 @@ class mainUI(sQMainWindow):
         return
     
     def set_load_ip(self):
+
+        self.show_message('load_config', '')
+
 
         train_name = self.ui.combo_load_train_name.currentText()
         train_parms = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=train_name)

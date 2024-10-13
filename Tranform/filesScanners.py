@@ -60,10 +60,7 @@ class filesFinderWorker(QObject):
         self.res_sizes = []
         self.avaiabilities:dict[str, dict[str, list]] = {}
         self.total_size = 0
-        t = time.time()
         self.searcher(self.main_path, pos_index=0)
-        print(time.time() - t)
-        print('signal emmit ,',self.res_paths)
         self.finish_signal.emit(StatusCodes.findFilesStatusCodes.SUCCESS,
                                 self.res_paths, 
                                 self.res_sizes, 

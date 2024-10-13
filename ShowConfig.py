@@ -27,7 +27,7 @@ data = {
 class ShowConfig(QWidget):
     def __init__(self,data):
         super().__init__()
-        self.setWindowTitle("Camera Configuration")
+        self.setWindowTitle("Profile Configuration")
         self.resize(500, 600)  # Set window size
         self.setStyleSheet("""
             QWidget {
@@ -79,7 +79,7 @@ class ShowConfig(QWidget):
         general_group = QGroupBox("General Settings")
         general_layout = QFormLayout()
 
-        general_layout.addRow("Path:", QLabel(data['path']))
+        # general_layout.addRow("Path:", QLabel(data['path']))
         general_layout.addRow("Temp Folder:", QLabel(data['temp_folder']))
         general_layout.addRow("Max Storage:", QLabel(str(data['max_allowed_storage'])))
         general_layout.addRow("Train ID:", QLabel(data['train_id']))

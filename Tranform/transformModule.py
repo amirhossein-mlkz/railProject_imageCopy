@@ -1,4 +1,6 @@
 import sys
+
+from Tranform.Network import pingAndCreateWorker
 sys.path.append('C:\\Users\\amirh\Desktop\\railProject_SoftwareCopy')
 
 import time
@@ -7,12 +9,25 @@ import threading
 # from persiantools.jdatetime import JalaliDateTime, timedelta
 # from PySide6.QtCore import Signal, QObject
 
-from Tranform.Network import pingWorker, shareMapping
-from Tranform.transformUtils import transormUtils
-from Tranform.sharingConstans import DIRECTORY_TREE, STRUCT_PARTS
-from Tranform.filesScanners import filesFinderWorker
-from Tranform.filesActionWorker import CopyWorker
+try:
+    from Tranform.Network import pingWorker, shareMapping
+    from Tranform.transformUtils import transormUtils
+    from Tranform.sharingConstans import DIRECTORY_TREE, STRUCT_PARTS
+    from Tranform.filesScanners import filesFinderWorker
+    from Tranform.filesActionWorker import CopyWorker
 
+except:
+
+    # from Network import pingWorker, shareMapping
+    from transformUtils import transormUtils
+    # from sharingConstans import DIRECTORY_TREE, STRUCT_PARTS
+    # from filesScanners import filesFinderWorker
+    # from filesActionWorker import CopyWorker
+
+
+
+
+import subprocess
 
 
 class transformModule:
@@ -25,6 +40,9 @@ class transformModule:
                  ) -> None:
         self.ip = ip
         if self.ip is not None:
+
+            
+
             self.src_path = transormUtils.build_share_path(ip, src_path)
 
             self.dst_path = dst_path
@@ -64,6 +82,14 @@ class transformModule:
     #     self.check_connection()
 
 
+
+
+
+
+
+
+
+
     def check_connection(self, event_func, ):
         # self.ping_worker = pingWorker(self.ip, self.username, self.password)
         self.ping_worker = pingWorker(self.ip)
@@ -72,6 +98,25 @@ class transformModule:
         self.ping_thread.start()
 
     
+
+    def check_connection_and_create_connection(self,event_func):
+
+
+
+        self.ping_worker = pingAndCreateWorker(self.ip,self.src_path,self.username,self.password)
+        self.ping_worker.result_signal.connect(event_func)
+        self.ping_thread = threading.Thread(target=self.ping_worker.run, daemon=True)
+        self.ping_thread.start()
+
+
+
+
+
+
+
+
+        
+
 
     def find_files(self, trains, dates_tange, finish_event_func, log_event_func=None,log_search=False):
         
@@ -112,6 +157,9 @@ class transformModule:
 
 
 
+    def read_log(self):
+
+        print(self.src_path)
 
 
 
@@ -123,21 +171,24 @@ if __name__=='__main__':
     app = QApplication(sys.argv)
 
 
-    nmap = shareMapping('','','')
-    drives = nmap.get_mapped_drives()
-    res = nmap.check_drived_is_mapped('192.168.1.60')
-    if res is None and False:
-        nmap.map_network('192.168.1.60','image_share',username='rail',password= '1', )
+    # nmap = shareMapping('','','')
+    # drives = nmap.get_mapped_drives()
+    # res = nmap.check_drived_is_mapped('192.168.1.60')
+    # if res is None and False:
+    #     nmap.map_network('192.168.1.60','image_share',username='rail',password= '1', )
     
     
-    def msg_callback1(txt):
-        print(txt)
+    # def msg_callback1(txt):
+    #     print(txt)
 
-    obj = transformModule('192.168.1.60', 'image_share', 'c:\\image_share')
-    obj.start_transition(msg_callback1,
-                        #  trains=['11BGD1'],
-                        #  dates_range=( JalaliDateTime(1402,3,13, 11,40), JalaliDateTime(1402,4, 11,8,30))
-                            # dates_range=( JalaliDateTime(1402,1,1), JalaliDateTime(1403,12,13))
-                         )
+    ip = '192.168.43.63'                    # IP address of the remote system
+    share_path = 'test'                      # Shared folder on the remote system
+    username = "MMM"                         # Your username
+    password = "PHK"   
+
+
+    obj = transformModule(ip=ip,src_path='test',dst_path='asd',username=username,password=password)
+    ret = obj.create_connection()
+    print(ret)
     app.exec()
     
