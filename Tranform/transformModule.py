@@ -1,20 +1,23 @@
 import sys
-
-from Tranform.Network import pingAndCreateWorker
-sys.path.append('C:\\Users\\amirh\Desktop\\railProject_SoftwareCopy')
-
+import pickle
 import time
 import threading
+import os
 
-# from persiantools.jdatetime import JalaliDateTime, timedelta
+
+
+from persiantools.jdatetime import JalaliDateTime, timedelta
 # from PySide6.QtCore import Signal, QObject
 
 try:
+    from Tranform.Network import pingAndCreateWorker
     from Tranform.Network import pingWorker, shareMapping
     from Tranform.transformUtils import transormUtils
     from Tranform.sharingConstans import DIRECTORY_TREE, STRUCT_PARTS
-    from Tranform.filesScanners import filesFinderWorker
+    from Tranform.filesScanners import filesFinderWorker, updateArchiveWorker
     from Tranform.filesActionWorker import CopyWorker
+    from Tranform.sharingConstans import StatusCodes
+    
 
 except:
 
@@ -69,24 +72,6 @@ class transformModule:
 
         self.move_flag = False
         
-    
-    
-    
-    
-
-    # def start_transition(self, msg_callback, trains=None, dates_range=None, move=False):
-    #     self.move_flag = move
-    #     self.msg_callback = msg_callback
-    #     self.trains = trains
-    #     self.dates_range = dates_range
-    #     self.check_connection()
-
-
-
-
-
-
-
 
 
 
@@ -107,14 +92,6 @@ class transformModule:
         self.ping_worker.result_signal.connect(event_func)
         self.ping_thread = threading.Thread(target=self.ping_worker.run, daemon=True)
         self.ping_thread.start()
-
-
-
-
-
-
-
-
         
 
 
@@ -150,17 +127,84 @@ class transformModule:
         self.copy_thread.start()
         
 
-    def copy_finish(self, ):
-
-        print('copy done')
 
 
 
 
-    def read_log(self):
+class archiveManager:
+    FILE_NAME = 'archive.molmal'
+    def __init__(self, db_dir):
+        self.db_path = os.path.join(db_dir, self.FILE_NAME)
+        
+        self.archive = None
 
-        print(self.src_path)
+        self.update_worker = None
+        self.update_thread = None
+        self.external_update_finish_func = None
 
+        
+
+    def update_archive(self,src_path, finish_func, log_func=None):
+        self.external_update_finish_func = finish_func
+
+        self.update_worker = updateArchiveWorker(src_path, DIRECTORY_TREE)
+        self.update_worker.finish_signal.connect(self.__update_archive_finish)
+
+        if log_func is not None:
+            self.update_worker.log_signal.connect(log_func)
+        
+        self.update_thread = threading.Thread(target=self.update_worker.run, daemon=True)
+        self.update_thread.start()
+    
+    def __update_archive_finish(self, status_code:int, archive:dict[str,dict[str, dict[str, dict[str, dict]]]]):
+        if status_code == StatusCodes.findFilesStatusCodes.SUCCESS:
+            self.archive = archive
+            self.save()
+
+        if self.external_update_finish_func is not None:
+            self.external_update_finish_func(status_code)
+        
+    
+    def get_available_trains(self,):
+        return list( self.archive.keys())
+    
+    def get_avaiable_dates(self, train_id:str):
+        res = {}
+        
+        for camera in self.archive[train_id].keys():
+            dates = self.archive[train_id][camera].keys()
+            dates = list(
+                map( lambda x:JalaliDateTime.strptime(x, '%Y-%m-%d').jdate())
+            )
+            res[camera] = dates
+        return res
+
+        
+    def load(self,):
+        if not os.path.exists(self.db_path):
+            return False
+        try:
+            with open(self.db_path, 'rb') as f:
+                self.archive = pickle.load(f)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+    def save(self,):
+        _dir,_ = os.path.split(self.db_path)
+        if not os.path.exists(_dir):
+            os.makedirs(_dir)
+
+        #remove old file
+        if os.path.exists(self.db_path):
+            os.remove(self.db_path)
+        try:
+            with open(self.db_path, 'wb') as f:
+                pickle.dump(self.db_path, f)
+            return True
+        except Exception as e:
+            return False
 
 
 

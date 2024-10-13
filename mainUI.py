@@ -20,7 +20,7 @@ from PySide6.QtWidgets import QAbstractSpinBox
 from UIFiles.main_UI import Ui_main
 from uiUtils.GUIComponents import single_timer_runner
 
-from Tranform.transformModule import transformModule
+from Tranform.transformModule import transformModule, archiveManager
 from Tranform.sharingConstans import StatusCodes
 
 from PySide6.QtGui import QFont,QIcon
@@ -355,11 +355,12 @@ class mainUI(sQMainWindow):
 
 
             self.dst_main_path  = os.path.join(DST_PATH,MAIN_PATH)
-            if DEBUG:
-                self.dst_main_path  = os.path.join('C:\\test_share',MAIN_PATH)      ############# TEMP
+            # if DEBUG:
+            #     pass
+            #     self.dst_main_path  = os.path.join('C:\\test_share',MAIN_PATH)      ############# TEMP
             self.dst_image_path = os.path.join(self.dst_main_path,IMAGE_PATH) 
             self.dst_utils_path = os.path.join(self.dst_main_path,UTILS_PATH)
-            self.dst_exist_videos_path = os.path.join(self.dst_utils_path,EXISTVIDEOS_PATH)
+            self.archive_path = os.path.join(self.dst_utils_path,EXISTVIDEOS_PATH)
             self.dst_log_path = os.path.join(self.dst_utils_path,LOG_PATH)
 
 
@@ -368,7 +369,7 @@ class mainUI(sQMainWindow):
             for path in pathes:
                 if not os.path.exists(path):
                     print(path)
-                    os.mkdir(path)
+                    os.makedirs(path)
 
 
 
@@ -459,6 +460,7 @@ class mainUI(sQMainWindow):
             else:
                 self.show_message('copy', 'Connection Faild. check ip and cables connections')
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
+            self.set_loading_progress_bar(False)
             return
         
         elif status_code == StatusCodes.pingAndConnectionStatusCodes.SUCCESS:
@@ -477,7 +479,7 @@ class mainUI(sQMainWindow):
                                      status_code, 
                                      paths:list[str], 
                                      sizes:list[int], 
-                                     avaiabilities:dict[str,dict[str, list]]):
+                                     ):
         
         if status_code == StatusCodes.findFilesStatusCodes.DIR_NOT_EXISTS:
             self.show_message('copy', f"Path dosen't exists: {self.trasformer.src_path} ", )
@@ -555,9 +557,7 @@ class mainUI(sQMainWindow):
             errors = self.read_log(log_path=log_path)
             self.errors+=errors
 
-            print(log_path)
 
-        print(self.errors)
 
 
         self.set_error_btn(error_count = self.errors)
@@ -601,19 +601,16 @@ class mainUI(sQMainWindow):
         self.show_message('setting_msg', "Local Updateing You Can Remove Trian Connection")
         self.set_loading_progress_bar(loading=True)
 
+        self.archive_manager = archiveManager(self.dst_utils_path)
+        self.archive_manager.update_archive(self.dst_image_path, self.save_exist_videos)
+
+        
 
 
 
-
-        self.check_availables = transformModule(None, self.dst_image_path, None,None, None)
-
-        self.check_availables.find_files(trains=None , dates_tange=None , finish_event_func=self.save_exist_videos)
-
-
-
-    def save_exist_videos(self,status_code,res_paths,res_sizes,avaiabilities):
-
-
+    def save_exist_videos(self,status_code,):
+        print(status_code)
+        return
         print('asd')
         avaiabilities
 
@@ -804,9 +801,9 @@ class mainUI(sQMainWindow):
                 self.edit_mode(mode=False)
 
 
-
-
-        return
+        self.ui_update_copy_parms()
+    
+        
     
 
     def load_train_configs(self):
