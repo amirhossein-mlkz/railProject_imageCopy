@@ -73,7 +73,7 @@ class mainUI(sQMainWindow):
             'password': self.ui.password_msg,
             'copy': self.ui.copy_log_lbl,
             'timeline':self.ui.time_line_msg,
-            'change_password' : self.ui.label_message_change_password,
+            'setting_msg' : self.ui.label_message_change_password,
             'profile' :  self.ui.label_profile_message,
             'profile_edit' :  self.ui.label_profile_edit_message,
             'load_config': self.ui.load_config_msg
@@ -196,6 +196,8 @@ class mainUI(sQMainWindow):
         self.ui.combo_load_train_name.currentIndexChanged.connect(self.set_load_ip)
 
         self.ui.btn_refresh_profile_name.clicked.connect(self.refresh_edit_profile)
+
+        self.ui.btn_local_update.clicked.connect(self.update_exist_videos)
 
         
 
@@ -596,6 +598,7 @@ class mainUI(sQMainWindow):
     def update_exist_videos(self):
 
         self.show_message('copy', "Local Updateing You Can Remove Trian Connection")
+        self.show_message('setting_msg', "Local Updateing You Can Remove Trian Connection")
         self.set_loading_progress_bar(loading=True)
 
 
@@ -629,6 +632,9 @@ class mainUI(sQMainWindow):
                         train[camera] = times
                     except:
                         print('Error in Convert timtimes to ranges')
+                        self.show_message('copy', "Error in Local Updating")
+                        self.show_message('setting_msg', "Error in Local Updating")
+
 
 
         json_exist_videos = self.dst_exist_videos_path
@@ -643,6 +649,7 @@ class mainUI(sQMainWindow):
 
 
         self.show_message('copy', "Finish Local Updateing")
+        self.show_message('setting_msg', "Finish Local Updateing")
         self.set_loading_progress_bar(loading=False)
 
 
@@ -935,7 +942,7 @@ class mainUI(sQMainWindow):
             
             print('Current password is wrong')
 
-            self.show_message(name='change_password',txt='Current Password Wrong',disapear=2000,style=error_style)
+            self.show_message(name='setting_msg',txt='Current Password Wrong',disapear=2000,style=error_style)
 
 
 
@@ -955,7 +962,7 @@ class mainUI(sQMainWindow):
             
             print('Password not match')
 
-            self.show_message(name='change_password',txt='Password Not Match',disapear=2000,style=error_style)
+            self.show_message(name='setting_msg',txt='Password Not Match',disapear=2000,style=error_style)
 
             return
 
@@ -969,7 +976,7 @@ class mainUI(sQMainWindow):
 
             if ret:
 
-                self.show_message(name='change_password',txt='Password Update Successfully',disapear=2000,style=success_style)
+                self.show_message(name='setting_msg',txt='Password Update Successfully',disapear=2000,style=success_style)
 
                 self.set_frame_change_password(mode=False)
 

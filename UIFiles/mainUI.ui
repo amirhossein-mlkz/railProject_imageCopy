@@ -1404,7 +1404,7 @@ QPushButton:disabled {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="copy">
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -4972,13 +4972,13 @@ border:none;</string>
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>180</height>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
-                  <height>180</height>
+                  <height>0</height>
                  </size>
                 </property>
                 <property name="frameShape">
@@ -5199,6 +5199,41 @@ border:none;</string>
                    </property>
                    <property name="text">
                     <string>Save</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_35">
+                <property name="frameShape">
+                 <enum>QFrame::Panel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_57">
+                 <item>
+                  <widget class="QLabel" name="label_14">
+                   <property name="maximumSize">
+                    <size>
+                     <width>109</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Local Update :</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_local_update">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                   <property name="text">
+                    <string>Click Here</string>
                    </property>
                   </widget>
                  </item>

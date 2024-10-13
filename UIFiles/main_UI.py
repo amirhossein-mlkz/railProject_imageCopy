@@ -2973,8 +2973,8 @@ class Ui_main(object):
 
         self.frame_change_password = QFrame(self.settings)
         self.frame_change_password.setObjectName(u"frame_change_password")
-        self.frame_change_password.setMinimumSize(QSize(0, 180))
-        self.frame_change_password.setMaximumSize(QSize(16777215, 180))
+        self.frame_change_password.setMinimumSize(QSize(0, 0))
+        self.frame_change_password.setMaximumSize(QSize(16777215, 0))
         self.frame_change_password.setFrameShape(QFrame.StyledPanel)
         self.frame_change_password.setFrameShadow(QFrame.Plain)
         self.verticalLayout_21 = QVBoxLayout(self.frame_change_password)
@@ -3074,6 +3074,27 @@ class Ui_main(object):
 
         self.verticalLayout_9.addWidget(self.frame_change_password)
 
+        self.frame_35 = QFrame(self.settings)
+        self.frame_35.setObjectName(u"frame_35")
+        self.frame_35.setFrameShape(QFrame.Panel)
+        self.frame_35.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_57 = QHBoxLayout(self.frame_35)
+        self.horizontalLayout_57.setObjectName(u"horizontalLayout_57")
+        self.label_14 = QLabel(self.frame_35)
+        self.label_14.setObjectName(u"label_14")
+        self.label_14.setMaximumSize(QSize(109, 16777215))
+
+        self.horizontalLayout_57.addWidget(self.label_14)
+
+        self.btn_local_update = QPushButton(self.frame_35)
+        self.btn_local_update.setObjectName(u"btn_local_update")
+        self.btn_local_update.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.horizontalLayout_57.addWidget(self.btn_local_update)
+
+
+        self.verticalLayout_9.addWidget(self.frame_35)
+
         self.frame_33 = QFrame(self.settings)
         self.frame_33.setObjectName(u"frame_33")
         self.frame_33.setFrameShape(QFrame.StyledPanel)
@@ -3107,7 +3128,7 @@ class Ui_main(object):
 
         self.retranslateUi(main)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(3)
         self.tabWidget.setCurrentIndex(2)
         self.tabWidget_2.setCurrentIndex(1)
 
@@ -3256,6 +3277,8 @@ class Ui_main(object):
         self.label_16.setText(QCoreApplication.translate("main", u"New Password :", None))
         self.label_22.setText(QCoreApplication.translate("main", u"Confirm Password :", None))
         self.btn_save_password.setText(QCoreApplication.translate("main", u"Save", None))
+        self.label_14.setText(QCoreApplication.translate("main", u"Local Update :", None))
+        self.btn_local_update.setText(QCoreApplication.translate("main", u"Click Here", None))
         self.label_message_change_password.setText("")
     # retranslateUi
 
