@@ -1419,7 +1419,6 @@ class mainUI(sQMainWindow):
                 with open(json_path, 'r', encoding='utf-8') as f:
                     self.json_data = json.load(f)
 
-                print(self.json_data)
                 self.ui_show_config = ShowConfig(self.json_data)
                 self.ui_show_config.show()
                 # self.trasformer.read_log()

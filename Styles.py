@@ -26,8 +26,6 @@ none_style = """
     background-color:none;
     border:none;
 
-
-
 """
 
 
