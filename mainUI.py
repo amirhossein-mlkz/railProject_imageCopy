@@ -601,12 +601,7 @@ class mainUI(sQMainWindow):
         self.show_message('setting_msg', "Local Updateing You Can Remove Trian Connection")
         self.set_loading_progress_bar(loading=True)
 
-
-
-
-
         self.check_availables = transformModule(None, self.dst_image_path, None,None, None)
-
         self.check_availables.find_files(trains=None , dates_tange=None , finish_event_func=self.save_exist_videos)
 
 
@@ -614,18 +609,10 @@ class mainUI(sQMainWindow):
     def save_exist_videos(self,status_code,res_paths,res_sizes,avaiabilities):
 
 
-        print('asd')
-        avaiabilities
-
         if avaiabilities != {}:
-
-
             for train_name in avaiabilities.keys():
-
                 train = avaiabilities[train_name]
-
                 for camera in train.keys():
-                    
                     try:
                         date_times = train[camera]
                         times = transormUtils.dateTimeRanges(date_times=date_times,step_lenght_sec=600,max_gap_sec=10)
@@ -634,7 +621,10 @@ class mainUI(sQMainWindow):
                         print('Error in Convert timtimes to ranges')
                         self.show_message('copy', "Error in Local Updating")
                         self.show_message('setting_msg', "Error in Local Updating")
-
+        else:
+            self.show_message('copy', "Nothing to Update")
+            self.show_message('setting_msg', "Nothing to Update")
+            return
 
 
         json_exist_videos = self.dst_exist_videos_path
@@ -644,15 +634,20 @@ class mainUI(sQMainWindow):
             os.remove(json_exist_videos)
 
         # # Your code to write the JSON
-        with open(json_exist_videos, 'w', encoding='utf-8') as f:
-            json.dump(avaiabilities, f, ensure_ascii=False, indent=4, default=self.custom_json_handler)
+        try:
+            with open(json_exist_videos, 'w', encoding='utf-8') as f:
+                json.dump(avaiabilities, f, ensure_ascii=False, indent=4, default=self.custom_json_handler)
+            self.show_message('copy', "Finish Local Updateing")
+            self.show_message('setting_msg', "Finish Local Updateing")
+            self.set_loading_progress_bar(loading=False)
 
 
-        self.show_message('copy', "Finish Local Updateing")
-        self.show_message('setting_msg', "Finish Local Updateing")
-        self.set_loading_progress_bar(loading=False)
 
+        except:
 
+            self.show_message('copy', "Error in Write New File")
+            self.show_message('setting_msg', "Error in Write New File")
+            self.set_loading_progress_bar(loading=False)
 
 
     # Custom JSON encoder function
