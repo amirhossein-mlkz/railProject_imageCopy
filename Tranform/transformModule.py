@@ -156,6 +156,15 @@ class archiveManager:
         self.update_thread = threading.Thread(target=self.update_worker.run, daemon=True)
         self.update_thread.start()
     
+    def is_during_updating(self):
+        if self.update_thread is None:
+            return False
+        
+        if self.update_thread.is_alive():
+            return True
+        else:
+            return False
+    
     def __update_archive_finish(self, status_code:int, archive:dict[str,dict[str, dict[str, dict[str, dict]]]]):
         if status_code == StatusCodes.findFilesStatusCodes.SUCCESS:
             self.archive = archive
@@ -170,11 +179,13 @@ class archiveManager:
     
     def get_avaiable_dates(self, train_id:str):
         res = {}
+        if train_id not in self.archive:
+            return {}
         
         for camera in self.archive[train_id].keys():
             dates = self.archive[train_id][camera].keys()
             dates = list(
-                map( lambda x:JalaliDateTime.strptime(x, '%Y-%m-%d').jdate())
+                map( lambda x:JalaliDateTime.strptime(x, '%Y-%m-%d').jdate(), dates)
             )
             res[camera] = dates
         return res

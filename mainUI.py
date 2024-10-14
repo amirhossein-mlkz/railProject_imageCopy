@@ -484,6 +484,7 @@ class mainUI(sQMainWindow):
         if status_code == StatusCodes.findFilesStatusCodes.DIR_NOT_EXISTS:
             self.show_message('copy', f"Path dosen't exists: {self.trasformer.src_path} ", )
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
+            self.set_loading_progress_bar(False)
             return
         
 
@@ -491,7 +492,7 @@ class mainUI(sQMainWindow):
         if len(paths) == 0:
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
             self.show_message('copy', 'No Files Found to Copy')
-            
+            self.set_loading_progress_bar(False)
             return
 
         self.ui.progress_bar.setMinimum(0)
@@ -527,6 +528,7 @@ class mainUI(sQMainWindow):
         if status_code == StatusCodes.copyStatusCodes.DISCONNECT:
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
             self.show_message('copy', "Dissconnected!")
+            self.set_loading_progress_bar(False)
             return
         # a = transormUtils.dateTimeRanges( avaiabilities['11BG21']['right'], 600 )
         GUIBackend.set_disable_enable(self.ui.copy_button, True)
