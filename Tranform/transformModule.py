@@ -12,7 +12,7 @@ from persiantools.jdatetime import JalaliDateTime, timedelta
 try:
     from Tranform.Network import pingAndCreateWorker
     from Tranform.Network import pingWorker, shareMapping
-    from Tranform.transformUtils import transormUtils
+    from Tranform.transformUtils import transormUtils, timeRangeWorker
     from Tranform.sharingConstans import DIRECTORY_TREE, STRUCT_PARTS
     from Tranform.filesScanners import filesFinderWorker, updateArchiveWorker
     from Tranform.filesActionWorker import CopyWorker
@@ -139,12 +139,15 @@ class archiveManager:
         self.archive = None
 
         self.update_worker = None
-        self.update_thread = None
+        self.update_thread:threading.Thread = None
+
+        self.time_range_worker = None
+        self.time_range_thread:threading.Thread = None
         self.external_update_finish_func = None
 
         
 
-    def update_archive(self,src_path, finish_func, log_func=None):
+    def update_archive(self,src_path, finish_func, log_func=None):        
         self.external_update_finish_func = finish_func
 
         self.update_worker = updateArchiveWorker(src_path, DIRECTORY_TREE)
@@ -172,10 +175,23 @@ class archiveManager:
 
         if self.external_update_finish_func is not None:
             self.external_update_finish_func(status_code)
+
+    def get_day_time_ranges(self, train_id, date:JalaliDateTime, cameras, finish_func, progress_func):
+        if self.time_range_thread is not None and self.time_range_thread.is_alive():
+            return
         
+        self.time_range_worker = timeRangeWorker(self.archive, train_id, date, cameras)
+        self.time_range_worker.finish_signal.connect(finish_func)
+        self.time_range_worker.progress_signal.connect(progress_func)
+        self.time_range_thread = threading.Thread(target=self.time_range_worker.run, daemon=True)
+        self.time_range_thread.start()
+
     
     def get_available_trains(self,):
         return list( self.archive.keys())
+    
+    def get_available_cameras(self, train_id:str):
+        return list( self.archive[train_id].keys())
     
     def get_avaiable_dates(self, train_id:str):
         res = {}

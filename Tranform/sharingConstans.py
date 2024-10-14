@@ -26,13 +26,9 @@ class StatusCodes:
         SUCCESS = 1
 
     class copyStatusCodes:
-        DISCONNECT = 0
-        SUCCESS=1
+        DISCONNECT = 10
+        SUCCESS=11
 
     class pingAndConnectionStatusCodes:
-        NOT_CONNECT = 0
-        SUCCESS = 1
-
-    class createConnectionStatusCodes:
-        CONNECTED = 1
-        NOT_CONNECTED = 0
+        NOT_CONNECT = 20
+        SUCCESS = 21
