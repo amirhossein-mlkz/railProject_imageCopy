@@ -32,3 +32,8 @@ class StatusCodes:
     class pingAndConnectionStatusCodes:
         NOT_CONNECT = 20
         SUCCESS = 21
+
+
+    class createConnectionStatusCodes:
+        CONNECTED = 1
+        NOT_CONNECTED = 0

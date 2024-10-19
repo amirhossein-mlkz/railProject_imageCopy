@@ -9,6 +9,7 @@ MODE = 1
 main_path = f'test_data{MODE}'
 
 
+
 if MODE==1:
     os.mkdir(main_path)
     for train in ['11BGD1',]:

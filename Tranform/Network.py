@@ -64,9 +64,9 @@ class pingAndCreateWorker(QObject):
         else:
             ret,msg = self.create_connection()
             if ret:
-                self.result_signal.emit(StatusCodes.createConnectionStatusCodes.CONNECTED,msg)
+                self.result_signal.emit(StatusCodes.pingAndConnectionStatusCodes.SUCCESS,msg)
             else:
-                self.result_signal.emit(StatusCodes.createConnectionStatusCodes.NOT_CONNECTED,msg)
+                self.result_signal.emit(StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT,msg)
 
     def __get_ping(self, ip):
         if platform.system().lower() == "windows":
