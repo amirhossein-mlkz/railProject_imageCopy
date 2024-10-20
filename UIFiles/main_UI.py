@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'mainUI.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.0
+## Created by: Qt User Interface Compiler version 6.7.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -2448,6 +2448,14 @@ class Ui_main(object):
 
         self.verticalLayout_6.addItem(self.verticalSpacer)
 
+        self.btn_cancel_edit_profile = QPushButton(self.frame_profile_edit)
+        self.btn_cancel_edit_profile.setObjectName(u"btn_cancel_edit_profile")
+        self.btn_cancel_edit_profile.setMinimumSize(QSize(95, 0))
+        self.btn_cancel_edit_profile.setMaximumSize(QSize(95, 16777215))
+        self.btn_cancel_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.verticalLayout_6.addWidget(self.btn_cancel_edit_profile, 0, Qt.AlignmentFlag.AlignHCenter)
+
         self.btn_save_edit_profile = QPushButton(self.frame_profile_edit)
         self.btn_save_edit_profile.setObjectName(u"btn_save_edit_profile")
         self.btn_save_edit_profile.setMinimumSize(QSize(95, 0))
@@ -2529,6 +2537,15 @@ class Ui_main(object):
 
 
         self.verticalLayout_8.addWidget(self.frame_63)
+
+        self.send_config_msg = QLabel(self.groupBox)
+        self.send_config_msg.setObjectName(u"send_config_msg")
+        sizePolicy1.setHeightForWidth(self.send_config_msg.sizePolicy().hasHeightForWidth())
+        self.send_config_msg.setSizePolicy(sizePolicy1)
+        self.send_config_msg.setMaximumSize(QSize(16777215, 40))
+        self.send_config_msg.setStyleSheet(u"color: rgb(0, 0, 0);")
+
+        self.verticalLayout_8.addWidget(self.send_config_msg)
 
         self.frame_14 = QFrame(self.groupBox)
         self.frame_14.setObjectName(u"frame_14")
@@ -2939,10 +2956,20 @@ class Ui_main(object):
         self.btn_save_config_edit = QPushButton(self.frame_train_edit)
         self.btn_save_config_edit.setObjectName(u"btn_save_config_edit")
         self.btn_save_config_edit.setEnabled(False)
-        self.btn_save_config_edit.setMaximumSize(QSize(16777215, 16777215))
+        self.btn_save_config_edit.setMinimumSize(QSize(200, 25))
+        self.btn_save_config_edit.setMaximumSize(QSize(200, 16777215))
         self.btn_save_config_edit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.verticalLayout_11.addWidget(self.btn_save_config_edit)
+        self.verticalLayout_11.addWidget(self.btn_save_config_edit, 0, Qt.AlignmentFlag.AlignHCenter)
+
+        self.btn_cancel_config_edit = QPushButton(self.frame_train_edit)
+        self.btn_cancel_config_edit.setObjectName(u"btn_cancel_config_edit")
+        self.btn_cancel_config_edit.setEnabled(False)
+        self.btn_cancel_config_edit.setMinimumSize(QSize(200, 25))
+        self.btn_cancel_config_edit.setMaximumSize(QSize(200, 16777215))
+        self.btn_cancel_config_edit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.verticalLayout_11.addWidget(self.btn_cancel_config_edit, 0, Qt.AlignmentFlag.AlignHCenter)
 
 
         self.verticalLayout_16.addWidget(self.frame_train_edit)
@@ -3148,7 +3175,7 @@ class Ui_main(object):
 
         self.retranslateUi(main)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         self.tabWidget.setCurrentIndex(2)
         self.tabWidget_2.setCurrentIndex(1)
 
@@ -3165,7 +3192,7 @@ class Ui_main(object):
         self.side_setting_btn.setText(QCoreApplication.translate("main", u"Settings", None))
         self.side_about_btn.setText(QCoreApplication.translate("main", u" About Us ", None))
         self.login_btn.setText(QCoreApplication.translate("main", u"Login", None))
-        self.login_btn.setProperty(u"styleClass", QCoreApplication.translate("main", u"fillBtn", None))
+        self.login_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
         self.logined_username_lbl.setText("")
         self.help_btn.setText("")
         self.minimize_btn.setText("")
@@ -3173,16 +3200,16 @@ class Ui_main(object):
         self.label.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.label_2.setText(QCoreApplication.translate("main", u"IP Address : ", None))
         self.ip_address_msg.setText(QCoreApplication.translate("main", u"message", None))
-        self.ip_address_msg.setProperty(u"styleClass", QCoreApplication.translate("main", u"msgStyle", None))
+        self.ip_address_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.label_17.setText(QCoreApplication.translate("main", u"User Name :", None))
         self.username_msg.setText(QCoreApplication.translate("main", u"message", None))
-        self.username_msg.setProperty(u"styleClass", QCoreApplication.translate("main", u"msgStyle", None))
+        self.username_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.label_21.setText(QCoreApplication.translate("main", u"Password   :", None))
         self.password_msg.setText(QCoreApplication.translate("main", u"message", None))
-        self.password_msg.setProperty(u"styleClass", QCoreApplication.translate("main", u"msgStyle", None))
+        self.password_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.timeline_groupbox.setTitle(QCoreApplication.translate("main", u"Time Line Filter", None))
         self.start_calendar_btn.setText("")
-        self.start_calendar_btn.setProperty(u"styleClass", "")
+        self.start_calendar_btn.setProperty("styleClass", "")
         self.label_30.setText(QCoreApplication.translate("main", u"To", None))
         self.label_31.setText(QCoreApplication.translate("main", u":", None))
         self.label_7.setText(QCoreApplication.translate("main", u"date", None))
@@ -3191,26 +3218,26 @@ class Ui_main(object):
         self.label_10.setText(QCoreApplication.translate("main", u"From", None))
         self.label_34.setText(QCoreApplication.translate("main", u"Time", None))
         self.end_calendar_btn.setText("")
-        self.end_calendar_btn.setProperty(u"styleClass", "")
+        self.end_calendar_btn.setProperty("styleClass", "")
         self.label_6.setText(QCoreApplication.translate("main", u"date", None))
         self.time_line_msg.setText(QCoreApplication.translate("main", u"TextLabel", None))
         self.copy_button.setText(QCoreApplication.translate("main", u"Start Copy", None))
-        self.copy_button.setProperty(u"styleClass", "")
+        self.copy_button.setProperty("styleClass", "")
         self.copy_log_lbl.setText(QCoreApplication.translate("main", u"message", None))
-        self.copy_log_lbl.setProperty(u"styleClass", QCoreApplication.translate("main", u"msgStyle", None))
+        self.copy_log_lbl.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.btn_found_errors.setText("")
         self.completed_copy_lbl.setText(QCoreApplication.translate("main", u"-", None))
         self.label_9.setText(QCoreApplication.translate("main", u"/", None))
         self.total_copy_lbl.setText(QCoreApplication.translate("main", u"-", None))
         self.total_copy_lbl_2.setText(QCoreApplication.translate("main", u"MB", None))
         self.copy_speed_lbl.setText(QCoreApplication.translate("main", u"Speed", None))
-        self.group_camera_1.setTitle(QCoreApplication.translate("main", u"Camera 1 - Right", None))
+        self.group_camera_1.setTitle(QCoreApplication.translate("main", u"Camera 1", None))
         self.label_33.setText(QCoreApplication.translate("main", u"Name :", None))
         self.line_name_camera_1.setText(QCoreApplication.translate("main", u"Right", None))
         self.label_18.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_19.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_20.setText(QCoreApplication.translate("main", u"Password :", None))
-        self.group_camera_2.setTitle(QCoreApplication.translate("main", u"Camera 2 - Left", None))
+        self.group_camera_2.setTitle(QCoreApplication.translate("main", u"Camera 2", None))
         self.label_35.setText(QCoreApplication.translate("main", u"Username :", None))
         self.line_name_camera_2.setText(QCoreApplication.translate("main", u"Left", None))
         self.label_23.setText(QCoreApplication.translate("main", u"Ip :", None))
@@ -3236,13 +3263,13 @@ class Ui_main(object):
         self.btn_refresh_profile_name.setText("")
         self.btn_edit_profile.setText("")
         self.btn_delete_profile.setText("")
-        self.group_camera_1_edit.setTitle(QCoreApplication.translate("main", u"Camera 1 - Right", None))
+        self.group_camera_1_edit.setTitle(QCoreApplication.translate("main", u"Camera 1", None))
         self.label_51.setText(QCoreApplication.translate("main", u"Name :", None))
         self.line_name_camera_1_edit.setText("")
         self.label_39.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_40.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_41.setText(QCoreApplication.translate("main", u"Password :", None))
-        self.group_camera_2_edit.setTitle(QCoreApplication.translate("main", u"Camera 2 - Left", None))
+        self.group_camera_2_edit.setTitle(QCoreApplication.translate("main", u"Camera 2", None))
         self.label_52.setText(QCoreApplication.translate("main", u"Name :", None))
         self.line_name_camera_2_edit.setText("")
         self.label_42.setText(QCoreApplication.translate("main", u"Ip :", None))
@@ -3260,18 +3287,21 @@ class Ui_main(object):
         self.label_48.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_49.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_50.setText(QCoreApplication.translate("main", u"Password :", None))
+        self.btn_cancel_edit_profile.setText(QCoreApplication.translate("main", u"Cancel", None))
         self.btn_save_edit_profile.setText(QCoreApplication.translate("main", u"Save", None))
         self.label_profile_edit_message.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("main", u"Edit / Delete", None))
         self.groupBox.setTitle(QCoreApplication.translate("main", u"Send", None))
         self.label_12.setText(QCoreApplication.translate("main", u"Profile Name :", None))
         self.label_13.setText(QCoreApplication.translate("main", u"Train Name :", None))
+        self.send_config_msg.setText(QCoreApplication.translate("main", u"message", None))
+        self.send_config_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.btn_send_profile.setText(QCoreApplication.translate("main", u"Send", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("main", u"Load", None))
         self.label_29.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.label_5.setText(QCoreApplication.translate("main", u"Ip : ", None))
         self.load_config_msg.setText(QCoreApplication.translate("main", u"message", None))
-        self.load_config_msg.setProperty(u"styleClass", QCoreApplication.translate("main", u"msgStyle", None))
+        self.load_config_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.btn_load_profile.setText(QCoreApplication.translate("main", u"Connect & Load", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("main", u"Load / Send", None))
         self.label_56.setText(QCoreApplication.translate("main", u"Train Name :", None))
@@ -3290,6 +3320,7 @@ class Ui_main(object):
         self.label_58.setText(QCoreApplication.translate("main", u"UserName :", None))
         self.label_59.setText(QCoreApplication.translate("main", u"Password :", None))
         self.btn_save_config_edit.setText(QCoreApplication.translate("main", u"Save", None))
+        self.btn_cancel_config_edit.setText(QCoreApplication.translate("main", u"Cancel", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_6), QCoreApplication.translate("main", u"Edit / Delete", None))
         self.label_3.setText(QCoreApplication.translate("main", u"Change Password :", None))
         self.btn_change_password.setText(QCoreApplication.translate("main", u"Click Here", None))

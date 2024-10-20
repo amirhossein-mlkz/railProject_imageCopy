@@ -80,7 +80,6 @@ class ShowConfig(QWidget):
         general_layout = QFormLayout()
 
         # general_layout.addRow("Path:", QLabel(data['path']))
-        general_layout.addRow("Temp Folder:", QLabel(data['temp_folder']))
         general_layout.addRow("Max Storage:", QLabel(str(data['max_allowed_storage'])))
         general_layout.addRow("Train ID:", QLabel(data['train_id']))
         general_layout.addRow("Motion:", QLabel(data['motion']))

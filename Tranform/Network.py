@@ -118,7 +118,7 @@ class pingAndCreateWorker(QObject):
                 print(msg)
                 return False,msg
    
-            return False, 'Error : Failed Create Connection, Username Or Password May Be Wrong'
+            return False, 'Error : Failed Create Connection, Username Or Password Maybe Wrong'
 
         except Exception as e:
             print(f"Error: {e}")

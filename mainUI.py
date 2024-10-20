@@ -15,13 +15,15 @@ from PySide6.QtCore import QTimer
 from login import LoginPage
 from PySide6.QtWidgets import QGraphicsBlurEffect
 from PySide6.QtWidgets import QAbstractSpinBox
-
+import shutil
 
 from UIFiles.main_UI import Ui_main
 from uiUtils.GUIComponents import single_timer_runner
 
 from Tranform.transformModule import transformModule, archiveManager
 from Tranform.sharingConstans import StatusCodes
+from Tranform.Network import pingAndCreateWorker
+# from Tranform.filesActionWorker import CopyWorker
 
 from PySide6.QtGui import QFont,QIcon
 from PySide6.QtWidgets import QMessageBox
@@ -76,7 +78,8 @@ class mainUI(sQMainWindow):
             'setting_msg' : self.ui.label_message_change_password,
             'profile' :  self.ui.label_profile_message,
             'profile_edit' :  self.ui.label_profile_edit_message,
-            'load_config': self.ui.load_config_msg
+            'load_config': self.ui.load_config_msg,
+            'send_config': self.ui.send_config_msg,
         }
         
         self.side_btns = [ self.ui.side_setting_btn , self.ui.side_train_config_btn,self.ui.side_profile_btn,self.ui.side_copy_btn]
@@ -104,6 +107,8 @@ class mainUI(sQMainWindow):
 
         self.load_train_configs()
         self.edit_mode(mode=False)
+        self.profile_edit_mode(mode=False)
+
 
         self.create_init_folders()
 
@@ -171,6 +176,7 @@ class mainUI(sQMainWindow):
         self.ui.btn_edit_config.clicked.connect(self.edit_config_train)
         self.ui.btn_delete_config.clicked.connect(self.delete_config_train)
         self.ui.btn_save_config_edit.clicked.connect(self.save_config_edit)
+        self.ui.btn_cancel_config_edit.clicked.connect(self.cancel_config_edit)
         self.ui.btn_refresh_name_config_edit.clicked.connect(self.load_train_configs)
 
         self.ui.combo_copy_train_name.currentIndexChanged.connect(self.ui_update_copy_parms)
@@ -191,6 +197,7 @@ class mainUI(sQMainWindow):
         self.ui.btn_edit_profile.clicked.connect(self.edit_profile)
         self.ui.btn_delete_profile.clicked.connect(self.delete_profile)
         self.ui.btn_save_edit_profile.clicked.connect(self.save_edit_profile)
+        self.ui.btn_cancel_edit_profile.clicked.connect(self.cancel_edit_profile)
         self.ui.btn_send_profile.clicked.connect(self.send_profile)
         self.ui.btn_load_profile.clicked.connect(self.load_profile)
         self.ui.combo_load_train_name.currentIndexChanged.connect(self.set_load_ip)
@@ -757,8 +764,7 @@ class mainUI(sQMainWindow):
                 ip = self.ui.line_train_profile_ip.setText('')
                 username = self.ui.line_train_profile_username.setText('')
                 password = self.ui.line_train_profile_password.setText('')
-
-
+                self.load_train_configs()
 
 
 
@@ -766,6 +772,9 @@ class mainUI(sQMainWindow):
     def check_connection_train_cofig(self):
         print('check_connection_train_cofig')
         return
+
+    def cancel_config_edit(self,):
+        self.edit_mode(mode=False)
 
 
     def save_config_edit(self):
@@ -795,17 +804,10 @@ class mainUI(sQMainWindow):
                     if password_ret:
                         flag =  True
             if flag:
-                print('Update Sucssfully')
-
-
-                ip = self.ui.line_train_profile_ip_edit.setText('')
-                username = self.ui.line_train_profile_username_edit.setText('')
-                password = self.ui.line_train_profile_password_edit.setText('')
-
-                
+                print('Update Sucssfully')                
                 self.edit_mode(mode=False)
 
-
+        self.load_train_configs()
         self.ui_update_copy_parms()
     
         
@@ -858,7 +860,7 @@ class mainUI(sQMainWindow):
             self.db.remove_row_by_col_name(table_name='TrainConfig',col_name='name',name_value=name)
             print('Item Removed')
 
-        return
+        self.load_train_configs()
     
 
     def edit_config_train(self):
@@ -880,14 +882,15 @@ class mainUI(sQMainWindow):
         self.ui.line_train_profile_ip_edit.setText(ret['ip'])
         self.ui.line_train_profile_username_edit.setText(ret['username'])
         self.ui.line_train_profile_password_edit.setText(ret['password'])
-
-
-
         return
 
 
 
     def edit_mode(self,mode):
+        if not mode:
+            ip = self.ui.line_train_profile_ip_edit.setText('')
+            username = self.ui.line_train_profile_username_edit.setText('')
+            password = self.ui.line_train_profile_password_edit.setText('')
 
         self.ui.btn_delete_config.setDisabled(mode)
         self.ui.btn_edit_config.setDisabled(mode)
@@ -895,6 +898,8 @@ class mainUI(sQMainWindow):
         self.ui.btn_refresh_name_config_edit.setDisabled(mode)
         self.ui.frame_train_edit.setDisabled(not(mode))
         self.ui.btn_save_config_edit.setDisabled(not(mode))
+        self.ui.btn_cancel_config_edit.setDisabled(not(mode))
+
 
 
         
@@ -1214,7 +1219,7 @@ class mainUI(sQMainWindow):
                 return False
 
 
-    def save_json(self,save_name,json_data):
+    def save_json(self,save_name,json_data, show_msg = True):
 
         try:
             if '.' in save_name:
@@ -1227,10 +1232,16 @@ class mainUI(sQMainWindow):
             with open(save_path, 'w', encoding='utf-8') as f:
                 json.dump(json_data, f, ensure_ascii=False, indent=4)
 
-            QMessageBox.information(self, "Success", "Configuration saved successfully!")
+            if show_msg:
+                QMessageBox.information(self, "Success", "Configuration saved successfully!")
+            
+            return True
 
         except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to save Configuration: {e}")
+            print(e)
+            if show_msg:
+                QMessageBox.critical(self, "Error", f"Failed to save Configuration: {e}")
+            return False
 
 
 
@@ -1296,10 +1307,11 @@ class mainUI(sQMainWindow):
 
 
     def refresh_edit_profile(self):
-
         self.load_train_profiles()
 
 
+    def cancel_edit_profile(self,):
+        self.profile_edit_mode(mode=False)
 
     def save_edit_profile(self):
 
@@ -1343,32 +1355,98 @@ class mainUI(sQMainWindow):
 
 
     def send_profile(self):
-
+        self.show_message('send_config', '')  
         profile_name = self.ui.combo_send_profile_name.currentText()
 
         if profile_name =='':
-            print('no profile Exist')
+            self.show_message('send_config', 'no Profile Exist')
             return
 
         train_name = self.ui.combo_send_train_name.currentText()
         if train_name =='':
-            print('No train Exist')
+            self.show_message('send_config', 'No Train Exist')
             return
 
+        ret = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=train_name)
+        if len(ret) == 0:
+            self.show_message('send_config', 'Train Info not Found, it may deleted')
+        train_info = ret[0]
 
+        self.train_info_to_send_config = train_info
+        self.config_name_to_send = profile_name
+
+        path = transormUtils.build_share_path(train_info['ip'], self.main_path)
+        pingworker = pingAndCreateWorker(train_info['ip'], path, train_info['username'], train_info['password'])
+        pingworker.result_signal.connect(self.send_config_step1)
+        threading.Thread(target=pingworker.run).start()
+        self.ui.btn_send_profile.setDisabled(True)
 
 
         # profile_name = profile_name+'.json'
         # file_path = os.path.join(CONFIG_PATH,profile_name)
         # print(file_path,'   ',train_parms)
 
+    def send_config_step1(self, status_code, msg:str):
+        if status_code == StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT:
+            if msg !='':
+                self.show_message('send_config', msg)
+                self.ui.btn_send_profile.setEnabled(True)
+
+            else:
+                self.show_message('send_config', 'Connection Faild. check ip and cables connections')
+                self.ui.btn_send_profile.setEnabled(True)
+
+            return
+        
+        elif status_code == StatusCodes.pingAndConnectionStatusCodes.SUCCESS:
+
+            self.show_message('send_config', msg)
+    
+
+            config_path = transormUtils.build_share_path(self.train_info_to_send_config['ip'],
+                                                         self.image_grabber_log_path)
+            dir_config, _ = os.path.split(config_path)
+            if not os.path.exists(dir_config):
+                self.show_message('send_config', 'Utils Directory Not Exist')
+                self.ui.btn_send_profile.setEnabled(True)
+                return
+            
 
 
+            src_config_path = os.path.join(CONFIG_PATH, self.config_name_to_send + '.json')
+
+            #-----------------update last modify------------------------
+            json_data = self.load_json(self.config_name_to_send)
+            if json_data is None:
+                self.show_message('send_config', f'Couldnt Load Config')
+                self.ui.btn_send_profile.setEnabled(True)
+                return
+            ret = self.save_json(self.config_name_to_send, json_data, show_msg=False)
+            if ret == False:
+                self.show_message('send_config', f'An Error Occur')
+                self.ui.btn_send_profile.setEnabled(True)
+                return
+            #-----------------------------------------------------------
+            
+            
+            if not os.path.exists(src_config_path):
+                self.show_message('send_config', 'Selected Config file not found')
+                self.ui.btn_send_profile.setEnabled(True)
+                return
+            
+            try:
+                shutil.copy2(src_config_path, config_path)
+                self.show_message('send_config', 'write config success')
+            except Exception as e:
+                self.show_message('send_config', f'An Error Occur: {e}')
+            finally:
+                self.ui.btn_send_profile.setEnabled(True)
+
+
+
+                
 
     def load_profile(self):
-
-
-
 
         train_name = self.ui.combo_load_train_name.currentText()
         if train_name =='':
@@ -1420,8 +1498,7 @@ class mainUI(sQMainWindow):
             self.show_message('load_config', msg)
             
 
-            json_path =os.path.join('\\\\',self.remote_ip, self.image_grabber_log_path)
-
+            json_path = transormUtils.build_share_path(self.remote_ip,self.image_grabber_log_path)
             if os.path.exists(json_path):
                 
 
