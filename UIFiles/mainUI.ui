@@ -505,12 +505,12 @@ QSplitter::handle
 
 *[styleSheet=&quot;LsideFrameStyle&quot;]
 {
-	background-color:#F3C623;
+	background: #413B47;
 }
 
 *[styleSheet=&quot;LsideFrameStyle&quot;]  .QPushButton{
 	border: 0px;
-	color: #505050;
+	color: #f0f0f0;
 	font-weight: bold;
 }
 
@@ -527,7 +527,7 @@ QSplitter::handle
 
 *[styleSheet=&quot;LtopFrameStyle&quot;]
 {
-	background-color:#F3C623;
+	background-color:rgb(220, 221, 180);
 	border:1px solid #D7D7D9;
 }
 
@@ -1386,7 +1386,7 @@ QPushButton:disabled {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="copy">
              <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -4197,9 +4197,15 @@ border:none;</string>
                         </property>
                         <item>
                          <widget class="QPushButton" name="btn_send_profile">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>30</height>
+                           </size>
+                          </property>
                           <property name="maximumSize">
                            <size>
-                            <width>95</width>
+                            <width>150</width>
                             <height>16777215</height>
                            </size>
                           </property>
@@ -4386,9 +4392,15 @@ border:none;</string>
                         </property>
                         <item>
                          <widget class="QPushButton" name="btn_load_profile">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>30</height>
+                           </size>
+                          </property>
                           <property name="maximumSize">
                            <size>
-                            <width>120</width>
+                            <width>150</width>
                             <height>16777215</height>
                            </size>
                           </property>
