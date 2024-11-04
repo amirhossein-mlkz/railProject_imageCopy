@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="asstets">
+    <file>icons/check-wight-24.png</file>
     <file>icons/logo_aryan.png</file>
     <file>icons/rahahan-logo.png</file>
     <file>icons/down_icon_black.png</file>

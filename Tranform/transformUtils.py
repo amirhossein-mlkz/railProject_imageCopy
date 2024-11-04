@@ -12,10 +12,23 @@ class transormUtils:
     @staticmethod
     def extract_file_name_info(name:str) -> tuple[JalaliDateTime, str, str]:
         name, extention = os.path.splitext(name)
-        date, clock, train_id, camera_name = name.split('_')
+        date, clock, train_id, camera_name, status = name.split('_')
         dc_str = date + '_' + clock
         dt = JalaliDateTime.strptime(dc_str,'%Y-%m-%d_%H-%M-%S-%f')
-        return dt, train_id, camera_name
+        return dt, train_id, camera_name, status, extention
+    
+    @staticmethod
+    def change_status(name:str, to_old:bool, to_new:bool=False,):
+        dt, train_id, camera_name, status, extention = transormUtils.extract_file_name_info(name)
+        if to_old:
+            status = 'old'
+        elif to_new:
+            status = 'new'
+
+        date_str = dt.strftime('%Y-%m-%d_%H-%M-%S-%f')
+        res_fname = f"{date_str}_{train_id}_{camera_name}_{status}{extention}"
+        return res_fname
+        
     
     @staticmethod
     def build_share_path( ip:str, share_name:str, path:str=''):

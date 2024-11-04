@@ -243,6 +243,8 @@ class mainUI(sQMainWindow):
     def set_login_status(self, status):
         self.is_login = status
         self.ui.timeline_groupbox.setVisible(status) 
+        GUIBackend.set_checkbox_value(self.ui.only_copy_new_checkbox, True)
+
         if status == True:
             self.ui.login_btn.setText('Logout')
             self.ui.login_btn.setIcon(QIcon(":/asstets/icons/logout_icon.png"))
@@ -424,6 +426,7 @@ class mainUI(sQMainWindow):
         src_path = self.image_path
         dst_path = self.dst_image_path
         self.date_time_ranges = None
+        self.status_of_file = 'new'
 
         if self.ui.timeline_groupbox.isChecked() and self.is_login:
             start_date_time = self.calenders['start'].date
@@ -443,6 +446,12 @@ class mainUI(sQMainWindow):
                 return
 
             self.date_time_ranges = (start_date_time, end_date_time)
+
+            #------------------------------------------------------------
+            if GUIBackend.get_checkbox_value(self.ui.only_copy_new_checkbox):
+                self.status_of_file = 'new'
+            else:
+                self.status_of_file = None
 
 
             
@@ -476,7 +485,8 @@ class mainUI(sQMainWindow):
                                         dates_tange=self.date_time_ranges,
                                         finish_event_func=self.step2_files_list_ready_event,
                                         log_event_func=self.step1_log_event,
-                                        log_search=self.log_search)
+                                        log_search=self.log_search,
+                                        status=self.status_of_file)
 
     def step1_log_event(self, log:str):
         txt = f'Searching Files: {log}'
@@ -510,7 +520,8 @@ class mainUI(sQMainWindow):
                                    finish_func=self.step3_copy_finish_event,
                                    speed_func=self.step2_update_speed,
                                    progress_func=self.step2_update_progress,
-                                   msg_callback=self.step2_log )
+                                   msg_callback=self.step2_log,
+                                   rename_src=True)
 
     def step2_update_progress(self, completed:int, total:int):
         if total<1:
@@ -707,6 +718,7 @@ class mainUI(sQMainWindow):
         src_path = self.log_path
         dst_path = self.dst_log_path
         self.date_time_ranges = None
+        self.status_of_file = 'new'
 
 
         self.trasformer = transformModule(self.copy_ip, src_path, dst_path, self.copy_username, self.copy_password)

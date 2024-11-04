@@ -95,12 +95,13 @@ class transformModule:
         
 
 
-    def find_files(self, trains, dates_tange, finish_event_func, log_event_func=None,log_search=False):
+    def find_files(self, trains, dates_tange, status, finish_event_func, log_event_func=None,log_search=False):
         
         
         self.searcher_worker = filesFinderWorker(self.src_path,
                                                  trains=trains,
                                                  date_ranges=dates_tange,
+                                                 status = status,
                                                  struct=DIRECTORY_TREE,
                                                  log_search=log_search)
         if log_event_func is not None:
@@ -110,13 +111,14 @@ class transformModule:
         self.searcher_thread = threading.Thread( target=self.searcher_worker.run, daemon=True )
         self.searcher_thread.start()
         
-    def start_copy(self, paths:list[str], sizes:list[int], finish_func, speed_func, progress_func, msg_callback, move=False):
+    def start_copy(self, paths:list[str], sizes:list[int], finish_func, speed_func, progress_func, msg_callback, move=False, rename_src=False):
         # a = transormUtils.dateTimeRanges( avaiabilities['11BG21']['right'], 600 )
         self.copy_worker = CopyWorker(self.src_path,
                                       dst_path=self.dst_path,
                                       files_paths=paths,
                                       sizes=sizes,
-                                      move=move
+                                      move=move,
+                                      rename_src=rename_src
                                       )
         
         self.copy_worker.log_signal.connect(msg_callback)

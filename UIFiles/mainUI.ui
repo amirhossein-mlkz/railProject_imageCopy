@@ -173,7 +173,7 @@ QCheckBox::indicator:checked
 {
     border: 2px solid #7892DF;
     background-color: #7892DF;
-    image: url(:/icons/icons/tick_icon.png) 
+	image: url(:/asstets/icons/check-wight-24.png);
 }
 
 QCheckBox::indicator:hover 
@@ -1323,7 +1323,7 @@ color:black;</string>
                </property>
                <property name="icon">
                 <iconset>
-                 <normaloff>assets/icons/help_icon.png</normaloff>assets/icons/help_icon.png</iconset>
+                 <normaloff>../../../.designer/backup/assets/icons/help_icon.png</normaloff>../../../.designer/backup/assets/icons/help_icon.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -1736,6 +1736,104 @@ QPushButton:disabled {
                        <property name="bottomMargin">
                         <number>9</number>
                        </property>
+                       <item row="0" column="7">
+                        <widget class="QLabel" name="label_8">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLabel{
+	font-weight:bold;
+	font-size:20px;
+	color:rgb(0, 123, 255);
+}
+
+QLabel:disabled{
+	font-weight:bold;
+	font-size:20px;
+	color:rgb(177, 177, 177);
+}</string>
+                         </property>
+                         <property name="text">
+                          <string>:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="0">
+                        <widget class="QLabel" name="label_30">
+                         <property name="minimumSize">
+                          <size>
+                           <width>40</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLabel{
+	font-size:16px;
+	color:rgb(0, 123, 255);
+}
+
+QLabel:disabled{
+	font-weight:bold;
+	font-size:20px;
+	color:rgb(177, 177, 177);
+}</string>
+                         </property>
+                         <property name="text">
+                          <string>To</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="1">
+                        <widget class="QLabel" name="label_7">
+                         <property name="text">
+                          <string>date</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="8">
+                        <widget class="timeSpinBox" name="start_time_minute">
+                         <property name="maximum">
+                          <number>59</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="3">
+                        <widget class="QPushButton" name="end_calendar_btn">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QPushButton{
+background:transparent;
+icon:url(:/asstets/icons/calendar.png);
+border:none;
+icon-size:25px;
+width:25px;
+height:25px;
+}
+
+QPushButton:hover{
+icon:url(:/asstets/icons/calendar-hover.png);
+
+}
+
+QPushButton:disabled{
+icon:url(:/asstets/icons/calendar-disable.png);
+
+}</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="styleClass" stdset="0">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
                        <item row="0" column="3">
                         <widget class="QPushButton" name="start_calendar_btn">
                          <property name="enabled">
@@ -1787,8 +1885,8 @@ icon:url(:/asstets/icons/calendar-disable.png);
                          </property>
                         </widget>
                        </item>
-                       <item row="1" column="0">
-                        <widget class="QLabel" name="label_30">
+                       <item row="0" column="0">
+                        <widget class="QLabel" name="label_10">
                          <property name="minimumSize">
                           <size>
                            <width>40</width>
@@ -1808,7 +1906,87 @@ QLabel:disabled{
 }</string>
                          </property>
                          <property name="text">
-                          <string>To</string>
+                          <string>From</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLineEdit" name="end_date">
+                         <property name="minimumSize">
+                          <size>
+                           <width>102</width>
+                           <height>27</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>120</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="6">
+                        <widget class="timeSpinBox" name="end_time_hour">
+                         <property name="maximum">
+                          <number>23</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="2">
+                        <widget class="QLineEdit" name="start_date">
+                         <property name="minimumSize">
+                          <size>
+                           <width>102</width>
+                           <height>27</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>120</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="5">
+                        <widget class="QLabel" name="label_32">
+                         <property name="text">
+                          <string>Time</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="6">
+                        <widget class="timeSpinBox" name="start_time_hour">
+                         <property name="maximum">
+                          <number>23</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="5">
+                        <widget class="QLabel" name="label_34">
+                         <property name="text">
+                          <string>Time</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="8">
+                        <widget class="timeSpinBox" name="end_time_minute">
+                         <property name="maximum">
+                          <number>59</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <widget class="QLabel" name="label_6">
+                         <property name="text">
+                          <string>date</string>
                          </property>
                         </widget>
                        </item>
@@ -1835,46 +2013,6 @@ QLabel:disabled{
                          </property>
                         </widget>
                        </item>
-                       <item row="1" column="1">
-                        <widget class="QLabel" name="label_7">
-                         <property name="text">
-                          <string>date</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="1" column="2">
-                        <widget class="QLineEdit" name="end_date">
-                         <property name="minimumSize">
-                          <size>
-                           <width>102</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>120</width>
-                           <height>16777215</height>
-                          </size>
-                         </property>
-                         <property name="readOnly">
-                          <bool>true</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="1" column="8">
-                        <widget class="timeSpinBox" name="end_time_minute">
-                         <property name="maximum">
-                          <number>59</number>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="1" column="6">
-                        <widget class="timeSpinBox" name="end_time_hour">
-                         <property name="maximum">
-                          <number>23</number>
-                         </property>
-                        </widget>
-                       </item>
                        <item row="1" column="4">
                         <spacer name="horizontalSpacer_8">
                          <property name="orientation">
@@ -1890,144 +2028,6 @@ QLabel:disabled{
                           </size>
                          </property>
                         </spacer>
-                       </item>
-                       <item row="0" column="5">
-                        <widget class="QLabel" name="label_32">
-                         <property name="text">
-                          <string>Time</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="6">
-                        <widget class="timeSpinBox" name="start_time_hour">
-                         <property name="maximum">
-                          <number>23</number>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="7">
-                        <widget class="QLabel" name="label_8">
-                         <property name="enabled">
-                          <bool>true</bool>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">QLabel{
-	font-weight:bold;
-	font-size:20px;
-	color:rgb(0, 123, 255);
-}
-
-QLabel:disabled{
-	font-weight:bold;
-	font-size:20px;
-	color:rgb(177, 177, 177);
-}</string>
-                         </property>
-                         <property name="text">
-                          <string>:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="0">
-                        <widget class="QLabel" name="label_10">
-                         <property name="minimumSize">
-                          <size>
-                           <width>40</width>
-                           <height>0</height>
-                          </size>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">QLabel{
-	font-size:16px;
-	color:rgb(0, 123, 255);
-}
-
-QLabel:disabled{
-	font-weight:bold;
-	font-size:20px;
-	color:rgb(177, 177, 177);
-}</string>
-                         </property>
-                         <property name="text">
-                          <string>From</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="8">
-                        <widget class="timeSpinBox" name="start_time_minute">
-                         <property name="maximum">
-                          <number>59</number>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="1" column="5">
-                        <widget class="QLabel" name="label_34">
-                         <property name="text">
-                          <string>Time</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="2">
-                        <widget class="QLineEdit" name="start_date">
-                         <property name="minimumSize">
-                          <size>
-                           <width>102</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>120</width>
-                           <height>16777215</height>
-                          </size>
-                         </property>
-                         <property name="readOnly">
-                          <bool>true</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="1" column="3">
-                        <widget class="QPushButton" name="end_calendar_btn">
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>0</height>
-                          </size>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">QPushButton{
-background:transparent;
-icon:url(:/asstets/icons/calendar.png);
-border:none;
-icon-size:25px;
-width:25px;
-height:25px;
-}
-
-QPushButton:hover{
-icon:url(:/asstets/icons/calendar-hover.png);
-
-}
-
-QPushButton:disabled{
-icon:url(:/asstets/icons/calendar-disable.png);
-
-}</string>
-                         </property>
-                         <property name="text">
-                          <string/>
-                         </property>
-                         <property name="styleClass" stdset="0">
-                          <string/>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="1">
-                        <widget class="QLabel" name="label_6">
-                         <property name="text">
-                          <string>date</string>
-                         </property>
-                        </widget>
                        </item>
                        <item row="0" column="4">
                         <spacer name="horizontalSpacer_7">
@@ -2047,6 +2047,26 @@ icon:url(:/asstets/icons/calendar-disable.png);
                        </item>
                       </layout>
                      </widget>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_59">
+                      <property name="topMargin">
+                       <number>6</number>
+                      </property>
+                      <item>
+                       <widget class="QCheckBox" name="only_copy_new_checkbox">
+                        <property name="text">
+                         <string>Only Copy New Files</string>
+                        </property>
+                        <property name="checked">
+                         <bool>true</bool>
+                        </property>
+                        <property name="tristate">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </item>
                     <item>
                      <widget class="QLabel" name="time_line_msg">

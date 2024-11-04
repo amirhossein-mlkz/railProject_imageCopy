@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-    QGroupBox, QHBoxLayout, QLabel, QLineEdit,
-    QMainWindow, QPlainTextEdit, QProgressBar, QPushButton,
-    QSizePolicy, QSpacerItem, QStackedWidget, QStatusBar,
-    QTabWidget, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
+    QGridLayout, QGroupBox, QHBoxLayout, QLabel,
+    QLineEdit, QMainWindow, QPlainTextEdit, QProgressBar,
+    QPushButton, QSizePolicy, QSpacerItem, QStackedWidget,
+    QStatusBar, QTabWidget, QVBoxLayout, QWidget)
 
 from uiUtils.GUIComponents import timeSpinBox
 import assets_rc
@@ -178,7 +178,7 @@ class Ui_main(object):
 "{\n"
 "    border: 2px solid #7892DF;\n"
 "    background-color: #7892DF;\n"
-"    image: url(:/icons/icons/tick_icon.png) \n"
+"	image: url(:/asstets/icons/check-wight-24.png);\n"
 "}\n"
 "\n"
 "QCheckBox::indicator:hover \n"
@@ -189,8 +189,8 @@ class Ui_main(object):
 "QCheckBox::indicator:disabled \n"
 "{\n"
 "    border: 2px solid #E0E4EC;\n"
-"    background-color: #F6F6F6;"
-                        "\n"
+"    background-color: #F6F"
+                        "6F6;\n"
 "}\n"
 "\n"
 "/**************************QGraphicsView***************************/\n"
@@ -502,12 +502,12 @@ class Ui_main(object):
 "\n"
 "*[styleSheet=\"LsideFrameStyle\"]\n"
 "{\n"
-"	background-color:#F3C623;\n"
+"	background: #413B47;\n"
 "}\n"
 "\n"
 "*[styleSheet=\"LsideFrameStyle\"]  .QPushButton{\n"
 "	border: 0px;\n"
-"	color: #505050;\n"
+"	color: #f0f0f0;\n"
 "	font-weight: bold;\n"
 "}\n"
 "\n"
@@ -524,7 +524,7 @@ class Ui_main(object):
 "\n"
 "*[styleSheet=\"LtopFrameStyle\"]\n"
 "{\n"
-"	background-color:#F3C623;\n"
+"	background-color:rgb(220, 221, 180);\n"
 "	border:1px solid #D7D7D9;\n"
 "}\n"
 "\n"
@@ -542,8 +542,8 @@ class Ui_main(object):
 "	border:1px solid #D7D7D9;\n"
 "}\n"
 "\n"
-"*[styleSheet=\"LpagesFrameStyle\"] .QWi"
-                        "dget\n"
+"*[styleSheet=\"LpagesFrameStyle\""
+                        "] .QWidget\n"
 "{\n"
 "	background-color: transparent;\n"
 "	border:None;\n"
@@ -589,9 +589,9 @@ class Ui_main(object):
 "	font-size: 24px;\n"
 "	color: rgb(20, 20, 20);\n"
 "	font-weight: bold;\n"
-"}\n"
 ""
-                        "\n"
+                        "}\n"
+"\n"
 "*[styleSheet=\"LshowStepsFrameStyle\"]  .QPushButton:hover\n"
 "{\n"
 "	border:5px solid #BDBDBF;\n"
@@ -634,8 +634,8 @@ class Ui_main(object):
 "\n"
 "QPushButton[styleClass=\"fillBtn\"]:disabled {\n"
 "   background-color: #c0c0c0;\n"
-"	bor"
-                        "der:none;\n"
+""
+                        "	border:none;\n"
 "}\n"
 "\n"
 "\n"
@@ -755,7 +755,7 @@ class Ui_main(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.leftSideFrame.sizePolicy().hasHeightForWidth())
         self.leftSideFrame.setSizePolicy(sizePolicy1)
-        self.leftSideFrame.setMinimumSize(QSize(0, 0))
+        self.leftSideFrame.setMinimumSize(QSize(120, 0))
         self.leftSideFrame.setMaximumSize(QSize(120, 16777211))
         self.leftSideFrame.setStyleSheet(u"LsideFrameStyle")
         self.leftSideFrame.setFrameShape(QFrame.Shape.StyledPanel)
@@ -765,30 +765,6 @@ class Ui_main(object):
         self.verticalLayout_67.setSpacing(0)
         self.verticalLayout_67.setObjectName(u"verticalLayout_67")
         self.verticalLayout_67.setContentsMargins(0, 0, 0, 0)
-        self.frame_3 = QFrame(self.leftSideFrame)
-        self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setMaximumSize(QSize(16777215, 87))
-        self.frame_3.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
-        self.verticalLayout_3 = QVBoxLayout(self.frame_3)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.dorsa_lbl = QLabel(self.frame_3)
-        self.dorsa_lbl.setObjectName(u"dorsa_lbl")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.dorsa_lbl.sizePolicy().hasHeightForWidth())
-        self.dorsa_lbl.setSizePolicy(sizePolicy2)
-        self.dorsa_lbl.setMinimumSize(QSize(90, 45))
-        self.dorsa_lbl.setMaximumSize(QSize(75, 65))
-        self.dorsa_lbl.setPixmap(QPixmap(u":/asstets/icons/2.png"))
-        self.dorsa_lbl.setScaledContents(True)
-
-        self.verticalLayout_3.addWidget(self.dorsa_lbl)
-
-
-        self.verticalLayout_67.addWidget(self.frame_3)
-
         self.verticalSpacer_6 = QSpacerItem(20, 12, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_67.addItem(self.verticalSpacer_6)
@@ -802,11 +778,11 @@ class Ui_main(object):
 
         self.side_copy_btn = QPushButton(self.leftSideFrame)
         self.side_copy_btn.setObjectName(u"side_copy_btn")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.side_copy_btn.sizePolicy().hasHeightForWidth())
-        self.side_copy_btn.setSizePolicy(sizePolicy3)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.side_copy_btn.sizePolicy().hasHeightForWidth())
+        self.side_copy_btn.setSizePolicy(sizePolicy2)
         self.side_copy_btn.setMinimumSize(QSize(0, 50))
         self.side_copy_btn.setMaximumSize(QSize(16777215, 50))
         font = QFont()
@@ -834,8 +810,8 @@ class Ui_main(object):
 
         self.side_profile_btn = QPushButton(self.leftSideFrame)
         self.side_profile_btn.setObjectName(u"side_profile_btn")
-        sizePolicy3.setHeightForWidth(self.side_profile_btn.sizePolicy().hasHeightForWidth())
-        self.side_profile_btn.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.side_profile_btn.sizePolicy().hasHeightForWidth())
+        self.side_profile_btn.setSizePolicy(sizePolicy2)
         self.side_profile_btn.setMinimumSize(QSize(0, 50))
         self.side_profile_btn.setMaximumSize(QSize(16777215, 50))
         self.side_profile_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -855,8 +831,8 @@ class Ui_main(object):
 
         self.side_train_config_btn = QPushButton(self.leftSideFrame)
         self.side_train_config_btn.setObjectName(u"side_train_config_btn")
-        sizePolicy3.setHeightForWidth(self.side_train_config_btn.sizePolicy().hasHeightForWidth())
-        self.side_train_config_btn.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.side_train_config_btn.sizePolicy().hasHeightForWidth())
+        self.side_train_config_btn.setSizePolicy(sizePolicy2)
         self.side_train_config_btn.setMinimumSize(QSize(0, 50))
         self.side_train_config_btn.setMaximumSize(QSize(16777215, 50))
         self.side_train_config_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -874,8 +850,8 @@ class Ui_main(object):
 
         self.side_setting_btn = QPushButton(self.leftSideFrame)
         self.side_setting_btn.setObjectName(u"side_setting_btn")
-        sizePolicy3.setHeightForWidth(self.side_setting_btn.sizePolicy().hasHeightForWidth())
-        self.side_setting_btn.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.side_setting_btn.sizePolicy().hasHeightForWidth())
+        self.side_setting_btn.setSizePolicy(sizePolicy2)
         self.side_setting_btn.setMinimumSize(QSize(0, 50))
         self.side_setting_btn.setMaximumSize(QSize(16777215, 50))
         self.side_setting_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -894,8 +870,8 @@ class Ui_main(object):
         self.side_about_btn = QPushButton(self.leftSideFrame)
         self.side_about_btn.setObjectName(u"side_about_btn")
         self.side_about_btn.setEnabled(False)
-        sizePolicy3.setHeightForWidth(self.side_about_btn.sizePolicy().hasHeightForWidth())
-        self.side_about_btn.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.side_about_btn.sizePolicy().hasHeightForWidth())
+        self.side_about_btn.setSizePolicy(sizePolicy2)
         self.side_about_btn.setMinimumSize(QSize(0, 50))
         self.side_about_btn.setMaximumSize(QSize(16777215, 50))
         self.side_about_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -917,6 +893,34 @@ class Ui_main(object):
 
         self.verticalLayout_67.addItem(self.verticalSpacer_2)
 
+        self.label_66 = QLabel(self.leftSideFrame)
+        self.label_66.setObjectName(u"label_66")
+        self.label_66.setMinimumSize(QSize(0, 80))
+        self.label_66.setMaximumSize(QSize(100, 80))
+        self.label_66.setPixmap(QPixmap(u":/asstets/icons/logo_aryan.png"))
+        self.label_66.setScaledContents(True)
+
+        self.verticalLayout_67.addWidget(self.label_66, 0, Qt.AlignmentFlag.AlignHCenter)
+
+        self.label_65 = QLabel(self.leftSideFrame)
+        self.label_65.setObjectName(u"label_65")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.label_65.sizePolicy().hasHeightForWidth())
+        self.label_65.setSizePolicy(sizePolicy3)
+        self.label_65.setMinimumSize(QSize(28, 120))
+        self.label_65.setMaximumSize(QSize(100, 120))
+        self.label_65.setSizeIncrement(QSize(50, 0))
+        self.label_65.setPixmap(QPixmap(u":/asstets/icons/rahahan-logo.png"))
+        self.label_65.setScaledContents(True)
+
+        self.verticalLayout_67.addWidget(self.label_65, 0, Qt.AlignmentFlag.AlignHCenter)
+
+        self.verticalSpacer_11 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.verticalLayout_67.addItem(self.verticalSpacer_11)
+
         self.login_btn = QPushButton(self.leftSideFrame)
         self.login_btn.setObjectName(u"login_btn")
         self.login_btn.setEnabled(True)
@@ -935,8 +939,8 @@ class Ui_main(object):
 
         self.verticalLayout_67.addItem(self.verticalSpacer_5)
 
-        self.verticalLayout_67.setStretch(5, 10)
-        self.verticalLayout_67.setStretch(11, 10)
+        self.verticalLayout_67.setStretch(4, 10)
+        self.verticalLayout_67.setStretch(10, 10)
 
         self.horizontalLayout_2.addWidget(self.leftSideFrame)
 
@@ -972,11 +976,11 @@ class Ui_main(object):
 
         self.help_btn = QPushButton(self.topFrame)
         self.help_btn.setObjectName(u"help_btn")
-        sizePolicy3.setHeightForWidth(self.help_btn.sizePolicy().hasHeightForWidth())
-        self.help_btn.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.help_btn.sizePolicy().hasHeightForWidth())
+        self.help_btn.setSizePolicy(sizePolicy2)
         self.help_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         icon4 = QIcon()
-        icon4.addFile(u"assets/icons/help_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon4.addFile(u"../../../.designer/backup/assets/icons/help_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.help_btn.setIcon(icon4)
         self.help_btn.setIconSize(QSize(22, 22))
 
@@ -984,8 +988,8 @@ class Ui_main(object):
 
         self.minimize_btn = QPushButton(self.topFrame)
         self.minimize_btn.setObjectName(u"minimize_btn")
-        sizePolicy3.setHeightForWidth(self.minimize_btn.sizePolicy().hasHeightForWidth())
-        self.minimize_btn.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.minimize_btn.sizePolicy().hasHeightForWidth())
+        self.minimize_btn.setSizePolicy(sizePolicy2)
         self.minimize_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         icon5 = QIcon()
         icon5.addFile(u":/asstets/icons/minus_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
@@ -996,8 +1000,8 @@ class Ui_main(object):
 
         self.close_btn = QPushButton(self.topFrame)
         self.close_btn.setObjectName(u"close_btn")
-        sizePolicy3.setHeightForWidth(self.close_btn.sizePolicy().hasHeightForWidth())
-        self.close_btn.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.close_btn.sizePolicy().hasHeightForWidth())
+        self.close_btn.setSizePolicy(sizePolicy2)
         self.close_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         icon6 = QIcon()
         icon6.addFile(u":/asstets/icons/close_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
@@ -1212,107 +1216,6 @@ class Ui_main(object):
         self.gridLayout = QGridLayout(self.frame_date_2)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(9, 9, 9, 9)
-        self.start_calendar_btn = QPushButton(self.frame_date_2)
-        self.start_calendar_btn.setObjectName(u"start_calendar_btn")
-        self.start_calendar_btn.setEnabled(True)
-        sizePolicy2.setHeightForWidth(self.start_calendar_btn.sizePolicy().hasHeightForWidth())
-        self.start_calendar_btn.setSizePolicy(sizePolicy2)
-        self.start_calendar_btn.setMinimumSize(QSize(25, 25))
-        self.start_calendar_btn.setMaximumSize(QSize(16777210, 16777215))
-        self.start_calendar_btn.setStyleSheet(u"QPushButton{\n"
-"background:transparent;\n"
-"icon:url(:/asstets/icons/calendar.png);\n"
-"border:none;\n"
-"icon-size:25px;\n"
-"width:25px;\n"
-"height:25px;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"icon:url(:/asstets/icons/calendar-hover.png);\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:disabled{\n"
-"icon:url(:/asstets/icons/calendar-disable.png);\n"
-"\n"
-"}")
-
-        self.gridLayout.addWidget(self.start_calendar_btn, 0, 3, 1, 1)
-
-        self.label_30 = QLabel(self.frame_date_2)
-        self.label_30.setObjectName(u"label_30")
-        self.label_30.setMinimumSize(QSize(40, 0))
-        self.label_30.setStyleSheet(u"QLabel{\n"
-"	font-size:16px;\n"
-"	color:rgb(0, 123, 255);\n"
-"}\n"
-"\n"
-"QLabel:disabled{\n"
-"	font-weight:bold;\n"
-"	font-size:20px;\n"
-"	color:rgb(177, 177, 177);\n"
-"}")
-
-        self.gridLayout.addWidget(self.label_30, 1, 0, 1, 1)
-
-        self.label_31 = QLabel(self.frame_date_2)
-        self.label_31.setObjectName(u"label_31")
-        self.label_31.setEnabled(True)
-        self.label_31.setStyleSheet(u"QLabel{\n"
-"	font-weight:bold;\n"
-"	font-size:20px;\n"
-"	color:rgb(0, 123, 255);\n"
-"}\n"
-"\n"
-"QLabel:disabled{\n"
-"	font-weight:bold;\n"
-"	font-size:20px;\n"
-"	color:rgb(177, 177, 177);\n"
-"}")
-
-        self.gridLayout.addWidget(self.label_31, 1, 7, 1, 1)
-
-        self.label_7 = QLabel(self.frame_date_2)
-        self.label_7.setObjectName(u"label_7")
-
-        self.gridLayout.addWidget(self.label_7, 1, 1, 1, 1)
-
-        self.end_date = QLineEdit(self.frame_date_2)
-        self.end_date.setObjectName(u"end_date")
-        self.end_date.setMinimumSize(QSize(102, 27))
-        self.end_date.setMaximumSize(QSize(120, 16777215))
-        self.end_date.setReadOnly(True)
-
-        self.gridLayout.addWidget(self.end_date, 1, 2, 1, 1)
-
-        self.end_time_minute = timeSpinBox(self.frame_date_2)
-        self.end_time_minute.setObjectName(u"end_time_minute")
-        self.end_time_minute.setMaximum(59)
-
-        self.gridLayout.addWidget(self.end_time_minute, 1, 8, 1, 1)
-
-        self.end_time_hour = timeSpinBox(self.frame_date_2)
-        self.end_time_hour.setObjectName(u"end_time_hour")
-        self.end_time_hour.setMaximum(23)
-
-        self.gridLayout.addWidget(self.end_time_hour, 1, 6, 1, 1)
-
-        self.horizontalSpacer_8 = QSpacerItem(38, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-
-        self.gridLayout.addItem(self.horizontalSpacer_8, 1, 4, 1, 1)
-
-        self.label_32 = QLabel(self.frame_date_2)
-        self.label_32.setObjectName(u"label_32")
-
-        self.gridLayout.addWidget(self.label_32, 0, 5, 1, 1)
-
-        self.start_time_hour = timeSpinBox(self.frame_date_2)
-        self.start_time_hour.setObjectName(u"start_time_hour")
-        self.start_time_hour.setMaximum(23)
-
-        self.gridLayout.addWidget(self.start_time_hour, 0, 6, 1, 1)
-
         self.label_8 = QLabel(self.frame_date_2)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setEnabled(True)
@@ -1330,10 +1233,10 @@ class Ui_main(object):
 
         self.gridLayout.addWidget(self.label_8, 0, 7, 1, 1)
 
-        self.label_10 = QLabel(self.frame_date_2)
-        self.label_10.setObjectName(u"label_10")
-        self.label_10.setMinimumSize(QSize(40, 0))
-        self.label_10.setStyleSheet(u"QLabel{\n"
+        self.label_30 = QLabel(self.frame_date_2)
+        self.label_30.setObjectName(u"label_30")
+        self.label_30.setMinimumSize(QSize(40, 0))
+        self.label_30.setStyleSheet(u"QLabel{\n"
 "	font-size:16px;\n"
 "	color:rgb(0, 123, 255);\n"
 "}\n"
@@ -1344,26 +1247,18 @@ class Ui_main(object):
 "	color:rgb(177, 177, 177);\n"
 "}")
 
-        self.gridLayout.addWidget(self.label_10, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_30, 1, 0, 1, 1)
+
+        self.label_7 = QLabel(self.frame_date_2)
+        self.label_7.setObjectName(u"label_7")
+
+        self.gridLayout.addWidget(self.label_7, 1, 1, 1, 1)
 
         self.start_time_minute = timeSpinBox(self.frame_date_2)
         self.start_time_minute.setObjectName(u"start_time_minute")
         self.start_time_minute.setMaximum(59)
 
         self.gridLayout.addWidget(self.start_time_minute, 0, 8, 1, 1)
-
-        self.label_34 = QLabel(self.frame_date_2)
-        self.label_34.setObjectName(u"label_34")
-
-        self.gridLayout.addWidget(self.label_34, 1, 5, 1, 1)
-
-        self.start_date = QLineEdit(self.frame_date_2)
-        self.start_date.setObjectName(u"start_date")
-        self.start_date.setMinimumSize(QSize(102, 27))
-        self.start_date.setMaximumSize(QSize(120, 16777215))
-        self.start_date.setReadOnly(True)
-
-        self.gridLayout.addWidget(self.start_date, 0, 2, 1, 1)
 
         self.end_calendar_btn = QPushButton(self.frame_date_2)
         self.end_calendar_btn.setObjectName(u"end_calendar_btn")
@@ -1389,10 +1284,119 @@ class Ui_main(object):
 
         self.gridLayout.addWidget(self.end_calendar_btn, 1, 3, 1, 1)
 
+        self.start_calendar_btn = QPushButton(self.frame_date_2)
+        self.start_calendar_btn.setObjectName(u"start_calendar_btn")
+        self.start_calendar_btn.setEnabled(True)
+        sizePolicy3.setHeightForWidth(self.start_calendar_btn.sizePolicy().hasHeightForWidth())
+        self.start_calendar_btn.setSizePolicy(sizePolicy3)
+        self.start_calendar_btn.setMinimumSize(QSize(25, 25))
+        self.start_calendar_btn.setMaximumSize(QSize(16777210, 16777215))
+        self.start_calendar_btn.setStyleSheet(u"QPushButton{\n"
+"background:transparent;\n"
+"icon:url(:/asstets/icons/calendar.png);\n"
+"border:none;\n"
+"icon-size:25px;\n"
+"width:25px;\n"
+"height:25px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"icon:url(:/asstets/icons/calendar-hover.png);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:disabled{\n"
+"icon:url(:/asstets/icons/calendar-disable.png);\n"
+"\n"
+"}")
+
+        self.gridLayout.addWidget(self.start_calendar_btn, 0, 3, 1, 1)
+
+        self.label_10 = QLabel(self.frame_date_2)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setMinimumSize(QSize(40, 0))
+        self.label_10.setStyleSheet(u"QLabel{\n"
+"	font-size:16px;\n"
+"	color:rgb(0, 123, 255);\n"
+"}\n"
+"\n"
+"QLabel:disabled{\n"
+"	font-weight:bold;\n"
+"	font-size:20px;\n"
+"	color:rgb(177, 177, 177);\n"
+"}")
+
+        self.gridLayout.addWidget(self.label_10, 0, 0, 1, 1)
+
+        self.end_date = QLineEdit(self.frame_date_2)
+        self.end_date.setObjectName(u"end_date")
+        self.end_date.setMinimumSize(QSize(102, 27))
+        self.end_date.setMaximumSize(QSize(120, 16777215))
+        self.end_date.setReadOnly(True)
+
+        self.gridLayout.addWidget(self.end_date, 1, 2, 1, 1)
+
+        self.end_time_hour = timeSpinBox(self.frame_date_2)
+        self.end_time_hour.setObjectName(u"end_time_hour")
+        self.end_time_hour.setMaximum(23)
+
+        self.gridLayout.addWidget(self.end_time_hour, 1, 6, 1, 1)
+
+        self.start_date = QLineEdit(self.frame_date_2)
+        self.start_date.setObjectName(u"start_date")
+        self.start_date.setMinimumSize(QSize(102, 27))
+        self.start_date.setMaximumSize(QSize(120, 16777215))
+        self.start_date.setReadOnly(True)
+
+        self.gridLayout.addWidget(self.start_date, 0, 2, 1, 1)
+
+        self.label_32 = QLabel(self.frame_date_2)
+        self.label_32.setObjectName(u"label_32")
+
+        self.gridLayout.addWidget(self.label_32, 0, 5, 1, 1)
+
+        self.start_time_hour = timeSpinBox(self.frame_date_2)
+        self.start_time_hour.setObjectName(u"start_time_hour")
+        self.start_time_hour.setMaximum(23)
+
+        self.gridLayout.addWidget(self.start_time_hour, 0, 6, 1, 1)
+
+        self.label_34 = QLabel(self.frame_date_2)
+        self.label_34.setObjectName(u"label_34")
+
+        self.gridLayout.addWidget(self.label_34, 1, 5, 1, 1)
+
+        self.end_time_minute = timeSpinBox(self.frame_date_2)
+        self.end_time_minute.setObjectName(u"end_time_minute")
+        self.end_time_minute.setMaximum(59)
+
+        self.gridLayout.addWidget(self.end_time_minute, 1, 8, 1, 1)
+
         self.label_6 = QLabel(self.frame_date_2)
         self.label_6.setObjectName(u"label_6")
 
         self.gridLayout.addWidget(self.label_6, 0, 1, 1, 1)
+
+        self.label_31 = QLabel(self.frame_date_2)
+        self.label_31.setObjectName(u"label_31")
+        self.label_31.setEnabled(True)
+        self.label_31.setStyleSheet(u"QLabel{\n"
+"	font-weight:bold;\n"
+"	font-size:20px;\n"
+"	color:rgb(0, 123, 255);\n"
+"}\n"
+"\n"
+"QLabel:disabled{\n"
+"	font-weight:bold;\n"
+"	font-size:20px;\n"
+"	color:rgb(177, 177, 177);\n"
+"}")
+
+        self.gridLayout.addWidget(self.label_31, 1, 7, 1, 1)
+
+        self.horizontalSpacer_8 = QSpacerItem(38, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.gridLayout.addItem(self.horizontalSpacer_8, 1, 4, 1, 1)
 
         self.horizontalSpacer_7 = QSpacerItem(38, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
@@ -1400,6 +1404,19 @@ class Ui_main(object):
 
 
         self.verticalLayout_20.addWidget(self.frame_date_2)
+
+        self.horizontalLayout_59 = QHBoxLayout()
+        self.horizontalLayout_59.setObjectName(u"horizontalLayout_59")
+        self.horizontalLayout_59.setContentsMargins(-1, 6, -1, -1)
+        self.only_copy_new_checkbox = QCheckBox(self.frame_7)
+        self.only_copy_new_checkbox.setObjectName(u"only_copy_new_checkbox")
+        self.only_copy_new_checkbox.setChecked(True)
+        self.only_copy_new_checkbox.setTristate(False)
+
+        self.horizontalLayout_59.addWidget(self.only_copy_new_checkbox)
+
+
+        self.verticalLayout_20.addLayout(self.horizontalLayout_59)
 
         self.time_line_msg = QLabel(self.frame_7)
         self.time_line_msg.setObjectName(u"time_line_msg")
@@ -2557,7 +2574,8 @@ class Ui_main(object):
         self.horizontalLayout_17.setContentsMargins(0, 0, 0, 0)
         self.btn_send_profile = QPushButton(self.frame_14)
         self.btn_send_profile.setObjectName(u"btn_send_profile")
-        self.btn_send_profile.setMaximumSize(QSize(95, 16777215))
+        self.btn_send_profile.setMinimumSize(QSize(0, 30))
+        self.btn_send_profile.setMaximumSize(QSize(150, 16777215))
         self.btn_send_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_17.addWidget(self.btn_send_profile)
@@ -2645,7 +2663,8 @@ class Ui_main(object):
         self.horizontalLayout_36.setContentsMargins(0, 0, 0, 0)
         self.btn_load_profile = QPushButton(self.frame_15)
         self.btn_load_profile.setObjectName(u"btn_load_profile")
-        self.btn_load_profile.setMaximumSize(QSize(120, 16777215))
+        self.btn_load_profile.setMinimumSize(QSize(0, 30))
+        self.btn_load_profile.setMaximumSize(QSize(150, 16777215))
         self.btn_load_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_36.addWidget(self.btn_load_profile)
@@ -3175,7 +3194,7 @@ class Ui_main(object):
 
         self.retranslateUi(main)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(2)
         self.tabWidget_2.setCurrentIndex(1)
 
@@ -3185,12 +3204,13 @@ class Ui_main(object):
 
     def retranslateUi(self, main):
         main.setWindowTitle(QCoreApplication.translate("main", u"MainWindow", None))
-        self.dorsa_lbl.setText("")
         self.side_copy_btn.setText(QCoreApplication.translate("main", u"Copy", None))
         self.side_profile_btn.setText(QCoreApplication.translate("main", u"Profile Config", None))
         self.side_train_config_btn.setText(QCoreApplication.translate("main", u"Train Config", None))
         self.side_setting_btn.setText(QCoreApplication.translate("main", u"Settings", None))
         self.side_about_btn.setText(QCoreApplication.translate("main", u" About Us ", None))
+        self.label_66.setText("")
+        self.label_65.setText("")
         self.login_btn.setText(QCoreApplication.translate("main", u"Login", None))
         self.login_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
         self.logined_username_lbl.setText("")
@@ -3208,18 +3228,19 @@ class Ui_main(object):
         self.password_msg.setText(QCoreApplication.translate("main", u"message", None))
         self.password_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.timeline_groupbox.setTitle(QCoreApplication.translate("main", u"Time Line Filter", None))
-        self.start_calendar_btn.setText("")
-        self.start_calendar_btn.setProperty("styleClass", "")
-        self.label_30.setText(QCoreApplication.translate("main", u"To", None))
-        self.label_31.setText(QCoreApplication.translate("main", u":", None))
-        self.label_7.setText(QCoreApplication.translate("main", u"date", None))
-        self.label_32.setText(QCoreApplication.translate("main", u"Time", None))
         self.label_8.setText(QCoreApplication.translate("main", u":", None))
-        self.label_10.setText(QCoreApplication.translate("main", u"From", None))
-        self.label_34.setText(QCoreApplication.translate("main", u"Time", None))
+        self.label_30.setText(QCoreApplication.translate("main", u"To", None))
+        self.label_7.setText(QCoreApplication.translate("main", u"date", None))
         self.end_calendar_btn.setText("")
         self.end_calendar_btn.setProperty("styleClass", "")
+        self.start_calendar_btn.setText("")
+        self.start_calendar_btn.setProperty("styleClass", "")
+        self.label_10.setText(QCoreApplication.translate("main", u"From", None))
+        self.label_32.setText(QCoreApplication.translate("main", u"Time", None))
+        self.label_34.setText(QCoreApplication.translate("main", u"Time", None))
         self.label_6.setText(QCoreApplication.translate("main", u"date", None))
+        self.label_31.setText(QCoreApplication.translate("main", u":", None))
+        self.only_copy_new_checkbox.setText(QCoreApplication.translate("main", u"Only Copy New Files", None))
         self.time_line_msg.setText(QCoreApplication.translate("main", u"TextLabel", None))
         self.copy_button.setText(QCoreApplication.translate("main", u"Start Copy", None))
         self.copy_button.setProperty("styleClass", "")
