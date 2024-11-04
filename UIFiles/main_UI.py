@@ -1447,6 +1447,8 @@ class Ui_main(object):
 
         self.frame_11 = QFrame(self.copy)
         self.frame_11.setObjectName(u"frame_11")
+        sizePolicy4.setHeightForWidth(self.frame_11.sizePolicy().hasHeightForWidth())
+        self.frame_11.setSizePolicy(sizePolicy4)
         self.frame_11.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_11.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_29 = QVBoxLayout(self.frame_11)

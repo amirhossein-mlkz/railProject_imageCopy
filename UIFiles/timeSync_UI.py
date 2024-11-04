@@ -24,9 +24,9 @@ class Ui_SysncTImeDialog(object):
     def setupUi(self, SysncTImeDialog):
         if not SysncTImeDialog.objectName():
             SysncTImeDialog.setObjectName(u"SysncTImeDialog")
-        SysncTImeDialog.resize(490, 180)
-        SysncTImeDialog.setMinimumSize(QSize(0, 180))
-        SysncTImeDialog.setMaximumSize(QSize(16777215, 180))
+        SysncTImeDialog.resize(497, 230)
+        SysncTImeDialog.setMinimumSize(QSize(0, 230))
+        SysncTImeDialog.setMaximumSize(QSize(16777215, 230))
         icon = QIcon()
         icon.addFile(u":/asstets/icons/refresh_5730689.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         SysncTImeDialog.setWindowIcon(icon)
@@ -88,6 +88,8 @@ class Ui_SysncTImeDialog(object):
 
         self.loadingframe = QFrame(SysncTImeDialog)
         self.loadingframe.setObjectName(u"loadingframe")
+        self.loadingframe.setMinimumSize(QSize(0, 0))
+        self.loadingframe.setMaximumSize(QSize(16777215, 16777215))
         self.verticalLayout_2 = QVBoxLayout(self.loadingframe)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(-1, 15, -1, -1)
@@ -108,8 +110,16 @@ class Ui_SysncTImeDialog(object):
 
         self.verticalLayout.addWidget(self.loadingframe)
 
+        self.error_lbl = QLabel(SysncTImeDialog)
+        self.error_lbl.setObjectName(u"error_lbl")
+        self.error_lbl.setStyleSheet(u"color:rgb(230, 63, 66);")
+        self.error_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.verticalLayout.addWidget(self.error_lbl)
+
         self.sync_btn = QPushButton(SysncTImeDialog)
         self.sync_btn.setObjectName(u"sync_btn")
+        self.sync_btn.setEnabled(True)
         self.sync_btn.setMinimumSize(QSize(150, 27))
         self.sync_btn.setMaximumSize(QSize(150, 16777215))
         self.sync_btn.setSizeIncrement(QSize(0, 0))
@@ -125,9 +135,18 @@ class Ui_SysncTImeDialog(object):
 "\n"
 "QPushButton:hover{\n"
 "background-color:rgb(71, 71, 213);	\n"
+"}\n"
+"\n"
+"QPushButton:disabled{\n"
+"background-color: rgb(185, 185, 185);\n"
+"border: 1px solid  rgb(185, 185, 185);\n"
 "}")
 
         self.verticalLayout.addWidget(self.sync_btn, 0, Qt.AlignmentFlag.AlignHCenter)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout.addItem(self.verticalSpacer_2)
 
 
         self.retranslateUi(SysncTImeDialog)
@@ -142,7 +161,8 @@ class Ui_SysncTImeDialog(object):
         self.label_3.setText(QCoreApplication.translate("SysncTImeDialog", u"Train System Time:", None))
         self.system_time_lbl.setText(QCoreApplication.translate("SysncTImeDialog", u"----", None))
         self.train_system_time_lbl.setText(QCoreApplication.translate("SysncTImeDialog", u"----", None))
-        self.label_2.setText(QCoreApplication.translate("SysncTImeDialog", u"PLease Wait a few seconds", None))
+        self.label_2.setText(QCoreApplication.translate("SysncTImeDialog", u"Please wait a few seconds...", None))
+        self.error_lbl.setText(QCoreApplication.translate("SysncTImeDialog", u"PLease Wait a few seconds", None))
         self.sync_btn.setText(QCoreApplication.translate("SysncTImeDialog", u"Sync TIme", None))
     # retranslateUi
 

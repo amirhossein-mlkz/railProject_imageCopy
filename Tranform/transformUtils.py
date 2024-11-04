@@ -1,5 +1,5 @@
 import os
-import subprocess
+import threading
 
 import cv2
 from PySide6.QtCore import Signal, QObject
@@ -56,6 +56,27 @@ class transormUtils:
         duration = frame_count / fps
         return duration
     
+    @staticmethod
+    def run_with_timeout(func, timeout, *args, **kwargs):
+
+        result = [None]
+        is_completed = [False]
+
+        def wrapper():
+            result[0] = func(*args, **kwargs)
+            is_completed[0] = True
+
+        thread = threading.Thread(target=wrapper)
+        thread.start()
+        thread.join(timeout)
+
+        executed_successfully = is_completed[0]
+        if not executed_successfully:
+            result[0] = "Error: Operation timed out!"
+
+        return executed_successfully, result[0]
+
+        
     # @staticmethod
     # def dateTimeRanges(date_times:list[JalaliDateTime], step_lenght_sec:int, max_gap_sec=1):
     #     date_times.sort()

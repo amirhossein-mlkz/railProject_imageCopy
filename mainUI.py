@@ -1616,6 +1616,7 @@ class mainUI(sQMainWindow):
         self.ping_thread = threading.Thread(target=self.ping_worker.run, daemon=True)
         self.ping_thread.start()
         GUIBackend.set_disable_enable(self.ui.check_time_btn, False)
+        self.show_message('copy', '')
 
 
     def time_sysnc_connection_event(self, status_code,msg=''):
