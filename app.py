@@ -6,6 +6,8 @@ if BUILD_UI:
     sys.path.append('UIFiles\\Assets')
     os.system('CMD /C pyside6-rcc uiFiles/Assets/assets.qrc -o uiFiles/Assets/assets_rc.py')#PySide
     os.system('CMD /C pyside6-uic UIFiles/mainUI.ui -o UIFiles/main_UI.py')
+    os.system('CMD /C pyside6-uic UIFiles/timeSyncUI.ui -o UIFiles/timeSync_UI.py')
+
     #dialogs
 
 from mainUI import mainUI

@@ -1,42 +1,44 @@
+import sys,os,platform,time,threading
+import subprocess
+import shutil
+import re,json
 
+from PySide6.QtWidgets import QGraphicsBlurEffect
+from PySide6.QtWidgets import QAbstractSpinBox
 from PySide6 import QtCore as sQtCore
 from PySide6.QtWidgets import QMainWindow as sQMainWindow
 from PySide6.QtWidgets import QApplication as sQApplication
-import sqlite3
-import sys,os,platform,time,subprocess,threading
-from Tranform.transformUtils import transormUtils
-from database import DataBase
-# from copy_ping import ShareCopyWorker
-from persiantools.jdatetime import JalaliDateTime
-import jdatetime
-from Calendar import  JalaliCalendarDialog
-from guiBackend import GUIBackend
 from PySide6.QtCore import QTimer
-from login import LoginPage
-from PySide6.QtWidgets import QGraphicsBlurEffect
-from PySide6.QtWidgets import QAbstractSpinBox
-import shutil
-
-from UIFiles.main_UI import Ui_main
-from uiUtils.GUIComponents import single_timer_runner
-
-from Tranform.transformModule import transformModule, archiveManager
-from Tranform.sharingConstans import StatusCodes
-from Tranform.Network import pingAndCreateWorker
-# from Tranform.filesActionWorker import CopyWorker
-
 from PySide6.QtGui import QFont,QIcon
 from PySide6.QtWidgets import QMessageBox
+import sqlite3
+from persiantools.jdatetime import JalaliDateTime
+
+from Tranform.transformUtils import transormUtils
+from database import DataBase
+from Calendar import  JalaliCalendarDialog
+from guiBackend import GUIBackend
+from login import LoginPage
+from UIFiles.main_UI import Ui_main
+from uiUtils.GUIComponents import single_timer_runner
+from Tranform.transformModule import transformModule, archiveManager
+from Tranform.sharingConstans import StatusCodes
+from Tranform.Network import pingAndCreateWorker, pingWorker
+from uiUtils.mapDictionary import mapDictionary
+from timeSetting import timeSetting
+from timeSettingDialog import timeSettingDialog
 import texts
 
+
 from Styles import error_style,success_style,none_style,click_side_btns,normal_side_btns
-import re,json
 from ShowConfig import ShowConfig
 from Constants import BASE_CONFIG,CAMERA_NAMES,CONFIG_PATH, EXISTVIDEOS_PATH, IMAGE_GRABBER_CONFIG_PATH,PARMS,EXISTVIDEOS_PATH,MAIN_PATH,IMAGE_PATH,LOG_PATH,DST_PATH, UTILS_PATH
 
 from UpdateExistVideos import WidgetUpdateExistVideos
 
 DEBUG = True
+
+
 # ui class
 class mainUI(sQMainWindow):
 
@@ -70,9 +72,6 @@ class mainUI(sQMainWindow):
 
 
         self.fields_msg = {
-            'ip': self.ui.ip_address_msg,
-            'username': self.ui.username_msg,
-            'password': self.ui.password_msg,
             'copy': self.ui.copy_log_lbl,
             'timeline':self.ui.time_line_msg,
             'setting_msg' : self.ui.label_message_change_password,
@@ -81,7 +80,17 @@ class mainUI(sQMainWindow):
             'load_config': self.ui.load_config_msg,
             'send_config': self.ui.send_config_msg,
         }
-        
+
+        self.mapDict = mapDictionary({
+            'codec': {
+                'none':'Best Quality',
+                'mpeg':'Best Compression'
+            }
+        })
+
+        GUIBackend.set_combobox_items(self.ui.new_profile_compression, self.mapDict.get_values('codec'))
+        GUIBackend.set_combobox_items(self.ui.edit_profile_compression, self.mapDict.get_values('codec'))
+
         self.side_btns = [ self.ui.side_setting_btn , self.ui.side_train_config_btn,self.ui.side_profile_btn,self.ui.side_copy_btn]
 
 
@@ -159,6 +168,7 @@ class mainUI(sQMainWindow):
     def button_connector(self):
 
         self.ui.close_btn.clicked.connect(self.close_win)
+        self.ui.check_time_btn.clicked.connect(self.check_time_sync)
         self.ui.minimize_btn.clicked.connect(self.minimize_win)
 
         self.ui.copy_button.clicked.connect(self.ui_copy)
@@ -402,7 +412,6 @@ class mainUI(sQMainWindow):
 
         self.ui.ip_input.setText(ret['ip'])
         self.ui.username_input.setText(ret['username'])
-        self.ui.password_input.setText(ret['password'])
 
 
     def start_copy(self,image_condition=None):
@@ -1107,12 +1116,9 @@ class mainUI(sQMainWindow):
 
 
     def save_camera_config(self):
-
-
-
-
-
         train_name = self.get_train_name_config()
+        codec_ui = GUIBackend.get_combobox_selected(self.ui.new_profile_compression)
+        codec = self.mapDict.value2key('codec', codec_ui)
 
         ret,msg = self.check_train_name(train_name=train_name)
         if not ret:
@@ -1126,11 +1132,9 @@ class mainUI(sQMainWindow):
             self.show_message('profile',txt=msg,style=error_style,disapear=2000)
         
         else:
-            ret = self.load_json(json_name=BASE_CONFIG)
-            if ret:
-                json_data = ret
-
-                print(json_data['cameras'])
+            config = self.load_json(json_name=BASE_CONFIG)
+            if config:
+                print(config['cameras'])
             
             else:
                 return
@@ -1144,22 +1148,24 @@ class mainUI(sQMainWindow):
 
             camera_configs = self.create_camera_configs()
 
-            json_data = self.update_base_json(json_data,camera_configs,train_name)
+            config = self.update_base_json(config,camera_configs,train_name, codec)
 
-            self.save_json(save_name=train_name,json_data=json_data)
+            self.save_json(save_name=train_name,json_data=config)
 
             self.clear_ui_profile()
 
-            print(json_data)
+            print(config)
 
 
 
-    def update_base_json(self,json_data,camera_configs=None,train_name=None):
+    def update_base_json(self,json_data,camera_configs=None,train_name=None, codec=None):
 
         if camera_configs:
             json_data['cameras'] = camera_configs
         if train_name:
             json_data ['name'] = train_name
+        if codec:
+            json_data['video_codec'] = codec
         return json_data
     
 
@@ -1267,6 +1273,10 @@ class mainUI(sQMainWindow):
         json_data = self.load_json(json_name=profile)
 
         camera_configs = json_data['cameras']
+        codec = json_data['video_codec']
+        codec_ui = self.mapDict.key2value('codec', codec)
+        GUIBackend.set_combobox_current_item(self.ui.edit_profile_compression, codec_ui)
+        
 
 
         for iter,config in enumerate(camera_configs):
@@ -1348,8 +1358,10 @@ class mainUI(sQMainWindow):
         ret , msg = self.check_camera_config(index=5,edit=True)
 
         if ret:
+            codec_ui = GUIBackend.get_combobox_selected(self.ui.edit_profile_compression)
+            codec = self.mapDict.value2key('codec', codec_ui)
 
-            json_data = self.update_base_json(json_data,camera_configs)
+            json_data = self.update_base_json(json_data,camera_configs, codec=codec)
 
             self.save_json(save_name=profile,json_data=json_data)
             
@@ -1584,6 +1596,48 @@ class mainUI(sQMainWindow):
 
             if msg_box.clickedButton() == ok_button:
                 return True
+
+
+    def check_time_sync(self,):
+        name = self.ui.combo_copy_train_name.currentText()
+        db_results = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=name)
+
+        if len(db_results)!=1:
+            print('Error in get data')
+            return
+        
+        db_res = db_results[0]
+        self.ip = db_res['ip']
+        src_path = 'rail_share'
+        src_path = transormUtils.build_share_path(self.ip, src_path)
+
+        self.ping_worker = pingAndCreateWorker(self.ip, src_path,db_res['username'],db_res['password'])
+        self.ping_worker.result_signal.connect(self.time_sysnc_connection_event)
+        self.ping_thread = threading.Thread(target=self.ping_worker.run, daemon=True)
+        self.ping_thread.start()
+        GUIBackend.set_disable_enable(self.ui.check_time_btn, False)
+
+
+    def time_sysnc_connection_event(self, status_code,msg=''):
+        if status_code == StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT:
+            if msg !='':
+                self.show_message('copy', msg)
+            else:
+                self.show_message('copy', 'Connection Faild. check ip and cables connections')
+            GUIBackend.set_disable_enable(self.ui.check_time_btn, True)
+            self.set_loading_progress_bar(False)
+            return
+        
+        elif status_code == StatusCodes.pingAndConnectionStatusCodes.SUCCESS:
+            
+            GUIBackend.set_disable_enable(self.ui.check_time_btn, False)
+            tsd = timeSettingDialog( self.ip )
+            tsd.exec_()
+
+            GUIBackend.set_disable_enable(self.ui.check_time_btn, True)
+
+
+            
 
 
 

@@ -18,8 +18,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
     QGridLayout, QGroupBox, QHBoxLayout, QLabel,
     QLineEdit, QMainWindow, QPlainTextEdit, QProgressBar,
-    QPushButton, QSizePolicy, QSpacerItem, QStackedWidget,
-    QStatusBar, QTabWidget, QVBoxLayout, QWidget)
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QStackedWidget, QStatusBar, QTabWidget, QVBoxLayout,
+    QWidget)
 
 from uiUtils.GUIComponents import timeSpinBox
 import assets_rc
@@ -29,7 +30,7 @@ class Ui_main(object):
         if not main.objectName():
             main.setObjectName(u"main")
         main.setEnabled(True)
-        main.resize(617, 798)
+        main.resize(617, 775)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1043,6 +1044,11 @@ class Ui_main(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.frame_56 = QFrame(self.copy)
         self.frame_56.setObjectName(u"frame_56")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.frame_56.sizePolicy().hasHeightForWidth())
+        self.frame_56.setSizePolicy(sizePolicy4)
         self.frame_56.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_56.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_56)
@@ -1075,13 +1081,11 @@ class Ui_main(object):
         self.frame_58.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_58.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_35 = QVBoxLayout(self.frame_58)
+        self.verticalLayout_35.setSpacing(10)
         self.verticalLayout_35.setObjectName(u"verticalLayout_35")
-        self.verticalLayout_35.setContentsMargins(34, 0, 42, 0)
+        self.verticalLayout_35.setContentsMargins(35, 0, 35, 0)
         self.frame_60 = QFrame(self.frame_58)
         self.frame_60.setObjectName(u"frame_60")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
         sizePolicy4.setHeightForWidth(self.frame_60.sizePolicy().hasHeightForWidth())
         self.frame_60.setSizePolicy(sizePolicy4)
         self.frame_60.setFrameShape(QFrame.Shape.NoFrame)
@@ -1105,11 +1109,6 @@ class Ui_main(object):
 
 
         self.verticalLayout_33.addLayout(self.horizontalLayout_54)
-
-        self.ip_address_msg = QLabel(self.frame_60)
-        self.ip_address_msg.setObjectName(u"ip_address_msg")
-
-        self.verticalLayout_33.addWidget(self.ip_address_msg)
 
 
         self.verticalLayout_35.addWidget(self.frame_60)
@@ -1139,47 +1138,8 @@ class Ui_main(object):
 
         self.verticalLayout_34.addLayout(self.horizontalLayout_55)
 
-        self.username_msg = QLabel(self.frame_61)
-        self.username_msg.setObjectName(u"username_msg")
-
-        self.verticalLayout_34.addWidget(self.username_msg)
-
 
         self.verticalLayout_35.addWidget(self.frame_61)
-
-        self.frame_59 = QFrame(self.frame_58)
-        self.frame_59.setObjectName(u"frame_59")
-        sizePolicy4.setHeightForWidth(self.frame_59.sizePolicy().hasHeightForWidth())
-        self.frame_59.setSizePolicy(sizePolicy4)
-        self.frame_59.setMinimumSize(QSize(0, 0))
-        self.frame_59.setFrameShape(QFrame.Shape.NoFrame)
-        self.verticalLayout_17 = QVBoxLayout(self.frame_59)
-        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
-        self.verticalLayout_17.setContentsMargins(-1, 0, -1, 0)
-        self.horizontalLayout_56 = QHBoxLayout()
-        self.horizontalLayout_56.setObjectName(u"horizontalLayout_56")
-        self.horizontalLayout_56.setContentsMargins(0, -1, -1, -1)
-        self.label_21 = QLabel(self.frame_59)
-        self.label_21.setObjectName(u"label_21")
-
-        self.horizontalLayout_56.addWidget(self.label_21)
-
-        self.password_input = QLineEdit(self.frame_59)
-        self.password_input.setObjectName(u"password_input")
-        self.password_input.setReadOnly(True)
-
-        self.horizontalLayout_56.addWidget(self.password_input)
-
-
-        self.verticalLayout_17.addLayout(self.horizontalLayout_56)
-
-        self.password_msg = QLabel(self.frame_59)
-        self.password_msg.setObjectName(u"password_msg")
-
-        self.verticalLayout_17.addWidget(self.password_msg)
-
-
-        self.verticalLayout_35.addWidget(self.frame_59)
 
 
         self.verticalLayout_2.addWidget(self.frame_58)
@@ -1191,7 +1151,7 @@ class Ui_main(object):
 
         self.verticalLayout_2.addWidget(self.line_10)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_2.addItem(self.verticalSpacer_3)
 
@@ -1455,6 +1415,29 @@ class Ui_main(object):
 
         self.verticalLayout_2.addWidget(self.copy_button, 0, Qt.AlignmentFlag.AlignHCenter)
 
+        self.check_time_btn = QPushButton(self.copy)
+        self.check_time_btn.setObjectName(u"check_time_btn")
+        self.check_time_btn.setEnabled(True)
+        self.check_time_btn.setMinimumSize(QSize(200, 33))
+        self.check_time_btn.setMaximumSize(QSize(200, 16777215))
+        self.check_time_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.check_time_btn.setStyleSheet(u"\n"
+"QPushButton{\n"
+"	\n"
+"color: rgb(85, 85, 255);\n"
+"background-color: transparent;\n"
+"border:2px solid rgb(85, 85, 255);\n"
+"min-height: 25px;\n"
+"border-radius:15px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:rgb(71, 71, 213);	\n"
+"color:#fff;\n"
+"}")
+
+        self.verticalLayout_2.addWidget(self.check_time_btn, 0, Qt.AlignmentFlag.AlignHCenter)
+
         self.line_21 = QFrame(self.copy)
         self.line_21.setObjectName(u"line_21")
         self.line_21.setFrameShape(QFrame.Shape.HLine)
@@ -1635,14 +1618,74 @@ class Ui_main(object):
         self.verticalLayout_14.setSpacing(6)
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
         self.verticalLayout_14.setContentsMargins(-1, -1, -1, 9)
-        self.frame_21 = QFrame(self.tab)
-        self.frame_21.setObjectName(u"frame_21")
-        self.frame_21.setMaximumSize(QSize(16777215, 509))
-        self.frame_21.setFrameShape(QFrame.Shape.NoFrame)
-        self.verticalLayout_13 = QVBoxLayout(self.frame_21)
-        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
-        self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
-        self.group_camera_1 = QGroupBox(self.frame_21)
+        self.scrollArea = QScrollArea(self.tab)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_3 = QWidget()
+        self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 453, 615))
+        self.verticalLayout_6 = QVBoxLayout(self.scrollAreaWidgetContents_3)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.frame_10 = QFrame(self.scrollAreaWidgetContents_3)
+        self.frame_10.setObjectName(u"frame_10")
+        self.frame_10.setMinimumSize(QSize(0, 30))
+        self.frame_10.setMaximumSize(QSize(16777215, 30))
+        self.frame_10.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_10.setFrameShadow(QFrame.Shadow.Plain)
+        self.horizontalLayout_11 = QHBoxLayout(self.frame_10)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(-1, 0, -1, 0)
+        self.label_4 = QLabel(self.frame_10)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setMinimumSize(QSize(100, 0))
+        self.label_4.setMaximumSize(QSize(100, 16777215))
+
+        self.horizontalLayout_11.addWidget(self.label_4)
+
+        self.line_train_name = QLineEdit(self.frame_10)
+        self.line_train_name.setObjectName(u"line_train_name")
+
+        self.horizontalLayout_11.addWidget(self.line_train_name)
+
+
+        self.verticalLayout_6.addWidget(self.frame_10)
+
+        self.line_22 = QFrame(self.scrollAreaWidgetContents_3)
+        self.line_22.setObjectName(u"line_22")
+        self.line_22.setFrameShape(QFrame.Shape.HLine)
+        self.line_22.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_6.addWidget(self.line_22)
+
+        self.horizontalFrame1111 = QFrame(self.scrollAreaWidgetContents_3)
+        self.horizontalFrame1111.setObjectName(u"horizontalFrame1111")
+        sizePolicy4.setHeightForWidth(self.horizontalFrame1111.sizePolicy().hasHeightForWidth())
+        self.horizontalFrame1111.setSizePolicy(sizePolicy4)
+        self.horizontalLayout_58 = QHBoxLayout(self.horizontalFrame1111)
+        self.horizontalLayout_58.setObjectName(u"horizontalLayout_58")
+        self.label_67 = QLabel(self.horizontalFrame1111)
+        self.label_67.setObjectName(u"label_67")
+        self.label_67.setMinimumSize(QSize(100, 0))
+        self.label_67.setMaximumSize(QSize(100, 16777215))
+
+        self.horizontalLayout_58.addWidget(self.label_67)
+
+        self.new_profile_compression = QComboBox(self.horizontalFrame1111)
+        self.new_profile_compression.setObjectName(u"new_profile_compression")
+
+        self.horizontalLayout_58.addWidget(self.new_profile_compression)
+
+
+        self.verticalLayout_6.addWidget(self.horizontalFrame1111)
+
+        self.line_15 = QFrame(self.scrollAreaWidgetContents_3)
+        self.line_15.setObjectName(u"line_15")
+        self.line_15.setFrameShape(QFrame.Shape.HLine)
+        self.line_15.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_6.addWidget(self.line_15)
+
+        self.group_camera_1 = QGroupBox(self.scrollAreaWidgetContents_3)
         self.group_camera_1.setObjectName(u"group_camera_1")
         self.group_camera_1.setMaximumSize(QSize(16777215, 156))
         self.group_camera_1.setCheckable(True)
@@ -1719,16 +1762,9 @@ class Ui_main(object):
         self.verticalLayout_10.addWidget(self.frame_23)
 
 
-        self.verticalLayout_13.addWidget(self.group_camera_1)
+        self.verticalLayout_6.addWidget(self.group_camera_1)
 
-        self.line_12 = QFrame(self.frame_21)
-        self.line_12.setObjectName(u"line_12")
-        self.line_12.setFrameShape(QFrame.Shape.HLine)
-        self.line_12.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.verticalLayout_13.addWidget(self.line_12)
-
-        self.group_camera_2 = QGroupBox(self.frame_21)
+        self.group_camera_2 = QGroupBox(self.scrollAreaWidgetContents_3)
         self.group_camera_2.setObjectName(u"group_camera_2")
         self.group_camera_2.setEnabled(True)
         self.group_camera_2.setCheckable(True)
@@ -1805,16 +1841,9 @@ class Ui_main(object):
         self.verticalLayout_12.addWidget(self.frame_28)
 
 
-        self.verticalLayout_13.addWidget(self.group_camera_2)
+        self.verticalLayout_6.addWidget(self.group_camera_2)
 
-        self.line_13 = QFrame(self.frame_21)
-        self.line_13.setObjectName(u"line_13")
-        self.line_13.setFrameShape(QFrame.Shape.HLine)
-        self.line_13.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.verticalLayout_13.addWidget(self.line_13)
-
-        self.group_camera_3 = QGroupBox(self.frame_21)
+        self.group_camera_3 = QGroupBox(self.scrollAreaWidgetContents_3)
         self.group_camera_3.setObjectName(u"group_camera_3")
         self.group_camera_3.setEnabled(True)
         self.group_camera_3.setCheckable(True)
@@ -1891,16 +1920,9 @@ class Ui_main(object):
         self.verticalLayout_15.addWidget(self.frame_31)
 
 
-        self.verticalLayout_13.addWidget(self.group_camera_3)
+        self.verticalLayout_6.addWidget(self.group_camera_3)
 
-        self.line_14 = QFrame(self.frame_21)
-        self.line_14.setObjectName(u"line_14")
-        self.line_14.setFrameShape(QFrame.Shape.HLine)
-        self.line_14.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.verticalLayout_13.addWidget(self.line_14)
-
-        self.group_camera_4 = QGroupBox(self.frame_21)
+        self.group_camera_4 = QGroupBox(self.scrollAreaWidgetContents_3)
         self.group_camera_4.setObjectName(u"group_camera_4")
         self.group_camera_4.setEnabled(True)
         self.group_camera_4.setCheckable(True)
@@ -1977,68 +1999,18 @@ class Ui_main(object):
         self.verticalLayout_24.addWidget(self.frame_39)
 
 
-        self.verticalLayout_13.addWidget(self.group_camera_4)
+        self.verticalLayout_6.addWidget(self.group_camera_4)
 
-        self.line_15 = QFrame(self.frame_21)
-        self.line_15.setObjectName(u"line_15")
-        self.line_15.setFrameShape(QFrame.Shape.HLine)
-        self.line_15.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.verticalLayout_13.addWidget(self.line_15)
-
-        self.frame_10 = QFrame(self.frame_21)
-        self.frame_10.setObjectName(u"frame_10")
-        self.frame_10.setMinimumSize(QSize(0, 30))
-        self.frame_10.setMaximumSize(QSize(16777215, 30))
-        self.frame_10.setFrameShape(QFrame.Shape.NoFrame)
-        self.frame_10.setFrameShadow(QFrame.Shadow.Plain)
-        self.horizontalLayout_11 = QHBoxLayout(self.frame_10)
-        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
-        self.horizontalLayout_11.setContentsMargins(-1, 0, -1, 0)
-        self.label_4 = QLabel(self.frame_10)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setMinimumSize(QSize(100, 0))
-        self.label_4.setMaximumSize(QSize(100, 16777215))
-
-        self.horizontalLayout_11.addWidget(self.label_4)
-
-        self.line_train_name = QLineEdit(self.frame_10)
-        self.line_train_name.setObjectName(u"line_train_name")
-
-        self.horizontalLayout_11.addWidget(self.line_train_name)
-
-
-        self.verticalLayout_13.addWidget(self.frame_10)
-
-        self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.verticalLayout_13.addItem(self.verticalSpacer_9)
-
-        self.line_16 = QFrame(self.frame_21)
-        self.line_16.setObjectName(u"line_16")
-        self.line_16.setFrameShape(QFrame.Shape.HLine)
-        self.line_16.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.verticalLayout_13.addWidget(self.line_16)
-
-
-        self.verticalLayout_14.addWidget(self.frame_21)
-
-        self.line = QFrame(self.tab)
-        self.line.setObjectName(u"line")
-        self.line.setFrameShape(QFrame.Shape.VLine)
-        self.line.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.verticalLayout_14.addWidget(self.line)
-
-        self.label_profile_message = QLabel(self.tab)
+        self.label_profile_message = QLabel(self.scrollAreaWidgetContents_3)
         self.label_profile_message.setObjectName(u"label_profile_message")
         self.label_profile_message.setMaximumSize(QSize(16777215, 23))
 
-        self.verticalLayout_14.addWidget(self.label_profile_message)
+        self.verticalLayout_6.addWidget(self.label_profile_message)
 
-        self.frame_34 = QFrame(self.tab)
+        self.frame_34 = QFrame(self.scrollAreaWidgetContents_3)
         self.frame_34.setObjectName(u"frame_34")
+        sizePolicy4.setHeightForWidth(self.frame_34.sizePolicy().hasHeightForWidth())
+        self.frame_34.setSizePolicy(sizePolicy4)
         self.frame_34.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_34.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_33 = QHBoxLayout(self.frame_34)
@@ -2061,7 +2033,18 @@ class Ui_main(object):
         self.horizontalLayout_33.addItem(self.horizontalSpacer_11)
 
 
-        self.verticalLayout_14.addWidget(self.frame_34)
+        self.verticalLayout_6.addWidget(self.frame_34)
+
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents_3)
+
+        self.verticalLayout_14.addWidget(self.scrollArea)
+
+        self.line = QFrame(self.tab)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.Shape.VLine)
+        self.line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_14.addWidget(self.line)
 
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
@@ -2133,19 +2116,48 @@ class Ui_main(object):
         self.horizontalLayout_13.addWidget(self.btn_delete_profile)
 
 
-        self.verticalLayout_5.addWidget(self.frame_12)
+        self.verticalLayout_5.addWidget(self.frame_12, 0, Qt.AlignmentFlag.AlignTop)
 
-        self.frame_profile_edit = QFrame(self.tab_2)
+        self.frame_profile_edit = QScrollArea(self.tab_2)
         self.frame_profile_edit.setObjectName(u"frame_profile_edit")
-        self.frame_profile_edit.setMaximumSize(QSize(16777215, 490))
-        self.frame_profile_edit.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_profile_edit.setFrameShadow(QFrame.Shadow.Raised)
-        self.verticalLayout_6 = QVBoxLayout(self.frame_profile_edit)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.group_camera_1_edit = QGroupBox(self.frame_profile_edit)
+        sizePolicy6 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.MinimumExpanding)
+        sizePolicy6.setHorizontalStretch(0)
+        sizePolicy6.setVerticalStretch(0)
+        sizePolicy6.setHeightForWidth(self.frame_profile_edit.sizePolicy().hasHeightForWidth())
+        self.frame_profile_edit.setSizePolicy(sizePolicy6)
+        self.frame_profile_edit.setMaximumSize(QSize(16777215, 16777215))
+        self.frame_profile_edit.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        self.frame_profile_edit.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_2 = QWidget()
+        self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 443, 669))
+        self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.horizontalFrame1111_2 = QFrame(self.scrollAreaWidgetContents_2)
+        self.horizontalFrame1111_2.setObjectName(u"horizontalFrame1111_2")
+        sizePolicy4.setHeightForWidth(self.horizontalFrame1111_2.sizePolicy().hasHeightForWidth())
+        self.horizontalFrame1111_2.setSizePolicy(sizePolicy4)
+        self.horizontalLayout_60 = QHBoxLayout(self.horizontalFrame1111_2)
+        self.horizontalLayout_60.setObjectName(u"horizontalLayout_60")
+        self.label_68 = QLabel(self.horizontalFrame1111_2)
+        self.label_68.setObjectName(u"label_68")
+        self.label_68.setMinimumSize(QSize(100, 0))
+        self.label_68.setMaximumSize(QSize(100, 16777215))
+
+        self.horizontalLayout_60.addWidget(self.label_68)
+
+        self.edit_profile_compression = QComboBox(self.horizontalFrame1111_2)
+        self.edit_profile_compression.setObjectName(u"edit_profile_compression")
+
+        self.horizontalLayout_60.addWidget(self.edit_profile_compression)
+
+
+        self.verticalLayout_3.addWidget(self.horizontalFrame1111_2)
+
+        self.group_camera_1_edit = QGroupBox(self.scrollAreaWidgetContents_2)
         self.group_camera_1_edit.setObjectName(u"group_camera_1_edit")
         self.group_camera_1_edit.setEnabled(True)
+        self.group_camera_1_edit.setMinimumSize(QSize(0, 120))
         self.group_camera_1_edit.setMaximumSize(QSize(16777215, 145))
         self.group_camera_1_edit.setCheckable(True)
         self.group_camera_1_edit.setChecked(False)
@@ -2222,11 +2234,12 @@ class Ui_main(object):
         self.verticalLayout_25.addWidget(self.frame_42)
 
 
-        self.verticalLayout_6.addWidget(self.group_camera_1_edit)
+        self.verticalLayout_3.addWidget(self.group_camera_1_edit)
 
-        self.group_camera_2_edit = QGroupBox(self.frame_profile_edit)
+        self.group_camera_2_edit = QGroupBox(self.scrollAreaWidgetContents_2)
         self.group_camera_2_edit.setObjectName(u"group_camera_2_edit")
         self.group_camera_2_edit.setEnabled(True)
+        self.group_camera_2_edit.setMinimumSize(QSize(0, 120))
         self.group_camera_2_edit.setCheckable(True)
         self.group_camera_2_edit.setChecked(False)
         self.verticalLayout_26 = QVBoxLayout(self.group_camera_2_edit)
@@ -2301,11 +2314,12 @@ class Ui_main(object):
         self.verticalLayout_26.addWidget(self.frame_45)
 
 
-        self.verticalLayout_6.addWidget(self.group_camera_2_edit)
+        self.verticalLayout_3.addWidget(self.group_camera_2_edit)
 
-        self.group_camera_3_edit = QGroupBox(self.frame_profile_edit)
+        self.group_camera_3_edit = QGroupBox(self.scrollAreaWidgetContents_2)
         self.group_camera_3_edit.setObjectName(u"group_camera_3_edit")
         self.group_camera_3_edit.setEnabled(True)
+        self.group_camera_3_edit.setMinimumSize(QSize(0, 120))
         self.group_camera_3_edit.setCheckable(True)
         self.group_camera_3_edit.setChecked(False)
         self.verticalLayout_27 = QVBoxLayout(self.group_camera_3_edit)
@@ -2380,11 +2394,12 @@ class Ui_main(object):
         self.verticalLayout_27.addWidget(self.frame_48)
 
 
-        self.verticalLayout_6.addWidget(self.group_camera_3_edit)
+        self.verticalLayout_3.addWidget(self.group_camera_3_edit)
 
-        self.group_camera_4_edit = QGroupBox(self.frame_profile_edit)
+        self.group_camera_4_edit = QGroupBox(self.scrollAreaWidgetContents_2)
         self.group_camera_4_edit.setObjectName(u"group_camera_4_edit")
         self.group_camera_4_edit.setEnabled(True)
+        self.group_camera_4_edit.setMinimumSize(QSize(0, 120))
         self.group_camera_4_edit.setCheckable(True)
         self.group_camera_4_edit.setChecked(False)
         self.verticalLayout_28 = QVBoxLayout(self.group_camera_4_edit)
@@ -2459,33 +2474,12 @@ class Ui_main(object):
         self.verticalLayout_28.addWidget(self.frame_51)
 
 
-        self.verticalLayout_6.addWidget(self.group_camera_4_edit)
+        self.verticalLayout_3.addWidget(self.group_camera_4_edit)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.verticalLayout_6.addItem(self.verticalSpacer)
-
-        self.btn_cancel_edit_profile = QPushButton(self.frame_profile_edit)
-        self.btn_cancel_edit_profile.setObjectName(u"btn_cancel_edit_profile")
-        self.btn_cancel_edit_profile.setMinimumSize(QSize(95, 0))
-        self.btn_cancel_edit_profile.setMaximumSize(QSize(95, 16777215))
-        self.btn_cancel_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.verticalLayout_6.addWidget(self.btn_cancel_edit_profile, 0, Qt.AlignmentFlag.AlignHCenter)
-
-        self.btn_save_edit_profile = QPushButton(self.frame_profile_edit)
-        self.btn_save_edit_profile.setObjectName(u"btn_save_edit_profile")
-        self.btn_save_edit_profile.setMinimumSize(QSize(95, 0))
-        self.btn_save_edit_profile.setMaximumSize(QSize(95, 16777215))
-        self.btn_save_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.verticalLayout_6.addWidget(self.btn_save_edit_profile, 0, Qt.AlignmentFlag.AlignHCenter)
-
-
-        self.verticalLayout_5.addWidget(self.frame_profile_edit)
-
-        self.frame_13 = QFrame(self.tab_2)
+        self.frame_13 = QFrame(self.scrollAreaWidgetContents_2)
         self.frame_13.setObjectName(u"frame_13")
+        sizePolicy4.setHeightForWidth(self.frame_13.sizePolicy().hasHeightForWidth())
+        self.frame_13.setSizePolicy(sizePolicy4)
         self.frame_13.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_13.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_15 = QHBoxLayout(self.frame_13)
@@ -2497,7 +2491,38 @@ class Ui_main(object):
         self.horizontalLayout_15.addWidget(self.label_profile_edit_message)
 
 
-        self.verticalLayout_5.addWidget(self.frame_13)
+        self.verticalLayout_3.addWidget(self.frame_13)
+
+        self.btn_save_edit_profile = QPushButton(self.scrollAreaWidgetContents_2)
+        self.btn_save_edit_profile.setObjectName(u"btn_save_edit_profile")
+        self.btn_save_edit_profile.setMinimumSize(QSize(95, 0))
+        self.btn_save_edit_profile.setMaximumSize(QSize(95, 16777215))
+        self.btn_save_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.verticalLayout_3.addWidget(self.btn_save_edit_profile, 0, Qt.AlignmentFlag.AlignHCenter)
+
+        self.btn_cancel_edit_profile = QPushButton(self.scrollAreaWidgetContents_2)
+        self.btn_cancel_edit_profile.setObjectName(u"btn_cancel_edit_profile")
+        self.btn_cancel_edit_profile.setMinimumSize(QSize(95, 0))
+        self.btn_cancel_edit_profile.setMaximumSize(QSize(95, 16777215))
+        self.btn_cancel_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btn_cancel_edit_profile.setStyleSheet(u"QPushButton{\n"
+"	background-color:transparent;\n"
+"	color:rgb(33, 33, 33);\n"
+"	border: 1px solid rgb(33, 33, 33);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	background-color:rgb(217, 217, 217);\n"
+"\n"
+"}")
+
+        self.verticalLayout_3.addWidget(self.btn_cancel_edit_profile, 0, Qt.AlignmentFlag.AlignHCenter)
+
+        self.frame_profile_edit.setWidget(self.scrollAreaWidgetContents_2)
+
+        self.verticalLayout_5.addWidget(self.frame_profile_edit)
 
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QWidget()
@@ -2900,7 +2925,7 @@ class Ui_main(object):
         self.horizontalLayout_53.addWidget(self.btn_delete_config)
 
 
-        self.verticalLayout_16.addWidget(self.frame_57)
+        self.verticalLayout_16.addWidget(self.frame_57, 0, Qt.AlignmentFlag.AlignTop)
 
         self.frame_train_edit = QFrame(self.tab_6)
         self.frame_train_edit.setObjectName(u"frame_train_edit")
@@ -3195,7 +3220,7 @@ class Ui_main(object):
         self.retranslateUi(main)
 
         self.stackedWidget.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -3219,14 +3244,7 @@ class Ui_main(object):
         self.close_btn.setText("")
         self.label.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.label_2.setText(QCoreApplication.translate("main", u"IP Address : ", None))
-        self.ip_address_msg.setText(QCoreApplication.translate("main", u"message", None))
-        self.ip_address_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.label_17.setText(QCoreApplication.translate("main", u"User Name :", None))
-        self.username_msg.setText(QCoreApplication.translate("main", u"message", None))
-        self.username_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
-        self.label_21.setText(QCoreApplication.translate("main", u"Password   :", None))
-        self.password_msg.setText(QCoreApplication.translate("main", u"message", None))
-        self.password_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.timeline_groupbox.setTitle(QCoreApplication.translate("main", u"Time Line Filter", None))
         self.label_8.setText(QCoreApplication.translate("main", u":", None))
         self.label_30.setText(QCoreApplication.translate("main", u"To", None))
@@ -3244,6 +3262,8 @@ class Ui_main(object):
         self.time_line_msg.setText(QCoreApplication.translate("main", u"TextLabel", None))
         self.copy_button.setText(QCoreApplication.translate("main", u"Start Copy", None))
         self.copy_button.setProperty("styleClass", "")
+        self.check_time_btn.setText(QCoreApplication.translate("main", u"check time sync", None))
+        self.check_time_btn.setProperty("styleClass", "")
         self.copy_log_lbl.setText(QCoreApplication.translate("main", u"message", None))
         self.copy_log_lbl.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.btn_found_errors.setText("")
@@ -3252,6 +3272,8 @@ class Ui_main(object):
         self.total_copy_lbl.setText(QCoreApplication.translate("main", u"-", None))
         self.total_copy_lbl_2.setText(QCoreApplication.translate("main", u"MB", None))
         self.copy_speed_lbl.setText(QCoreApplication.translate("main", u"Speed", None))
+        self.label_4.setText(QCoreApplication.translate("main", u"Profile Name :", None))
+        self.label_67.setText(QCoreApplication.translate("main", u"Compression:", None))
         self.group_camera_1.setTitle(QCoreApplication.translate("main", u"Camera 1", None))
         self.label_33.setText(QCoreApplication.translate("main", u"Name :", None))
         self.line_name_camera_1.setText(QCoreApplication.translate("main", u"Right", None))
@@ -3276,7 +3298,6 @@ class Ui_main(object):
         self.label_36.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_37.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_38.setText(QCoreApplication.translate("main", u"Password :", None))
-        self.label_4.setText(QCoreApplication.translate("main", u"Profile Name :", None))
         self.label_profile_message.setText("")
         self.btn_save_profile.setText(QCoreApplication.translate("main", u"Save", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("main", u"Create New Profile", None))
@@ -3284,6 +3305,7 @@ class Ui_main(object):
         self.btn_refresh_profile_name.setText("")
         self.btn_edit_profile.setText("")
         self.btn_delete_profile.setText("")
+        self.label_68.setText(QCoreApplication.translate("main", u"Compression:", None))
         self.group_camera_1_edit.setTitle(QCoreApplication.translate("main", u"Camera 1", None))
         self.label_51.setText(QCoreApplication.translate("main", u"Name :", None))
         self.line_name_camera_1_edit.setText("")
@@ -3308,9 +3330,9 @@ class Ui_main(object):
         self.label_48.setText(QCoreApplication.translate("main", u"Ip :", None))
         self.label_49.setText(QCoreApplication.translate("main", u"Username :", None))
         self.label_50.setText(QCoreApplication.translate("main", u"Password :", None))
-        self.btn_cancel_edit_profile.setText(QCoreApplication.translate("main", u"Cancel", None))
-        self.btn_save_edit_profile.setText(QCoreApplication.translate("main", u"Save", None))
         self.label_profile_edit_message.setText("")
+        self.btn_save_edit_profile.setText(QCoreApplication.translate("main", u"Save", None))
+        self.btn_cancel_edit_profile.setText(QCoreApplication.translate("main", u"Cancel", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("main", u"Edit / Delete", None))
         self.groupBox.setTitle(QCoreApplication.translate("main", u"Send", None))
         self.label_12.setText(QCoreApplication.translate("main", u"Profile Name :", None))
