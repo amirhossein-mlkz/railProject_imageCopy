@@ -522,6 +522,10 @@ class mainUI(sQMainWindow):
             self.show_message('copy', 'No Files Found to Copy')
             self.set_loading_progress_bar(False)
             return
+        
+        move = False
+        if self.log_search:
+            move = True
 
         self.ui.progress_bar.setMinimum(0)
         self.ui.progress_bar.setMaximum(100)
@@ -532,7 +536,8 @@ class mainUI(sQMainWindow):
                                    speed_func=self.step2_update_speed,
                                    progress_func=self.step2_update_progress,
                                    msg_callback=self.step2_log,
-                                   rename_src=True)
+                                   rename_src=True,
+                                   move=move)
 
     def step2_update_progress(self, completed:int, total:int):
         if total<1:
