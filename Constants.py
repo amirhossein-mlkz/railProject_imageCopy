@@ -7,7 +7,7 @@ BASE_CONFIG = 'base_config.json'
 
 CAMERA_NAMES = ['right','left','3','4']
 
-PARMS = ['name','ip','username','password']
+PARMS = ['name','ip','port', 'username','password']
 
 
 DST_PATH = 'C:\\'

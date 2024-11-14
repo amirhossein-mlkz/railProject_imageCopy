@@ -93,6 +93,8 @@ class mainUI(sQMainWindow):
 
         self.side_btns = [ self.ui.side_setting_btn , self.ui.side_train_config_btn,self.ui.side_profile_btn,self.ui.side_copy_btn]
 
+        self.names = []
+
 
      
 
@@ -1052,6 +1054,8 @@ class mainUI(sQMainWindow):
             
             else:
                 group = eval('self.ui.group_camera_{}'.format(iter+1))
+
+                GUIBackend.set_input(self.ui.line_train_name, '')
             group.setChecked(False)
 
 
@@ -1154,7 +1158,7 @@ class mainUI(sQMainWindow):
 
             self.clear_ui_profile()
 
-            print(config)
+            self.refresh_edit_profile()
 
 
 
@@ -1163,7 +1167,7 @@ class mainUI(sQMainWindow):
         if camera_configs:
             json_data['cameras'] = camera_configs
         if train_name:
-            json_data ['name'] = train_name
+            json_data ['train_id'] = train_name
         if codec:
             json_data['video_codec'] = codec
         return json_data
@@ -1190,20 +1194,29 @@ class mainUI(sQMainWindow):
             config = {}
             
             if edit_mode:
-
+                state = GUIBackend.is_groupbox_checked(eval(f'self.ui.group_camera_{iter+1}_edit'))
+                if not state:
+                    continue
                 name = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[0],iter+1))
                 ip = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[1],iter+1))
-                username = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[2],iter+1))
-                password = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[3],iter+1))
+                port = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[2],iter+1))
+                username = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[3],iter+1))
+                password = eval('self.ui.line_{}_camera_{}_edit.text()'.format(PARMS[4],iter+1))
+
             else:
-                name = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[0],iter+1))
-                ip = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[1],iter+1))
-                username = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[2],iter+1))
-                password = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[3],iter+1))
+                state = GUIBackend.is_groupbox_checked(eval(f'self.ui.group_camera_{iter+1}'))
+                if not state:
+                    continue
+                name =     eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[0],iter+1))
+                ip =       eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[1],iter+1))
+                port =     eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[2],iter+1))
+                username = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[3],iter+1))
+                password = eval('self.ui.line_{}_camera_{}.text()'.format(PARMS[4],iter+1))
 
             config = {
                 'name' : name,
                 'ip' : ip,
+                'port': port, 
                 'username' :username,
                 'password' :password
             }
@@ -1265,23 +1278,19 @@ class mainUI(sQMainWindow):
 
 
     def edit_profile(self):
-
-
-
         profile = self.ui.combo_train_name_profile.currentText()
 
         json_data = self.load_json(json_name=profile)
 
+        train_id = json_data['train_id']
         camera_configs = json_data['cameras']
         codec = json_data['video_codec']
         codec_ui = self.mapDict.key2value('codec', codec)
         GUIBackend.set_combobox_current_item(self.ui.edit_profile_compression, codec_ui)
-        
+        GUIBackend.set_input( self.ui.edit_profile_name, train_id)
 
 
         for iter,config in enumerate(camera_configs):
-
-
             one_item = False
             
             for parm in PARMS:
@@ -1338,36 +1347,45 @@ class mainUI(sQMainWindow):
     def save_edit_profile(self):
 
         profile = self.ui.combo_train_name_profile.currentText()
+        new_train_id = GUIBackend.get_input(self.ui.edit_profile_name)
+        json_path = os.path.join(CONFIG_PATH, profile + '.json')
 
         if profile == '':
-            print('Profile cant be empty')
+            self.show_message('profile',txt='profile cant be empty',style=error_style,disapear=2000)
             return
-        profile+='.json'
-        if not os.path.exists(os.path.join(CONFIG_PATH,profile)):
-            print('Profile Config Not Exist')
+        
+        if profile.lower() != new_train_id.lower():
+            ret,msg = self.check_train_name(train_name=new_train_id)
+            if not ret:
+                self.show_message('profile',txt=msg, style=error_style,disapear=2000)
+                return False
+        
+
+
+        if not os.path.exists(json_path):
+            self.show_message('profile',txt='Profile Config Not Exist, maybe deleted during edit',style=error_style,disapear=2000)
             return
 
         json_data = self.load_json(json_name=profile)
-
-
-
-        
-
         camera_configs = self.create_camera_configs(edit_mode=True)
-
         ret , msg = self.check_camera_config(index=5,edit=True)
 
         if ret:
             codec_ui = GUIBackend.get_combobox_selected(self.ui.edit_profile_compression)
             codec = self.mapDict.value2key('codec', codec_ui)
 
-            json_data = self.update_base_json(json_data,camera_configs, codec=codec)
+            json_data = self.update_base_json(json_data,camera_configs, train_name=new_train_id, codec=codec)
 
-            self.save_json(save_name=profile,json_data=json_data)
-            
-            print(json_data)
-
+            if os.path.exists(json_path):
+                try:
+                    os.remove(json_path)
+                except:
+                    self.show_message('profile',txt='failed replace',style=error_style,disapear=2000)
+                    return
+                    
+            self.save_json(save_name=new_train_id,json_data=json_data)
             self.profile_edit_mode(mode=False)
+            self.refresh_edit_profile()
 
         else:
             self.show_message('profile_edit',txt=msg,style=error_style,disapear=2000)
