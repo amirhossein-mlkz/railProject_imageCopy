@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'mainUI.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.2
+## Created by: Qt User Interface Compiler version 6.8.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -3213,13 +3213,13 @@ class Ui_main(object):
         main.setWindowTitle(QCoreApplication.translate("main", u"MainWindow", None))
         self.side_copy_btn.setText(QCoreApplication.translate("main", u"Copy", None))
         self.side_profile_btn.setText(QCoreApplication.translate("main", u"Profile Config", None))
-        self.side_train_config_btn.setText(QCoreApplication.translate("main", u"Thin Client Config", None))
+        self.side_train_config_btn.setText(QCoreApplication.translate("main", u"Thin Clients", None))
         self.side_setting_btn.setText(QCoreApplication.translate("main", u"Settings", None))
         self.side_about_btn.setText(QCoreApplication.translate("main", u" About Us ", None))
         self.label_66.setText("")
         self.label_65.setText("")
         self.login_btn.setText(QCoreApplication.translate("main", u"Login", None))
-        self.login_btn.setProperty("styleClass", QCoreApplication.translate("main", u"fillBtn", None))
+        self.login_btn.setProperty(u"styleClass", QCoreApplication.translate("main", u"fillBtn", None))
         self.logined_username_lbl.setText("")
         self.help_btn.setText("")
         self.minimize_btn.setText("")
@@ -3232,9 +3232,9 @@ class Ui_main(object):
         self.label_30.setText(QCoreApplication.translate("main", u"To", None))
         self.label_7.setText(QCoreApplication.translate("main", u"date", None))
         self.end_calendar_btn.setText("")
-        self.end_calendar_btn.setProperty("styleClass", "")
+        self.end_calendar_btn.setProperty(u"styleClass", "")
         self.start_calendar_btn.setText("")
-        self.start_calendar_btn.setProperty("styleClass", "")
+        self.start_calendar_btn.setProperty(u"styleClass", "")
         self.label_10.setText(QCoreApplication.translate("main", u"From", None))
         self.label_32.setText(QCoreApplication.translate("main", u"Time", None))
         self.label_34.setText(QCoreApplication.translate("main", u"Time", None))
@@ -3243,11 +3243,11 @@ class Ui_main(object):
         self.only_copy_new_checkbox.setText(QCoreApplication.translate("main", u"Only Copy New Files", None))
         self.time_line_msg.setText(QCoreApplication.translate("main", u"TextLabel", None))
         self.copy_button.setText(QCoreApplication.translate("main", u"Start Copy", None))
-        self.copy_button.setProperty("styleClass", "")
+        self.copy_button.setProperty(u"styleClass", "")
         self.check_time_btn.setText(QCoreApplication.translate("main", u"check time sync", None))
-        self.check_time_btn.setProperty("styleClass", "")
+        self.check_time_btn.setProperty(u"styleClass", "")
         self.copy_log_lbl.setText(QCoreApplication.translate("main", u"message", None))
-        self.copy_log_lbl.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
+        self.copy_log_lbl.setProperty(u"styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.btn_found_errors.setText("")
         self.completed_copy_lbl.setText(QCoreApplication.translate("main", u"-", None))
         self.label_9.setText(QCoreApplication.translate("main", u"/", None))
@@ -3329,13 +3329,13 @@ class Ui_main(object):
         self.label_12.setText(QCoreApplication.translate("main", u"Profile Name :", None))
         self.label_13.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.send_config_msg.setText(QCoreApplication.translate("main", u"message", None))
-        self.send_config_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
+        self.send_config_msg.setProperty(u"styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.btn_send_profile.setText(QCoreApplication.translate("main", u"Send", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("main", u"Load", None))
         self.label_29.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.label_5.setText(QCoreApplication.translate("main", u"Ip : ", None))
         self.load_config_msg.setText(QCoreApplication.translate("main", u"message", None))
-        self.load_config_msg.setProperty("styleClass", QCoreApplication.translate("main", u"msgStyle", None))
+        self.load_config_msg.setProperty(u"styleClass", QCoreApplication.translate("main", u"msgStyle", None))
         self.btn_load_profile.setText(QCoreApplication.translate("main", u"Connect & Load", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("main", u"Load / Send", None))
         self.label_56.setText(QCoreApplication.translate("main", u"Train Name :", None))
