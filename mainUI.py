@@ -521,6 +521,11 @@ class mainUI(sQMainWindow):
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
             self.show_message('copy', 'No Files Found to Copy')
             self.set_loading_progress_bar(False)
+
+            if self.flag_copy_log and not self.start_copy_logs:
+                self.copy_logs()
+            else:
+                self.set_loading_progress_bar(False)
             return
         
         move = False
@@ -646,6 +651,16 @@ class mainUI(sQMainWindow):
 
     def save_exist_videos(self,status_code,):
         print(status_code)
+        if status_code == StatusCodes.findFilesStatusCodes.DIR_NOT_EXISTS:
+            self.show_message('copy', "archive directory not exist")
+            return
+        
+        if status_code == StatusCodes.findFilesStatusCodes.SUCCESS:
+            self.show_message('copy', "archive updated")
+
+        self.set_loading_progress_bar(False)
+            
+
         return
         print('asd')
         avaiabilities

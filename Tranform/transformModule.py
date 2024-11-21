@@ -160,6 +160,7 @@ class archiveManager:
         
         self.update_thread = threading.Thread(target=self.update_worker.run, daemon=True)
         self.update_thread.start()
+        # self.update_worker.run()
     
     def is_during_updating(self):
         if self.update_thread is None:
