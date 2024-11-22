@@ -39,16 +39,25 @@ class transformModule:
                  src_path:str, 
                  dst_path:str,
                  username:str,
-                 password:str
+                 password:str,
+                 reverse_mode = False
                  ) -> None:
         self.ip = ip
+        self.reverse_mode = reverse_mode
         if self.ip is not None:
 
             
+            if not reverse_mode:
+                self.src_path = transormUtils.build_share_path(ip, src_path)
+                self.dst_path = dst_path
 
-            self.src_path = transormUtils.build_share_path(ip, src_path)
 
-            self.dst_path = dst_path
+            else:
+                self.dst_path = transormUtils.build_share_path(ip, dst_path)
+                self.src_path = src_path
+
+
+
             self.username = username
             self.password = password
 
@@ -86,9 +95,12 @@ class transformModule:
 
     def check_connection_and_create_connection(self,event_func):
 
+        if self.reverse_mode:
+            src = self.dst_path
+        else:
+            src = self.src_path
 
-
-        self.ping_worker = pingAndCreateWorker(self.ip,self.src_path,self.username,self.password)
+        self.ping_worker = pingAndCreateWorker(self.ip,src,self.username,self.password)
         self.ping_worker.result_signal.connect(event_func)
         self.ping_thread = threading.Thread(target=self.ping_worker.run, daemon=True)
         self.ping_thread.start()
@@ -160,7 +172,6 @@ class archiveManager:
         
         self.update_thread = threading.Thread(target=self.update_worker.run, daemon=True)
         self.update_thread.start()
-        # self.update_worker.run()
     
     def is_during_updating(self):
         if self.update_thread is None:

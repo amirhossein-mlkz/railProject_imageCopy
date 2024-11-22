@@ -5,11 +5,12 @@ from datetime import datetime
 
 sys.path.append('UIFiles\\Assets')
 
-BUILD_UI = False
+BUILD_UI = True
 if BUILD_UI:
     os.system('CMD /C pyside6-rcc uiFiles/Assets/assets.qrc -o uiFiles/Assets/assets_rc.py')#PySide
     os.system('CMD /C pyside6-uic UIFiles/mainUI.ui -o UIFiles/main_UI.py')
     os.system('CMD /C pyside6-uic UIFiles/timeSyncUI.ui -o UIFiles/timeSync_UI.py')
+    os.system('CMD /C pyside6-uic UIFiles/updateUI.ui -o UIFiles/updateUI.py')
 
     #dialogs
 

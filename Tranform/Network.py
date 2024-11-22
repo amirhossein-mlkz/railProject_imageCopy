@@ -98,6 +98,9 @@ class pingAndCreateWorker(QObject):
 
         # Construct the command for mapping the network share
         if self.username and self.password:
+
+            
+
             command = f'net use {self.src_path} /user:{self.username} {self.password}'
         else:
             command = f'net use {self.src_path}'

@@ -28,7 +28,7 @@ from uiUtils.mapDictionary import mapDictionary
 from timeSetting import timeSetting
 from timeSettingDialog import timeSettingDialog
 import texts
-
+from UpdateRemote import updateRemote
 
 from Styles import error_style,success_style,none_style,click_side_btns,normal_side_btns
 from ShowConfig import ShowConfig
@@ -217,6 +217,10 @@ class mainUI(sQMainWindow):
         self.ui.btn_refresh_profile_name.clicked.connect(self.refresh_edit_profile)
 
         self.ui.btn_local_update.clicked.connect(self.update_exist_videos)
+
+
+
+        self.ui.btn_update_train.clicked.connect(self.check_train_update)
 
         
 
@@ -1677,6 +1681,54 @@ class mainUI(sQMainWindow):
 
 
             
+
+    def check_train_update(self):
+
+
+
+        name = self.ui.combo_copy_train_name.currentText()
+        db_results = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=name)
+
+        if len(db_results)!=1:
+            self.show_message('copy', 'Error in Get Data')
+            return
+        
+        db_res = db_results[0]
+        self.db_res = db_res
+        self.ip = db_res['ip']
+        src_path = 'rail_share'
+        src_path = transormUtils.build_share_path(self.ip, src_path)
+
+        self.ping_worker = pingAndCreateWorker(self.ip, src_path,db_res['username'],db_res['password'])
+        self.ping_worker.result_signal.connect(self.remote_update_event)
+        self.ping_thread = threading.Thread(target=self.ping_worker.run, daemon=True)
+        self.ping_thread.start()
+        GUIBackend.set_disable_enable(self.ui.btn_update_train, False)
+        self.show_message('copy', 'Check Connection')
+
+
+
+
+
+    def remote_update_event(self, status_code,msg=''):
+        if status_code == StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT:
+            if msg !='':
+                self.show_message('copy', msg)
+            else:
+                self.show_message('copy', 'Connection Faild. check ip and cables connections')
+            GUIBackend.set_disable_enable(self.ui.btn_update_train, True)
+            self.set_loading_progress_bar(False)
+            return
+        
+        elif status_code == StatusCodes.pingAndConnectionStatusCodes.SUCCESS:
+            
+            GUIBackend.set_disable_enable(self.ui.btn_update_train, False)
+            tsd = updateRemote( self.ip , user_name=self.db_res['username'],password=self.db_res['password'],name=self.db_res['name'] )
+            tsd.exec_()
+
+            GUIBackend.set_disable_enable(self.ui.btn_update_train, True)
+
+
 
 
 

@@ -44,7 +44,7 @@ class CopyWorker(QObject):
             file_dst_path = file_src_path.replace(self.src_path, self.dst_path)
             file_dst_dir, fname = os.path.split(file_dst_path)
 
-            if not os.path.exists(file_dst_dir):
+            if not os.path.exists(file_dst_dir) :
                 os.makedirs(file_dst_dir)
 
             self.log_signal.emit(f'Copy {fname}')
