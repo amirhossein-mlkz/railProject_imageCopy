@@ -13,6 +13,7 @@ from PySide6.QtGui import QFont,QIcon
 from PySide6.QtWidgets import QMessageBox
 import sqlite3
 from persiantools.jdatetime import JalaliDateTime
+from PySide6.QtWidgets import QVBoxLayout, QWidget, QComboBox, QGridLayout, QLabel, QDialog,QDialogButtonBox,QPushButton,QFrame , QStatusBar
 
 from Tranform.transformUtils import transormUtils
 from database import DataBase
@@ -35,8 +36,20 @@ from ShowConfig import ShowConfig
 from Constants import BASE_CONFIG,CAMERA_NAMES,CONFIG_PATH, EXISTVIDEOS_PATH, IMAGE_GRABBER_CONFIG_PATH,PARMS,EXISTVIDEOS_PATH,MAIN_PATH,IMAGE_PATH,LOG_PATH,DST_PATH, UTILS_PATH
 
 from UpdateExistVideos import WidgetUpdateExistVideos
+from Tranform.Network import Sharing
 
-DEBUG = True
+from pathConstans import pathConstants
+from FirewallRules import enable_file_sharing
+
+from timeSetting import timeSetting
+from utils.Storage import StorageWidget
+import dorsa_logger
+from pathConstans import pathConstants
+
+
+
+
+DEBUG = False
 
 
 # ui class
@@ -49,12 +62,54 @@ class mainUI(sQMainWindow):
 
         self.ui = Ui_main()
         self.ui.setupUi(self)
+
+
+
+        self.logger = dorsa_logger.logger(
+                                        main_folderpath=pathConstants.SELF_LOGS_SHARE_FOLDER,
+                                        date_type=dorsa_logger.date_types.AD_DATE,
+                                        date_format=dorsa_logger.date_formats.YYMMDD,
+                                        time_format=dorsa_logger.time_formats.HHMMSS,
+                                        file_level=dorsa_logger.log_levels.DEBUG,
+                                        console_level=dorsa_logger.log_levels.DEBUG,
+                                        console_print=True,
+                                        current_username="NotLogin",
+                                        line_seperator='-')
+
+
+
+
+
+
         self.language = 'English'
         self.login_ui = LoginPage(self)
         self.login_ui.login_button_connector(self.check_password)
         self.login_ui.close_button_connector(self.close_login)
 
         self.is_login = False
+
+
+
+
+
+
+        # Create a QStatusBar
+        self.status_bar = QStatusBar()
+        self.setStatusBar(self.status_bar)
+
+        # Set the maximum height for the status bar (e.g., 30 pixels)
+        self.status_bar.setMaximumHeight(10)
+
+
+                # Set the background color and text color using a stylesheet
+        self.status_bar.setStyleSheet("""
+            QStatusBar {
+                background-color: rgb(220, 221, 180);  /* Background color */
+            }
+        """)
+
+
+
 
         # window setup
         flags = sQtCore.Qt.WindowFlags(
@@ -92,6 +147,7 @@ class mainUI(sQMainWindow):
         GUIBackend.set_combobox_items(self.ui.edit_profile_compression, self.mapDict.get_values('codec'))
 
         self.side_btns = [ self.ui.side_setting_btn , self.ui.side_train_config_btn,self.ui.side_profile_btn,self.ui.side_copy_btn]
+        # self.side_btns = [ ]
 
         self.names = []
 
@@ -136,6 +192,86 @@ class mainUI(sQMainWindow):
         self.ui.progressBar.setMinimum(0)
         self.ui.progressBar.setValue(0)
 
+
+        self.create_share_folder()
+        self.set_firewall_rules()
+
+
+
+
+        self.show_storage()
+
+    
+
+
+
+
+
+        ############################ LOG  #####################################
+
+        log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                    text=f"MainUI Completed", 
+                                    code="Minit000")
+        self.logger.create_new_log(message=log_msg)
+
+        #######################################################################
+
+
+
+
+
+    def show_storage(self):
+
+        self.storage_object = StorageWidget(path=pathConstants.SELF_IMAGES_DIR)
+        GUIBackend.add_widget(self.ui.storage_widget,self.storage_object)
+
+
+
+
+
+
+
+
+    def set_firewall_rules(self):
+
+        ret = enable_file_sharing()
+
+
+
+        ############################ LOG  #####################################
+
+        log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                    text=f"Firewall Rules Updated {ret}", 
+                                    code="Minit000")
+        self.logger.create_new_log(message=log_msg)
+
+        #######################################################################
+
+
+
+
+    
+    def create_share_folder(self):
+        try:
+            ret_remove =  Sharing.remove_share(pathConstants.SELF_SHARE_NAME)
+            ret_share = Sharing.create_and_share_folder(pathConstants.SELF_SHARE_PATH,
+                                            pathConstants.SELF_SHARE_NAME)
+            
+
+
+            ############################ LOG  #####################################
+
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                        text=f"Remove Share Folder : {ret_remove} , Create Share Folder : {ret_share} ", 
+                                        code="Mc000")
+            self.logger.create_new_log(message=log_msg)
+
+            #######################################################################
+
+
+
+        except:
+            pass
 
 
     def create_init_folders(self):
@@ -184,7 +320,7 @@ class mainUI(sQMainWindow):
         self.ui.login_btn.clicked.connect(self.show_login)
 
         self.ui.btn_save_train.clicked.connect(self.save_train_config)
-        self.ui.btn_check_connection.clicked.connect(self.check_connection_train_cofig)
+
         self.ui.btn_edit_config.clicked.connect(self.edit_config_train)
         self.ui.btn_delete_config.clicked.connect(self.delete_config_train)
         self.ui.btn_save_config_edit.clicked.connect(self.save_config_edit)
@@ -223,6 +359,22 @@ class mainUI(sQMainWindow):
         self.ui.btn_update_train.clicked.connect(self.check_train_update)
 
         
+
+
+        ############################### LOG  ##################################
+
+        log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                    text=f"Buttons Connected", 
+                                    code="Mc000")
+        self.logger.create_new_log(message=log_msg)
+
+        #######################################################################
+
+
+
+
+
+
 
     def show_login(self):
         if self.is_login:
@@ -332,7 +484,26 @@ class mainUI(sQMainWindow):
     def close_win(self):
 
         ret = self.show_question(texts.MESSAGES['message'][self.language],texts.MESSAGES['Close'][self.language])
+
+
+        ############################### LOG  ##################################
+
+        log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                    text=f"Close Windows Show", 
+                                    code="Mc000")
+        self.logger.create_new_log(message=log_msg)
+
+        #######################################################################
+
+
+
         if ret:
+            ############################### LOG  ##################################
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                        text=f"Software Closed", 
+                                        code="Mc000")
+            self.logger.create_new_log(message=log_msg)
+            #######################################################################
 
             self.close()
             sys.exit()
@@ -368,39 +539,61 @@ class mainUI(sQMainWindow):
 
 
     def load_pathes(self):
-        res = self.db.fetch_table_as_dict(table_name='pathes')
 
-        data = self.load_json(json_name=BASE_CONFIG)
+        try:
+            res = self.db.fetch_table_as_dict(table_name='pathes')
 
-        if data:
-            self.main_path = MAIN_PATH
-            self.image_path = os.path.join(self.main_path,IMAGE_PATH)
-            self.log_path = os.path.join(self.main_path,UTILS_PATH,LOG_PATH)
-            self.image_grabber_log_path = os.path.join(self.main_path,UTILS_PATH,IMAGE_GRABBER_CONFIG_PATH)
+            data = self.load_json(json_name=BASE_CONFIG)
 
-
-            self.dst_main_path  = os.path.join(DST_PATH,MAIN_PATH)
-            # if DEBUG:
-            #     pass
-            #     self.dst_main_path  = os.path.join('C:\\test_share',MAIN_PATH)      ############# TEMP
-            self.dst_image_path = os.path.join(self.dst_main_path,IMAGE_PATH) 
-            self.dst_utils_path = os.path.join(self.dst_main_path,UTILS_PATH)
-            self.archive_path = os.path.join(self.dst_utils_path,EXISTVIDEOS_PATH)
-            self.dst_log_path = os.path.join(self.dst_utils_path,LOG_PATH)
+            if data:
+                self.main_path = MAIN_PATH
+                self.image_path = os.path.join(self.main_path,IMAGE_PATH)
+                self.log_path = os.path.join(self.main_path,UTILS_PATH,LOG_PATH)
+                self.image_grabber_log_path = os.path.join(self.main_path,UTILS_PATH,IMAGE_GRABBER_CONFIG_PATH)
 
 
-            pathes = [self.dst_main_path,self.dst_image_path,self.dst_utils_path]
+                self.dst_main_path  = os.path.join(DST_PATH,MAIN_PATH)
+                # if DEBUG:
+                #     pass
+                #     self.dst_main_path  = os.path.join('C:\\test_share',MAIN_PATH)      ############# TEMP
+                self.dst_image_path = os.path.join(self.dst_main_path,IMAGE_PATH) 
+                self.dst_utils_path = os.path.join(self.dst_main_path,UTILS_PATH)
+                self.archive_path = os.path.join(self.dst_utils_path,EXISTVIDEOS_PATH)
+                self.dst_log_path = os.path.join(self.dst_utils_path,LOG_PATH)
 
-            for path in pathes:
-                if not os.path.exists(path):
-                    print(path)
-                    os.makedirs(path)
 
+                pathes = [self.dst_main_path,self.dst_image_path,self.dst_utils_path]
 
+                for path in pathes:
+                    if not os.path.exists(path):
+                        print(path)
+                        os.makedirs(path)
+
+            else:
+
+                ############################### LOG  ##################################
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Load Pathes Error", 
+                                            code="ml000")
+                self.logger.create_new_log(message=log_msg)
+                #######################################################################
+
+        except Exception as e:
+
+            ############################### LOG  ##################################
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                        text=f"Except Error in Load pathes : {e}", 
+                                        code="ml001")
+            self.logger.create_new_log(message=log_msg)
+            #######################################################################
 
 
     def ui_copy(self):
+
         self.start_copy()
+
+
+
 
     
     def ui_update_copy_parms(self):
@@ -411,16 +604,53 @@ class mainUI(sQMainWindow):
 
         if len(ret)!=1:
             print('Error in get data')
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Get train info from DB error {ret}", 
+                                            code="Mu001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                print('Create log function get db ui_update_copy_parms error')
+                pass
+            #######################################################################
+            
             return
         
+
+
         ret = ret[0]
-
-
         self.ui.ip_input.setText(ret['ip'])
         self.ui.username_input.setText(ret['username'])
 
 
+        ############################### LOG  ##################################
+        try:
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                        text=f"Update Copy Params in UI {ret['ip']} {ret['username']}", 
+                                        code="Mu000")
+            self.logger.create_new_log(message=log_msg)
+        except:
+            print('Create log function ui_update_copy_parms error')
+            pass
+        #######################################################################
+
+
+
+
     def start_copy(self,image_condition=None):
+
+
+        ############################### LOG  ##################################
+        log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                    text=f"Start Copy Clicked", 
+                                    code="Mc000")
+        self.logger.create_new_log(message=log_msg)
+        #######################################################################
+
+
+
 
         self.set_error_btn(error_count = 0)
         
@@ -430,6 +660,20 @@ class mainUI(sQMainWindow):
 
         if len(ret)!=1:
             print('Error in get data')
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Get train info from DB error {ret}", 
+                                            code="Mu001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                print('Create log function start_copy ui_update_copy_parms error')
+                pass
+            #######################################################################
+
+
+
             return
         
         ret = ret[0]
@@ -469,10 +713,40 @@ class mainUI(sQMainWindow):
                 self.status_of_file = None
 
 
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Timeline Selected {self.date_time_ranges}", 
+                                            code="Ms000")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                print('Create log function start copy error')
+                pass
+            #######################################################################
+
+
+
+
+
             
 
         self.trasformer = transformModule(self.copy_ip, src_path, dst_path, self.copy_username, self.copy_password)
         self.show_message('copy', 'Check Connection...')
+
+
+
+        ############################### LOG  ##################################
+        try:
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                        text=f"Show Message : check connection - src_path: {src_path} - dst_path : {dst_path}", 
+                                        code="Ms001")
+            self.logger.create_new_log(message=log_msg)
+        except:
+            pass
+        #######################################################################
+
+        
         self.set_loading_progress_bar(loading=True)
         
         GUIBackend.set_disable_enable(self.ui.copy_button, False)
@@ -492,16 +766,35 @@ class mainUI(sQMainWindow):
                 self.show_message('copy', 'Connection Faild. check ip and cables connections')
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
             self.set_loading_progress_bar(False)
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Error : check connection {status_code} {msg}", 
+                                            code="Mstep1000")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
             return
         
         elif status_code == StatusCodes.pingAndConnectionStatusCodes.SUCCESS:
             self.show_message('copy', 'Searching Files...')
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                            text=f"Show Message : SearchingFiles", 
+                                            code="Mscce001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
             self.trasformer.find_files( trains= None,
                                         dates_tange=self.date_time_ranges,
                                         finish_event_func=self.step2_files_list_ready_event,
                                         log_event_func=self.step1_log_event,
                                         log_search=self.log_search,
                                         status=self.status_of_file)
+            
 
     def step1_log_event(self, log:str):
         txt = f'Searching Files: {log}'
@@ -513,10 +806,31 @@ class mainUI(sQMainWindow):
                                      sizes:list[int], 
                                      ):
         
+
+        self.show_message('copy', 'Check Storage')
+
+        # ret = self.check_storage(needed_size = sum(sizes))
+
+        # if not ret:
+        #     self.start_cleaning(self,needed_size = sum(sizes))
+        #     return
+
         if status_code == StatusCodes.findFilesStatusCodes.DIR_NOT_EXISTS:
-            self.show_message('copy', f"Path dosen't exists: {self.trasformer.src_path} ", )
+            self.show_message('copy', f"Path doesn't exists: {self.trasformer.src_path} ", )
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
             self.set_loading_progress_bar(False)
+
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Error : {status_code} - Path doesn't exists: {self.trasformer.src_path}", 
+                                            code="Ms001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
+
             return
         
 
@@ -530,8 +844,23 @@ class mainUI(sQMainWindow):
                 self.copy_logs()
             else:
                 self.set_loading_progress_bar(False)
+
+
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"No Files Found to Copy - flag_copy_log : {self.flag_copy_log} , start_copy_logs : {self.start_copy_logs}", 
+                                            code="Ms001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
+
+
             return
         
+
         move = False
         if self.log_search:
             move = True
@@ -547,6 +876,20 @@ class mainUI(sQMainWindow):
                                    msg_callback=self.step2_log,
                                    rename_src=True,
                                    move=move)
+        
+
+
+        ############################### LOG  ##################################
+        try:
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                        text=f"Start Copy", 
+                                        code="Mstep2002")
+            self.logger.create_new_log(message=log_msg)
+        except:
+            pass
+        #######################################################################
+
+
 
     def step2_update_progress(self, completed:int, total:int):
         if total<1:
@@ -572,8 +915,19 @@ class mainUI(sQMainWindow):
             GUIBackend.set_disable_enable(self.ui.copy_button, True)
             self.show_message('copy', "Dissconnected!")
             self.set_loading_progress_bar(False)
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Step3 Error : Disconnected {status_code}", 
+                                            code="Mstep3000")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
             return
         # a = transormUtils.dateTimeRanges( avaiabilities['11BG21']['right'], 600 )
+
         GUIBackend.set_disable_enable(self.ui.copy_button, True)
         self.show_message('copy', "Copy Videos Finish Success")
 
@@ -581,13 +935,149 @@ class mainUI(sQMainWindow):
 
 
 
+        ############################### LOG  ##################################
+        try:
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                        text=f"Copy Videos Finish Success", 
+                                        code="Mstep3001")
+            self.logger.create_new_log(message=log_msg)
+        except:
+            pass
+        #######################################################################
+
+
         if self.log_search and self.start_copy_logs:
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                            text=f"Start For Show Logs,CheckRemoteTime,UpdateArchive", 
+                                            code="Mstep3003")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
+
+
             new_logs = self.trasformer.searcher_worker.res_paths
             self.show_logs(new_logs)
+            self.check_remote_time()
             self.update_exist_videos()
 
         if self.flag_copy_log and not self.start_copy_logs:
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                            text=f"Start Copy Logs in Step3", 
+                                            code="Mstep3002")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
+
+
+            
             self.copy_logs()
+
+
+
+
+    def check_storage(self,size):
+
+        print('needed size = ',size)
+        ret , msg = self.storage_object.check_storage(needed_size_MB=size)
+        self.show_message('copy',msg)
+
+        return ret
+
+
+
+
+    def start_cleaning(self,size):
+
+        self.storage_object.start(space_should_be_clean_MB=size)
+
+
+
+
+
+    def check_remote_time(self):
+
+        
+        try:
+
+            name = self.ui.combo_copy_train_name.currentText()
+            db_results = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=name)
+
+            if len(db_results)!=1:
+                print('Error in get data')
+                return
+            
+            db_res = db_results[0]
+            ip = db_res['ip']
+
+            remote_time, local_time = timeSetting.get_time_from_remote_system(ip_address=ip)
+
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                            text=f"Check Remote Time - remote_time: {remote_time} , local_time : {local_time}", 
+                                            code="Mchek_remote_time001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
+
+
+            if  remote_time is not None and local_time is not None:
+
+
+                # Calculate the time delta between the two datetime objects
+                time_delta = abs(remote_time - local_time)
+
+
+                # Check if the delta is greater than one minute (60 seconds)
+                if time_delta.total_seconds() < 60:
+                    return
+
+                else:
+                    self.ui.check_time_btn.click()
+
+                    ############################### LOG  ##################################
+                    try:
+                        log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                                    text=f"check_time_btn Clicked", 
+                                                    code="Mchek_remote_time003")
+                        self.logger.create_new_log(message=log_msg)
+                    except:
+                        pass
+                    #######################################################################
+
+
+
+
+
+
+        except Exception as e:
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                            text=f"Error in check remote time {e}", 
+                                            code="Mchek_remote_time002")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
+
+
+            
+
+
+
+
 
     def show_logs(self,new_logs):
         
@@ -606,6 +1096,23 @@ class mainUI(sQMainWindow):
 
 
         self.set_error_btn(error_count = self.errors)
+
+
+
+        ############################### LOG  ##################################
+        try:
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                        text=f"Show Logs {self.errors} ", 
+                                        code="Mshow_logs000")
+            self.logger.create_new_log(message=log_msg)
+        except:
+            pass
+        #######################################################################
+
+
+
+
+
 
 
 
@@ -642,21 +1149,57 @@ class mainUI(sQMainWindow):
 
     def update_exist_videos(self):
 
-        self.show_message('copy', "Local Updateing You Can Remove Trian Connection")
-        self.show_message('setting_msg', "Local Updateing You Can Remove Trian Connection")
-        self.set_loading_progress_bar(loading=True)
+        try:
 
-        self.archive_manager = archiveManager(self.dst_utils_path)
-        self.archive_manager.update_archive(self.dst_image_path, self.save_exist_videos)
+            self.show_message('copy', "Local Updateing You Can Remove Trian Connection")
+            self.show_message('setting_msg', "Local Updateing You Can Remove Trian Connection")
+            self.set_loading_progress_bar(loading=True)
+            self.archive_manager = archiveManager(self.dst_utils_path)
+            self.archive_manager.update_archive(self.dst_image_path, self.save_exist_videos)
 
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                            text=f"Local Updateing You Can Remove Trian Connection", 
+                                            code="Mupdate_exist_videos000")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
+
+
+
+
+
+        except Exception as e:
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                            text=f"Error : Except in update exist Videos ", 
+                                            code="Mupdate_exist_videos001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
         
 
 
 
     def save_exist_videos(self,status_code,):
-        print(status_code)
+        # print(status_code)
         if status_code == StatusCodes.findFilesStatusCodes.DIR_NOT_EXISTS:
             self.show_message('copy', "archive directory not exist")
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Error : Archive directory not exist", 
+                                            code="Msave_exist_videos001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
             return
         
         if status_code == StatusCodes.findFilesStatusCodes.SUCCESS:
@@ -665,49 +1208,18 @@ class mainUI(sQMainWindow):
         self.set_loading_progress_bar(False)
             
 
-        return
-        print('asd')
-        avaiabilities
-
-        if avaiabilities != {}:
-            for train_name in avaiabilities.keys():
-                train = avaiabilities[train_name]
-                for camera in train.keys():
-                    try:
-                        date_times = train[camera]
-                        times = transormUtils.dateTimeRanges(date_times=date_times,step_lenght_sec=600,max_gap_sec=10)
-                        train[camera] = times
-                    except:
-                        print('Error in Convert timtimes to ranges')
-                        self.show_message('copy', "Error in Local Updating")
-                        self.show_message('setting_msg', "Error in Local Updating")
-        else:
-            self.show_message('copy', "Nothing to Update")
-            self.show_message('setting_msg', "Nothing to Update")
-            return
-
-
-        json_exist_videos = self.dst_exist_videos_path
-
-
-        if os.path.exists(json_exist_videos):
-            os.remove(json_exist_videos)
-
-        # # Your code to write the JSON
+        ############################### LOG  ##################################
         try:
-            with open(json_exist_videos, 'w', encoding='utf-8') as f:
-                json.dump(avaiabilities, f, ensure_ascii=False, indent=4, default=self.custom_json_handler)
-            self.show_message('copy', "Finish Local Updateing")
-            self.show_message('setting_msg', "Finish Local Updateing")
-            self.set_loading_progress_bar(loading=False)
-
-
-
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                        text=f"Archive Updated", 
+                                        code="Msave_exist_videos002")
+            self.logger.create_new_log(message=log_msg)
         except:
+            pass
+        #######################################################################
 
-            self.show_message('copy', "Error in Write New File")
-            self.show_message('setting_msg', "Error in Write New File")
-            self.set_loading_progress_bar(loading=False)
+
+        return
 
 
     # Custom JSON encoder function
@@ -1072,7 +1584,7 @@ class mainUI(sQMainWindow):
 
                 input.setText('')
             
-            self.ui.group_camera_1.setChecked(False)
+            # self.ui.group_camera_1.setChecked(False)
             if edit :
                 group = eval('self.ui.group_camera_{}_edit'.format(iter+1))
             
@@ -1080,7 +1592,7 @@ class mainUI(sQMainWindow):
                 group = eval('self.ui.group_camera_{}'.format(iter+1))
 
                 GUIBackend.set_input(self.ui.line_train_name, '')
-            group.setChecked(False)
+            # group.setChecked(False)
 
 
     def check_camera_config(self,index,edit= False):

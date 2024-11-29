@@ -72,6 +72,7 @@ class ShowConfig(QWidget):
             camera_layout.addRow("IP:", QLabel(camera['ip']))
             camera_layout.addRow("Username:", QLabel(camera['username']))
             camera_layout.addRow("Password:", QLabel(camera['password']))
+            camera_layout.addRow("Port:", QLabel(camera['port']))
             camera_group.setLayout(camera_layout)
             scroll_layout.addWidget(camera_group)
 

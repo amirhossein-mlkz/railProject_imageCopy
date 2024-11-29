@@ -17,10 +17,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
     QGridLayout, QGroupBox, QHBoxLayout, QLabel,
-    QLineEdit, QMainWindow, QPlainTextEdit, QProgressBar,
-    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QStackedWidget, QStatusBar, QTabWidget, QVBoxLayout,
-    QWidget)
+    QLineEdit, QMainWindow, QProgressBar, QPushButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
+    QTabWidget, QVBoxLayout, QWidget)
 
 from uiUtils.GUIComponents import timeSpinBox
 import assets_rc
@@ -30,7 +29,7 @@ class Ui_main(object):
         if not main.objectName():
             main.setObjectName(u"main")
         main.setEnabled(True)
-        main.resize(617, 775)
+        main.resize(617, 806)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -765,9 +764,15 @@ class Ui_main(object):
         self.verticalLayout_67.setSpacing(0)
         self.verticalLayout_67.setObjectName(u"verticalLayout_67")
         self.verticalLayout_67.setContentsMargins(0, 0, 0, 0)
-        self.verticalSpacer_6 = QSpacerItem(20, 12, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.frame_28 = QFrame(self.leftSideFrame)
+        self.frame_28.setObjectName(u"frame_28")
+        self.frame_28.setMinimumSize(QSize(0, 12))
+        self.frame_28.setMaximumSize(QSize(16777215, 12))
+        self.frame_28.setStyleSheet(u"background-color:rgb(220, 221, 180);")
+        self.frame_28.setFrameShape(QFrame.NoFrame)
+        self.frame_28.setFrameShadow(QFrame.Raised)
 
-        self.verticalLayout_67.addItem(self.verticalSpacer_6)
+        self.verticalLayout_67.addWidget(self.frame_28)
 
         self.line_5 = QFrame(self.leftSideFrame)
         self.line_5.setObjectName(u"line_5")
@@ -889,7 +894,7 @@ class Ui_main(object):
 
         self.verticalLayout_67.addWidget(self.line_8)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_67.addItem(self.verticalSpacer_2)
 
@@ -900,7 +905,7 @@ class Ui_main(object):
         self.label_66.setPixmap(QPixmap(u":/asstets/icons/logo_aryan.png"))
         self.label_66.setScaledContents(True)
 
-        self.verticalLayout_67.addWidget(self.label_66)
+        self.verticalLayout_67.addWidget(self.label_66, 0, Qt.AlignHCenter)
 
         self.label_65 = QLabel(self.leftSideFrame)
         self.label_65.setObjectName(u"label_65")
@@ -915,9 +920,9 @@ class Ui_main(object):
         self.label_65.setPixmap(QPixmap(u":/asstets/icons/rahahan-logo.png"))
         self.label_65.setScaledContents(True)
 
-        self.verticalLayout_67.addWidget(self.label_65)
+        self.verticalLayout_67.addWidget(self.label_65, 0, Qt.AlignHCenter)
 
-        self.verticalSpacer_11 = QSpacerItem(20, 40, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_11 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_67.addItem(self.verticalSpacer_11)
 
@@ -933,14 +938,12 @@ class Ui_main(object):
         self.login_btn.setIcon(icon3)
         self.login_btn.setIconSize(QSize(20, 20))
 
-        self.verticalLayout_67.addWidget(self.login_btn)
+        self.verticalLayout_67.addWidget(self.login_btn, 0, Qt.AlignHCenter)
 
-        self.verticalSpacer_5 = QSpacerItem(20, 19, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_5 = QSpacerItem(20, 19, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_67.addItem(self.verticalSpacer_5)
 
-        self.verticalLayout_67.setStretch(4, 10)
-        self.verticalLayout_67.setStretch(10, 10)
 
         self.horizontalLayout_2.addWidget(self.leftSideFrame)
 
@@ -964,7 +967,7 @@ class Ui_main(object):
         self.horizontalLayout_14.setSpacing(11)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
         self.horizontalLayout_14.setContentsMargins(0, 6, -1, 6)
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.horizontalLayout_14.addItem(self.horizontalSpacer)
 
@@ -984,6 +987,10 @@ class Ui_main(object):
         self.help_btn.setIconSize(QSize(22, 22))
 
         self.horizontalLayout_14.addWidget(self.help_btn)
+
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_14.addItem(self.horizontalSpacer_5)
 
         self.minimize_btn = QPushButton(self.topFrame)
         self.minimize_btn.setObjectName(u"minimize_btn")
@@ -1065,14 +1072,14 @@ class Ui_main(object):
 
         self.verticalLayout_2.addWidget(self.frame_56)
 
-        self.line_9 = QFrame(self.copy)
-        self.line_9.setObjectName(u"line_9")
-        self.line_9.setFrameShape(QFrame.Shape.VLine)
-        self.line_9.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.verticalLayout_2.addWidget(self.line_9)
-
-        self.frame_58 = QFrame(self.copy)
+        self.frame_13 = QFrame(self.copy)
+        self.frame_13.setObjectName(u"frame_13")
+        self.frame_13.setFrameShape(QFrame.NoFrame)
+        self.frame_13.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_10 = QVBoxLayout(self.frame_13)
+        self.verticalLayout_10.setSpacing(0)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.frame_58 = QFrame(self.frame_13)
         self.frame_58.setObjectName(u"frame_58")
         self.frame_58.setEnabled(False)
         self.frame_58.setMinimumSize(QSize(0, 80))
@@ -1140,34 +1147,29 @@ class Ui_main(object):
         self.verticalLayout_35.addWidget(self.frame_61)
 
 
-        self.verticalLayout_2.addWidget(self.frame_58)
+        self.verticalLayout_10.addWidget(self.frame_58)
 
-        self.line_10 = QFrame(self.copy)
-        self.line_10.setObjectName(u"line_10")
-        self.line_10.setFrameShape(QFrame.Shape.VLine)
-        self.line_10.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.verticalLayout_2.addWidget(self.line_10)
-
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.verticalLayout_2.addItem(self.verticalSpacer_3)
-
-        self.timeline_groupbox = QGroupBox(self.copy)
+        self.frame_7 = QFrame(self.frame_13)
+        self.frame_7.setObjectName(u"frame_7")
+        self.frame_7.setFrameShape(QFrame.NoFrame)
+        self.frame_7.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_12 = QVBoxLayout(self.frame_7)
+        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.timeline_groupbox = QGroupBox(self.frame_7)
         self.timeline_groupbox.setObjectName(u"timeline_groupbox")
         self.timeline_groupbox.setMinimumSize(QSize(0, 160))
         self.timeline_groupbox.setCheckable(True)
         self.verticalLayout_19 = QVBoxLayout(self.timeline_groupbox)
         self.verticalLayout_19.setObjectName(u"verticalLayout_19")
         self.verticalLayout_19.setContentsMargins(0, -1, 0, -1)
-        self.frame_7 = QFrame(self.timeline_groupbox)
-        self.frame_7.setObjectName(u"frame_7")
-        self.frame_7.setMinimumSize(QSize(0, 120))
-        self.frame_7.setFrameShape(QFrame.NoFrame)
-        self.verticalLayout_20 = QVBoxLayout(self.frame_7)
+        self.frame_21 = QFrame(self.timeline_groupbox)
+        self.frame_21.setObjectName(u"frame_21")
+        self.frame_21.setMinimumSize(QSize(0, 120))
+        self.frame_21.setFrameShape(QFrame.NoFrame)
+        self.verticalLayout_20 = QVBoxLayout(self.frame_21)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
         self.verticalLayout_20.setContentsMargins(0, -1, 0, -1)
-        self.frame_date_2 = QFrame(self.frame_7)
+        self.frame_date_2 = QFrame(self.frame_21)
         self.frame_date_2.setObjectName(u"frame_date_2")
         self.frame_date_2.setMaximumSize(QSize(16777215, 16777215))
         self.frame_date_2.setFrameShape(QFrame.NoFrame)
@@ -1352,11 +1354,11 @@ class Ui_main(object):
 
         self.gridLayout.addWidget(self.label_31, 1, 7, 1, 1)
 
-        self.horizontalSpacer_8 = QSpacerItem(38, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_8 = QSpacerItem(38, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.gridLayout.addItem(self.horizontalSpacer_8, 1, 4, 1, 1)
 
-        self.horizontalSpacer_7 = QSpacerItem(38, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_7 = QSpacerItem(38, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.gridLayout.addItem(self.horizontalSpacer_7, 0, 4, 1, 1)
 
@@ -1366,7 +1368,7 @@ class Ui_main(object):
         self.horizontalLayout_59 = QHBoxLayout()
         self.horizontalLayout_59.setObjectName(u"horizontalLayout_59")
         self.horizontalLayout_59.setContentsMargins(-1, 6, -1, -1)
-        self.only_copy_new_checkbox = QCheckBox(self.frame_7)
+        self.only_copy_new_checkbox = QCheckBox(self.frame_21)
         self.only_copy_new_checkbox.setObjectName(u"only_copy_new_checkbox")
         self.only_copy_new_checkbox.setChecked(True)
         self.only_copy_new_checkbox.setTristate(False)
@@ -1376,7 +1378,7 @@ class Ui_main(object):
 
         self.verticalLayout_20.addLayout(self.horizontalLayout_59)
 
-        self.time_line_msg = QLabel(self.frame_7)
+        self.time_line_msg = QLabel(self.frame_21)
         self.time_line_msg.setObjectName(u"time_line_msg")
         font1 = QFont()
         font1.setFamilies([u"Roboto"])
@@ -1389,16 +1391,29 @@ class Ui_main(object):
         self.verticalLayout_20.addWidget(self.time_line_msg)
 
 
-        self.verticalLayout_19.addWidget(self.frame_7)
+        self.verticalLayout_19.addWidget(self.frame_21)
 
 
-        self.verticalLayout_2.addWidget(self.timeline_groupbox)
+        self.verticalLayout_12.addWidget(self.timeline_groupbox)
 
-        self.copy_button = QPushButton(self.copy)
+
+        self.verticalLayout_10.addWidget(self.frame_7)
+
+
+        self.verticalLayout_2.addWidget(self.frame_13)
+
+        self.frame_24 = QFrame(self.copy)
+        self.frame_24.setObjectName(u"frame_24")
+        self.frame_24.setMaximumSize(QSize(16777215, 110))
+        self.frame_24.setFrameShape(QFrame.NoFrame)
+        self.frame_24.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_13 = QVBoxLayout(self.frame_24)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.copy_button = QPushButton(self.frame_24)
         self.copy_button.setObjectName(u"copy_button")
         self.copy_button.setEnabled(True)
-        self.copy_button.setMinimumSize(QSize(200, 31))
-        self.copy_button.setMaximumSize(QSize(200, 16777215))
+        self.copy_button.setMinimumSize(QSize(415, 31))
+        self.copy_button.setMaximumSize(QSize(415, 16777215))
         self.copy_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.copy_button.setStyleSheet(u"QPushButton{\n"
 "	\n"
@@ -1411,9 +1426,15 @@ class Ui_main(object):
 "background-color:rgb(71, 71, 213);	\n"
 "}")
 
-        self.verticalLayout_2.addWidget(self.copy_button)
+        self.verticalLayout_13.addWidget(self.copy_button, 0, Qt.AlignHCenter)
 
-        self.check_time_btn = QPushButton(self.copy)
+        self.frame_3 = QFrame(self.frame_24)
+        self.frame_3.setObjectName(u"frame_3")
+        self.frame_3.setFrameShape(QFrame.NoFrame)
+        self.frame_3.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_15 = QHBoxLayout(self.frame_3)
+        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        self.check_time_btn = QPushButton(self.frame_3)
         self.check_time_btn.setObjectName(u"check_time_btn")
         self.check_time_btn.setEnabled(True)
         self.check_time_btn.setMinimumSize(QSize(200, 33))
@@ -1434,9 +1455,9 @@ class Ui_main(object):
 "color:#fff;\n"
 "}")
 
-        self.verticalLayout_2.addWidget(self.check_time_btn)
+        self.horizontalLayout_15.addWidget(self.check_time_btn)
 
-        self.btn_update_train = QPushButton(self.copy)
+        self.btn_update_train = QPushButton(self.frame_3)
         self.btn_update_train.setObjectName(u"btn_update_train")
         self.btn_update_train.setEnabled(True)
         self.btn_update_train.setMinimumSize(QSize(200, 33))
@@ -1457,14 +1478,13 @@ class Ui_main(object):
 "color:#fff;\n"
 "}")
 
-        self.verticalLayout_2.addWidget(self.btn_update_train)
+        self.horizontalLayout_15.addWidget(self.btn_update_train)
 
-        self.line_21 = QFrame(self.copy)
-        self.line_21.setObjectName(u"line_21")
-        self.line_21.setFrameShape(QFrame.Shape.VLine)
-        self.line_21.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.verticalLayout_2.addWidget(self.line_21)
+        self.verticalLayout_13.addWidget(self.frame_3)
+
+
+        self.verticalLayout_2.addWidget(self.frame_24)
 
         self.frame_11 = QFrame(self.copy)
         self.frame_11.setObjectName(u"frame_11")
@@ -1583,7 +1603,7 @@ class Ui_main(object):
 
         self.horizontalLayout_5.addWidget(self.total_copy_lbl_2)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_4)
 
@@ -1643,7 +1663,7 @@ class Ui_main(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 370, 685))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 447, 685))
         self.verticalLayout_6 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(-1, -1, -1, 9)
@@ -1978,7 +1998,7 @@ class Ui_main(object):
         self.btn_save_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_save_profile.setIconSize(QSize(29, 23))
 
-        self.verticalLayout_14.addWidget(self.btn_save_profile)
+        self.verticalLayout_14.addWidget(self.btn_save_profile, 0, Qt.AlignHCenter)
 
         self.line = QFrame(self.tab)
         self.line.setObjectName(u"line")
@@ -2071,7 +2091,7 @@ class Ui_main(object):
         self.frame_profile_edit.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 447, 782))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 370, 782))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.horizontalFrame1111_3 = QFrame(self.scrollAreaWidgetContents_2)
@@ -2380,15 +2400,21 @@ class Ui_main(object):
 
         self.verticalLayout_5.addWidget(self.label_profile_edit_message)
 
-        self.btn_save_edit_profile = QPushButton(self.tab_2)
+        self.frame_22 = QFrame(self.tab_2)
+        self.frame_22.setObjectName(u"frame_22")
+        self.frame_22.setFrameShape(QFrame.StyledPanel)
+        self.frame_22.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_22 = QHBoxLayout(self.frame_22)
+        self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
+        self.btn_save_edit_profile = QPushButton(self.frame_22)
         self.btn_save_edit_profile.setObjectName(u"btn_save_edit_profile")
         self.btn_save_edit_profile.setMinimumSize(QSize(95, 0))
         self.btn_save_edit_profile.setMaximumSize(QSize(95, 16777215))
         self.btn_save_edit_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.verticalLayout_5.addWidget(self.btn_save_edit_profile)
+        self.horizontalLayout_22.addWidget(self.btn_save_edit_profile)
 
-        self.btn_cancel_edit_profile = QPushButton(self.tab_2)
+        self.btn_cancel_edit_profile = QPushButton(self.frame_22)
         self.btn_cancel_edit_profile.setObjectName(u"btn_cancel_edit_profile")
         self.btn_cancel_edit_profile.setMinimumSize(QSize(95, 0))
         self.btn_cancel_edit_profile.setMaximumSize(QSize(95, 16777215))
@@ -2405,7 +2431,10 @@ class Ui_main(object):
 "\n"
 "}")
 
-        self.verticalLayout_5.addWidget(self.btn_cancel_edit_profile)
+        self.horizontalLayout_22.addWidget(self.btn_cancel_edit_profile)
+
+
+        self.verticalLayout_5.addWidget(self.frame_22, 0, Qt.AlignBottom)
 
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QWidget()
@@ -2577,7 +2606,7 @@ class Ui_main(object):
 
         self.verticalLayout_7.addWidget(self.groupBox_2)
 
-        self.verticalSpacer_10 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_10 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_7.addItem(self.verticalSpacer_10)
 
@@ -2712,15 +2741,10 @@ class Ui_main(object):
         self.frame_54.setFrameShape(QFrame.NoFrame)
         self.horizontalLayout_9 = QHBoxLayout(self.frame_54)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.btn_check_connection = QPushButton(self.frame_54)
-        self.btn_check_connection.setObjectName(u"btn_check_connection")
-        self.btn_check_connection.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_9.addWidget(self.btn_check_connection)
-
         self.btn_save_train = QPushButton(self.frame_54)
         self.btn_save_train.setObjectName(u"btn_save_train")
         self.btn_save_train.setEnabled(True)
+        self.btn_save_train.setMaximumSize(QSize(200, 16777215))
         self.btn_save_train.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.horizontalLayout_9.addWidget(self.btn_save_train)
@@ -2728,13 +2752,7 @@ class Ui_main(object):
 
         self.verticalLayout_31.addWidget(self.frame_54)
 
-        self.plainTextEdit_check_connection = QPlainTextEdit(self.tab_5)
-        self.plainTextEdit_check_connection.setObjectName(u"plainTextEdit_check_connection")
-        self.plainTextEdit_check_connection.setMaximumSize(QSize(16777215, 100))
-
-        self.verticalLayout_31.addWidget(self.plainTextEdit_check_connection)
-
-        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_31.addItem(self.verticalSpacer_4)
 
@@ -2864,28 +2882,37 @@ class Ui_main(object):
 
         self.verticalLayout_11.addWidget(self.frame_25)
 
-        self.btn_save_config_edit = QPushButton(self.frame_train_edit)
+        self.frame_23 = QFrame(self.frame_train_edit)
+        self.frame_23.setObjectName(u"frame_23")
+        self.frame_23.setFrameShape(QFrame.StyledPanel)
+        self.frame_23.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_23 = QHBoxLayout(self.frame_23)
+        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
+        self.btn_save_config_edit = QPushButton(self.frame_23)
         self.btn_save_config_edit.setObjectName(u"btn_save_config_edit")
         self.btn_save_config_edit.setEnabled(False)
         self.btn_save_config_edit.setMinimumSize(QSize(200, 25))
         self.btn_save_config_edit.setMaximumSize(QSize(200, 16777215))
         self.btn_save_config_edit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.verticalLayout_11.addWidget(self.btn_save_config_edit)
+        self.horizontalLayout_23.addWidget(self.btn_save_config_edit)
 
-        self.btn_cancel_config_edit = QPushButton(self.frame_train_edit)
+        self.btn_cancel_config_edit = QPushButton(self.frame_23)
         self.btn_cancel_config_edit.setObjectName(u"btn_cancel_config_edit")
         self.btn_cancel_config_edit.setEnabled(False)
         self.btn_cancel_config_edit.setMinimumSize(QSize(200, 25))
         self.btn_cancel_config_edit.setMaximumSize(QSize(200, 16777215))
         self.btn_cancel_config_edit.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.verticalLayout_11.addWidget(self.btn_cancel_config_edit)
+        self.horizontalLayout_23.addWidget(self.btn_cancel_config_edit)
+
+
+        self.verticalLayout_11.addWidget(self.frame_23)
 
 
         self.verticalLayout_16.addWidget(self.frame_train_edit)
 
-        self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_16.addItem(self.verticalSpacer_7)
 
@@ -2946,9 +2973,9 @@ class Ui_main(object):
 
         self.horizontalLayout_18.addWidget(self.label_15)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_18.addItem(self.horizontalSpacer_2)
+        self.horizontalLayout_18.addItem(self.horizontalSpacer_6)
 
         self.line_current_password = QLineEdit(self.frame_4)
         self.line_current_password.setObjectName(u"line_current_password")
@@ -2972,9 +2999,9 @@ class Ui_main(object):
 
         self.horizontalLayout_19.addWidget(self.label_16)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_19.addItem(self.horizontalSpacer_3)
+        self.horizontalLayout_19.addItem(self.horizontalSpacer_10)
 
         self.line_new_password = QLineEdit(self.frame_17)
         self.line_new_password.setObjectName(u"line_new_password")
@@ -2998,9 +3025,9 @@ class Ui_main(object):
 
         self.horizontalLayout_26.addWidget(self.label_22)
 
-        self.horizontalSpacer_9 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_26.addItem(self.horizontalSpacer_9)
+        self.horizontalLayout_26.addItem(self.horizontalSpacer_11)
 
         self.line_confirm_password = QLineEdit(self.frame_18)
         self.line_confirm_password.setObjectName(u"line_confirm_password")
@@ -3019,7 +3046,7 @@ class Ui_main(object):
         self.btn_save_password.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_save_password.setStyleSheet(u"")
 
-        self.verticalLayout_21.addWidget(self.btn_save_password)
+        self.verticalLayout_21.addWidget(self.btn_save_password, 0, Qt.AlignHCenter)
 
 
         self.verticalLayout_9.addWidget(self.frame_change_password)
@@ -3044,6 +3071,26 @@ class Ui_main(object):
 
         self.verticalLayout_9.addWidget(self.frame_35)
 
+        self.frame_36 = QFrame(self.settings)
+        self.frame_36.setObjectName(u"frame_36")
+        self.frame_36.setFrameShape(QFrame.NoFrame)
+        self.horizontalLayout_61 = QHBoxLayout(self.frame_36)
+        self.horizontalLayout_61.setObjectName(u"horizontalLayout_61")
+        self.label_18 = QLabel(self.frame_36)
+        self.label_18.setObjectName(u"label_18")
+        self.label_18.setMaximumSize(QSize(109, 16777215))
+
+        self.horizontalLayout_61.addWidget(self.label_18)
+
+        self.btn_storage_manager = QPushButton(self.frame_36)
+        self.btn_storage_manager.setObjectName(u"btn_storage_manager")
+        self.btn_storage_manager.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.horizontalLayout_61.addWidget(self.btn_storage_manager)
+
+
+        self.verticalLayout_9.addWidget(self.frame_36)
+
         self.frame_33 = QFrame(self.settings)
         self.frame_33.setObjectName(u"frame_33")
         self.frame_33.setFrameShape(QFrame.NoFrame)
@@ -3058,13 +3105,43 @@ class Ui_main(object):
 
         self.verticalLayout_9.addWidget(self.frame_33)
 
-        self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_9.addItem(self.verticalSpacer_8)
 
         self.stackedWidget.addWidget(self.settings)
 
         self.verticalLayout.addWidget(self.stackedWidget)
+
+        self.frame_27 = QFrame(self.frame)
+        self.frame_27.setObjectName(u"frame_27")
+        self.frame_27.setMinimumSize(QSize(0, 50))
+        self.frame_27.setMaximumSize(QSize(16777215, 50))
+        self.frame_27.setStyleSheet(u"	background-color:rgb(220, 221, 180);\n"
+"	border:1px solid #D7D7D9;")
+        self.frame_27.setFrameShape(QFrame.StyledPanel)
+        self.frame_27.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_24 = QHBoxLayout(self.frame_27)
+        self.horizontalLayout_24.setObjectName(u"horizontalLayout_24")
+        self.horizontalLayout_24.setContentsMargins(0, 0, 0, 0)
+        self.horizontalSpacer_2 = QSpacerItem(26, 16, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_24.addItem(self.horizontalSpacer_2)
+
+        self.label_19 = QLabel(self.frame_27)
+        self.label_19.setObjectName(u"label_19")
+        self.label_19.setMinimumSize(QSize(67, 0))
+        self.label_19.setMaximumSize(QSize(67, 16777215))
+
+        self.horizontalLayout_24.addWidget(self.label_19)
+
+        self.storage_widget = QHBoxLayout()
+        self.storage_widget.setObjectName(u"storage_widget")
+
+        self.horizontalLayout_24.addLayout(self.storage_widget)
+
+
+        self.verticalLayout.addWidget(self.frame_27)
 
 
         self.horizontalLayout_2.addWidget(self.frame)
@@ -3073,9 +3150,6 @@ class Ui_main(object):
         self.horizontalLayout.addWidget(self.localStyleSheet)
 
         main.setCentralWidget(self.globalStyleSheet)
-        self.statusBar = QStatusBar(main)
-        self.statusBar.setObjectName(u"statusBar")
-        main.setStatusBar(self.statusBar)
         QWidget.setTabOrder(self.line_name_camera_1, self.line_ip_camera_1)
         QWidget.setTabOrder(self.line_ip_camera_1, self.line_port_camera_1)
         QWidget.setTabOrder(self.line_port_camera_1, self.line_username_camera_1)
@@ -3096,18 +3170,14 @@ class Ui_main(object):
         QWidget.setTabOrder(self.line_port_camera_4, self.line_username_camera_4)
         QWidget.setTabOrder(self.line_username_camera_4, self.line_password_camera_4)
         QWidget.setTabOrder(self.line_password_camera_4, self.btn_refresh_profile_name)
-        QWidget.setTabOrder(self.btn_refresh_profile_name, self.copy_button)
-        QWidget.setTabOrder(self.copy_button, self.check_time_btn)
-        QWidget.setTabOrder(self.check_time_btn, self.btn_found_errors)
+        QWidget.setTabOrder(self.btn_refresh_profile_name, self.btn_found_errors)
         QWidget.setTabOrder(self.btn_found_errors, self.tabWidget)
         QWidget.setTabOrder(self.tabWidget, self.scrollArea)
         QWidget.setTabOrder(self.scrollArea, self.line_train_name)
         QWidget.setTabOrder(self.line_train_name, self.new_profile_compression)
         QWidget.setTabOrder(self.new_profile_compression, self.group_camera_2)
         QWidget.setTabOrder(self.group_camera_2, self.group_camera_4)
-        QWidget.setTabOrder(self.group_camera_4, self.end_time_minute)
-        QWidget.setTabOrder(self.end_time_minute, self.only_copy_new_checkbox)
-        QWidget.setTabOrder(self.only_copy_new_checkbox, self.combo_train_name_profile)
+        QWidget.setTabOrder(self.group_camera_4, self.combo_train_name_profile)
         QWidget.setTabOrder(self.combo_train_name_profile, self.btn_edit_profile)
         QWidget.setTabOrder(self.btn_edit_profile, self.btn_delete_profile)
         QWidget.setTabOrder(self.btn_delete_profile, self.frame_profile_edit)
@@ -3132,19 +3202,15 @@ class Ui_main(object):
         QWidget.setTabOrder(self.line_train_profile_name, self.line_train_profile_ip)
         QWidget.setTabOrder(self.line_train_profile_ip, self.line_train_profile_username)
         QWidget.setTabOrder(self.line_train_profile_username, self.line_train_profile_password)
-        QWidget.setTabOrder(self.line_train_profile_password, self.btn_check_connection)
-        QWidget.setTabOrder(self.btn_check_connection, self.btn_save_train)
-        QWidget.setTabOrder(self.btn_save_train, self.plainTextEdit_check_connection)
-        QWidget.setTabOrder(self.plainTextEdit_check_connection, self.btn_refresh_name_config_edit)
+        QWidget.setTabOrder(self.line_train_profile_password, self.btn_save_train)
+        QWidget.setTabOrder(self.btn_save_train, self.btn_refresh_name_config_edit)
         QWidget.setTabOrder(self.btn_refresh_name_config_edit, self.combo_train_name_config)
         QWidget.setTabOrder(self.combo_train_name_config, self.btn_edit_config)
         QWidget.setTabOrder(self.btn_edit_config, self.btn_delete_config)
         QWidget.setTabOrder(self.btn_delete_config, self.line_train_profile_ip_edit)
         QWidget.setTabOrder(self.line_train_profile_ip_edit, self.line_train_profile_username_edit)
         QWidget.setTabOrder(self.line_train_profile_username_edit, self.line_train_profile_password_edit)
-        QWidget.setTabOrder(self.line_train_profile_password_edit, self.btn_save_config_edit)
-        QWidget.setTabOrder(self.btn_save_config_edit, self.btn_cancel_config_edit)
-        QWidget.setTabOrder(self.btn_cancel_config_edit, self.btn_change_password)
+        QWidget.setTabOrder(self.line_train_profile_password_edit, self.btn_change_password)
         QWidget.setTabOrder(self.btn_change_password, self.line_current_password)
         QWidget.setTabOrder(self.line_current_password, self.line_new_password)
         QWidget.setTabOrder(self.line_new_password, self.line_confirm_password)
@@ -3177,23 +3243,11 @@ class Ui_main(object):
         QWidget.setTabOrder(self.minimize_btn, self.close_btn)
         QWidget.setTabOrder(self.close_btn, self.combo_copy_train_name)
         QWidget.setTabOrder(self.combo_copy_train_name, self.group_camera_3)
-        QWidget.setTabOrder(self.group_camera_3, self.ip_input)
-        QWidget.setTabOrder(self.ip_input, self.username_input)
-        QWidget.setTabOrder(self.username_input, self.timeline_groupbox)
-        QWidget.setTabOrder(self.timeline_groupbox, self.start_time_minute)
-        QWidget.setTabOrder(self.start_time_minute, self.end_calendar_btn)
-        QWidget.setTabOrder(self.end_calendar_btn, self.start_calendar_btn)
-        QWidget.setTabOrder(self.start_calendar_btn, self.end_date)
-        QWidget.setTabOrder(self.end_date, self.end_time_hour)
-        QWidget.setTabOrder(self.end_time_hour, self.start_date)
-        QWidget.setTabOrder(self.start_date, self.start_time_hour)
-        QWidget.setTabOrder(self.start_time_hour, self.btn_save_edit_profile)
-        QWidget.setTabOrder(self.btn_save_edit_profile, self.btn_cancel_edit_profile)
 
         self.retranslateUi(main)
 
         self.stackedWidget.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(0)
 
 
@@ -3335,9 +3389,7 @@ class Ui_main(object):
         self.label_53.setText(QCoreApplication.translate("main", u"Ip Adrress :", None))
         self.label_54.setText(QCoreApplication.translate("main", u"UserName :", None))
         self.label_55.setText(QCoreApplication.translate("main", u"Password :", None))
-        self.btn_check_connection.setText(QCoreApplication.translate("main", u"Check Connection", None))
         self.btn_save_train.setText(QCoreApplication.translate("main", u"Save", None))
-        self.plainTextEdit_check_connection.setPlainText(QCoreApplication.translate("main", u"Check Ping ....", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_5), QCoreApplication.translate("main", u"Create New Thin Client", None))
         self.label_57.setText(QCoreApplication.translate("main", u"Train Name :", None))
         self.btn_refresh_name_config_edit.setText("")
@@ -3351,12 +3403,15 @@ class Ui_main(object):
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_6), QCoreApplication.translate("main", u"Edit / Delete", None))
         self.label_3.setText(QCoreApplication.translate("main", u"Change Password :", None))
         self.btn_change_password.setText(QCoreApplication.translate("main", u"Click Here", None))
-        self.label_15.setText(QCoreApplication.translate("main", u"Current Password/Mother Password :", None))
+        self.label_15.setText(QCoreApplication.translate("main", u"Current/Mother Password :", None))
         self.label_16.setText(QCoreApplication.translate("main", u"New Password :", None))
         self.label_22.setText(QCoreApplication.translate("main", u"Confirm Password :", None))
         self.btn_save_password.setText(QCoreApplication.translate("main", u"Save", None))
         self.label_14.setText(QCoreApplication.translate("main", u"Local Update :", None))
         self.btn_local_update.setText(QCoreApplication.translate("main", u"Click Here", None))
+        self.label_18.setText(QCoreApplication.translate("main", u"Storage Manager :", None))
+        self.btn_storage_manager.setText(QCoreApplication.translate("main", u"Click Here", None))
         self.label_message_change_password.setText("")
+        self.label_19.setText(QCoreApplication.translate("main", u"Storage : ", None))
     # retranslateUi
 

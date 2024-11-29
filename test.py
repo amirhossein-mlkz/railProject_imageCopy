@@ -1,32 +1,22 @@
-import json
-import os
+import ctypes
+import subprocess
 
-# Specify the network path to the JSON file
-json_path = r'\\192.168.43.99\rail_share\utils\config.json'
-
-def read_json_from_network(path):
+def run_as_admin(command):
+    """Run a command as an administrator."""
     try:
-        # Check if the file exists
-        if os.path.exists(path):
-            with open(path, 'r', encoding='utf-8') as f:
-                # Load JSON data
-                data = json.load(f)
-                return data
-        else:
-            print(f"File not found: {path}")
-            return None
-    except FileNotFoundError:
-        print(f"File not found: {path}")
-    except PermissionError:
-        print(f"Permission denied: {path}")
-    except json.JSONDecodeError:
-        print(f"Error decoding JSON from file: {path}")
+        # Use ctypes to request admin privileges for the subprocess
+        ctypes.windll.shell32.ShellExecuteW(
+            None, "runas", "powershell", f"-Command {command}", None, 1
+        )
+        print(f"Command executed with admin privileges: {command}")
     except Exception as e:
-        print(f"An error occurred: {e}")
-    
-    return None
+        print(f"Failed to run command as admin: {e}")
 
-# Call the function and print the result
-data = read_json_from_network(json_path)
-if data is not None:
-    print(data)
+# Example usage
+if __name__ == "__main__":
+    # Command to share a folder
+    folder_path = r"C:\Users\Public\TestFolder"
+    share_name = "TestShare"
+    command = f'net share {share_name}="{folder_path}" /GRANT:Everyone,FULL /REMARK:"Shared Folder"'
+    
+    run_as_admin(command)
