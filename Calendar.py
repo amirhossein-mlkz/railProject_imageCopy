@@ -292,11 +292,11 @@ class JalaliCalendarDialog(QDialog):
                     day += 1
 
     def select_day(self):
-        for btn in self.days_buttons.values():
-            btn.setStyleSheet(DAY_BUTTON_STYLE)
+        # for btn in self.days_buttons.values():
+        #     btn.setStyleSheet(DAY_BUTTON_STYLE)
         
         self.selected_button = self.sender()
-        self.selected_button.setStyleSheet(DAY_BUTTON_SELECTED_STYLE)
+        # self.selected_button.setStyleSheet(DAY_BUTTON_SELECTED_STYLE)
         self.selected_day = int(self.selected_button.text())
 
     def set_date(self, date:JalaliDateTime, accept=False):

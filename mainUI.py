@@ -50,6 +50,7 @@ from pathConstans import pathConstants
 
 
 DEBUG = False
+SHOW_LASTLOG = True
 
 
 # ui class
@@ -862,8 +863,11 @@ class mainUI(sQMainWindow):
         
 
         move = False
+        rename_src = True
+
         if self.log_search:
             move = True
+            rename_src = False
 
         self.ui.progress_bar.setMinimum(0)
         self.ui.progress_bar.setMaximum(100)
@@ -874,7 +878,7 @@ class mainUI(sQMainWindow):
                                    speed_func=self.step2_update_speed,
                                    progress_func=self.step2_update_progress,
                                    msg_callback=self.step2_log,
-                                   rename_src=True,
+                                   rename_src=rename_src,
                                    move=move)
         
 
@@ -1080,38 +1084,60 @@ class mainUI(sQMainWindow):
 
 
     def show_logs(self,new_logs):
+
         
-        self.errors = 0
-        for log in new_logs:
-            split = log.split('\\')
-            file = split[-1]
-            folder = split[-2]
 
-            log_path = os.path.join(self.dst_log_path,folder,file)
-
-            errors = self.read_log(log_path=log_path)
-            self.errors+=errors
-
-
-
-
-        self.set_error_btn(error_count = self.errors)
-
-
-
-        ############################### LOG  ##################################
         try:
-            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
-                                        text=f"Show Logs {self.errors} ", 
-                                        code="Mshow_logs000")
-            self.logger.create_new_log(message=log_msg)
+
+            self.errors = 0
+            if len(new_logs)==0:
+                return
+
+            if SHOW_LASTLOG:
+                if len(new_logs)>1:
+                    new_logs = [new_logs[-1]]
+
+            for log in new_logs:
+                split = log.split('\\')
+                file = split[-1]
+                folder = split[-2]
+
+                log_path = os.path.join(self.dst_log_path,folder,file)
+
+                errors = self.read_log(log_path=log_path)
+                self.errors+=errors
+
+
+
+
+            self.set_error_btn(error_count = self.errors)
+
+
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                            text=f"Show Logs {self.errors} ", 
+                                            code="Mshow_logs000")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
+
+
         except:
-            pass
-        #######################################################################
 
 
 
-
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                            text=f"Error in Show Logs ", 
+                                            code="Mshow_logs001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
 
 
 
@@ -1226,6 +1252,19 @@ class mainUI(sQMainWindow):
     def custom_json_handler(self,obj):
         if isinstance(obj, JalaliDateTime):
             return obj.strftime('%Y-%m-%d %H:%M')  # Convert to string format
+        
+
+        ############################### LOG  ##################################
+        try:
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                        text=f"Type {type(obj)} is not serializable", 
+                                        code="Mcustom_json_handler000")
+            self.logger.create_new_log(message=log_msg)
+        except:
+            pass
+        #######################################################################
+
+        
         raise TypeError(f"Type {type(obj)} is not serializable")
 
 
@@ -1248,12 +1287,40 @@ class mainUI(sQMainWindow):
 
         self.show_message('copy', "Start Copy Logs ...")
 
+
+        ############################### LOG  ##################################
+        try:
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                        text=f"Start Copy Logs ", 
+                                        code="Mcopy_logs000")
+            self.logger.create_new_log(message=log_msg)
+        except:
+            pass
+        #######################################################################
+
+
+
+
         name = self.ui.combo_copy_train_name.currentText()
 
         ret = self.db.fetch_spec_parm_table(table_name='TrainConfig',col_name='name',spec_row=name)
 
         if len(ret)!=1:
             print('Error in get data')
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Error in Get data Copy Logs", 
+                                            code="Mcopy_logs001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
+
+
+
+
             return
         
         ret = ret[0]
@@ -1276,6 +1343,21 @@ class mainUI(sQMainWindow):
 
 
         # check_connection_and_create_connection
+
+        ############################### LOG  ##################################
+        try:
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                        text=f"Start step1_check_connection_event in copy logs", 
+                                        code="Mcopy_logs002")
+            self.logger.create_new_log(message=log_msg)
+        except:
+            pass
+        #######################################################################
+
+
+
+
+
 
 
 
@@ -1301,29 +1383,65 @@ class mainUI(sQMainWindow):
         password = self.ui.line_train_profile_password.text()
     
         if name =='' or ip=='' or username=='' or password=='':
-            print('name error')
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Error in Save Train Config name:{name},ip:{ip},username:{username},password{password} ", 
+                                            code="Msave_train_config000")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
             return
         
 
         if not self.is_valid_ip(ip):
-            print('IP Error')
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Error in IP Error {ip} ", 
+                                            code="Msave_train_config001")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
             return
         
         ret = self.show_question(texts.MESSAGES['message'][self.language],texts.MESSAGES['CheckSave'][self.language])
 
         if ret:
-
-
-
             ret = self.db.add_value('TrainConfig',name=name,ip=ip,username=username,password=password)
-
             if ret:
                 print('Add Complete')
-
                 ip = self.ui.line_train_profile_ip.setText('')
                 username = self.ui.line_train_profile_username.setText('')
                 password = self.ui.line_train_profile_password.setText('')
                 self.load_train_configs()
+
+                ############################### LOG  ##################################
+                try:
+                    log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                                text=f"Train Add Complete {ip},{username}", 
+                                                code="Msave_train_config000")
+                    self.logger.create_new_log(message=log_msg)
+                except:
+                    pass
+                #######################################################################
+            
+            else:
+
+                ############################### LOG  ##################################
+                try:
+                    log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                                text=f"Error in add Train to database {ip},{username}", 
+                                                code="Msave_train_config000")
+                    self.logger.create_new_log(message=log_msg)
+                except:
+                    pass
+                #######################################################################
+                
+
+
 
 
 
@@ -1711,15 +1829,46 @@ class mainUI(sQMainWindow):
 
     def check_train_name(self,train_name):
 
+
+        reserved_names = [
+            "CON", "PRN", "AUX", "NUL",
+            "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9",
+            "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
+        ]
+
+        # Invalid characters in Windows filenames
+        invalid_chars = '<>:"/\\|?_*'
+
+        only_name = train_name
+
         exist_json = os.listdir(CONFIG_PATH)
         train_name = train_name+'.json'
+
         if train_name =='.json':
             return False,'Train Name Is Empty'
         elif train_name in exist_json:
             return False,'Duplicate Name , Change Train Name'
 
 
+        if train_name[0]=='.':
+            return False , 'Filename Dont Start with .'
+
+        # Check for invalid characters
+        if any(char in invalid_chars for char in train_name):
+            return False, "Filename contains invalid characters."
+
+        # Check for reserved names
+        if only_name.upper() in reserved_names:
+            return False, "Filename is a reserved name in Windows."
+
+
+        # Ensure filename is not too long
+        if len(train_name) > 100:
+            return False, "Filename is too long."
+
         return True,''
+
+
 
     def create_camera_configs(self,edit_mode = False):
 
@@ -2223,23 +2372,62 @@ class mainUI(sQMainWindow):
 
 
     def remote_update_event(self, status_code,msg=''):
-        if status_code == StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT:
-            if msg !='':
-                self.show_message('copy', msg)
-            else:
-                self.show_message('copy', 'Connection Faild. check ip and cables connections')
-            GUIBackend.set_disable_enable(self.ui.btn_update_train, True)
-            self.set_loading_progress_bar(False)
-            return
-        
-        elif status_code == StatusCodes.pingAndConnectionStatusCodes.SUCCESS:
+        try:
+            if status_code == StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT:
+                if msg !='':
+                    self.show_message('copy', msg)
+                else:
+                    self.show_message('copy', 'Connection Faild. check ip and cables connections')
+                GUIBackend.set_disable_enable(self.ui.btn_update_train, True)
+                self.set_loading_progress_bar(False)
+
+
+                ############################### LOG  ##################################
+                try:
+                    log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                                text=f"Error : Show Remote Update", 
+                                                code="Mremote_update_event001")
+                    self.logger.create_new_log(message=log_msg)
+                except:
+                    pass
+                #######################################################################
+
+
+
+                return
             
-            GUIBackend.set_disable_enable(self.ui.btn_update_train, False)
-            tsd = updateRemote( self.ip , user_name=self.db_res['username'],password=self.db_res['password'],name=self.db_res['name'] )
-            tsd.exec_()
+            elif status_code == StatusCodes.pingAndConnectionStatusCodes.SUCCESS:
+                
+                GUIBackend.set_disable_enable(self.ui.btn_update_train, False)
+                tsd = updateRemote( self.ip , user_name=self.db_res['username'],password=self.db_res['password'],name=self.db_res['name'] )
+                tsd.exec_()
 
-            GUIBackend.set_disable_enable(self.ui.btn_update_train, True)
+                GUIBackend.set_disable_enable(self.ui.btn_update_train, True)
 
+
+
+                ############################### LOG  ##################################
+                try:
+                    log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                                text=f"Show Remote Update", 
+                                                code="Mremote_update_event000")
+                    self.logger.create_new_log(message=log_msg)
+                except:
+                    pass
+                #######################################################################
+
+        except Exception as e:
+
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                            text=f"Error : Show Remote Update {e}", 
+                                            code="Mremote_update_event003")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
 
 
 

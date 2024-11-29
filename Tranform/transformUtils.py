@@ -17,6 +17,11 @@ class transormUtils:
         dt = JalaliDateTime.strptime(dc_str,'%Y-%m-%d_%H-%M-%S-%f')
         return dt, train_id, camera_name, status, extention
     
+
+    
+
+
+
     @staticmethod
     def change_status(name:str, to_old:bool, to_new:bool=False,):
         dt, train_id, camera_name, status, extention = transormUtils.extract_file_name_info(name)
@@ -75,6 +80,12 @@ class transormUtils:
             result[0] = "Error: Operation timed out!"
 
         return executed_successfully, result[0]
+
+
+
+
+
+
 
         
     # @staticmethod

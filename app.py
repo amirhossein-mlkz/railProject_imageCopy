@@ -76,7 +76,7 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
 
 
-    app.setStyle('windows')
+    # app.setStyle('windows')
     
     main_ui = mainUI()
     main_ui.show()

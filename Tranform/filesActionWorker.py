@@ -44,10 +44,18 @@ class CopyWorker(QObject):
             file_dst_path = file_src_path.replace(self.src_path, self.dst_path)
             file_dst_dir, fname = os.path.split(file_dst_path)
 
+            self.log_signal.emit(f'Copy {fname}')
+
+
             if not os.path.exists(file_dst_dir) :
                 os.makedirs(file_dst_dir)
 
-            self.log_signal.emit(f'Copy {fname}')
+            name, extention = os.path.splitext(fname)
+            if extention !='.log':
+                fname = transormUtils.change_status(fname, to_new=True,to_old=False)
+                file_dst_path = os.path.join(file_dst_dir,fname)
+
+
 
             try:
                 if self.move:

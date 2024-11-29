@@ -16,36 +16,27 @@ class Sharing:
     @staticmethod
     def create_and_share_folder(folder_path, share_name, description="", permissions=None):
         # Create the folder if it doesn't exist
-        try:
-            if not os.path.exists(folder_path):
-                os.makedirs(folder_path)
-            
-            # Define the share info
-            share_info = {
-                'netname': share_name,
-                'type': win32netcon.STYPE_DISKTREE,
-                'remark': description,
-                'permissions': 0,
-                'max_uses': -1,
-                'current_uses': 0,
-                'path': folder_path,
-                'passwd': ''
-            }
-            
-            # Add the share
-            win32net.NetShareAdd(None, 2, share_info)
-            
-            # Set folder permissions
-            if permissions:
-                Sharing.set_folder_permissions(folder_path, permissions)
-
-
-            return True
-
-        except:
-            return False
-
-
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+        
+        # Define the share info
+        share_info = {
+            'netname': share_name,
+            'type': win32netcon.STYPE_DISKTREE,
+            'remark': description,
+            'permissions': 0,
+            'max_uses': -1,
+            'current_uses': 0,
+            'path': folder_path,
+            'passwd': ''
+        }
+        
+        # Add the share
+        win32net.NetShareAdd(None, 2, share_info)
+        
+        # Set folder permissions
+        if permissions:
+            Sharing.set_folder_permissions(folder_path, permissions)
 
     @staticmethod
     def remove_share(share_name):
@@ -53,10 +44,8 @@ class Sharing:
             # Remove the share
             win32net.NetShareDel(None, share_name)
             print(f"Share '{share_name}' removed successfully.")
-            return True
         except Exception as e:
             print(f"Error: {e}")
-            return False
 
     @staticmethod
     def set_folder_permissions(folder_path, permissions):
@@ -103,7 +92,7 @@ class pingWorker(QObject):
         
         try:
             # اجرای دستور پینگ
-            output = subprocess.run(["ping", param, "1", ip], capture_output=True, text=True)
+            output = subprocess.run(["ping", param, "1", ip], capture_output=True, text=True, timeout=4)
             
             # بررسی returncode
             if 'ttl' in output.stdout.lower():
@@ -152,7 +141,7 @@ class pingAndCreateWorker(QObject):
         
         try:
             # اجرای دستور پینگ
-            output = subprocess.run(["ping", param, "1", ip], capture_output=True, text=True)
+            output = subprocess.run(["ping", param, "1", ip], capture_output=True, text=True, timeout=4)
             
             # بررسی returncode
             if 'ttl' in output.stdout.lower():
@@ -172,15 +161,18 @@ class pingAndCreateWorker(QObject):
 
     def create_connection(self):
 
+
         # Construct the command for mapping the network share
         if self.username and self.password:
-            command = f'net use {self.src_path} /user:{self.username} {self.password}'
+            #command = f'net use {self.src_path} /user:{self.username} {self.password}'
+            command = ["net", "use", self.src_path, f"/user:{self.username}", self.password]
         else:
-            command = f'net use {self.src_path}'
+            #command = f'net use {self.src_path}'
+            command = ["net", "use", self.src_path]
 
         try:
             # Execute the command to map the network share
-            result = subprocess.run(command, shell=True, capture_output=True, text=True)
+            result = subprocess.run(command, capture_output=True, text=True, timeout=4)
             if 'completed successfully' in result.stdout:
                 msg = 'connection completed successfully'
                 return True,msg
@@ -198,7 +190,7 @@ class pingAndCreateWorker(QObject):
 
         except Exception as e:
             print(f"Error: {e}")
-            return False
+            return False, f'Error : Failed Create Connection, Username Or Password Maybe Wrong {e}'
 
 
 
