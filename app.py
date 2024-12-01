@@ -42,14 +42,6 @@ if __name__ == '__main__':
     folder_share_status = False
     
 
-
-    #check_firewall_disable
-
-
-    #check_folder_share
-
-
-
     #get admin provollage if any one ret False and do that work
 
 
@@ -60,7 +52,7 @@ if __name__ == '__main__':
             if run_as_admin():
                 # Don't exit, just let the program continue to the next steps
                 print("Now running as admin! Continuing execution...")
-                sys.exit(0)
+                # sys.exit(0)
 
             else:
                 print("Failed to obtain admin privileges. Exiting.")
@@ -76,7 +68,7 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
 
 
-    # app.setStyle('windows')
+    app.setStyle('windows')
     
     main_ui = mainUI()
     main_ui.show()

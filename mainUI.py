@@ -39,15 +39,16 @@ from UpdateExistVideos import WidgetUpdateExistVideos
 from Tranform.Network import Sharing
 
 from pathConstans import pathConstants
-from FirewallRules import enable_file_sharing
+from FirewallRules import enable_file_sharing, ensure_network_discovery_enabled
 
 from timeSetting import timeSetting
-from utils.Storage import StorageWidget
+from utils.Storage import StorageWidget , get_current_drive_storage
+from utils import Storage
 import dorsa_logger
 from pathConstans import pathConstants
+from Tranform.storageManager import storageManager,Space
 
-
-
+from IPChecker import check_ip
 
 DEBUG = False
 SHOW_LASTLOG = True
@@ -63,6 +64,9 @@ class mainUI(sQMainWindow):
 
         self.ui = Ui_main()
         self.ui.setupUi(self)
+
+        self.create_init_folders()
+
 
 
 
@@ -122,6 +126,8 @@ class mainUI(sQMainWindow):
         self.set_login_status(False) 
         self.ui.stackedWidget.setCurrentWidget(self.ui.copy)
         self.db = DataBase('data.db')
+        self.storage_obj = storageManager(path=pathConstants.SELF_IMAGES_DIR,
+                                          logs_path=None)
         self.button_connector()
 
         self.load_pathes()
@@ -135,6 +141,7 @@ class mainUI(sQMainWindow):
             'profile_edit' :  self.ui.label_profile_edit_message,
             'load_config': self.ui.load_config_msg,
             'send_config': self.ui.send_config_msg,
+            'ip_msg' : self.ui.lbl_ip_error,
         }
 
         self.mapDict = mapDictionary({
@@ -178,7 +185,6 @@ class mainUI(sQMainWindow):
         self.profile_edit_mode(mode=False)
 
 
-        self.create_init_folders()
 
         self.load_train_profiles()
 
@@ -203,7 +209,7 @@ class mainUI(sQMainWindow):
         self.show_storage()
 
     
-
+        self.load_storage_values()
 
 
 
@@ -224,25 +230,22 @@ class mainUI(sQMainWindow):
     def show_storage(self):
 
         self.storage_object = StorageWidget(path=pathConstants.SELF_IMAGES_DIR)
+        self.storage_object.set_delete_func_event(self.manual_delete)
         GUIBackend.add_widget(self.ui.storage_widget,self.storage_object)
-
-
-
-
-
-
 
 
     def set_firewall_rules(self):
 
         ret = enable_file_sharing()
 
+        msg = ensure_network_discovery_enabled()
+
 
 
         ############################ LOG  #####################################
 
         log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
-                                    text=f"Firewall Rules Updated {ret}", 
+                                    text=f"Firewall Rules Updated : {ret} , Enusre discovery : {msg}", 
                                     code="Minit000")
         self.logger.create_new_log(message=log_msg)
 
@@ -278,6 +281,9 @@ class mainUI(sQMainWindow):
     def create_init_folders(self):
         if not os.path.exists(CONFIG_PATH):
             os.mkdir(CONFIG_PATH)
+
+        if not os.path.exists(pathConstants.SELF_LOGS_SHARE_FOLDER):
+            os.makedirs(pathConstants.SELF_LOGS_SHARE_FOLDER)
 
     def startup(self,):
         for name in self.fields_msg.keys():
@@ -332,7 +338,10 @@ class mainUI(sQMainWindow):
 
 
         self.ui.btn_change_password.clicked.connect(self.change_password)
+        self.ui.btn_storage_manager.clicked.connect(self.show_ui_storage)
         self.ui.btn_save_password.clicked.connect(self.save_password)
+        self.ui.btn_save_storage.clicked.connect(self.save_storage_config)
+        
 
 
         self.ui.group_camera_1.toggled.connect(self.on_group_box_toggled)
@@ -640,6 +649,44 @@ class mainUI(sQMainWindow):
 
 
 
+
+        flag , msg = check_ip(ret['ip'])
+
+        if flag:
+            self.ui.lbl_ip_error.setStyleSheet(""" 
+                                               
+                                                border: 2px solid #004a00; /* Blue border */
+                                                border-radius: 10px;
+                                               
+                                                background-color: #008000;  /* Background color */ """)
+
+        else:
+            self.ui.lbl_ip_error.setStyleSheet(""" 
+                                               
+                                                border: 2px solid #8a8a00; /* Blue border */
+                                                border-radius: 10px;                             
+                                                background-color: #FFFF00;  /* Background color */ """)
+
+        self.show_message('ip_msg',msg)
+
+
+
+        ############################### LOG  ##################################
+        try:
+            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                        text=f"Check IP : {flag},{msg}", 
+                                        code="Mu001")
+            self.logger.create_new_log(message=log_msg)
+        except:
+            print('Create log function check_ip error')
+            pass
+        #######################################################################
+
+
+
+
+
+
     def start_copy(self,image_condition=None):
 
 
@@ -702,7 +749,7 @@ class mainUI(sQMainWindow):
             end_date_time = end_date_time.replace(hour=end_h, minute=end_min, second=0, microsecond=0)
 
             if start_date_time > end_date_time:
-                self.show_message('timeline', "start date time can't be bigger than end", 4000)
+                self.show_message('timeline', "Start can not Later Than End ", 4000,style = error_style)
                 return
 
             self.date_time_ranges = (start_date_time, end_date_time)
@@ -812,6 +859,8 @@ class mainUI(sQMainWindow):
 
         # ret = self.check_storage(needed_size = sum(sizes))
 
+
+
         # if not ret:
         #     self.start_cleaning(self,needed_size = sum(sizes))
         #     return
@@ -861,37 +910,84 @@ class mainUI(sQMainWindow):
 
             return
         
-
-        move = False
-        rename_src = True
-
-        if self.log_search:
-            move = True
-            rename_src = False
-
-        self.ui.progress_bar.setMinimum(0)
-        self.ui.progress_bar.setMaximum(100)
-        self.ui.progress_bar.setValue(0)
-        self.trasformer.start_copy(paths, 
-                                   sizes, 
-                                   finish_func=self.step3_copy_finish_event,
-                                   speed_func=self.step2_update_speed,
-                                   progress_func=self.step2_update_progress,
-                                   msg_callback=self.step2_log,
-                                   rename_src=rename_src,
-                                   move=move)
-        
+        self.show_message('copy', 'Check For Enough Space')
 
 
-        ############################### LOG  ##################################
-        try:
-            log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
-                                        text=f"Start Copy", 
-                                        code="Mstep2002")
-            self.logger.create_new_log(message=log_msg)
-        except:
-            pass
-        #######################################################################
+        res , space_should_be_delete = self.storage_obj.has_enough_space_for_files(files_path=paths,
+                                                    sizes=sizes,
+                                                    src_dir=self.trasformer.src_path,
+                                                    dst_dir=self.trasformer.dst_path)
+
+
+
+
+        if not res:
+            # START CLEANING 
+
+            self.storage_obj.send_clean_request(name='milad',size=space_should_be_delete)
+            func = transormUtils.pass_extra_arg_event(event_func=self.clening_finish_signal,extra_args=(paths,sizes))
+            self.storage_obj.finish_cleaning_signal.connect(func)
+            self.storage_obj.progress_signal.connect(self.show_remove_files)
+
+            clean_thread = threading.Thread(target=self.storage_obj.run,daemon=True)
+            clean_thread.start()
+
+        else:
+
+            self.clening_finish_signal(name_id='', status=True,paths=paths,sizes=sizes)
+
+
+
+    def show_remove_files(self,name_id,remove_path,deleted,total):
+
+        print(remove_path)
+        self.show_message('copy',f"Delete {deleted.toMB()}/{total.toMB()} - Removed {remove_path}")
+
+
+
+    def clening_finish_signal(self,name_id, status,paths,sizes):
+
+        if status:
+
+            ## space is ready
+
+            move = False
+            rename_src = True
+
+            if self.log_search:
+                move = True
+                rename_src = False
+
+            self.ui.progress_bar.setMinimum(0)
+            self.ui.progress_bar.setMaximum(100)
+            self.ui.progress_bar.setValue(0)
+            self.trasformer.start_copy(paths, 
+                                    sizes, 
+                                    finish_func=self.step3_copy_finish_event,
+                                    speed_func=self.step2_update_speed,
+                                    progress_func=self.step2_update_progress,
+                                    msg_callback=self.step2_log,
+                                    rename_src=rename_src,
+                                    move=move)
+            
+
+
+            ############################### LOG  ##################################
+            try:
+                log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.INFO,
+                                            text=f"Start Copy", 
+                                            code="Mstep2002")
+                self.logger.create_new_log(message=log_msg)
+            except:
+                pass
+            #######################################################################
+
+
+        else:
+
+            self.show_message('copy','Space Not Enough For Download')
+            self.ui.copy_button.setEnabled(True)
+
 
 
 
@@ -1583,11 +1679,33 @@ class mainUI(sQMainWindow):
 
 
 
+    def show_ui_storage(self):
+
+
+
+
+        height = 140
+        if self.ui.frame_storage.height()>0:
+            height = 0
+
+        # if not(mode):
+        #     height = 0
+            
+        self.ui.frame_storage.setMaximumHeight(height)
+        self.ui.frame_storage.setMinimumHeight(height)
+
+        # self.ui.line_current_password.setText('')
+        # self.ui.line_new_password.setText('')
+        # self.ui.line_confirm_password.setText('')
+
+
+
+
+
 
     def change_password(self):
 
         self.set_frame_change_password(mode=True)
-
         return
     
 
@@ -2428,6 +2546,129 @@ class mainUI(sQMainWindow):
             except:
                 pass
             #######################################################################
+
+
+
+
+
+
+
+
+
+
+
+    def save_storage_config(self):
+
+        try:
+            min = self.ui.spinBox_min_allow.value()
+            max = self.ui.spinBox_max_allow.value()
+
+            if min>=max:
+                self.show_message(name='setting_msg',txt='Max Should be Higher',disapear=2000,style=error_style)
+                return
+            
+            else:
+
+                max_ret = self.db.update_row_by_input(table_name='storage',column_name='max',new_value=max,condition_field='id',condition_value=0)
+                min_ret = self.db.update_row_by_input(table_name='storage',column_name='min',new_value=min,condition_field='id',condition_value=0)
+
+
+                ############################### LOG  ##################################
+                try:
+                    log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
+                                                text=f"database parms updated : max{max} - {max_ret},min{min} - {min_ret}", 
+                                                code="Msave_storage_config000")
+                    self.logger.create_new_log(message=log_msg)
+                except:
+                    pass
+                #######################################################################
+
+
+                if max_ret and min_ret:
+                    self.show_message(name='setting_msg',txt='New Values Updated',disapear=2000,style=success_style)
+
+                else:
+                    self.show_message(name='setting_msg',txt='Error in Save New Values',disapear=2000,style=error_style)
+
+                self.load_storage_values()
+
+
+
+        except:
+            pass
+
+
+    
+
+    def load_storage_values(self):
+
+
+        values = self.db.fetch_table_as_dict(table_name='storage')
+        print(values)
+
+        if values[0] !=[]:
+            values = values[0]
+            self.min_allowed = int(values['min'])
+            self.max_allowed = int(values['max'])
+            self.ui.spinBox_min_allow.setValue(self.min_allowed)
+            self.ui.spinBox_max_allow.setValue(self.max_allowed)
+
+            self.storage_obj.update_max_storage(max_usage=(self.max_allowed/100))
+
+            self.storage_object.update_percentages(min=self.min_allowed,max = self.max_allowed)
+        
+        else:
+            print('Error in get data from database')
+
+
+
+
+
+
+
+    def manual_delete(self):
+
+
+        
+
+        storage_info = get_current_drive_storage(mode=Storage.B)
+
+        total,used,free = storage_info['total_space'] , storage_info['used_space'] ,storage_info['free_space'] 
+        min_allowed = 100  - self.min_allowed
+        min_byte = (min_allowed*total / 100)
+
+        if min_byte - free <0:
+            self.show_message('copy','Free Space is Higher Than Minimum Threshold')
+            return
+        
+        self.ui.copy_button.setEnabled(False)
+
+        try:
+
+            space_should_be_delete = Space( min_byte - free)
+
+
+            self.storage_obj.send_clean_request(name='milad',size=space_should_be_delete)
+            # func = transormUtils.pass_extra_arg_event(event_func=self.clening_finish_signal,extra_args=(paths,sizes))
+            self.storage_obj.finish_cleaning_signal.connect(self.enble_copy_btn)
+            self.storage_obj.progress_signal.connect(self.show_remove_files)
+
+            clean_thread = threading.Thread(target=self.storage_obj.run,daemon=True)
+            clean_thread.start()
+
+        except:
+            self.ui.copy_button.setEnabled(True)
+            self.show_message('copy','Error in Deleting Files')
+
+    
+    def enble_copy_btn(self,name_id,status):
+
+        self.ui.copy_button.setEnabled(True)
+        if status:
+            self.show_message('copy','CleanUp Finished')
+        
+        else:
+            self.show_message('copy','Files Not Found for Deletion')
 
 
 

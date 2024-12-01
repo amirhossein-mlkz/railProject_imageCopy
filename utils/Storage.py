@@ -2,6 +2,7 @@ from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QProgressBar , QPushButton , QMessageBox , QHBoxLayout,QSpacerItem, QSizePolicy
 )
 from PySide6.QtCore import Qt
+from PySide6.QtCore import QTimer
 import shutil
 import os
 import threading
@@ -10,6 +11,7 @@ import threading
 
 GB = 'GB'
 MB = 'MB'
+B = 'Byte'
 
 # Function to get drive storage information
 def get_current_drive_storage(drive_root=r'C:\\',mode = GB):
@@ -25,6 +27,19 @@ def get_current_drive_storage(drive_root=r'C:\\',mode = GB):
             total = total / (1024 ** 2)
             free = free / (1024 ** 2)
             used = total - free
+
+
+        elif mode == B:
+
+            
+            return {
+                "drive": drive_root,
+                "total_space": round(total, 2),
+                "used_space": round(used, 2),
+                "free_space": round(free, 2),
+            }
+        
+
 
 
         return {
@@ -64,6 +79,7 @@ class StorageWidget(QWidget):
 
     def __init__(self,path,percentage_max_allowed = 89 ,percentage_low_limit = 88):
         super().__init__()
+        
         self.setStyleSheet(self.get_stylesheet("#4CAF50"))
         self.setContentsMargins(0, 0, 0, 0)
 
@@ -107,19 +123,33 @@ class StorageWidget(QWidget):
         self.setLayout(layout)
 
 
-        self.timer_checker()
+        # self.timer_checker()
+
+        # Create a QTimer
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_storage)  # Connect the timeout signal to the function
+        self.timer.start(2000)  # Set the interval to 2000 ms (2 seconds)
 
 
 
 
-    def timer_checker(self):
 
-        # try:
+
+
+
+    def update_percentages(self,max,min):
+
+        self.percentage_max_allowed = max
+        self.percentage_low_limit = min
         self.update_storage()
-        # except:
-        #     pass
 
-        threading.Timer(30,self.timer_checker).start()
+
+
+    def set_delete_func_event(self,func):
+
+        self.delete_func = func
+
+
 
 
 
@@ -153,11 +183,11 @@ class StorageWidget(QWidget):
 
             self.progress_bar.setStyleSheet(self.get_stylesheet(color="#FF0000"))
 
-            if not self.start_cleaning:
-                self.action_button.setVisible(True)  # Enable action button
+        #     if not self.start_cleaning:
+        #         self.action_button.setVisible(True)  # Enable action button
         else:
             self.progress_bar.setStyleSheet(self.get_stylesheet(color="#4CAF50"))
-            self.action_button.setVisible(False)  # Disable action button
+        #     self.action_button.setVisible(False)  # Disable action button
 
 
 
@@ -172,14 +202,10 @@ class StorageWidget(QWidget):
         ret = self.show_question(title='CleanUp',message='Are you sure you want to clean up?')
         if ret:
 
-            ret , space_should_be_clean_MB = self.calc_space_need()
-
-            if ret:
-
-                self.start(space_should_be_clean_MB=space_should_be_clean_MB)
+            self.delete_func()
             
-            else:
-                print('dont need delete')
+        else:
+            print('dont need delete')
 
 
 
@@ -413,24 +439,25 @@ class StorageWidget(QWidget):
     def get_cleanup_button_stylesheet(self):
         return """
         QPushButton {
-            background-color: #FF4C4C;  /* Bright red */
+            background-color: #5555ff;  /* Bright red */
             color: white;  /* Text color */
             border: none;
             border-radius: 8px;
             padding: 8px 16px;
             font-size: 14px;
             font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+       
         }
 
         QPushButton:hover {
-            background-color: #FF3333;  /* Darker red on hover */
-            transform: scale(1.05);  /* Slight enlargement */
+            background-color:rgb(71, 71, 213);	
+}
+
         }
 
         QPushButton:pressed {
             background-color: #CC0000;  /* Even darker red when pressed */
-            transform: scale(0.95);  /* Slight shrinkage */
+
         }
 
         QPushButton:disabled {

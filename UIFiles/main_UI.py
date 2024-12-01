@@ -18,8 +18,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
     QGridLayout, QGroupBox, QHBoxLayout, QLabel,
     QLineEdit, QMainWindow, QProgressBar, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
-    QTabWidget, QVBoxLayout, QWidget)
+    QScrollArea, QSizePolicy, QSpacerItem, QSpinBox,
+    QStackedWidget, QTabWidget, QVBoxLayout, QWidget)
 
 from uiUtils.GUIComponents import timeSpinBox
 import assets_rc
@@ -1072,6 +1072,13 @@ class Ui_main(object):
 
         self.verticalLayout_2.addWidget(self.frame_56)
 
+        self.lbl_ip_error = QLabel(self.copy)
+        self.lbl_ip_error.setObjectName(u"lbl_ip_error")
+        self.lbl_ip_error.setMinimumSize(QSize(0, 25))
+        self.lbl_ip_error.setMaximumSize(QSize(16777215, 25))
+
+        self.verticalLayout_2.addWidget(self.lbl_ip_error, 0, Qt.AlignHCenter)
+
         self.frame_13 = QFrame(self.copy)
         self.frame_13.setObjectName(u"frame_13")
         self.frame_13.setFrameShape(QFrame.NoFrame)
@@ -1526,7 +1533,7 @@ class Ui_main(object):
 "    border-radius: 8px;\n"
 "    width: 20px;\n"
 "    margin: 2px;\n"
-"    animation: moveSlow 6s infinite; /* Slower animation */\n"
+"\n"
 "}\n"
 "\n"
 "@keyframes moveSlow {\n"
@@ -1630,7 +1637,7 @@ class Ui_main(object):
 "        background-color: #4caf50;       /* Color of the moving chunk */\n"
 "        width: 25px;                     /* Width of the moving element */\n"
 "        margin: 0px;                     /* No gap between chunks */\n"
-"        animation: move 2s infinite;     /* Continuous left-right animation */\n"
+"\n"
 "    }\n"
 "\n"
 "    @keyframes move {\n"
@@ -1660,10 +1667,11 @@ class Ui_main(object):
         self.verticalLayout_14.setContentsMargins(-1, -1, -1, 9)
         self.scrollArea = QScrollArea(self.tab)
         self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setFrameShape(QFrame.NoFrame)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 447, 685))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 449, 685))
         self.verticalLayout_6 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(-1, -1, -1, 9)
@@ -2087,6 +2095,7 @@ class Ui_main(object):
         sizePolicy6.setHeightForWidth(self.frame_profile_edit.sizePolicy().hasHeightForWidth())
         self.frame_profile_edit.setSizePolicy(sizePolicy6)
         self.frame_profile_edit.setMaximumSize(QSize(16777215, 16777215))
+        self.frame_profile_edit.setFrameShape(QFrame.NoFrame)
         self.frame_profile_edit.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.frame_profile_edit.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
@@ -2402,7 +2411,7 @@ class Ui_main(object):
 
         self.frame_22 = QFrame(self.tab_2)
         self.frame_22.setObjectName(u"frame_22")
-        self.frame_22.setFrameShape(QFrame.StyledPanel)
+        self.frame_22.setFrameShape(QFrame.NoFrame)
         self.frame_22.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_22 = QHBoxLayout(self.frame_22)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
@@ -2884,7 +2893,7 @@ class Ui_main(object):
 
         self.frame_23 = QFrame(self.frame_train_edit)
         self.frame_23.setObjectName(u"frame_23")
-        self.frame_23.setFrameShape(QFrame.StyledPanel)
+        self.frame_23.setFrameShape(QFrame.NoFrame)
         self.frame_23.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_23 = QHBoxLayout(self.frame_23)
         self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
@@ -3091,6 +3100,86 @@ class Ui_main(object):
 
         self.verticalLayout_9.addWidget(self.frame_36)
 
+        self.frame_storage = QFrame(self.settings)
+        self.frame_storage.setObjectName(u"frame_storage")
+        self.frame_storage.setMinimumSize(QSize(0, 0))
+        self.frame_storage.setMaximumSize(QSize(16777215, 0))
+        self.frame_storage.setFrameShape(QFrame.NoFrame)
+        self.frame_storage.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_15 = QVBoxLayout(self.frame_storage)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.frame_31 = QFrame(self.frame_storage)
+        self.frame_31.setObjectName(u"frame_31")
+        self.frame_31.setFrameShape(QFrame.NoFrame)
+        self.frame_31.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_30 = QHBoxLayout(self.frame_31)
+        self.horizontalLayout_30.setObjectName(u"horizontalLayout_30")
+        self.horizontalLayout_30.setContentsMargins(0, -1, 0, -1)
+        self.frame_30 = QFrame(self.frame_31)
+        self.frame_30.setObjectName(u"frame_30")
+        self.frame_30.setFrameShape(QFrame.NoFrame)
+        self.frame_30.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_28 = QHBoxLayout(self.frame_30)
+        self.horizontalLayout_28.setObjectName(u"horizontalLayout_28")
+        self.horizontalLayout_28.setContentsMargins(0, -1, 0, -1)
+        self.label_21 = QLabel(self.frame_30)
+        self.label_21.setObjectName(u"label_21")
+
+        self.horizontalLayout_28.addWidget(self.label_21)
+
+        self.spinBox_min_allow = QSpinBox(self.frame_30)
+        self.spinBox_min_allow.setObjectName(u"spinBox_min_allow")
+        self.spinBox_min_allow.setMinimumSize(QSize(70, 27))
+
+        self.horizontalLayout_28.addWidget(self.spinBox_min_allow)
+
+        self.label_23 = QLabel(self.frame_30)
+        self.label_23.setObjectName(u"label_23")
+
+        self.horizontalLayout_28.addWidget(self.label_23)
+
+
+        self.horizontalLayout_30.addWidget(self.frame_30)
+
+        self.frame_29 = QFrame(self.frame_31)
+        self.frame_29.setObjectName(u"frame_29")
+        self.frame_29.setFrameShape(QFrame.NoFrame)
+        self.frame_29.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_27 = QHBoxLayout(self.frame_29)
+        self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
+        self.horizontalLayout_27.setContentsMargins(0, -1, 0, -1)
+        self.label_20 = QLabel(self.frame_29)
+        self.label_20.setObjectName(u"label_20")
+
+        self.horizontalLayout_27.addWidget(self.label_20)
+
+        self.spinBox_max_allow = QSpinBox(self.frame_29)
+        self.spinBox_max_allow.setObjectName(u"spinBox_max_allow")
+        self.spinBox_max_allow.setMinimumSize(QSize(70, 27))
+        self.spinBox_max_allow.setValue(0)
+
+        self.horizontalLayout_27.addWidget(self.spinBox_max_allow)
+
+        self.label_24 = QLabel(self.frame_29)
+        self.label_24.setObjectName(u"label_24")
+
+        self.horizontalLayout_27.addWidget(self.label_24)
+
+
+        self.horizontalLayout_30.addWidget(self.frame_29)
+
+
+        self.verticalLayout_15.addWidget(self.frame_31)
+
+        self.btn_save_storage = QPushButton(self.frame_storage)
+        self.btn_save_storage.setObjectName(u"btn_save_storage")
+        self.btn_save_storage.setMinimumSize(QSize(150, 0))
+
+        self.verticalLayout_15.addWidget(self.btn_save_storage, 0, Qt.AlignHCenter)
+
+
+        self.verticalLayout_9.addWidget(self.frame_storage)
+
         self.frame_33 = QFrame(self.settings)
         self.frame_33.setObjectName(u"frame_33")
         self.frame_33.setFrameShape(QFrame.NoFrame)
@@ -3248,7 +3337,7 @@ class Ui_main(object):
 
         self.stackedWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(0)
+        self.tabWidget_2.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(main)
@@ -3270,11 +3359,12 @@ class Ui_main(object):
         self.minimize_btn.setText("")
         self.close_btn.setText("")
         self.label.setText(QCoreApplication.translate("main", u"Train Name :", None))
+        self.lbl_ip_error.setText("")
         self.label_2.setText(QCoreApplication.translate("main", u"IP Address : ", None))
         self.label_17.setText(QCoreApplication.translate("main", u"User Name :", None))
         self.timeline_groupbox.setTitle(QCoreApplication.translate("main", u"Time Line Filter", None))
         self.label_8.setText(QCoreApplication.translate("main", u":", None))
-        self.label_30.setText(QCoreApplication.translate("main", u"To", None))
+        self.label_30.setText(QCoreApplication.translate("main", u"End", None))
         self.label_7.setText(QCoreApplication.translate("main", u"date", None))
         self.end_calendar_btn.setText("")
         self.end_calendar_btn.setProperty("styleClass", "")
@@ -3411,6 +3501,11 @@ class Ui_main(object):
         self.btn_local_update.setText(QCoreApplication.translate("main", u"Click Here", None))
         self.label_18.setText(QCoreApplication.translate("main", u"Storage Manager :", None))
         self.btn_storage_manager.setText(QCoreApplication.translate("main", u"Click Here", None))
+        self.label_21.setText(QCoreApplication.translate("main", u"Minimum Allowed :", None))
+        self.label_23.setText(QCoreApplication.translate("main", u"%", None))
+        self.label_20.setText(QCoreApplication.translate("main", u"Maximum Allowed :", None))
+        self.label_24.setText(QCoreApplication.translate("main", u"%", None))
+        self.btn_save_storage.setText(QCoreApplication.translate("main", u"Save", None))
         self.label_message_change_password.setText("")
         self.label_19.setText(QCoreApplication.translate("main", u"Storage : ", None))
     # retranslateUi

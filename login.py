@@ -27,6 +27,7 @@ class LoginPage(QWidget):
         self.error_label.setStyleSheet("color: red;")  # Set the error message color to red
 
         self.login_button = QPushButton('Login', self)
+        # self.login_button.setDefault(True)  # This makes the button triggered by Enter key
         self.close_button = QPushButton('Close', self)
 
         # Set up layouts
@@ -50,8 +51,10 @@ class LoginPage(QWidget):
         self.setStyleSheet("""
             QWidget#LoginPage {
                 background-color: #f0f0f0;
+                border: 2px solid #007BFF;
                 border-radius: 15px;
-                border: 2px solid #ccc;
+                                        
+                           
             }
             QLabel {
                 font-size: 14px;
@@ -92,6 +95,16 @@ class LoginPage(QWidget):
         self.centerOnParent()
 
     
+
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
+            self.login_button.click()  # Simulate a button click
+
+
+
+
+
     def write_error(self, txt:str, t=2000):
         self.error_label.setText(txt)
         if txt:

@@ -18,7 +18,13 @@ class transormUtils:
         return dt, train_id, camera_name, status, extention
     
 
-    
+        
+    @staticmethod
+    def pass_extra_arg_event(event_func, extra_args):
+        def res_func(*args):
+            args = args + extra_args
+            event_func(*args)
+        return res_func
 
 
 
