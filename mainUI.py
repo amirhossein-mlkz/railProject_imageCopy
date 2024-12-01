@@ -224,6 +224,9 @@ class mainUI(sQMainWindow):
         #######################################################################
 
 
+        self.ui.btn_update_train.setVisible(False)
+        self.ui.btn_update_train.setVisible(False)
+
 
 
 
@@ -987,6 +990,7 @@ class mainUI(sQMainWindow):
 
             self.show_message('copy','Space Not Enough For Download')
             self.ui.copy_button.setEnabled(True)
+            self.ui.btn_local_update.click()
 
 
 
@@ -1016,6 +1020,8 @@ class mainUI(sQMainWindow):
             self.show_message('copy', "Dissconnected!")
             self.set_loading_progress_bar(False)
 
+            
+
             ############################### LOG  ##################################
             try:
                 log_msg = dorsa_logger.log_message(level=dorsa_logger.log_levels.DEBUG,
@@ -1025,6 +1031,8 @@ class mainUI(sQMainWindow):
             except:
                 pass
             #######################################################################
+
+            self.update_exist_videos()
             return
         # a = transormUtils.dateTimeRanges( avaiabilities['11BG21']['right'], 600 )
 
@@ -1076,7 +1084,7 @@ class mainUI(sQMainWindow):
                 pass
             #######################################################################
 
-
+            self.update_exist_videos()
             
             self.copy_logs()
 
