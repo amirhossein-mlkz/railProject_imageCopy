@@ -3,6 +3,8 @@ import pickle
 import time
 import threading
 import os
+from datetime import time as dtime
+from datetime import datetime
 
 
 
@@ -135,7 +137,8 @@ class transformModule:
         
         self.copy_worker.log_signal.connect(msg_callback)
         self.copy_worker.progress_signal.connect(progress_func)
-        self.copy_worker.speed_singnal.connect(speed_func)
+        if speed_func:
+            self.copy_worker.speed_singnal.connect(speed_func)
         self.copy_worker.finish_signal.connect(finish_func)
         self.copy_thread = threading.Thread( target=self.copy_worker.run, daemon=True )
         self.copy_thread.start()
@@ -200,12 +203,45 @@ class archiveManager:
         self.time_range_thread = threading.Thread(target=self.time_range_worker.run, daemon=True)
         self.time_range_thread.start()
 
+    def get_day_times(self, train_id, date:JalaliDateTime, camera) -> list[JalaliDateTime]:
+        times_str = self.archive[train_id][camera][date.strftime('%Y-%m-%d')].keys()
+        times = []
+        date_str = date.strftime('%Y-%m-%d')
+        for t_str in times_str:
+            t_str = date_str + '_' + t_str
+            dt = JalaliDateTime.strptime(t_str, "%Y-%m-%d_%H-%M-%S")
+            times.append(dt)
+        return times
+    
+    def filter_files(self, 
+                     train_id, 
+                     date:JalaliDateTime, 
+                     camera:str, 
+                     start_time:JalaliDateTime|dtime, 
+                     end_time:JalaliDateTime|dtime) -> list[dict]:
+        '''
+        reutns files info in a specific day in a time range
+        '''
+        date_str = date.strftime('%Y-%m-%d')
+        on_day_archive = self.archive[train_id][camera][date_str]
+        result = []
+        for file_info in on_day_archive.values():
+            if start_time <= file_info['datetime'] < end_time:
+                result.append(file_info)
+
+        return result
+
     
     def get_available_trains(self,):
-        return list( self.archive.keys())
+        if self.archive is not None:
+            return list( self.archive.keys())
+        return []
     
     def get_available_cameras(self, train_id:str):
-        return list( self.archive[train_id].keys())
+        if train_id in self.archive:
+            return list( self.archive[train_id].keys())
+        else:
+            return []
     
     def get_avaiable_dates(self, train_id:str):
         res = {}
@@ -227,6 +263,8 @@ class archiveManager:
         try:
             with open(self.db_path, 'rb') as f:
                 self.archive = pickle.load(f)
+            if not isinstance(self.archive, dict):
+                self.archive = {}
             return True
         except Exception as e:
             print(e)

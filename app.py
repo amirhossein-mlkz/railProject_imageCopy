@@ -4,13 +4,14 @@ import os
 from datetime import datetime
 import ctypes
 from get_admin_privilage import run_as_admin
+from utils.Trial import TrialManager
 
 
 sys.path.append('UIFiles\\Assets')
 
 BUILD_UI = True
 
-ADMIN_ACCESS = False
+ADMIN_ACCESS = True
 
 
 if BUILD_UI:
@@ -25,22 +26,13 @@ from mainUI import mainUI
 
 
 if __name__ == '__main__':
-
-
-
-
-    # Get the current year
-    current_year = datetime.now().year
-
-    # Check if the year is 2025
-    if current_year == 2025:
-        sys.exit()  # Stops the program
-
-
-    fiewall_status = False
-
-    folder_share_status = False
-    
+    trial_manager = TrialManager(trial_days=30)
+    # trial_manager.reset_trial()
+    if trial_manager.check_trial():
+        print("The software is running in trial mode.")
+    else:
+        print("Trial has expired. Please purchase the software.")
+        sys.exit()
 
     #get admin provollage if any one ret False and do that work
 

@@ -117,6 +117,8 @@ class filesFinderWorker(QObject):
                 for sub in subs:
                     sub_path = os.path.join(path, sub)
                     if os.path.exists(sub_path):
+                        if not os.path.isdir(sub_path):
+                            continue
                         for log_name in os.listdir(sub_path):
                             new_path = os.path.join(sub_path,log_name)
                             self.res_paths.append(new_path)
