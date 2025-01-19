@@ -1,7 +1,7 @@
 from datetime import datetime
 import os,sys
 
-from PySide6.QtWidgets import QDialog
+from PySide6.QtWidgets import QWidget
 from persiantools.jdatetime import JalaliDateTime
 from PySide6.QtCore import QTimer
 
@@ -31,7 +31,7 @@ import threading
 
 
 
-class updateRemote(QDialog):
+class updateRemote(QWidget):
 
     def __init__(self, ip,user_name,password,name):
         super().__init__()
@@ -159,6 +159,8 @@ class updateRemote(QDialog):
             self.ui.btn_update_ig.setDisabled(True)
             self.ui.btn_update_ig.setDisabled(True)
 
+            print('start update')
+
       
 
     def check_remote_version(self, status_code,msg=''):
@@ -166,6 +168,7 @@ class updateRemote(QDialog):
 
         if status_code == StatusCodes.pingAndConnectionStatusCodes.NOT_CONNECT:
             if msg !='':
+                print(msg)
                 self.show_message('lbl_msg', msg)
             else:
                 self.show_message('lbl_msg', 'Connection Faild. check ip and cables connections')
@@ -186,6 +189,8 @@ class updateRemote(QDialog):
                         self.json_data = json.load(f)
                     
                     # print(self.json_data)
+
+                    print('Get Remote Version')
 
 
                     self.show_message('lbl_msg', 'Get Remote Version')

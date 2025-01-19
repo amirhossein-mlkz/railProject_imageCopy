@@ -83,7 +83,7 @@ class ShowConfig(QWidget):
         # general_layout.addRow("Path:", QLabel(data['path']))
         general_layout.addRow("Max Storage:", QLabel(str(data['max_allowed_storage'])))
         general_layout.addRow("Train ID:", QLabel(data['train_id']))
-        general_layout.addRow("Motion:", QLabel(data['motion']))
+        general_layout.addRow("Motion:", QLabel(str(data['motion'])))
         general_layout.addRow("Motion Sensitivity:", QLabel(str(data['motion_sens'])))
         general_layout.addRow("Output:", QLabel(data['output']))
         general_layout.addRow("Video FPS:", QLabel(str(data['video_fps'])))

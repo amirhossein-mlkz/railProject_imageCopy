@@ -153,6 +153,8 @@ class mainUI(sQMainWindow):
 
         GUIBackend.set_combobox_items(self.ui.new_profile_compression, self.mapDict.get_values('codec'))
         GUIBackend.set_combobox_items(self.ui.edit_profile_compression, self.mapDict.get_values('codec'))
+        GUIBackend.set_combobox_items(self.ui.new_profile_motion, ['Enable','Disable'])
+        GUIBackend.set_combobox_items(self.ui.edit_profile_motion, ['Enable','Disable'])
 
         self.side_btns = [ self.ui.side_setting_btn , self.ui.side_train_config_btn,self.ui.side_profile_btn,self.ui.side_copy_btn]
         # self.side_btns = [ ]
@@ -224,8 +226,8 @@ class mainUI(sQMainWindow):
         #######################################################################
 
 
-        self.ui.btn_update_train.setVisible(False)
-        self.ui.btn_update_train.setVisible(False)
+        #self.ui.btn_update_train.setVisible(False)
+        #self.ui.btn_update_train.setVisible(False)
 
 
 
@@ -1895,7 +1897,12 @@ class mainUI(sQMainWindow):
         return pattern.match(ip) is not None
 
 
+    def convert_motion2bool(self,value):
 
+        if value == 'Enable':
+            return True
+        
+        return False
 
 
 
@@ -1903,6 +1910,10 @@ class mainUI(sQMainWindow):
         train_name = self.get_train_name_config()
         codec_ui = GUIBackend.get_combobox_selected(self.ui.new_profile_compression)
         codec = self.mapDict.value2key('codec', codec_ui)
+
+        motion = GUIBackend.get_combobox_selected(self.ui.new_profile_motion)
+        motion = self.convert_motion2bool(motion)
+
 
         ret,msg = self.check_train_name(train_name=train_name)
         if not ret:
@@ -1932,7 +1943,7 @@ class mainUI(sQMainWindow):
 
             camera_configs = self.create_camera_configs()
 
-            config = self.update_base_json(config,camera_configs,train_name, codec)
+            config = self.update_base_json(config,camera_configs,train_name, codec , motion=motion)
 
             self.save_json(save_name=train_name,json_data=config)
 
@@ -1942,7 +1953,7 @@ class mainUI(sQMainWindow):
 
 
 
-    def update_base_json(self,json_data,camera_configs=None,train_name=None, codec=None):
+    def update_base_json(self,json_data,camera_configs=None,train_name=None, codec=None,motion=None):
 
         if camera_configs:
             json_data['cameras'] = camera_configs
@@ -1950,6 +1961,9 @@ class mainUI(sQMainWindow):
             json_data ['train_id'] = train_name
         if codec:
             json_data['video_codec'] = codec
+        if motion is not None : 
+            json_data['motion'] = motion
+
         return json_data
     
 
@@ -2086,6 +2100,13 @@ class mainUI(sQMainWindow):
             return False
 
 
+    def convert_bool2motion(self,value):
+
+        if bool(value):
+            return 'Enable'
+        
+        return 'Disable'
+
 
 
     def edit_profile(self):
@@ -2096,8 +2117,14 @@ class mainUI(sQMainWindow):
         train_id = json_data['train_id']
         camera_configs = json_data['cameras']
         codec = json_data['video_codec']
+        motion = json_data['motion']
+
         codec_ui = self.mapDict.key2value('codec', codec)
+        motion = self.convert_bool2motion(motion)
+
+
         GUIBackend.set_combobox_current_item(self.ui.edit_profile_compression, codec_ui)
+        GUIBackend.set_combobox_current_item(self.ui.edit_profile_motion, motion)
         GUIBackend.set_input( self.ui.edit_profile_name, train_id)
 
 
@@ -2185,7 +2212,10 @@ class mainUI(sQMainWindow):
             codec_ui = GUIBackend.get_combobox_selected(self.ui.edit_profile_compression)
             codec = self.mapDict.value2key('codec', codec_ui)
 
-            json_data = self.update_base_json(json_data,camera_configs, train_name=new_train_id, codec=codec)
+            motion = GUIBackend.get_combobox_selected(self.ui.edit_profile_motion)
+            motion = self.convert_motion2bool(motion)
+
+            json_data = self.update_base_json(json_data,camera_configs, train_name=new_train_id, codec=codec,motion = motion)
 
             if os.path.exists(json_path):
                 try:
@@ -2352,6 +2382,7 @@ class mainUI(sQMainWindow):
             
 
             json_path = transormUtils.build_share_path(self.remote_ip,self.image_grabber_log_path)
+   
             if os.path.exists(json_path):
                 
 
@@ -2526,7 +2557,8 @@ class mainUI(sQMainWindow):
                 
                 GUIBackend.set_disable_enable(self.ui.btn_update_train, False)
                 tsd = updateRemote( self.ip , user_name=self.db_res['username'],password=self.db_res['password'],name=self.db_res['name'] )
-                tsd.exec_()
+                # tsd.exec()
+                tsd.show()
 
                 GUIBackend.set_disable_enable(self.ui.btn_update_train, True)
 

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>699</width>
-    <height>831</height>
+    <width>604</width>
+    <height>629</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -783,12 +783,12 @@ QGroupBox:disabled {
           <string notr="true">LsideFrameStyle</string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::Shape::NoFrame</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <property name="lineWidth">
           <number>1</number>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_67" stretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout_67" stretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -822,17 +822,14 @@ QGroupBox:disabled {
              <string notr="true">background-color:rgb(220, 221, 180);</string>
             </property>
             <property name="frameShape">
-             <enum>QFrame::Shape::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Shadow::Raised</enum>
+             <enum>QFrame::NoFrame</enum>
             </property>
            </widget>
           </item>
           <item>
            <widget class="Line" name="line_5">
             <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
+             <enum>Qt::Vertical</enum>
             </property>
            </widget>
           </item>
@@ -859,6 +856,7 @@ QGroupBox:disabled {
             <property name="font">
              <font>
               <family>Roboto</family>
+              <weight>75</weight>
               <italic>false</italic>
               <bold>true</bold>
              </font>
@@ -889,7 +887,7 @@ color:black;</string>
           <item>
            <widget class="Line" name="line_4">
             <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
+             <enum>Qt::Vertical</enum>
             </property>
            </widget>
           </item>
@@ -934,7 +932,7 @@ color:black;</string>
           <item>
            <widget class="Line" name="line_6">
             <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
+             <enum>Qt::Vertical</enum>
             </property>
            </widget>
           </item>
@@ -979,7 +977,7 @@ color:black;</string>
           <item>
            <widget class="Line" name="line_7">
             <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
+             <enum>Qt::Vertical</enum>
             </property>
            </widget>
           </item>
@@ -1024,7 +1022,7 @@ color:black;</string>
           <item>
            <widget class="Line" name="line_2">
             <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
+             <enum>Qt::Vertical</enum>
             </property>
            </widget>
           </item>
@@ -1072,15 +1070,19 @@ color:black;</string>
           <item>
            <widget class="Line" name="line_8">
             <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>PushButton</string>
             </property>
            </widget>
           </item>
           <item>
            <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
-            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
@@ -1089,7 +1091,7 @@ color:black;</string>
             </property>
            </spacer>
           </item>
-          <item alignment="Qt::AlignmentFlag::AlignHCenter">
+          <item alignment="Qt::AlignHCenter">
            <widget class="QLabel" name="label_66">
             <property name="minimumSize">
              <size>
@@ -1114,7 +1116,7 @@ color:black;</string>
             </property>
            </widget>
           </item>
-          <item alignment="Qt::AlignmentFlag::AlignHCenter">
+          <item alignment="Qt::AlignHCenter">
            <widget class="QLabel" name="label_65">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -1153,11 +1155,8 @@ color:black;</string>
           </item>
           <item>
            <spacer name="verticalSpacer_11">
-            <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
-            </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Policy::Fixed</enum>
+             <enum>QSizePolicy::Fixed</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -1167,7 +1166,7 @@ color:black;</string>
             </property>
            </spacer>
           </item>
-          <item alignment="Qt::AlignmentFlag::AlignHCenter">
+          <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="login_btn">
             <property name="enabled">
              <bool>true</bool>
@@ -1210,11 +1209,8 @@ color:black;</string>
           </item>
           <item>
            <spacer name="verticalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
-            </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Policy::Fixed</enum>
+             <enum>QSizePolicy::Fixed</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -1230,7 +1226,7 @@ color:black;</string>
        <item>
         <widget class="QFrame" name="frame">
          <property name="frameShape">
-          <enum>QFrame::Shape::NoFrame</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <property name="lineWidth">
           <number>0</number>
@@ -1275,7 +1271,7 @@ color:black;</string>
              <string notr="true">LtopFrameStyle</string>
             </property>
             <property name="frameShape">
-             <enum>QFrame::Shape::NoFrame</enum>
+             <enum>QFrame::NoFrame</enum>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_14">
              <property name="spacing">
@@ -1292,9 +1288,6 @@ color:black;</string>
              </property>
              <item>
               <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Orientation::Vertical</enum>
-               </property>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
@@ -1338,9 +1331,6 @@ color:black;</string>
              </item>
              <item>
               <spacer name="horizontalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
@@ -1438,7 +1428,7 @@ QPushButton:disabled {
               <item>
                <widget class="QScrollArea" name="scrollArea_2">
                 <property name="horizontalScrollBarPolicy">
-                 <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+                 <enum>Qt::ScrollBarAsNeeded</enum>
                 </property>
                 <property name="widgetResizable">
                  <bool>true</bool>
@@ -1448,8 +1438,8 @@ QPushButton:disabled {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>549</width>
-                   <height>651</height>
+                   <width>514</width>
+                   <height>650</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -1465,7 +1455,7 @@ QPushButton:disabled {
                      </sizepolicy>
                     </property>
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_4">
                      <item>
@@ -1497,10 +1487,7 @@ QPushButton:disabled {
                   <item>
                    <widget class="QFrame" name="frame_13">
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Shadow::Raised</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_10">
                      <property name="spacing">
@@ -1524,7 +1511,7 @@ QPushButton:disabled {
                         </size>
                        </property>
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_35">
                         <property name="spacing">
@@ -1551,7 +1538,7 @@ QPushButton:disabled {
                            </sizepolicy>
                           </property>
                           <property name="frameShape">
-                           <enum>QFrame::Shape::NoFrame</enum>
+                           <enum>QFrame::NoFrame</enum>
                           </property>
                           <layout class="QVBoxLayout" name="verticalLayout_33">
                            <property name="topMargin">
@@ -1596,7 +1583,7 @@ QPushButton:disabled {
                            </sizepolicy>
                           </property>
                           <property name="frameShape">
-                           <enum>QFrame::Shape::NoFrame</enum>
+                           <enum>QFrame::NoFrame</enum>
                           </property>
                           <layout class="QVBoxLayout" name="verticalLayout_34">
                            <property name="topMargin">
@@ -1635,10 +1622,7 @@ QPushButton:disabled {
                      <item>
                       <widget class="QFrame" name="frame_7">
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
-                       </property>
-                       <property name="frameShadow">
-                        <enum>QFrame::Shadow::Raised</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_12">
                         <item>
@@ -1671,7 +1655,7 @@ QPushButton:disabled {
                               </size>
                              </property>
                              <property name="frameShape">
-                              <enum>QFrame::Shape::NoFrame</enum>
+                              <enum>QFrame::NoFrame</enum>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_20">
                               <property name="leftMargin">
@@ -1689,7 +1673,7 @@ QPushButton:disabled {
                                  </size>
                                 </property>
                                 <property name="frameShape">
-                                 <enum>QFrame::Shape::NoFrame</enum>
+                                 <enum>QFrame::NoFrame</enum>
                                 </property>
                                 <layout class="QGridLayout" name="gridLayout">
                                  <property name="leftMargin">
@@ -1916,11 +1900,8 @@ QLabel:disabled{
                                  </item>
                                  <item row="1" column="3">
                                   <spacer name="horizontalSpacer_8">
-                                   <property name="orientation">
-                                    <enum>Qt::Orientation::Vertical</enum>
-                                   </property>
                                    <property name="sizeType">
-                                    <enum>QSizePolicy::Policy::Fixed</enum>
+                                    <enum>QSizePolicy::Fixed</enum>
                                    </property>
                                    <property name="sizeHint" stdset="0">
                                     <size>
@@ -1990,11 +1971,8 @@ QLabel:disabled{
                                  </item>
                                  <item row="0" column="3">
                                   <spacer name="horizontalSpacer_7">
-                                   <property name="orientation">
-                                    <enum>Qt::Orientation::Vertical</enum>
-                                   </property>
                                    <property name="sizeType">
-                                    <enum>QSizePolicy::Policy::Fixed</enum>
+                                    <enum>QSizePolicy::Fixed</enum>
                                    </property>
                                    <property name="sizeHint" stdset="0">
                                     <size>
@@ -2052,6 +2030,7 @@ QLabel:disabled{
                                  <font>
                                   <family>Roboto</family>
                                   <pointsize>12</pointsize>
+                                  <weight>50</weight>
                                   <italic>false</italic>
                                   <bold>false</bold>
                                  </font>
@@ -2076,7 +2055,7 @@ QLabel:disabled{
                     </layout>
                    </widget>
                   </item>
-                  <item alignment="Qt::AlignmentFlag::AlignHCenter">
+                  <item alignment="Qt::AlignHCenter">
                    <widget class="QPushButton" name="copy_button">
                     <property name="enabled">
                      <bool>true</bool>
@@ -2119,10 +2098,7 @@ background-color:rgb(71, 71, 213);
                   <item>
                    <widget class="QFrame" name="frame_3">
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Shadow::Raised</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_15">
                      <item>
@@ -2225,10 +2201,7 @@ color:#fff;
                      </size>
                     </property>
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Shadow::Raised</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_13"/>
                    </widget>
@@ -2242,13 +2215,13 @@ color:#fff;
                      </sizepolicy>
                     </property>
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_29">
                      <item>
                       <widget class="QFrame" name="frame_20">
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_34">
                         <item>
@@ -2342,6 +2315,7 @@ QProgressBar::chunk {
                         <font>
                          <family>Roboto</family>
                          <pointsize>-1</pointsize>
+                         <weight>50</weight>
                          <italic>false</italic>
                          <bold>false</bold>
                         </font>
@@ -2366,7 +2340,7 @@ border:none;</string>
                 </widget>
                </widget>
               </item>
-              <item alignment="Qt::AlignmentFlag::AlignHCenter">
+              <item>
                <widget class="QLabel" name="lbl_ip_error">
                 <property name="minimumSize">
                  <size>
@@ -2400,7 +2374,7 @@ border:none;</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Shape::NoFrame</enum>
+                 <enum>QFrame::NoFrame</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_18">
                  <item>
@@ -2459,9 +2433,6 @@ border:none;</string>
                    </item>
                    <item>
                     <spacer name="horizontalSpacer_4">
-                     <property name="orientation">
-                      <enum>Qt::Orientation::Vertical</enum>
-                     </property>
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>40</width>
@@ -2523,7 +2494,7 @@ border:none;</string>
               <item>
                <widget class="QTabWidget" name="tabWidget">
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="tab">
                  <attribute name="title">
@@ -2539,7 +2510,7 @@ border:none;</string>
                   <item>
                    <widget class="QScrollArea" name="scrollArea">
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <property name="widgetResizable">
                      <bool>true</bool>
@@ -2549,8 +2520,8 @@ border:none;</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>382</width>
-                       <height>685</height>
+                       <width>531</width>
+                       <height>703</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -2572,7 +2543,7 @@ border:none;</string>
                          </size>
                         </property>
                         <property name="frameShape">
-                         <enum>QFrame::Shape::NoFrame</enum>
+                         <enum>QFrame::NoFrame</enum>
                         </property>
                         <layout class="QHBoxLayout" name="horizontalLayout_11">
                          <property name="topMargin">
@@ -2609,7 +2580,7 @@ border:none;</string>
                       <item>
                        <widget class="Line" name="line_22">
                         <property name="orientation">
-                         <enum>Qt::Orientation::Vertical</enum>
+                         <enum>Qt::Vertical</enum>
                         </property>
                        </widget>
                       </item>
@@ -2644,20 +2615,54 @@ border:none;</string>
                          <item>
                           <widget class="QComboBox" name="new_profile_compression"/>
                          </item>
+                         <item>
+                          <widget class="QFrame" name="horizontalFrame1111_4">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <layout class="QHBoxLayout" name="horizontalLayout_62">
+                            <item>
+                             <widget class="QLabel" name="label_89">
+                              <property name="minimumSize">
+                               <size>
+                                <width>62</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>62</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string> Motion :</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QComboBox" name="new_profile_motion"/>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
                         </layout>
                        </widget>
                       </item>
                       <item>
                        <widget class="Line" name="line_24">
                         <property name="orientation">
-                         <enum>Qt::Orientation::Vertical</enum>
+                         <enum>Qt::Vertical</enum>
                         </property>
                        </widget>
                       </item>
                       <item>
                        <widget class="Line" name="line_15">
                         <property name="orientation">
-                         <enum>Qt::Orientation::Vertical</enum>
+                         <enum>Qt::Vertical</enum>
                         </property>
                        </widget>
                       </item>
@@ -3047,7 +3052,7 @@ border:none;</string>
                     </property>
                    </widget>
                   </item>
-                  <item alignment="Qt::AlignmentFlag::AlignHCenter">
+                  <item>
                    <widget class="QPushButton" name="btn_save_profile">
                     <property name="minimumSize">
                      <size>
@@ -3078,7 +3083,7 @@ border:none;</string>
                   <item>
                    <widget class="Line" name="line">
                     <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
+                     <enum>Qt::Vertical</enum>
                     </property>
                    </widget>
                   </item>
@@ -3107,7 +3112,7 @@ border:none;</string>
                      </size>
                     </property>
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_13">
                      <property name="topMargin">
@@ -3264,10 +3269,10 @@ border:none;</string>
                      </size>
                     </property>
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <property name="verticalScrollBarPolicy">
-                     <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+                     <enum>Qt::ScrollBarAsNeeded</enum>
                     </property>
                     <property name="widgetResizable">
                      <bool>true</bool>
@@ -3277,8 +3282,8 @@ border:none;</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>382</width>
-                       <height>782</height>
+                       <width>531</width>
+                       <height>800</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -3346,6 +3351,40 @@ border:none;</string>
                          </item>
                          <item>
                           <widget class="QComboBox" name="edit_profile_compression"/>
+                         </item>
+                         <item>
+                          <widget class="QFrame" name="horizontalFrame1111_5">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <layout class="QHBoxLayout" name="horizontalLayout_63">
+                            <item>
+                             <widget class="QLabel" name="label_90">
+                              <property name="minimumSize">
+                               <size>
+                                <width>62</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>62</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>Motion :</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QComboBox" name="edit_profile_motion"/>
+                            </item>
+                           </layout>
+                          </widget>
                          </item>
                         </layout>
                        </widget>
@@ -3763,13 +3802,10 @@ border:none;</string>
                     </property>
                    </widget>
                   </item>
-                  <item alignment="Qt::AlignmentFlag::AlignBottom">
+                  <item>
                    <widget class="QFrame" name="frame_22">
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Shadow::Raised</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_22">
                      <item>
@@ -3866,7 +3902,7 @@ QPushButton:hover{
                         </size>
                        </property>
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_16">
                         <item>
@@ -3910,7 +3946,7 @@ QPushButton:hover{
                         </size>
                        </property>
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_21">
                         <item>
@@ -3979,7 +4015,7 @@ QPushButton:hover{
                         </size>
                        </property>
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_17">
                         <property name="leftMargin">
@@ -4025,7 +4061,7 @@ QPushButton:hover{
                   <item>
                    <widget class="Line" name="line_3">
                     <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
+                     <enum>Qt::Vertical</enum>
                     </property>
                    </widget>
                   </item>
@@ -4056,7 +4092,7 @@ QPushButton:hover{
                         </size>
                        </property>
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_35">
                         <item>
@@ -4100,7 +4136,7 @@ QPushButton:hover{
                         </size>
                        </property>
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_12">
                         <item>
@@ -4162,7 +4198,7 @@ QPushButton:hover{
                         </size>
                        </property>
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_36">
                         <property name="spacing">
@@ -4210,9 +4246,6 @@ QPushButton:hover{
                   </item>
                   <item>
                    <spacer name="verticalSpacer_10">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
-                    </property>
                     <property name="sizeHint" stdset="0">
                      <size>
                       <width>20</width>
@@ -4245,7 +4278,7 @@ QPushButton:hover{
                   <item>
                    <widget class="QFrame" name="frame_55">
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_52">
                      <item>
@@ -4276,14 +4309,14 @@ QPushButton:hover{
                   <item>
                    <widget class="Line" name="line_17">
                     <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
+                     <enum>Qt::Vertical</enum>
                     </property>
                    </widget>
                   </item>
                   <item>
                    <widget class="QFrame" name="frame_6">
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_6">
                      <item>
@@ -4314,7 +4347,7 @@ QPushButton:hover{
                   <item>
                    <widget class="Line" name="line_18">
                     <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
+                     <enum>Qt::Vertical</enum>
                     </property>
                    </widget>
                   </item>
@@ -4324,7 +4357,7 @@ QPushButton:hover{
                      <bool>true</bool>
                     </property>
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_7">
                      <item>
@@ -4355,14 +4388,14 @@ QPushButton:hover{
                   <item>
                    <widget class="Line" name="line_19">
                     <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
+                     <enum>Qt::Vertical</enum>
                     </property>
                    </widget>
                   </item>
                   <item>
                    <widget class="QFrame" name="frame_9">
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_8">
                      <item>
@@ -4397,14 +4430,14 @@ QPushButton:hover{
                   <item>
                    <widget class="Line" name="line_20">
                     <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
+                     <enum>Qt::Vertical</enum>
                     </property>
                    </widget>
                   </item>
                   <item>
                    <widget class="QFrame" name="frame_54">
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_9">
                      <item>
@@ -4431,9 +4464,6 @@ QPushButton:hover{
                   </item>
                   <item>
                    <spacer name="verticalSpacer_4">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
-                    </property>
                     <property name="sizeHint" stdset="0">
                      <size>
                       <width>20</width>
@@ -4458,7 +4488,7 @@ QPushButton:hover{
                      </size>
                     </property>
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_53">
                      <item>
@@ -4585,13 +4615,13 @@ border:none;</string>
                      <bool>false</bool>
                     </property>
                     <property name="frameShape">
-                     <enum>QFrame::Shape::NoFrame</enum>
+                     <enum>QFrame::NoFrame</enum>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_11">
                      <item>
                       <widget class="QFrame" name="frame_26">
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_25">
                         <item>
@@ -4622,7 +4652,7 @@ border:none;</string>
                      <item>
                       <widget class="QFrame" name="frame_19">
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_10">
                         <item>
@@ -4653,7 +4683,7 @@ border:none;</string>
                      <item>
                       <widget class="QFrame" name="frame_25">
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_20">
                         <item>
@@ -4684,10 +4714,7 @@ border:none;</string>
                      <item>
                       <widget class="QFrame" name="frame_23">
                        <property name="frameShape">
-                        <enum>QFrame::Shape::NoFrame</enum>
-                       </property>
-                       <property name="frameShadow">
-                        <enum>QFrame::Shadow::Raised</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_23">
                         <item>
@@ -4748,9 +4775,6 @@ border:none;</string>
                   </item>
                   <item>
                    <spacer name="verticalSpacer_7">
-                    <property name="orientation">
-                     <enum>Qt::Orientation::Vertical</enum>
-                    </property>
                     <property name="sizeHint" stdset="0">
                      <size>
                       <width>20</width>
@@ -4770,7 +4794,7 @@ border:none;</string>
               <item>
                <widget class="QFrame" name="frame_2">
                 <property name="frameShape">
-                 <enum>QFrame::Shape::NoFrame</enum>
+                 <enum>QFrame::NoFrame</enum>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
@@ -4802,7 +4826,7 @@ border:none;</string>
               <item>
                <widget class="Line" name="line_11">
                 <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
+                 <enum>Qt::Vertical</enum>
                 </property>
                </widget>
               </item>
@@ -4821,7 +4845,7 @@ border:none;</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Shape::NoFrame</enum>
+                 <enum>QFrame::NoFrame</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_21">
                  <property name="spacing">
@@ -4836,7 +4860,7 @@ border:none;</string>
                  <item>
                   <widget class="QFrame" name="frame_4">
                    <property name="frameShape">
-                    <enum>QFrame::Shape::NoFrame</enum>
+                    <enum>QFrame::NoFrame</enum>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_18">
                     <item>
@@ -4860,9 +4884,6 @@ border:none;</string>
                     </item>
                     <item>
                      <spacer name="horizontalSpacer_6">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
                       <property name="sizeHint" stdset="0">
                        <size>
                         <width>40</width>
@@ -4893,7 +4914,7 @@ border:none;</string>
                  <item>
                   <widget class="QFrame" name="frame_17">
                    <property name="frameShape">
-                    <enum>QFrame::Shape::NoFrame</enum>
+                    <enum>QFrame::NoFrame</enum>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_19">
                     <item>
@@ -4917,9 +4938,6 @@ border:none;</string>
                     </item>
                     <item>
                      <spacer name="horizontalSpacer_10">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
                       <property name="sizeHint" stdset="0">
                        <size>
                         <width>40</width>
@@ -4950,7 +4968,7 @@ border:none;</string>
                  <item>
                   <widget class="QFrame" name="frame_18">
                    <property name="frameShape">
-                    <enum>QFrame::Shape::NoFrame</enum>
+                    <enum>QFrame::NoFrame</enum>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_26">
                     <item>
@@ -4974,9 +4992,6 @@ border:none;</string>
                     </item>
                     <item>
                      <spacer name="horizontalSpacer_11">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
                       <property name="sizeHint" stdset="0">
                        <size>
                         <width>40</width>
@@ -5004,7 +5019,7 @@ border:none;</string>
                    </layout>
                   </widget>
                  </item>
-                 <item alignment="Qt::AlignmentFlag::AlignHCenter">
+                 <item>
                   <widget class="QPushButton" name="btn_save_password">
                    <property name="minimumSize">
                     <size>
@@ -5035,7 +5050,7 @@ border:none;</string>
               <item>
                <widget class="QFrame" name="frame_35">
                 <property name="frameShape">
-                 <enum>QFrame::Shape::NoFrame</enum>
+                 <enum>QFrame::NoFrame</enum>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_57">
                  <item>
@@ -5067,7 +5082,7 @@ border:none;</string>
               <item>
                <widget class="QFrame" name="frame_36">
                 <property name="frameShape">
-                 <enum>QFrame::Shape::NoFrame</enum>
+                 <enum>QFrame::NoFrame</enum>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_61">
                  <item>
@@ -5111,19 +5126,13 @@ border:none;</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Shape::NoFrame</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Shadow::Raised</enum>
+                 <enum>QFrame::NoFrame</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_15">
                  <item>
                   <widget class="QFrame" name="frame_31">
                    <property name="frameShape">
-                    <enum>QFrame::Shape::NoFrame</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Shadow::Raised</enum>
+                    <enum>QFrame::NoFrame</enum>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_30">
                     <property name="leftMargin">
@@ -5135,10 +5144,7 @@ border:none;</string>
                     <item>
                      <widget class="QFrame" name="frame_30">
                       <property name="frameShape">
-                       <enum>QFrame::Shape::NoFrame</enum>
-                      </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Shadow::Raised</enum>
+                       <enum>QFrame::NoFrame</enum>
                       </property>
                       <layout class="QHBoxLayout" name="horizontalLayout_28">
                        <property name="leftMargin">
@@ -5177,10 +5183,7 @@ border:none;</string>
                     <item>
                      <widget class="QFrame" name="frame_29">
                       <property name="frameShape">
-                       <enum>QFrame::Shape::NoFrame</enum>
-                      </property>
-                      <property name="frameShadow">
-                       <enum>QFrame::Shadow::Raised</enum>
+                       <enum>QFrame::NoFrame</enum>
                       </property>
                       <layout class="QHBoxLayout" name="horizontalLayout_27">
                        <property name="leftMargin">
@@ -5222,7 +5225,7 @@ border:none;</string>
                    </layout>
                   </widget>
                  </item>
-                 <item alignment="Qt::AlignmentFlag::AlignHCenter">
+                 <item>
                   <widget class="QPushButton" name="btn_save_storage">
                    <property name="minimumSize">
                     <size>
@@ -5241,7 +5244,7 @@ border:none;</string>
               <item>
                <widget class="QFrame" name="frame_33">
                 <property name="frameShape">
-                 <enum>QFrame::Shape::NoFrame</enum>
+                 <enum>QFrame::NoFrame</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_22">
                  <item>
@@ -5262,9 +5265,6 @@ border:none;</string>
               </item>
               <item>
                <spacer name="verticalSpacer_8">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
@@ -5296,10 +5296,7 @@ border:none;</string>
 	border:1px solid #D7D7D9;</string>
             </property>
             <property name="frameShape">
-             <enum>QFrame::Shape::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Shadow::Raised</enum>
+             <enum>QFrame::NoFrame</enum>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_24">
              <property name="leftMargin">
@@ -5316,11 +5313,8 @@ border:none;</string>
              </property>
              <item>
               <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
                <property name="sizeType">
-                <enum>QSizePolicy::Policy::Fixed</enum>
+                <enum>QSizePolicy::Fixed</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>

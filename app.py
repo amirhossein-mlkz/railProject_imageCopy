@@ -11,7 +11,7 @@ sys.path.append('UIFiles\\Assets')
 
 BUILD_UI = True
 
-ADMIN_ACCESS = True
+ADMIN_ACCESS = False
 
 
 if BUILD_UI:
