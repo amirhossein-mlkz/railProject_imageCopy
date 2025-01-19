@@ -893,12 +893,7 @@ class Ui_main(object):
 
         self.verticalLayout_67.addWidget(self.line_8)
 
-        self.pushButton = QPushButton(self.leftSideFrame)
-        self.pushButton.setObjectName(u"pushButton")
-
-        self.verticalLayout_67.addWidget(self.pushButton)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_67.addItem(self.verticalSpacer_2)
 
@@ -926,7 +921,7 @@ class Ui_main(object):
 
         self.verticalLayout_67.addWidget(self.label_65, 0, Qt.AlignHCenter)
 
-        self.verticalSpacer_11 = QSpacerItem(20, 40, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_11 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_67.addItem(self.verticalSpacer_11)
 
@@ -944,7 +939,7 @@ class Ui_main(object):
 
         self.verticalLayout_67.addWidget(self.login_btn, 0, Qt.AlignHCenter)
 
-        self.verticalSpacer_5 = QSpacerItem(20, 19, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_5 = QSpacerItem(20, 19, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_67.addItem(self.verticalSpacer_5)
 
@@ -971,7 +966,7 @@ class Ui_main(object):
         self.horizontalLayout_14.setSpacing(11)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
         self.horizontalLayout_14.setContentsMargins(0, 6, -1, 6)
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.horizontalLayout_14.addItem(self.horizontalSpacer)
 
@@ -992,7 +987,7 @@ class Ui_main(object):
 
         self.horizontalLayout_14.addWidget(self.help_btn)
 
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.horizontalLayout_14.addItem(self.horizontalSpacer_5)
 
@@ -1317,7 +1312,7 @@ class Ui_main(object):
 
         self.gridLayout.addWidget(self.label_32, 0, 4, 1, 1)
 
-        self.horizontalSpacer_8 = QSpacerItem(38, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_8 = QSpacerItem(38, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.gridLayout.addItem(self.horizontalSpacer_8, 1, 3, 1, 1)
 
@@ -1356,7 +1351,7 @@ class Ui_main(object):
 
         self.gridLayout.addWidget(self.end_time_minute, 1, 7, 1, 1)
 
-        self.horizontalSpacer_7 = QSpacerItem(38, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_7 = QSpacerItem(38, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.gridLayout.addItem(self.horizontalSpacer_7, 0, 3, 1, 1)
 
@@ -1618,7 +1613,7 @@ class Ui_main(object):
 
         self.horizontalLayout_5.addWidget(self.total_copy_lbl_2)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_4)
 
@@ -1679,7 +1674,7 @@ class Ui_main(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 531, 703))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 436, 703))
         self.verticalLayout_6 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(-1, -1, -1, 9)
@@ -2035,7 +2030,7 @@ class Ui_main(object):
         self.btn_save_profile.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.btn_save_profile.setIconSize(QSize(29, 23))
 
-        self.verticalLayout_14.addWidget(self.btn_save_profile)
+        self.verticalLayout_14.addWidget(self.btn_save_profile, 0, Qt.AlignHCenter)
 
         self.line = QFrame(self.tab)
         self.line.setObjectName(u"line")
@@ -2129,7 +2124,7 @@ class Ui_main(object):
         self.frame_profile_edit.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 531, 800))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 436, 800))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.horizontalFrame1111_3 = QFrame(self.scrollAreaWidgetContents_2)
@@ -2664,13 +2659,17 @@ class Ui_main(object):
 
         self.verticalLayout_7.addWidget(self.groupBox_2)
 
-        self.verticalSpacer_10 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_10 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_7.addItem(self.verticalSpacer_10)
 
         self.tabWidget.addTab(self.tab_3, "")
 
         self.verticalLayout_4.addWidget(self.tabWidget)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_4.addItem(self.verticalSpacer)
 
         self.stackedWidget.addWidget(self.camera_config)
         self.train_config = QWidget()
@@ -2810,7 +2809,7 @@ class Ui_main(object):
 
         self.verticalLayout_31.addWidget(self.frame_54)
 
-        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_31.addItem(self.verticalSpacer_4)
 
@@ -2969,7 +2968,7 @@ class Ui_main(object):
 
         self.verticalLayout_16.addWidget(self.frame_train_edit)
 
-        self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_16.addItem(self.verticalSpacer_7)
 
@@ -3009,6 +3008,26 @@ class Ui_main(object):
 
         self.verticalLayout_9.addWidget(self.line_11)
 
+        self.frame_35 = QFrame(self.settings)
+        self.frame_35.setObjectName(u"frame_35")
+        self.frame_35.setFrameShape(QFrame.NoFrame)
+        self.horizontalLayout_57 = QHBoxLayout(self.frame_35)
+        self.horizontalLayout_57.setObjectName(u"horizontalLayout_57")
+        self.label_14 = QLabel(self.frame_35)
+        self.label_14.setObjectName(u"label_14")
+        self.label_14.setMaximumSize(QSize(109, 16777215))
+
+        self.horizontalLayout_57.addWidget(self.label_14)
+
+        self.btn_local_update = QPushButton(self.frame_35)
+        self.btn_local_update.setObjectName(u"btn_local_update")
+        self.btn_local_update.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.horizontalLayout_57.addWidget(self.btn_local_update)
+
+
+        self.verticalLayout_9.addWidget(self.frame_35)
+
         self.frame_change_password = QFrame(self.settings)
         self.frame_change_password.setObjectName(u"frame_change_password")
         self.frame_change_password.setMinimumSize(QSize(0, 0))
@@ -3030,7 +3049,7 @@ class Ui_main(object):
 
         self.horizontalLayout_18.addWidget(self.label_15)
 
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.horizontalLayout_18.addItem(self.horizontalSpacer_6)
 
@@ -3056,7 +3075,7 @@ class Ui_main(object):
 
         self.horizontalLayout_19.addWidget(self.label_16)
 
-        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.horizontalLayout_19.addItem(self.horizontalSpacer_10)
 
@@ -3082,7 +3101,7 @@ class Ui_main(object):
 
         self.horizontalLayout_26.addWidget(self.label_22)
 
-        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.horizontalLayout_26.addItem(self.horizontalSpacer_11)
 
@@ -3107,26 +3126,6 @@ class Ui_main(object):
 
 
         self.verticalLayout_9.addWidget(self.frame_change_password)
-
-        self.frame_35 = QFrame(self.settings)
-        self.frame_35.setObjectName(u"frame_35")
-        self.frame_35.setFrameShape(QFrame.NoFrame)
-        self.horizontalLayout_57 = QHBoxLayout(self.frame_35)
-        self.horizontalLayout_57.setObjectName(u"horizontalLayout_57")
-        self.label_14 = QLabel(self.frame_35)
-        self.label_14.setObjectName(u"label_14")
-        self.label_14.setMaximumSize(QSize(109, 16777215))
-
-        self.horizontalLayout_57.addWidget(self.label_14)
-
-        self.btn_local_update = QPushButton(self.frame_35)
-        self.btn_local_update.setObjectName(u"btn_local_update")
-        self.btn_local_update.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.horizontalLayout_57.addWidget(self.btn_local_update)
-
-
-        self.verticalLayout_9.addWidget(self.frame_35)
 
         self.frame_36 = QFrame(self.settings)
         self.frame_36.setObjectName(u"frame_36")
@@ -3238,7 +3237,7 @@ class Ui_main(object):
 
         self.verticalLayout_9.addWidget(self.frame_33)
 
-        self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_9.addItem(self.verticalSpacer_8)
 
@@ -3256,7 +3255,7 @@ class Ui_main(object):
         self.horizontalLayout_24 = QHBoxLayout(self.frame_27)
         self.horizontalLayout_24.setObjectName(u"horizontalLayout_24")
         self.horizontalLayout_24.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_2 = QSpacerItem(26, 16, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(26, 16, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.horizontalLayout_24.addItem(self.horizontalSpacer_2)
 
@@ -3379,7 +3378,7 @@ class Ui_main(object):
         self.retranslateUi(main)
 
         self.stackedWidget.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -3393,7 +3392,6 @@ class Ui_main(object):
         self.side_train_config_btn.setText(QCoreApplication.translate("main", u"Thin Clients", None))
         self.side_setting_btn.setText(QCoreApplication.translate("main", u"Settings", None))
         self.side_about_btn.setText(QCoreApplication.translate("main", u" About Us ", None))
-        self.pushButton.setText(QCoreApplication.translate("main", u"PushButton", None))
         self.label_66.setText("")
         self.label_65.setText("")
         self.login_btn.setText(QCoreApplication.translate("main", u"Login", None))
@@ -3537,12 +3535,12 @@ class Ui_main(object):
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_6), QCoreApplication.translate("main", u"Edit / Delete", None))
         self.label_3.setText(QCoreApplication.translate("main", u"Change Password :", None))
         self.btn_change_password.setText(QCoreApplication.translate("main", u"Click Here", None))
+        self.label_14.setText(QCoreApplication.translate("main", u"Local Update :", None))
+        self.btn_local_update.setText(QCoreApplication.translate("main", u"Click Here", None))
         self.label_15.setText(QCoreApplication.translate("main", u"Current/Mother Password :", None))
         self.label_16.setText(QCoreApplication.translate("main", u"New Password :", None))
         self.label_22.setText(QCoreApplication.translate("main", u"Confirm Password :", None))
         self.btn_save_password.setText(QCoreApplication.translate("main", u"Save", None))
-        self.label_14.setText(QCoreApplication.translate("main", u"Local Update :", None))
-        self.btn_local_update.setText(QCoreApplication.translate("main", u"Click Here", None))
         self.label_18.setText(QCoreApplication.translate("main", u"Storage Manager :", None))
         self.btn_storage_manager.setText(QCoreApplication.translate("main", u"Click Here", None))
         self.label_21.setText(QCoreApplication.translate("main", u"Minimum Allowed :", None))

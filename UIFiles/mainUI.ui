@@ -788,7 +788,7 @@ QGroupBox:disabled {
          <property name="lineWidth">
           <number>1</number>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_67" stretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout_67" stretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -1075,14 +1075,10 @@ color:black;</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
@@ -1155,6 +1151,9 @@ color:black;</string>
           </item>
           <item>
            <spacer name="verticalSpacer_11">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
             <property name="sizeType">
              <enum>QSizePolicy::Fixed</enum>
             </property>
@@ -1209,6 +1208,9 @@ color:black;</string>
           </item>
           <item>
            <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
             <property name="sizeType">
              <enum>QSizePolicy::Fixed</enum>
             </property>
@@ -1288,6 +1290,9 @@ color:black;</string>
              </property>
              <item>
               <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
@@ -1331,6 +1336,9 @@ color:black;</string>
              </item>
              <item>
               <spacer name="horizontalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
@@ -1900,6 +1908,9 @@ QLabel:disabled{
                                  </item>
                                  <item row="1" column="3">
                                   <spacer name="horizontalSpacer_8">
+                                   <property name="orientation">
+                                    <enum>Qt::Vertical</enum>
+                                   </property>
                                    <property name="sizeType">
                                     <enum>QSizePolicy::Fixed</enum>
                                    </property>
@@ -1971,6 +1982,9 @@ QLabel:disabled{
                                  </item>
                                  <item row="0" column="3">
                                   <spacer name="horizontalSpacer_7">
+                                   <property name="orientation">
+                                    <enum>Qt::Vertical</enum>
+                                   </property>
                                    <property name="sizeType">
                                     <enum>QSizePolicy::Fixed</enum>
                                    </property>
@@ -2433,6 +2447,9 @@ border:none;</string>
                    </item>
                    <item>
                     <spacer name="horizontalSpacer_4">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>40</width>
@@ -2494,7 +2511,7 @@ border:none;</string>
               <item>
                <widget class="QTabWidget" name="tabWidget">
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="tab">
                  <attribute name="title">
@@ -2520,7 +2537,7 @@ border:none;</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>531</width>
+                       <width>436</width>
                        <height>703</height>
                       </rect>
                      </property>
@@ -3052,7 +3069,7 @@ border:none;</string>
                     </property>
                    </widget>
                   </item>
-                  <item>
+                  <item alignment="Qt::AlignHCenter">
                    <widget class="QPushButton" name="btn_save_profile">
                     <property name="minimumSize">
                      <size>
@@ -3282,7 +3299,7 @@ border:none;</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>531</width>
+                       <width>436</width>
                        <height>800</height>
                       </rect>
                      </property>
@@ -4246,6 +4263,9 @@ QPushButton:hover{
                   </item>
                   <item>
                    <spacer name="verticalSpacer_10">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
                     <property name="sizeHint" stdset="0">
                      <size>
                       <width>20</width>
@@ -4257,6 +4277,19 @@ QPushButton:hover{
                  </layout>
                 </widget>
                </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </widget>
@@ -4464,6 +4497,9 @@ QPushButton:hover{
                   </item>
                   <item>
                    <spacer name="verticalSpacer_4">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
                     <property name="sizeHint" stdset="0">
                      <size>
                       <width>20</width>
@@ -4775,6 +4811,9 @@ border:none;</string>
                   </item>
                   <item>
                    <spacer name="verticalSpacer_7">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
                     <property name="sizeHint" stdset="0">
                      <size>
                       <width>20</width>
@@ -4831,6 +4870,38 @@ border:none;</string>
                </widget>
               </item>
               <item>
+               <widget class="QFrame" name="frame_35">
+                <property name="frameShape">
+                 <enum>QFrame::NoFrame</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_57">
+                 <item>
+                  <widget class="QLabel" name="label_14">
+                   <property name="maximumSize">
+                    <size>
+                     <width>109</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Local Update :</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_local_update">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                   <property name="text">
+                    <string>Click Here</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
                <widget class="QFrame" name="frame_change_password">
                 <property name="minimumSize">
                  <size>
@@ -4884,6 +4955,9 @@ border:none;</string>
                     </item>
                     <item>
                      <spacer name="horizontalSpacer_6">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
                       <property name="sizeHint" stdset="0">
                        <size>
                         <width>40</width>
@@ -4938,6 +5012,9 @@ border:none;</string>
                     </item>
                     <item>
                      <spacer name="horizontalSpacer_10">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
                       <property name="sizeHint" stdset="0">
                        <size>
                         <width>40</width>
@@ -4992,6 +5069,9 @@ border:none;</string>
                     </item>
                     <item>
                      <spacer name="horizontalSpacer_11">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
                       <property name="sizeHint" stdset="0">
                        <size>
                         <width>40</width>
@@ -5041,38 +5121,6 @@ border:none;</string>
                    </property>
                    <property name="text">
                     <string>Save</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QFrame" name="frame_35">
-                <property name="frameShape">
-                 <enum>QFrame::NoFrame</enum>
-                </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_57">
-                 <item>
-                  <widget class="QLabel" name="label_14">
-                   <property name="maximumSize">
-                    <size>
-                     <width>109</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>Local Update :</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="btn_local_update">
-                   <property name="cursor">
-                    <cursorShape>PointingHandCursor</cursorShape>
-                   </property>
-                   <property name="text">
-                    <string>Click Here</string>
                    </property>
                   </widget>
                  </item>
@@ -5265,6 +5313,9 @@ border:none;</string>
               </item>
               <item>
                <spacer name="verticalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
@@ -5313,6 +5364,9 @@ border:none;</string>
              </property>
              <item>
               <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
                <property name="sizeType">
                 <enum>QSizePolicy::Fixed</enum>
                </property>
