@@ -24,7 +24,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(757, 308)
+        Form.resize(710, 306)
         Form.setStyleSheet(u"background-color:rgb(220, 221, 180);")
         self.verticalLayout_2 = QVBoxLayout(Form)
         self.verticalLayout_2.setSpacing(0)
@@ -32,7 +32,7 @@ class Ui_Form(object):
         self.verticalLayout_2.setContentsMargins(0, 0, -1, 0)
         self.topFrame = QFrame(Form)
         self.topFrame.setObjectName(u"topFrame")
-        self.topFrame.setFrameShape(QFrame.StyledPanel)
+        self.topFrame.setFrameShape(QFrame.NoFrame)
         self.topFrame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_5 = QHBoxLayout(self.topFrame)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
@@ -83,7 +83,7 @@ class Ui_Form(object):
         self.frame_2 = QFrame(Form)
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setMinimumSize(QSize(0, 37))
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_2.setFrameShape(QFrame.NoFrame)
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_3 = QHBoxLayout(self.frame_2)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -100,7 +100,7 @@ class Ui_Form(object):
 
         self.frame_3 = QFrame(self.gb_image_grabber)
         self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setFrameShape(QFrame.StyledPanel)
+        self.frame_3.setFrameShape(QFrame.NoFrame)
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_2 = QHBoxLayout(self.frame_3)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
@@ -119,7 +119,7 @@ class Ui_Form(object):
 
         self.frame = QFrame(self.gb_image_grabber)
         self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShape(QFrame.NoFrame)
         self.frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.frame)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -172,7 +172,7 @@ class Ui_Form(object):
 
         self.frame_7 = QFrame(self.gb_image_grabber_2)
         self.frame_7.setObjectName(u"frame_7")
-        self.frame_7.setFrameShape(QFrame.StyledPanel)
+        self.frame_7.setFrameShape(QFrame.NoFrame)
         self.frame_7.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_7 = QHBoxLayout(self.frame_7)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
@@ -191,7 +191,7 @@ class Ui_Form(object):
 
         self.frame_8 = QFrame(self.gb_image_grabber_2)
         self.frame_8.setObjectName(u"frame_8")
-        self.frame_8.setFrameShape(QFrame.StyledPanel)
+        self.frame_8.setFrameShape(QFrame.NoFrame)
         self.frame_8.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.frame_8)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
@@ -243,7 +243,7 @@ class Ui_Form(object):
 
         self.frame_9 = QFrame(self.gb_image_grabber_3)
         self.frame_9.setObjectName(u"frame_9")
-        self.frame_9.setFrameShape(QFrame.StyledPanel)
+        self.frame_9.setFrameShape(QFrame.NoFrame)
         self.frame_9.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_9 = QHBoxLayout(self.frame_9)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
@@ -262,7 +262,7 @@ class Ui_Form(object):
 
         self.frame_10 = QFrame(self.gb_image_grabber_3)
         self.frame_10.setObjectName(u"frame_10")
-        self.frame_10.setFrameShape(QFrame.StyledPanel)
+        self.frame_10.setFrameShape(QFrame.NoFrame)
         self.frame_10.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_10 = QHBoxLayout(self.frame_10)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")

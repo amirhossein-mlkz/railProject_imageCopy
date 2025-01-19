@@ -3,7 +3,7 @@ import os
 import shutil
 
 from persiantools.jdatetime import JalaliDateTime, timedelta
-from PySide6.QtCore import Signal, QObject
+from PySide6.QtCore import Signal, QObject , QThread
 from Tranform.sharingConstans import StatusCodes
 from Tranform.transformUtils import transormUtils
 
@@ -15,7 +15,7 @@ class CopyWorker(QObject):
     finish_signal = Signal(int)
     error_signal = Signal(str)
 
-    def __init__(self, src_path, dst_path, files_paths:list[str], sizes:list[int], move = False, rename_src=False):
+    def __init__(self, src_path, dst_path, files_paths:list[str], sizes:list[int], move = False, rename_src=False,change_status = True):
         super().__init__()
         self.src_path = src_path
         self.dst_path = dst_path
@@ -24,6 +24,7 @@ class CopyWorker(QObject):
         self.sizes = sizes
         self.move = move
         self.speeds = []
+        self.change_status = change_status
 
 
     def run(self):
@@ -52,7 +53,8 @@ class CopyWorker(QObject):
 
             name, extention = os.path.splitext(fname)
             if extention !='.log':
-                fname = transormUtils.change_status(fname, to_new=True,to_old=False)
+                if self.change_status:
+                    fname = transormUtils.change_status(fname, to_new=True,to_old=False)
                 file_dst_path = os.path.join(file_dst_dir,fname)
 
 

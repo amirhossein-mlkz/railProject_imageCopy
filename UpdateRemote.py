@@ -319,7 +319,7 @@ class updateRemote(QWidget):
             dst_path = transormUtils.build_share_path(self.ip,self.dst_path,)
 
 
-            self.copy_worker = CopyWorker(dst_path=dst_path,src_path=self.src_path,files_paths=file_paths,sizes=sizes,move=False)
+            self.copy_worker = CopyWorker(dst_path=dst_path,src_path=self.src_path,files_paths=file_paths,sizes=sizes,move=False , change_status=False)
 
 
             # self.copy_worker.log_signal.connect(msg_callback)
